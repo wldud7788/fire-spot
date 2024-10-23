@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
+import CalendarHeader from "./CalendarHeader";
 
 const Calendar = () => {
   // 모임 데이터, 스탬프 데이터 불러오기
@@ -23,20 +24,13 @@ const Calendar = () => {
     setSelectedDate(day);
   };
 
-  return (
-    <div className="flex">
-      <div className="">
-        <span className="">
-          <span className="">{format(currentMonth, "M")}월</span>
-          {format(currentMonth, "yyyy")}
-        </span>
-      </div>
-      <div className="flex">
-        <div onClick={prevMonth}>{"<="}</div>
-        <div onClick={nextMonth}>{"=>"}</div>
-      </div>
-    </div>
-  );
+  const headerProps = {
+    currentMonth,
+    prevMonth,
+    nextMonth
+  };
+
+  return <CalendarHeader {...headerProps} />;
 };
 
 export default Calendar;
