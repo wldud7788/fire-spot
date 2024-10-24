@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { addMonths, subMonths } from "date-fns";
 import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
@@ -17,11 +17,18 @@ const Calendar = () => {
     queryKey: queryKey.calendar.schedule("testUser")
   });
 
+  const cellCardTable: CellCardTable | null = useMemo(() => {
+    if (!scheduleList) {
+      return null; // 또는 원하는 초기값
+    }
+    return convertScheduleListToCellCardTable(scheduleList);
+  }, [scheduleList]);
+
   if (isPending || !scheduleList) {
     return <></>;
   }
-  const cellCardTable: CellCardTable | null =
-    convertScheduleListToCellCardTable(scheduleList);
+  // const cellCardTable: CellCardTable =
+  //   convertScheduleListToCellCardTable(scheduleList);
 
   // 이전 월
   const prevMonth = () => {

@@ -29,8 +29,8 @@ export const dummySchedules: Schedule[] = [
     typeId: 3,
     type: "stamp",
     content: "양평 두물머리 캠핑장",
-    startDate: new Date("Fri Nov 08 2024 00:00:00 GMT+0900"),
-    endDate: new Date("Fri Nov 08 2024 00:00:00 GMT+0900")
+    startDate: new Date("Tue Nov 05 2024 00:00:00 GMT+0900"),
+    endDate: new Date("Tue Nov 05 2024 00:00:00 GMT+0900")
   },
   {
     typeId: 2,
