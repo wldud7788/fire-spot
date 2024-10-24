@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import CalendarHeader from "./CalendarHeader";
+import CalendarDays from "./CalendarDays";
 
 const Calendar = () => {
   // 모임 데이터, 스탬프 데이터 불러오기
@@ -30,7 +31,12 @@ const Calendar = () => {
     nextMonth
   };
 
-  return <CalendarHeader {...headerProps} />;
+  return (
+    <div className="w-[500px]">
+      <CalendarHeader {...headerProps} />
+      <CalendarDays currentMonth={currentMonth} />
+    </div>
+  );
 };
 
 export default Calendar;
