@@ -18,7 +18,12 @@ const ModalTestPage = () => {
         onClick={handleModalOpen} // 버튼 클릭 시 모달 열기
       />
 
-      <Modal modalClass={""} isOpen={isOpen} onClose={handleModalClose}>
+      <Modal
+        modalClass={""}
+        wid={"500"}
+        isOpen={isOpen}
+        onClose={handleModalClose}
+      >
         <h2>모달 내용</h2>
         <p>모달 내의 텍스트입니다.</p>
         <button onClick={handleModalClose}>닫기</button>

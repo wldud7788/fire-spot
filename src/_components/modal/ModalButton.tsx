@@ -8,7 +8,7 @@ type ModalButtonProps = {
 const ModalButton = ({ onClick, buttonText }: ModalButtonProps) => {
   return (
     <>
-      <button type="button" className="modalBtn" onClick={onClick}>
+      <button type="button" className="modal_btn" onClick={onClick}>
         {buttonText}
       </button>
     </>
