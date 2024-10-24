@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { format, addMonths, subMonths } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
+import { addMonths, subMonths } from "date-fns";
 import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
 import { getScheduleList } from "./action/calendarAction";
 import { queryKey } from "./hook/queryKey";
 import { useQuery } from "@tanstack/react-query";
-import { CellCard, CellCardTable, Schedule } from "./type/schedules";
+import { CellCardTable, Schedule } from "./type/schedule.types";
 import { convertScheduleListToCellCardTable } from "./service/calenderService";
 
 const Calendar = () => {
@@ -21,7 +20,8 @@ const Calendar = () => {
   if (isPending || !scheduleList) {
     return <></>;
   }
-  const cellCardTable = convertScheduleListToCellCardTable(scheduleList);
+  const cellCardTable: CellCardTable | null =
+    convertScheduleListToCellCardTable(scheduleList);
 
   // 이전 월
   const prevMonth = () => {
@@ -41,7 +41,7 @@ const Calendar = () => {
   return (
     <div className="w-[500px]">
       <CalendarHeader {...headerProps} />
-      {/* <CalendarDays currentMonth={currentMonth} /> */}
+      <CalendarDays currentMonth={currentMonth} cellCardTable={cellCardTable} />
     </div>
   );
 };

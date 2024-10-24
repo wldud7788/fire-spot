@@ -1,6 +1,6 @@
 // Sat Nov 02 2024 00:00:00 GMT+0900 (한국 표준시)
 
-import { Schedule } from "./type/schedules";
+import { Schedule } from "./type/schedule.types";
 
 //
 export const dummySchedules: Schedule[] = [
@@ -23,7 +23,7 @@ export const dummySchedules: Schedule[] = [
     type: "meet",
     content: "서핑과 함께하는 바닷가 캠핑",
     startDate: new Date("Wed Nov 06 2024 00:00:00 GMT+0900"),
-    endDate: new Date("Thu Nov 07 2024 00:00:00 GMT+0900")
+    endDate: new Date("Sat Nov 09 2024 00:00:00 GMT+0900")
   },
   {
     typeId: 3,

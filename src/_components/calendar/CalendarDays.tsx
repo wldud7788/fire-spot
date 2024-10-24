@@ -8,8 +8,15 @@ import {
 } from "date-fns";
 import React from "react";
 import CalendarCell from "./CalendarCell";
+import { CellCardTable } from "./type/schedule.types";
 
-const CalendarDays = ({ currentMonth }: { currentMonth: Date }) => {
+const CalendarDays = ({
+  currentMonth,
+  cellCardTable
+}: {
+  currentMonth: Date;
+  cellCardTable: CellCardTable;
+}) => {
   const today = new Date();
 
   // 이번 달의 시작 일자(요일 등 포함)
@@ -40,7 +47,11 @@ const CalendarDays = ({ currentMonth }: { currentMonth: Date }) => {
   return (
     <ul className="grid grid-cols-7">
       {days.map((day) => (
-        <CalendarCell key={day.toISOString()} day={day} />
+        <CalendarCell
+          key={day.toISOString()}
+          day={day}
+          cellCardList={cellCardTable[format(day, "yyyy-MM-dd")]}
+        />
       ))}
     </ul>
   );

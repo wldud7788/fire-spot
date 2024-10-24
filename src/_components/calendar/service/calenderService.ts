@@ -1,4 +1,6 @@
-import { Schedule } from "../type/schedules";
+import { format } from "date-fns";
+import { CellCard, CellCardTable, Schedule } from "../type/schedule.types";
+import { randomUUID } from "crypto";
 
 /** 
  * 사용자의 schedule(스탬프, 모임)데이터 를 받아서 데이터 변환 
@@ -40,4 +42,40 @@ import { Schedule } from "../type/schedules";
 */
 
 /** 사용자의 일정(모임, 스탬프) 목록을 CellCardTable 형태로 변환 후 반환 */
-export const convertScheduleListToCellCardTable = (schedule: Schedule) => {};
+const formatDateToString = (date: Date) => {
+  return format(date, "yyyy-MM-dd");
+};
+export const convertScheduleListToCellCardTable = (
+  scheduleList: Schedule[]
+): CellCardTable => {
+  const cellCardTable: CellCardTable = {};
+
+  scheduleList.forEach((schedule) => {
+    const { type, typeId, content, startDate, endDate } = schedule;
+
+    if (type === "stamp") {
+      const tableKey = formatDateToString(startDate);
+
+      if (!cellCardTable[tableKey]) {
+        cellCardTable[tableKey] = [];
+      }
+
+      const cellCard: CellCard = {
+        ...schedule,
+        id: `${type}-${typeId}`,
+        date: startDate,
+        isExistPrev: false,
+        isExistNext: false,
+        isShowContent: true,
+        range: 1
+      };
+
+      // stamp의 경우는 단일 날짜이므로 바로 처리
+      cellCardTable[tableKey].push(cellCard);
+    }
+  });
+
+  console.log("cellCardTable", cellCardTable);
+
+  return cellCardTable;
+};

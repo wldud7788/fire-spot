@@ -1,42 +1,14 @@
 import { format } from "date-fns";
 import React from "react";
-
-type Schedule = {
-  // id: number;
-  id: Date;
-  type: string; // stamp | meet
-  content: string;
-  prev: boolean;
-  next: boolean;
-};
-
-// items.push({
-//   day: i,
-//   schedules: [
-//     {
-//       id: i,
-//       type: "stamp",
-//       content: "가평 어디",
-//       prev: false,
-//       next: false
-//     },
-//     {
-//       id: addDays(i, 100),
-//       type: "stamp",
-//       content: "가평 어디",
-//       prev: false,
-//       next: false
-//     }
-//   ]
-// });
+import { CellCard, Schedule } from "./type/schedule.types";
 
 type Props = {
   day: Date;
-  schedules: Schedule[];
+  cellCardList: CellCard[];
 };
 
 // 캘린더 한 칸
-const CalendarCell = ({ day, schedules }: Props) => {
+const CalendarCell = ({ day, cellCardList }: Props) => {
   const isPrevExistClassName = "pr-2";
   const isNextExistClassName = "pl-2";
   const isPrevAndNextExistClassName = "";
@@ -48,11 +20,12 @@ const CalendarCell = ({ day, schedules }: Props) => {
         <p>{format(day, "d")}</p>
       </section>
       <section className="flex flex-col">
-        {schedules.map((schedule) => (
-          <div key={schedule.id.toISOString()} className="bg-slate-500">
-            {schedule.content}
-          </div>
-        ))}
+        {cellCardList &&
+          cellCardList.map((cellCard) => (
+            <div key={cellCard.id} className="bg-slate-500">
+              {cellCard.content}
+            </div>
+          ))}
       </section>
     </li>
   );

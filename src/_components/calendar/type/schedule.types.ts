@@ -7,16 +7,20 @@ export type Schedule = {
   endDate: Date;
 };
 
+export type CellCardTable = {
+  [key: string]: CellCard[]; // [yyyy-MM-dd]
+};
+
 export type CellCard = {
   id: string; // key를 위한 id (type + typeId + index ?)
-  order: number; // 일정이 제일 긴 순으로 표시해줘야함
+  range?: number; // 아니면 이거 ? 그냥 날짜 범위를 구해서 넣어버리면 되는거 아닌가?
   typeId: number;
   type: scheduleType;
   content: string;
   date: Date;
   isExistPrev: boolean;
   isExistNext: boolean;
-  isStartOfWeek: boolean;
+  isShowContent: boolean;
 };
 
 export type MeetResponse = {
