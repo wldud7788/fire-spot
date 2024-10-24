@@ -5,12 +5,23 @@ import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
+import { getScheduleList } from "./action/calendarAction";
+import { queryKey } from "./hook/queryKey";
+import { useQuery } from "@tanstack/react-query";
+import { CellCard, CellCardTable, Schedule } from "./type/schedules";
+import { convertScheduleListToCellCardTable } from "./service/calenderService";
 
 const Calendar = () => {
-  // 모임 데이터, 스탬프 데이터 불러오기
-  // 현재 날짜 구하기
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const { data: scheduleList, isPending } = useQuery<Schedule[]>({
+    queryFn: () => getScheduleList(),
+    queryKey: queryKey.calendar.schedule("testUser")
+  });
+
+  if (isPending || !scheduleList) {
+    return <></>;
+  }
+  const cellCardTable = convertScheduleListToCellCardTable(scheduleList);
 
   // 이전 월
   const prevMonth = () => {
@@ -19,10 +30,6 @@ const Calendar = () => {
   // 다음 월
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
-  };
-  // Cell 클릭
-  const handleDateClick = (day: Date) => {
-    setSelectedDate(day);
   };
 
   const headerProps = {
@@ -34,7 +41,7 @@ const Calendar = () => {
   return (
     <div className="w-[500px]">
       <CalendarHeader {...headerProps} />
-      <CalendarDays currentMonth={currentMonth} />
+      {/* <CalendarDays currentMonth={currentMonth} /> */}
     </div>
   );
 };

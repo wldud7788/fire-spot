@@ -7,8 +7,11 @@ import {
   startOfWeek
 } from "date-fns";
 import React from "react";
+import CalendarCell from "./CalendarCell";
 
 const CalendarDays = ({ currentMonth }: { currentMonth: Date }) => {
+  const today = new Date();
+
   // 이번 달의 시작 일자(요일 등 포함)
   const monthStart = startOfMonth(currentMonth);
 
@@ -25,15 +28,19 @@ const CalendarDays = ({ currentMonth }: { currentMonth: Date }) => {
 
   const days = [];
 
+  /**
+   * dayStart ~ dayEnd까지 반복
+   * 각 요소마다 일자, 그 날의 할일 등에 대한 ..
+   *
+   */
   for (let i = dayStart; i <= dayEnd; i = addDays(i, 1)) {
     days.push(i);
-    // days.push(<li key={i.toString()}>{format(i, "d")}</li>);
   }
 
   return (
     <ul className="grid grid-cols-7">
       {days.map((day) => (
-        <li key={day.toISOString()}>{format(day, "d")}</li>
+        <CalendarCell key={day.toISOString()} day={day} />
       ))}
     </ul>
   );
