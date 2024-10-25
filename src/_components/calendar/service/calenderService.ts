@@ -1,6 +1,18 @@
-import { addDays, format } from "date-fns";
+import {
+  addDays,
+  differenceInDays,
+  endOfWeek,
+  format,
+  isEqual,
+  setHours,
+  setMilliseconds,
+  setMinutes,
+  setSeconds,
+  subDays
+} from "date-fns";
 import { CellCard, CellCardTable, Schedule } from "../type/schedule.types";
 import { randomUUID } from "crypto";
+import { get } from "http";
 
 /** 
  * 사용자의 schedule(스탬프, 모임)데이터 를 받아서 데이터 변환 
@@ -81,12 +93,66 @@ const getStampCellCard = (schedule: Schedule) => {
   } as CellCard;
 };
 
-const getMeetCellCard = (schedule: Schedule) => {
-  const { type, typeId, startDate, endDate } = schedule;
+const getWeekEndAtMidnight = (weekEnd: Date) => {
+  return setHours(setMinutes(setSeconds(setMilliseconds(weekEnd, 0), 0), 0), 0);
+};
 
-  for (let i = startDate; i <= endDate; i = addDays(i, 1)) {
-    console.log("i", i);
+const getMeetCellCard = (schedule: Schedule) => {
+  const { type, typeId, content, startDate, endDate } = schedule;
+  const meetCellCardList = [] as CellCard[];
+  const daysBetween = differenceInDays(endDate, startDate);
+
+  let sequence = 1;
+  // 주의 마지막
+  let weekEnd = getWeekEndAtMidnight(endOfWeek(startDate));
+  // 일정이 길어져 주가 변경되는 경우 같은 일정이지만 주 기준 시작 date는 다름
+  let isExistNext = endDate > weekEnd;
+
+  // div 크기가 될 변수 (주 마지막 일자 - 시작 일자  or 종료 일자 - 시작 일자)
+  let range = 1;
+  if (isExistNext) {
+    range = differenceInDays(weekEnd, startDate) + 1;
+  } else {
+    range = differenceInDays(endDate, startDate) + 1;
   }
+
+  meetCellCardList.push({
+    id: `${type}-${typeId}-${sequence}`,
+    date: startDate,
+    isExistPrev: false,
+    range,
+    typeId,
+    type,
+    content,
+    isExistNext
+  });
+
+  if (isExistNext) {
+    for (let i = addDays(weekEnd, 1); i <= endDate; i = addDays(i, 7)) {
+      sequence++;
+      weekEnd = getWeekEndAtMidnight(endOfWeek(i));
+      isExistNext = endDate > weekEnd;
+      range = 1;
+      if (isExistNext) {
+        range = differenceInDays(weekEnd, i) + 1;
+      } else {
+        range = differenceInDays(endDate, i) + 1;
+      }
+
+      meetCellCardList.push({
+        id: `${type}-${typeId}-${sequence}`,
+        date: i,
+        isExistPrev: true,
+        range,
+        typeId,
+        type,
+        content,
+        isExistNext
+      });
+    }
+  }
+
+  console.log("meetCellCardList", meetCellCardList);
 
   return {
     ...schedule,

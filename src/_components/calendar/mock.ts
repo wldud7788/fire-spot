@@ -23,7 +23,7 @@ export const dummySchedules: Schedule[] = [
     type: "meet",
     content: "서핑과 함께하는 바닷가 캠핑",
     startDate: new Date("Wed Nov 06 2024 00:00:00 GMT+0900"),
-    endDate: new Date("Sat Nov 09 2024 00:00:00 GMT+0900")
+    endDate: new Date("Tue Nov 19 2024 00:00:00 GMT+0900")
   },
   {
     typeId: 3,

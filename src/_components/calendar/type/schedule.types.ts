@@ -20,7 +20,7 @@ export type CellCard = {
   date: Date;
   isExistPrev: boolean;
   isExistNext: boolean;
-  isShowContent: boolean;
+  isShowContent?: boolean;
 };
 
 export type MeetResponse = {
