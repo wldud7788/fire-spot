@@ -43,6 +43,8 @@ const Calendar = () => {
     nextMonth
   };
 
+  console.log("cellCardTable", cellCardTable);
+
   return (
     <div className="w-[500px]">
       <CalendarHeader {...headerProps} />

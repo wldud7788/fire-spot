@@ -9,11 +9,6 @@ type Props = {
 
 // 캘린더 한 칸
 const CalendarCell = ({ day, cellCardList }: Props) => {
-  const isPrevExistClassName = "pr-2";
-  const isNextExistClassName = "pl-2";
-  const isPrevAndNextExistClassName = "";
-  const isNotExistClassName = "pr-2 pl-2";
-
   return (
     <li className="flex w-full flex-col border-[1px]">
       <section className="flex h-[20px] w-full justify-end">

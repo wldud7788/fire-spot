@@ -30,7 +30,7 @@ import { get } from "http";
 
     위 데이터를 다음과 같이 변환
 
-    [
+[2024-10-11]:[
       {
         typeId: 1,
         type: "meet",
@@ -62,19 +62,24 @@ export const convertScheduleListToCellCardTable = (
   scheduleList.forEach((schedule) => {
     const { type, startDate } = schedule;
     const tableKey = format(startDate, "yyyy-MM-dd");
-    let cellCard = {} as CellCard;
 
     if (!cellCardTable[tableKey]) {
       cellCardTable[tableKey] = [];
     }
 
+    let cellCard = [] as CellCard[];
+
     if (type === "stamp") {
+      // const cellCard = getStampCellCard(schedule);
+      // cellCardTable[tableKey].push(cellCard);
       cellCard = getStampCellCard(schedule);
+      // cellCardTable[tableKey].push(cellCard);
     } else {
+      // const cellCardList = getMeetCellCard(schedule);
+      // cellCardTable[tableKey].push(...cellCardList);
       cellCard = getMeetCellCard(schedule);
     }
-
-    cellCardTable[tableKey].push(cellCard);
+    cellCardTable[tableKey].push(...cellCard);
   });
 
   return cellCardTable;
@@ -82,15 +87,17 @@ export const convertScheduleListToCellCardTable = (
 
 const getStampCellCard = (schedule: Schedule) => {
   const { type, typeId, startDate } = schedule;
-  return {
-    ...schedule,
-    id: `${type}-${typeId}`,
-    date: startDate,
-    isExistPrev: false,
-    isExistNext: false,
-    isShowContent: true,
-    range: 1
-  } as CellCard;
+  return [
+    {
+      ...schedule,
+      id: `${type}-${typeId}`,
+      date: startDate,
+      isExistPrev: false,
+      isExistNext: false,
+      isShowContent: true,
+      range: 1
+    }
+  ] as CellCard[];
 };
 
 const getWeekEndAtMidnight = (weekEnd: Date) => {
@@ -100,8 +107,8 @@ const getWeekEndAtMidnight = (weekEnd: Date) => {
 const getMeetCellCard = (schedule: Schedule) => {
   const { type, typeId, content, startDate, endDate } = schedule;
   const meetCellCardList = [] as CellCard[];
-  const daysBetween = differenceInDays(endDate, startDate);
 
+  // 같은 일정인데 다른 줄(주)에서 생성된 div 같은 것들을 구별하는 변수
   let sequence = 1;
   // 주의 마지막
   let weekEnd = getWeekEndAtMidnight(endOfWeek(startDate));
@@ -152,15 +159,5 @@ const getMeetCellCard = (schedule: Schedule) => {
     }
   }
 
-  console.log("meetCellCardList", meetCellCardList);
-
-  return {
-    ...schedule,
-    id: `${type}-${typeId}`,
-    date: startDate,
-    isExistPrev: false,
-    isExistNext: false,
-    isShowContent: true,
-    range: 1
-  } as CellCard;
+  return meetCellCardList;
 };
