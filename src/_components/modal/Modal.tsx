@@ -12,9 +12,9 @@ const Modal = ({ modalClass, wid, children, isOpen, onClose }: ModalProps) => {
   if (!isOpen) return null;
   return (
     <div
-      className={`modal ${modalClass ? modalClass : ""} w-full max-w-[${wid}]`}
+      className={`modal fixed left-0 top-0 h-full w-full bg-[rgba(0,0,0,.35)] ${modalClass ? modalClass : ""} flex items-center justify-center`}
     >
-      <div className="modal_cont">
+      <div className={`modal_cont`} style={{ width: `${wid}px` }}>
         <div className="modal_inner">{children}</div>
         <button type="button" className="modal_close_btn" onClick={onClose}>
           닫기
