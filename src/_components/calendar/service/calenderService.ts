@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { CellCard, CellCardTable, Schedule } from "../type/schedule.types";
 import { randomUUID } from "crypto";
 
@@ -23,7 +23,7 @@ import { randomUUID } from "crypto";
         typeId: 1,
         type: "meet",
         content:"서핑과 함께하는 바닷가 캠핑",
-        date: "Wed Nov 06 2024 . . ." // 2024.11.06,
+        date: "Wed Nov 06 2024 . . ." // 2024.11.06, // stamp, meet
         isExistPrev:false, 
         isExistNext:true,
         isStartOfWeek:true
@@ -42,40 +42,59 @@ import { randomUUID } from "crypto";
 */
 
 /** 사용자의 일정(모임, 스탬프) 목록을 CellCardTable 형태로 변환 후 반환 */
-const formatDateToString = (date: Date) => {
-  return format(date, "yyyy-MM-dd");
-};
 export const convertScheduleListToCellCardTable = (
   scheduleList: Schedule[]
 ): CellCardTable => {
   const cellCardTable: CellCardTable = {};
 
   scheduleList.forEach((schedule) => {
-    const { type, typeId, content, startDate, endDate } = schedule;
+    const { type, startDate } = schedule;
+    const tableKey = format(startDate, "yyyy-MM-dd");
+    let cellCard = {} as CellCard;
+
+    if (!cellCardTable[tableKey]) {
+      cellCardTable[tableKey] = [];
+    }
 
     if (type === "stamp") {
-      const tableKey = formatDateToString(startDate);
-
-      if (!cellCardTable[tableKey]) {
-        cellCardTable[tableKey] = [];
-      }
-
-      const cellCard: CellCard = {
-        ...schedule,
-        id: `${type}-${typeId}`,
-        date: startDate,
-        isExistPrev: false,
-        isExistNext: false,
-        isShowContent: true,
-        range: 1
-      };
-
-      // stamp의 경우는 단일 날짜이므로 바로 처리
-      cellCardTable[tableKey].push(cellCard);
+      cellCard = getStampCellCard(schedule);
+    } else {
+      cellCard = getMeetCellCard(schedule);
     }
+
+    cellCardTable[tableKey].push(cellCard);
   });
 
-  console.log("cellCardTable", cellCardTable);
-
   return cellCardTable;
+};
+
+const getStampCellCard = (schedule: Schedule) => {
+  const { type, typeId, startDate } = schedule;
+  return {
+    ...schedule,
+    id: `${type}-${typeId}`,
+    date: startDate,
+    isExistPrev: false,
+    isExistNext: false,
+    isShowContent: true,
+    range: 1
+  } as CellCard;
+};
+
+const getMeetCellCard = (schedule: Schedule) => {
+  const { type, typeId, startDate, endDate } = schedule;
+
+  for (let i = startDate; i <= endDate; i = addDays(i, 1)) {
+    console.log("i", i);
+  }
+
+  return {
+    ...schedule,
+    id: `${type}-${typeId}`,
+    date: startDate,
+    isExistPrev: false,
+    isExistNext: false,
+    isShowContent: true,
+    range: 1
+  } as CellCard;
 };

@@ -24,11 +24,9 @@ const Calendar = () => {
     return convertScheduleListToCellCardTable(scheduleList);
   }, [scheduleList]);
 
-  if (isPending || !scheduleList) {
+  if (isPending || !cellCardTable) {
     return <></>;
   }
-  // const cellCardTable: CellCardTable =
-  //   convertScheduleListToCellCardTable(scheduleList);
 
   // 이전 월
   const prevMonth = () => {
