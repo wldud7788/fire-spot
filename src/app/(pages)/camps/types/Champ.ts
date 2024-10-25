@@ -3,6 +3,7 @@ export interface campCard {
   img: string;
   title: string;
   location: string;
+  lo: string;
   date: string;
   personnel: string;
   personnelCount01: number;
