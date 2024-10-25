@@ -36,7 +36,7 @@ export const dummySchedules: Schedule[] = [
     typeId: 2,
     type: "meet",
     content: "초보자를 위한 캠핑 워크샵",
-    startDate: new Date("Sat Nov 09 2024 00:00:00 GMT+0900"),
-    endDate: new Date("Sun Nov 10 2024 00:00:00 GMT+0900")
+    startDate: new Date("Sat Nov 23 2024 00:00:00 GMT+0900"),
+    endDate: new Date("Sun Nov 24 2024 00:00:00 GMT+0900")
   }
 ];

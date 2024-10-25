@@ -13,13 +13,14 @@ export type CellCardTable = {
 
 export type CellCard = {
   id: string; // key를 위한 id (type + typeId + index ?)
-  range?: number; // 아니면 이거 ? 그냥 날짜 범위를 구해서 넣어버리면 되는거 아닌가?
+  range: number; // 아니면 이거 ? 그냥 날짜 범위를 구해서 넣어버리면 되는거 아닌가?
   typeId: number;
   type: scheduleType;
   content: string;
-  date: Date;
   isExistPrev: boolean;
   isExistNext: boolean;
+  date: Date;
+  // renderDate: Date;
   isShowContent?: boolean;
 };
 

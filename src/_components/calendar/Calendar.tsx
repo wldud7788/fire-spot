@@ -46,7 +46,7 @@ const Calendar = () => {
   console.log("cellCardTable", cellCardTable);
 
   return (
-    <div className="w-[500px]">
+    <div className="w-full">
       <CalendarHeader {...headerProps} />
       <CalendarDays currentMonth={currentMonth} cellCardTable={cellCardTable} />
     </div>

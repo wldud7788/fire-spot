@@ -61,25 +61,26 @@ export const convertScheduleListToCellCardTable = (
 
   scheduleList.forEach((schedule) => {
     const { type, startDate } = schedule;
-    const tableKey = format(startDate, "yyyy-MM-dd");
+    let tableKey = format(startDate, "yyyy-MM-dd");
 
     if (!cellCardTable[tableKey]) {
       cellCardTable[tableKey] = [];
     }
 
-    let cellCard = [] as CellCard[];
-
     if (type === "stamp") {
-      // const cellCard = getStampCellCard(schedule);
-      // cellCardTable[tableKey].push(cellCard);
-      cellCard = getStampCellCard(schedule);
-      // cellCardTable[tableKey].push(cellCard);
+      const stampCellCard = getStampCellCard(schedule);
+      cellCardTable[tableKey].push(stampCellCard);
     } else {
-      // const cellCardList = getMeetCellCard(schedule);
-      // cellCardTable[tableKey].push(...cellCardList);
-      cellCard = getMeetCellCard(schedule);
+      const meetCellCardList = getMeetCellCard(schedule);
+
+      meetCellCardList.forEach((meetCellCard) => {
+        tableKey = format(meetCellCard.date, "yyyy-MM-dd");
+        if (!cellCardTable[tableKey]) {
+          cellCardTable[tableKey] = [];
+        }
+        cellCardTable[tableKey].push(meetCellCard);
+      });
     }
-    cellCardTable[tableKey].push(...cellCard);
   });
 
   return cellCardTable;
@@ -87,17 +88,15 @@ export const convertScheduleListToCellCardTable = (
 
 const getStampCellCard = (schedule: Schedule) => {
   const { type, typeId, startDate } = schedule;
-  return [
-    {
-      ...schedule,
-      id: `${type}-${typeId}`,
-      date: startDate,
-      isExistPrev: false,
-      isExistNext: false,
-      isShowContent: true,
-      range: 1
-    }
-  ] as CellCard[];
+  return {
+    ...schedule,
+    id: `${type}-${typeId}`,
+    date: startDate,
+    isExistPrev: false,
+    isExistNext: false,
+    isShowContent: true,
+    range: 1
+  } as CellCard;
 };
 
 const getWeekEndAtMidnight = (weekEnd: Date) => {
@@ -160,4 +159,17 @@ const getMeetCellCard = (schedule: Schedule) => {
   }
 
   return meetCellCardList;
+};
+
+export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
+  if (!meetCard) return {};
+  const paddingLeft = meetCard.isExistPrev ? "0px" : "8px";
+  const paddingRight = meetCard.isExistNext ? "0px" : "8px";
+  const style = {
+    width: `calc(101% * ${meetCard.range})`,
+    paddingLeft,
+    paddingRight
+  };
+
+  return style;
 };
