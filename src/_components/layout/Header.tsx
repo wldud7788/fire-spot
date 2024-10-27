@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
-import CustomInput from "../search/CustomInput";
+import CustomInput from "../search/SearchInput";
 import useDropdown from "@/hooks/useDropdown";
 
 const Header = () => {

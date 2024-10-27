@@ -9,7 +9,7 @@ interface CustomInputProps {
   placeholder?: string; // 플레이스홀더 추가
 }
 
-const CustomInput: React.FC<CustomInputProps> = ({
+const SearchInput: React.FC<CustomInputProps> = ({
   value,
   onChange,
   className = "", // 기본값 설정
@@ -33,4 +33,4 @@ const CustomInput: React.FC<CustomInputProps> = ({
   );
 };
 
-export default CustomInput;
+export default SearchInput;
