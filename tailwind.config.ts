@@ -10,6 +10,33 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ["var(--font-pretendard)", "sans-serif"]
+      },
+      boxShadow: {
+        custom:
+          "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
+        buttonShadow: "0 2px 6px rgba(0, 0, 0, 0.2)"
+      },
+      lineHeight: {
+        "40": "40px"
+      },
+      screens: {
+        "max-n": { max: "1460px" },
+        "max-t": { max: "1260px" },
+        "max-m": { max: "600px" },
+        "max-sm": { max: "400px" }
+      },
+      backgroundImage: {
+        search: "url('/assets/images/search.png')",
+        profile: "url('/assets/images/profile.png')",
+        map: "url('/assets/images/map.png')",
+        sos: "url('/assets/images/sos.png')",
+        chat: "url('/assets/images/chat.png')"
+      },
+      backgroundPosition: {
+        "left-center": "left 10px center"
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
