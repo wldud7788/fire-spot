@@ -64,6 +64,16 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)"
+      },
+      backgroundImage: {
+        date: "url('/assets/images/ico-date.svg')",
+        group: "url('/assets/images/ico-group.svg')",
+        heart: "url('/assets/images/ico-heart.svg')",
+        location: "url('/assets/images/ico-location.svg')"
+      },
+      backgroundPosition: {
+        "left-center": "left center",
+        "right-center": "right center"
       }
     }
   },
