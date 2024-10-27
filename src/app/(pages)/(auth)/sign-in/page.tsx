@@ -23,7 +23,7 @@ const SignIn = () => {
   };
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex min-h-[calc(100vh-16rem)] flex-col items-center justify-center">
       <div className="flex w-[480px] flex-col items-center gap-11 border p-14">
         <h2 className="text-2xl font-bold text-black">
           SNS계정으로 간편 로그인
