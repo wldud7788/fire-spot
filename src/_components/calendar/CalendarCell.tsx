@@ -25,30 +25,35 @@ const CalendarCell = ({ day, cellCardList }: Props) => {
   )[0];
 
   const meetCardStyle = getMeetCardStyle(meetCard);
+  const cardBg = true ? "bg-red-500" : "bg-slate-500";
 
+  // TODO CSS 진행중
   return (
-    <li className="flex h-[75px] w-full flex-col border-[1px]">
+    <li className="flex min-h-[105px] w-full flex-col border-[1px]">
       <section className="flex h-[20px] w-full justify-end">
         <p>{format(day, "d")}</p>
       </section>
-      <section className="relative flex flex-col justify-between">
-        <div>
+      <section className="relative flex flex-col justify-end">
+        <div className="h-[50px]">
           {meetCard && (
             <div
               // className={`absolute top-2 w-[${(30 * meetCard[0].range).toString()}px] bg-slate-500`}>
               className={`absolute top-2`}
-              style={meetCardStyle}
+              style={{ ...meetCardStyle }}
             >
-              <div className="w-full bg-slate-500">{meetCard.content}</div>
+              <div className={`w-full ${cardBg}`}>{meetCard.content}</div>
             </div>
           )}
         </div>
-        {/* {showStamp &&
-          stampCardList.map((stamp) => (
-            <div key={stamp.id} className="bg-slate-500">
-              {stamp.content}
-            </div>
-          ))} */}
+        <ul className="flex w-24">
+          {showStamp &&
+            stampCardList.map((stamp) => (
+              <li key={stamp.id} className="h-12 bg-slate-500">
+                {/* {stamp.content} */}
+                도장
+              </li>
+            ))}
+        </ul>
       </section>
     </li>
   );
