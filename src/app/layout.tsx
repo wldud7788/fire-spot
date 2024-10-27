@@ -30,7 +30,9 @@ export default function RootLayout({
           <Suspense fallback={<></>}>
             <RQProviders>
               <Header />
-              {children}
+              <div className="min-h-[calc(100vh-80px)] pt-[80px]">
+                {children}
+              </div>
               <Footer />
             </RQProviders>
           </Suspense>

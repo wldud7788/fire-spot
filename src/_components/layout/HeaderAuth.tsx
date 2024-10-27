@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { getUser, signOut } from "@/_utils/auth";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import useDropdown from "@/hooks/useDropdown";
 
 const HeaderAuth = () => {
@@ -17,6 +16,7 @@ const HeaderAuth = () => {
     const fetchUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
+      console.log(currentUser);
     };
     fetchUser();
   }, []);
@@ -33,7 +33,7 @@ const HeaderAuth = () => {
         <Link href={"/sign-in"}>로그인</Link>
       ) : (
         <div
-          className="bg-profile relative inline-block h-10 w-10 bg-center bg-no-repeat"
+          className="relative inline-block h-10 w-10 bg-profile bg-center bg-no-repeat"
           ref={dropdownRef}
           onClick={toggleDropdown}
         >
