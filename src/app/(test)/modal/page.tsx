@@ -3,6 +3,7 @@
 import Modal from "@/_components/modal/Modal";
 import ModalButton from "@/_components/modal/ModalButton";
 import { useState } from "react";
+import { buttonTypes } from "@/_components/modal/ModalButton";
 
 const ModalTestPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ const ModalTestPage = () => {
     <div>
       <h1>모달 테스트</h1>
       <ModalButton
-        buttonText="모달 열기"
+        buttonText={buttonTypes.open}
         onClick={handleModalOpen} // 버튼 클릭 시 모달 열기
       />
 
