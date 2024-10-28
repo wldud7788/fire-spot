@@ -50,7 +50,8 @@ import { CellCard, CellCardTable, Schedule } from "../type/schedule.types";
 */
 
 /** 사용자의 일정(모임, 스탬프) 목록을 CellCardTable 형태로 변환 후 반환 */
-export const convertScheduleListToCellCardTable = (
+export const convertScheduleDataToCellCardTable = (
+  // TODO 함수명 변경 convertScheduleDataToCellCardTable
   scheduleList: Schedule[]
 ): CellCardTable => {
   const cellCardTable: CellCardTable = {};

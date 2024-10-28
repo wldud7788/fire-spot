@@ -3,12 +3,12 @@
 import React, { useMemo, useState } from "react";
 import { addMonths, subMonths } from "date-fns";
 import CalendarHeader from "./CalendarHeader";
-import CalendarDays from "./CalendarDays";
+import CalendarTable from "./CalendarTable";
 import { getScheduleList } from "./action/calendarAction";
 import { queryKey } from "./hook/queryKey";
 import { useQuery } from "@tanstack/react-query";
 import { CellCardTable, Schedule } from "./type/schedule.types";
-import { convertScheduleListToCellCardTable } from "./service/calenderService";
+import { convertScheduleDataToCellCardTable } from "./service/calenderService";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -22,7 +22,7 @@ const Calendar = () => {
     if (!scheduleList) {
       return null; // 또는 원하는 초기값
     }
-    return convertScheduleListToCellCardTable(scheduleList);
+    return convertScheduleDataToCellCardTable(scheduleList);
   }, [scheduleList]);
 
   if (isPending || !cellCardTable) {
@@ -47,7 +47,10 @@ const Calendar = () => {
   return (
     <div className="w-full">
       <CalendarHeader {...headerProps} />
-      <CalendarDays currentMonth={currentMonth} cellCardTable={cellCardTable} />
+      <CalendarTable
+        currentMonth={currentMonth}
+        cellCardTable={cellCardTable}
+      />
     </div>
   );
 };

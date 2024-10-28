@@ -10,7 +10,8 @@ import React from "react";
 import CalendarCell from "./CalendarCell";
 import { CellCardTable } from "./type/schedule.types";
 
-const CalendarDays = ({
+// CalendarTable로 이름 변경
+const CalendarTable = ({
   currentMonth,
   cellCardTable
 }: {
@@ -55,4 +56,4 @@ const CalendarDays = ({
   );
 };
 
-export default CalendarDays;
+export default CalendarTable;
