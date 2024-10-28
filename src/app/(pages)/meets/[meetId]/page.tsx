@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
-import { createClient } from "@/_utils/supabase/server";
 import { getMeetDetail } from "../actions/meetDetailAction";
-import MeetController from "../c/meetsDetail/MeetController";
+import MeetController from "../components/meetsDetail/MeetController";
 
 /**
  *
@@ -28,9 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
-  // const recommendMeets = 어쩌구 저쩌구
-
-  console.log("meetDetail", meetWithCamp);
 
   return <MeetController meetWithCamp={meetWithCamp} />;
 };
