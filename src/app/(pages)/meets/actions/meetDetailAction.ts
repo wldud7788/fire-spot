@@ -10,7 +10,9 @@ const getMeetDetail = async ({ meetId }: { meetId: string }) => {
     .select(
       `
     *,
-    camp (*)`
+    camp (*),
+    meet_attendee_count:meet_attendee!inner.count()
+    `
     )
     .eq("id", meetId)
     .returns<Meet[]>();
@@ -19,6 +21,8 @@ const getMeetDetail = async ({ meetId }: { meetId: string }) => {
   if (error) {
     throw new Error("getMeetDetail Error");
   }
+
+  console.log("data", data);
 
   return data[0];
 };
