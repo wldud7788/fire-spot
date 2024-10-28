@@ -38,7 +38,7 @@ const Header = () => {
       <div className="relative mx-auto max-w-[1540px] bg-white p-5">
         {isDropdownOpen && (
           <div
-            className="fixed inset-0 z-0 bg-black opacity-50"
+            className="fixed inset-0 z-10 bg-black opacity-50"
             onClick={closeDropdown}
           ></div>
         )}
@@ -47,7 +47,7 @@ const Header = () => {
             <Link href={"/"}>로고</Link>
             <form
               action=""
-              className="relative flex items-center rounded-2xl border border-slate-300"
+              className="relative z-20 flex items-center rounded-2xl border border-slate-300"
             >
               <CustomInput
                 inputType="header"
