@@ -6,4 +6,8 @@ const formatDateKr = (date: Date | string) => {
   return format(date, "M'월' d'일'", { locale: ko });
 };
 
-export { formatDateKr };
+const formatFullDateKr = (date: Date | string) => {
+  return format(date, "yy'년' M'월' d'일' (eee) a h:mm", { locale: ko });
+};
+
+export { formatDateKr, formatFullDateKr };

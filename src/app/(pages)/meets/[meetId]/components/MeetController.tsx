@@ -8,16 +8,15 @@ import MeetSuppliesSection from "./MeetSuppliesSection";
 import MeetRecommendSection from "./MeetRecommendSection";
 
 type Props = {
-  meetAndCamp: MeetWithCamp;
+  meetWithCamp: MeetWithCamp;
 };
-const MeetController = ({ meetAndCamp }: Props) => {
+const MeetController = ({ meetWithCamp }: Props) => {
   return (
     <div className="mx-auto w-full">
-      <MeetTitleSection meetAndCamp={meetAndCamp} />
-      <MeetIntroSection meetAndCamp={meetAndCamp} />
-      <MeetContentSection meetAndCamp={meetAndCamp} />
-      <MeetSuppliesSection meetAndCamp={meetAndCamp} />
-      <MeetContentSection meetAndCamp={meetAndCamp} />
+      <MeetTitleSection meetWithCamp={meetWithCamp} />
+      <MeetIntroSection meetWithCamp={meetWithCamp} />
+      <MeetContentSection meetWithCamp={meetWithCamp} />
+      <MeetSuppliesSection meetWithCamp={meetWithCamp} />
       <MeetRecommendSection />
     </div>
   );

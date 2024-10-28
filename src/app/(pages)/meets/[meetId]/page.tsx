@@ -27,12 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const MeetDetail = async ({ params }: Props) => {
-  const meetAndCamp = await getMeetDetail({ meetId: params.meetId });
+  const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
   // const recommendMeets = 어쩌구 저쩌구
 
-  console.log("meetDetail", meetAndCamp);
+  console.log("meetDetail", meetWithCamp);
 
-  return <MeetController meetAndCamp={meetAndCamp} />;
+  return <MeetController meetWithCamp={meetWithCamp} />;
 };
 
 export default MeetDetail;

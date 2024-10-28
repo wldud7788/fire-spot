@@ -2,10 +2,10 @@ import React from "react";
 import { MeetWithCamp } from "../../types/meet.types";
 import { formatDateKr } from "@/_utils/date";
 type Props = {
-  meetAndCamp: MeetWithCamp;
+  meetWithCamp: MeetWithCamp;
 };
-const MeetTitleSection = ({ meetAndCamp }: Props) => {
-  const { meet, camp } = meetAndCamp;
+const MeetTitleSection = ({ meetWithCamp }: Props) => {
+  const { meet, camp } = meetWithCamp;
 
   // TODO firstImageUrl 제외한 사진도 upsert 해주자
   return (
