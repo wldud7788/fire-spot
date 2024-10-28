@@ -17,6 +17,7 @@ const Calendar = () => {
     queryKey: queryKey.calendar.schedule("testUser")
   });
 
+  // scheduleList가 변경되지 않는다면 리렌더링이 되더라도 값을 새로 할당하지 않음
   const cellCardTable: CellCardTable | null = useMemo(() => {
     if (!scheduleList) {
       return null; // 또는 원하는 초기값
@@ -42,8 +43,6 @@ const Calendar = () => {
     prevMonth,
     nextMonth
   };
-
-  console.log("cellCardTable", cellCardTable);
 
   return (
     <div className="w-full">

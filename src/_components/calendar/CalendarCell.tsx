@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import React from "react";
-import { CellCard, Schedule } from "./type/schedule.types";
+import { CellCard } from "./type/schedule.types";
 import { getMeetCardStyle } from "./service/calenderService";
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
   cellCardList: CellCard[];
 };
 
+// TODO 스탬프, 모임 필터링 데이터는 여기서 하는게 나을까?
 // 캘린더 한 칸
 const CalendarCell = ({ day, cellCardList }: Props) => {
   const showStamp = true;

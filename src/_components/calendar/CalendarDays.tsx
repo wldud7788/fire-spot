@@ -17,8 +17,6 @@ const CalendarDays = ({
   currentMonth: Date;
   cellCardTable: CellCardTable;
 }) => {
-  const today = new Date();
-
   // 이번 달의 시작 일자(요일 등 포함)
   const monthStart = startOfMonth(currentMonth);
 

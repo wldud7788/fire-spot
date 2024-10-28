@@ -7,6 +7,7 @@ type Props = {
   nextMonth: () => void;
 };
 
+// TODO 모임, 스탬프 필터 추가해야함
 const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }: Props) => {
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   return (

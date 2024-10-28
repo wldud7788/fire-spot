@@ -1,7 +1,7 @@
 export type Schedule = {
   // id: number;
   typeId: number;
-  type: scheduleType;
+  type: ScheduleType;
   content: string;
   startDate: Date;
   endDate: Date;
@@ -12,10 +12,10 @@ export type CellCardTable = {
 };
 
 export type CellCard = {
-  id: string; // key를 위한 id (type + typeId + index ?)
-  range: number; // 아니면 이거 ? 그냥 날짜 범위를 구해서 넣어버리면 되는거 아닌가?
+  id: string; // key를 위한 id (type-typeId-sequence)
+  range: number; // 모임 같은 경우 몇 칸을 차지하는지
   typeId: number;
-  type: scheduleType;
+  type: ScheduleType;
   content: string;
   isExistPrev: boolean;
   isExistNext: boolean;
@@ -35,4 +35,4 @@ export const SCHEDULE_TYPE = {
   meet: "meet"
 };
 
-export type scheduleType = keyof typeof SCHEDULE_TYPE;
+export type ScheduleType = keyof typeof SCHEDULE_TYPE;
