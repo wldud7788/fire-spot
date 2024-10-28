@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import React from "react";
 import { createClient } from "@/_utils/supabase/server";
+import { getMeetDetail } from "../actions/meetDetailAction";
+import MeetController from "./components/MeetController";
 
 /**
  *
@@ -16,38 +18,19 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const supabase = await createClient();
-  // const { data: meets } = await supabase.from("meet").select();
-  const meetsWithCampsQuery = supabase.from("meet").select(`
-    *,
-    camp(addr1)
-    `);
-  const { data: meets } = await meetsWithCampsQuery;
+  const meetDetail = await getMeetDetail({ meetId: params.meetId });
 
   return {
-    title: params.meetId
+    title: meetDetail.camp.facltNm,
+    description: meetDetail.camp.lineIntro
   };
 }
 
-const MeetDetail = async () => {
-  const supabase = await createClient();
-  // const { data: meets } = await supabase.from("meet").select();
-  const { data: meetDetail, error } = await supabase
-    .from("meet")
-    .select(
-      `
-    *,
-    camp (
-      *
-    )
-  `
-    )
-    .eq("id", 1)
-    .single();
+const MeetDetail = async ({ params }: Props) => {
+  const meetDetail = await getMeetDetail({ meetId: params.meetId });
+  // const recommendMeets = 어쩌구 저쩌구
 
-  console.log("meets", meetDetail);
-
-  return <div>MeetDetail</div>;
+  return <MeetController meetDetail={meetDetail} />;
 };
 
 export default MeetDetail;
