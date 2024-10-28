@@ -11,11 +11,15 @@ const getMeetDetail = async ({ meetId }: { meetId: string }) => {
       `
     *,
     camp (*),
-    meet_attendee_count:meet_attendee!inner.count()
-    `
+    meet_attendee!inner(id),
+    meet_attendee_count:meet_attendee!inner(count)
+
+  `
     )
     .eq("id", meetId)
-    .returns<Meet[]>();
+    .single(); //
+
+  // .returns<Meet[]>();
   // .single();
 
   if (error) {
