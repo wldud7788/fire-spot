@@ -1,5 +1,11 @@
 import { Camp } from "./camp.types";
 
+export interface MeetWithCamp {
+  meet: Meet;
+  camp: Camp;
+}
+
+// export interface Meet extends Camp {
 export interface Meet {
   id: number;
   user_id: string;
@@ -14,5 +20,5 @@ export interface Meet {
   created_at: string;
   deadline_headcount: number;
   deadline_date: string | null;
-  camp: Camp;
+  attendee_count: number;
 }

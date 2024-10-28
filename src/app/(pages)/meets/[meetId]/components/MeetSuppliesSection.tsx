@@ -1,9 +1,9 @@
 import React from "react";
-import { Meet } from "../../types/meet.types";
+import { MeetWithCamp } from "../../types/meet.types";
 type Props = {
-  meetDetail: Meet;
+  meetAndCamp: MeetWithCamp;
 };
-const MeetSuppliesSection = ({ meetDetail }: Props) => {
+const MeetSuppliesSection = ({ meetAndCamp }: Props) => {
   return <div>MeetSuppliesSection</div>;
 };
 

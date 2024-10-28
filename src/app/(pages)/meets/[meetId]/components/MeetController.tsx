@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Meet } from "../../types/meet.types";
+import { MeetWithCamp } from "../../types/meet.types";
 import MeetContentSection from "./MeetContentSection";
 import MeetTitleSection from "./MeetTitleSection";
 import MeetIntroSection from "./MeetIntroSection";
@@ -8,17 +8,16 @@ import MeetSuppliesSection from "./MeetSuppliesSection";
 import MeetRecommendSection from "./MeetRecommendSection";
 
 type Props = {
-  meetDetail: Meet;
+  meetAndCamp: MeetWithCamp;
 };
-
-const MeetController = ({ meetDetail }: Props) => {
+const MeetController = ({ meetAndCamp }: Props) => {
   return (
     <div className="mx-auto w-full">
-      <MeetTitleSection meetDetail={meetDetail} />
-      <MeetIntroSection meetDetail={meetDetail} />
-      <MeetContentSection meetDetail={meetDetail} />
-      <MeetSuppliesSection meetDetail={meetDetail} />
-      <MeetContentSection meetDetail={meetDetail} />
+      <MeetTitleSection meetAndCamp={meetAndCamp} />
+      <MeetIntroSection meetAndCamp={meetAndCamp} />
+      <MeetContentSection meetAndCamp={meetAndCamp} />
+      <MeetSuppliesSection meetAndCamp={meetAndCamp} />
+      <MeetContentSection meetAndCamp={meetAndCamp} />
       <MeetRecommendSection />
     </div>
   );

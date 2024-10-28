@@ -1,33 +1,26 @@
 "use server";
 
 import { createClient } from "@/_utils/supabase/server";
-import { Meet } from "../types/meet.types";
-import meetRpc from "../utils/meet.supabase.rpc";
+import { MeetWithCamp } from "../types/meet.types";
+import supabaseRpc from "../utils/supabase.rpc";
 
-const getMeetDetail = async ({ meetId }: { meetId: string }) => {
+const getMeetDetail = async ({
+  meetId
+}: {
+  meetId: string;
+}): Promise<MeetWithCamp> => {
   const supabase = await createClient();
-  // const { data, error } = await supabase
-  //   .from("meet")
-  //   .select(
-  //     `
-  //   *,
-  //   camp (*),
-  //   meet_attendee_count:meet_attendee!inner(count)
 
-  // `
-  //   )
-  //   .eq("id", meetId)
-  //   .returns<Meet[]>();
-
-  const { data, error } = await supabase.rpc(meetRpc.getMeetDetail);
-
+  const { data, error } = await supabase.rpc(supabaseRpc.meet.getMeetDetail, {
+    meet_id: meetId
+  });
   if (error) {
     throw new Error("getMeetDetail Error");
   }
 
-  console.log("data", data);
+  data.meet.attendee_count = data.attendee_count;
 
-  return data[0];
+  return { ...data };
 };
 
 export { getMeetDetail };

@@ -1,7 +1,7 @@
 import React from "react";
-import { Meet } from "../../types/meet.types";
+import { MeetWithCamp } from "../../types/meet.types";
 type Props = {
-  meetDetail: Meet;
+  meetAndCamp: MeetWithCamp;
 };
 const MeetRecommendSection = () => {
   return <div>MeetRecommendSection</div>;

@@ -1,14 +1,16 @@
 import React from "react";
-import { Meet } from "../../types/meet.types";
+import { MeetWithCamp } from "../../types/meet.types";
 type Props = {
-  meetDetail: Meet;
+  meetAndCamp: MeetWithCamp;
 };
-const MeetTitleSection = ({ meetDetail }: Props) => {
+const MeetTitleSection = ({ meetAndCamp }: Props) => {
+  const { meet, camp } = meetAndCamp;
+
   return (
     <div>
-      <h2>{meetDetail.title}</h2>
-      <p>{meetDetail.camp.addr1}</p>
-      <p>{meetDetail.start_date}</p>
+      <h2>{meet.title}</h2>
+      <p>{camp.addr1}</p>
+      <p>{meet.start_date}</p>
       {/* <p>{meetDetail.}/{meetDetail.deadline_headcount}</p> */}
     </div>
   );
