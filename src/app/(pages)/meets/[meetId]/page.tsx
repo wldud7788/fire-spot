@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import React from "react";
 import { createClient } from "@/_utils/supabase/server";
 import { getMeetDetail } from "../actions/meetDetailAction";
-import MeetController from "./components/MeetController";
+import MeetController from "../c/meetsDetail/MeetController";
 
 /**
  *
