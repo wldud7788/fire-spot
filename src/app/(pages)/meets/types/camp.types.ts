@@ -7,5 +7,6 @@ export interface Camp {
   facltNm: string;
   contentId: number;
   lineIntro: string;
+  firstImageUrl: string;
   created_at: string;
 }
