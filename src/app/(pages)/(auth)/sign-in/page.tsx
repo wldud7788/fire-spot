@@ -6,20 +6,26 @@ import React from "react";
 const SignIn = () => {
   const supabase = createClient();
   const signInWithKakao = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "kakao",
       options: {
         redirectTo: `${window.location.host}/auth/callback` //ToDo - 배포 이후 버셀로 도메인 변경 서버로 바꾸면 window가 없어서 고장남
       }
     });
+    if (error) {
+      return <div>kakao 로그인 오류 {error.message}</div>;
+    }
   };
   const signInWithGoogle = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo: `${window.location.host}/auth/callback`
       }
     });
+    if (error) {
+      return <div>google 로그인 오류 {error.message}</div>;
+    }
   };
 
   return (
