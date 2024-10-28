@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import React from "react";
 import { CellCard } from "./type/schedule.types";
-import { getMeetCardStyle } from "./service/calenderService";
+import { getMeetCardStyle } from "./utils/calenderService";
 
 type Props = {
   day: Date;
@@ -21,9 +21,7 @@ const CalendarCell = ({ day, cellCardList }: Props) => {
     (cellCard) => cellCard.type === "stamp"
   );
 
-  const meetCard = cellCardList.filter(
-    (cellCard) => cellCard.type === "meet"
-  )[0];
+  const meetCard = cellCardList.find((cellCard) => cellCard.type === "meet");
 
   const meetCardStyle = getMeetCardStyle(meetCard);
   const cardBg = true ? "bg-red-500" : "bg-slate-500";
@@ -46,12 +44,12 @@ const CalendarCell = ({ day, cellCardList }: Props) => {
             </div>
           )}
         </div>
-        <ul className="flex w-24">
+        <ul className="flex w-full justify-end gap-2">
           {showStamp &&
             stampCardList.map((stamp) => (
               <li key={stamp.id} className="h-12 bg-slate-500">
                 {/* {stamp.content} */}
-                도장
+                stamp
               </li>
             ))}
         </ul>

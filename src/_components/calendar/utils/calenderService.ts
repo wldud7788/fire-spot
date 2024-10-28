@@ -165,8 +165,8 @@ const getMeetCellCard = (schedule: Schedule) => {
 
 export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
   if (!meetCard) return {};
-  const paddingLeft = meetCard.isExistPrev ? "0px" : "8px";
-  const paddingRight = meetCard.isExistNext ? "0px" : "8px";
+  const paddingLeft = meetCard.isExistPrev ? "0px" : "32px";
+  const paddingRight = meetCard.isExistNext ? "0px" : "32px";
   const style = {
     width: `calc(101% * ${meetCard.range})`,
     paddingLeft,

@@ -8,11 +8,11 @@ import { getScheduleList } from "./action/calendarAction";
 import { queryKey } from "./hook/queryKey";
 import { useQuery } from "@tanstack/react-query";
 import { CellCardTable, Schedule } from "./type/schedule.types";
-import { convertScheduleDataToCellCardTable } from "./service/calenderService";
+import { convertScheduleDataToCellCardTable } from "./utils/calenderService";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const { data: scheduleList, isPending } = useQuery<Schedule[]>({
+  const { data: scheduleList } = useQuery<Schedule[]>({
     queryFn: () => getScheduleList(),
     queryKey: queryKey.calendar.schedule("testUser")
   });
@@ -25,7 +25,7 @@ const Calendar = () => {
     return convertScheduleDataToCellCardTable(scheduleList);
   }, [scheduleList]);
 
-  if (isPending || !cellCardTable) {
+  if (!cellCardTable) {
     return <></>;
   }
 
