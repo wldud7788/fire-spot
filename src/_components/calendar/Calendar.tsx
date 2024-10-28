@@ -12,6 +12,7 @@ import { convertScheduleDataToCellCardTable } from "./utils/calenderService";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  // TODO 실제 데이터로 변경되면 훅 분리하기
   const { data: scheduleList } = useQuery<Schedule[]>({
     queryFn: () => getScheduleList(),
     queryKey: queryKey.calendar.schedule("testUser")
