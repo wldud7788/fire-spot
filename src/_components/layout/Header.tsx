@@ -5,8 +5,10 @@ import HeaderAuth from "./HeaderAuth";
 import useDropdown from "@/hooks/useDropdown";
 import CSearchInput from "../search/CSearchInput";
 import DropDownSearch from "../search/DropDownSearch";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
     useDropdown(); // 훅 사용
@@ -32,6 +34,11 @@ const Header = () => {
     };
   }, []);
 
+  //검색 관련
+  const submitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/camping?keyword=${searchValue}`);
+  };
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-10 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
@@ -48,7 +55,10 @@ const Header = () => {
         <div className="z-10 flex items-center justify-between leading-40">
           <div className="flex gap-8">
             <Link href={"/"}>로고</Link>
-            <form action="" className="relative z-20 flex items-center">
+            <form
+              onSubmit={submitSearch}
+              className="relative z-20 flex items-center"
+            >
               <div className="header_search">
                 <CSearchInput
                   value={searchValue}
