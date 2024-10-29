@@ -7,7 +7,7 @@ import browserClient from "@/_utils/supabase/client";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment-timezone";
 
-import { getChatData } from "./Chat-api";
+import { getChatData } from "./[id]/Chat-api";
 
 import "@/css/chat.css";
 // import useAuthStore from '@/store/useAuthStore';

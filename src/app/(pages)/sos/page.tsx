@@ -1,6 +1,7 @@
 import React from "react";
 import { createClient } from "@/_utils/supabase/client";
 import MainChat from "@/_components/chat/MainChat";
+import userList from "@/_components/chat/userList";
 
 const SosList = () => {
   const supabase = createClient();
@@ -15,6 +16,7 @@ const SosList = () => {
   return (
     <>
       <MainChat />
+      {/* <userList/> */}
       <div>SosList</div>
     </>
   );
