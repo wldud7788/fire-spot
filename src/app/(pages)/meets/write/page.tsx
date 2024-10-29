@@ -2,7 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetRequest } from "../types/meet.types";
-import { DateRangePicker } from "react-date-range";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import { ko } from "date-fns/locale";
+import "react-datepicker/dist/react-datepicker.css";
+import { setHours, setMinutes } from "date-fns";
+registerLocale("ko", ko);
 /**
  *
  * write할 때 camp 테이블에 데이터 upsert
@@ -48,7 +52,7 @@ const CampSelect = () => {
     // <div className="h-40 bg-slate-400">
     <input
       type="text"
-      className="h-40 border-4"
+      className="mb-10 h-20 border-4"
       onChange={handleSearchKeyword}
     />
     // </div>
@@ -56,28 +60,44 @@ const CampSelect = () => {
 };
 
 const MeetWrite = () => {
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   setValue,
+  //   watch,
+  //   formState: { errors }
+  // } = useForm<Input>();
+
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
     formState: { errors }
   } = useForm<Input>();
   const onSubmit: SubmitHandler<Input> = (data) => console.log(data);
 
-  // * 1. 제목
-  // * 2. 캠핑장 선택
-  // * 3. 시작날짜
-  // * 4. 종료날짜
-  // * 5. 초보 가능 여부
-  // * 6. 모집인원
-  // * 7. 내용
-  // * 8. 준비물
+  const [startDate, setStartDate] = useState<Date | null>(
+    setHours(setMinutes(new Date(), 30), 16)
+  );
 
+  console.log("startDate", startDate);
   return (
     <div>
       <CampSelect />
+
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-44 flex-col">
-        {/* <input  {...register("camp_id")} placeholder="" /> */}
+        <DatePicker
+          selected={startDate} // 상태 변수를 사용
+          onChange={(date) => {
+            const value = date ? date : new Date();
+
+            setStartDate(value); // 상태 업데이트
+            setValue("start_date", value); // react-hook-form에 날짜 설정
+          }}
+          showTimeSelect
+          dateFormat="MMMM d일 aa h:mm"
+          locale="ko"
+        />
         {errors.title && <span>This field is required</span>}
         <input
           className="border-2"
@@ -89,7 +109,7 @@ const MeetWrite = () => {
         />
         <input className="border-2" {...register("content")} />
         <input className="border-2" {...register("supplies")} />
-        <input className="border-2" {...register("start_date")} />
+        {/* <input className="border-2" {...register("start_date")} /> */}
         <input className="border-2" {...register("end_date")} />
         <input className="border-2" {...register("is_day_trip")} />
         <input

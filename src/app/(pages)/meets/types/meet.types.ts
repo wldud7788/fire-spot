@@ -28,7 +28,7 @@ export interface MeetRequest {
   title: string;
   content: string;
   supplies: string[];
-  start_date: string;
+  start_date: string | Date;
   end_date: string;
   is_day_trip: boolean;
   deadline_headcount: number;
