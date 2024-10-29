@@ -1,7 +1,12 @@
 "use server";
 
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
-import { GOAMPING_KEY, GOAMPING_URL } from "../api/apiKey";
+import {
+  GOAMPING_KEY,
+  GOAMPING_URL,
+  GOCAMPING_HOST,
+  GOCAMPING_SEARCH_API
+} from "../api/apiKey";
 
 export const getTotalData = async () => {
   try {
@@ -54,4 +59,15 @@ export const getCampData = async (contentId: string) => {
     console.error("Error fetching data:", error);
     return null;
   }
+};
+
+export const getSearchCampsData = async (keyword: string) => {
+  const res = await fetch(
+    `${GOCAMPING_HOST}${GOCAMPING_SEARCH_API}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}`
+  );
+  if (!res.ok) {
+    throw new Error("검색 패치 오류");
+  }
+  const data = await res.json();
+  return data.response.body.items.item;
 };
