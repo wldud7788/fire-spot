@@ -89,32 +89,6 @@ body {
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
 }
-/*
-input:focus + .input_line {
-  width: calc(100% - 20px);
-  transform: translateX(-50%);
-  left: 50%;
-}
-.header_search input:focus {
-  border: none !important; /* 강제로 border를 없앰 
-  outline: none !;
-}*/
-
-/* .search_icon::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: calc(100% - 80%);
-  height: 1px;
-  width: 0;
-  background-color: #d1d5db;
-  transition: width 0.2s;
-} */
-/* 
-.search_icon:focus::after {
-  width: 100%;
-} */
-
 .header_search {
   position: relative;
 }
