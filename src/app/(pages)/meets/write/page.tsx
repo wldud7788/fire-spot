@@ -45,6 +45,7 @@ const MeetWrite = () => {
         className="relative flex w-full flex-col gap-10"
       >
         <div className="mb-20 w-[600px]">
+          {errors.camp_id && <span>캠핑장을 선택하세요.</span>}
           <input
             type="text"
             className="border-4"

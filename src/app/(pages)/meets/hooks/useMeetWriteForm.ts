@@ -19,6 +19,7 @@ const useMeetWriteForm = () => {
     register,
     handleSubmit,
     setValue,
+    clearErrors,
     formState: { errors }
   } = useForm<Input>({
     defaultValues: {
@@ -33,6 +34,7 @@ const useMeetWriteForm = () => {
 
     setIsOpen(false);
     setSearchKeyword(camp.facltNm);
+    clearErrors("camp_id"); // camp_id 에러 초기화
   };
 
   const handleChangeSearchKeyword = (
