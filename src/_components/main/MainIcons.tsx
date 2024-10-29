@@ -20,7 +20,7 @@ const MainIcons = () => {
             <li key={icon.id}>
               <Link
                 href={icon.href}
-                className="color-[#404040] flex flex-col items-center justify-center gap-[10px] text-[24px]"
+                className="flex flex-col items-center justify-center gap-[10px] text-[24px] text-[#404040]"
               >
                 <img src={icon.src} />
                 {icon.text}
