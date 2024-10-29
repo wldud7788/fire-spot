@@ -1,3 +1,5 @@
+// 피그마 기준으로 필요 없을 거 같습니다.. 그래도 혹시 모르니까 남겨두겠습니댜 (선택한 도시 날씨)
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -7,7 +9,7 @@ type WeatherComponentProps = {
 };
 // 날짜하나 만들기 props 기본값 주기/ ui
 const WeatherComponent = ({
-  city,
+  city = "Seoul",
   date = new Date()
 }: WeatherComponentProps) => {
   const [weatherData, setWeatherData] = useState<any>(null);
