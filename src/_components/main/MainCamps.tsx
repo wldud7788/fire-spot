@@ -11,7 +11,7 @@ const MainCamps = async () => {
       {camps.map((camp) => {
         return (
           <li className="main_camps flex-1" key={camp.contentId}>
-            <CampCard camp={camp} />
+            <CampCard camp={camp} type={"main"} />
           </li>
         );
       })}
