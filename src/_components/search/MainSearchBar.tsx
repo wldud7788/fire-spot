@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import CSearchInput from "./CSearchInput";
 import useDropdown from "@/hooks/useDropdown";
-import DropdownRegions from "./DropdownRegions";
 import DropDownSearch from "./DropDownSearch";
+import DropdownRegions from "../dropdownRegions/DropdownRegions";
 
 const MainSearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
