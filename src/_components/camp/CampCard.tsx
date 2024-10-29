@@ -8,7 +8,7 @@ type CampingDataProps = {
 
 const CampCard = ({ camp }: CampingDataProps) => {
   return (
-    <div className="camping_card group w-[calc(25%-30px)]">
+    <div className="camping_card group">
       <Link href={`/camps/${camp.contentId}`}>
         <div className="inner">
           <div className="img_box relative overflow-hidden py-[23%]">
