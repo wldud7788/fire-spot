@@ -45,7 +45,7 @@ const MeetWrite = () => {
         className="relative flex w-full flex-col gap-10"
       >
         <div className="mb-20 w-[600px]">
-          {errors.camp_id && <span>캠핑장을 선택하세요.</span>}
+          {errors.contentId && <span>캠핑장을 선택하세요.</span>}
           <input
             type="text"
             className="border-4"
@@ -73,22 +73,52 @@ const MeetWrite = () => {
         <input
           type="hidden"
           className="border-2"
-          {...register("camp_id", { required: true })}
+          {...register("contentId", { required: true })}
         />
         <input
           className="border-2"
+          placeholder="제목"
           {...register("title", { required: true })}
         />
-        <input className="border-2" {...register("content")} />
-        <input className="border-2" {...register("supplies")} />
-        <input className="border-2" {...register("is_day_trip")} />
+        <input
+          className="border-2"
+          placeholder="내용"
+          {...register("content", { required: true })}
+        />
+        <label>
+          <input
+            type="radio"
+            value="true"
+            {...register("is_newbie", { required: true })} // is_newbie 필드 등록
+          />
+          초보 가능
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="false"
+            {...register("is_newbie", { required: true })} // 동일한 이름으로 등록
+          />
+          초보 불가능
+        </label>
+        <input
+          className="border-2"
+          placeholder="준비물"
+          {...register("supplies")}
+        />
         <input
           className="border-2"
           type="number"
-          {...register("deadline_headcount", { min: 2, max: 10 })}
+          {...register("deadline_headcount", {
+            min: 2,
+            max: 10,
+            required: true
+          })}
         />
-        {errors.deadline_headcount && <span>This 인원수 확인 is required</span>}
-        <input className="border-2" {...register("deadline_date")} />
+        {errors.deadline_headcount && <span>인원수 확인</span>}
+        {/* <input className="border-2" {...register("is_day_trip")} /> */}
+        {/* <input className="border-2" {...register("deadline_date")} /> */}
 
         <input type="submit" />
       </form>

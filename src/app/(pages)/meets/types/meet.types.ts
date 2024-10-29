@@ -1,15 +1,15 @@
-import { CampResponse } from "./camp.types";
+import { CampFromDB } from "./camp.types";
 
 export interface MeetWithCamp {
   meet: MeetResponse;
-  camp: CampResponse;
+  camp: CampFromDB;
 }
 
 // export interface Meet extends Camp {
 export interface MeetResponse {
   id: number;
   user_id: string;
-  camp_id: number;
+  contentId: number;
   title: string;
   content: string;
   supplies: string[]; // [ '텐트', '생수', '콘센트', '음식', '침낭' . . . ],
@@ -24,13 +24,14 @@ export interface MeetResponse {
 }
 
 export interface MeetForm {
-  camp_id: string;
+  contentId: string;
   title: string;
   content: string;
   supplies: string[];
   start_date: string | Date;
   end_date: string | Date;
   is_day_trip: boolean;
+  is_newbie: boolean;
   deadline_headcount: number;
   deadline_date: string | null;
 }

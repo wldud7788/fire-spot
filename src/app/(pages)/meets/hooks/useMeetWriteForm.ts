@@ -4,7 +4,13 @@ import { MeetForm } from "../types/meet.types";
 import { Camp } from "../../camps/types/Camp";
 import useDate from "../hooks/useDate";
 type Input = MeetForm;
-import { GOAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
+import {
+  GOAMPING_IMAGE_LIST_URL,
+  GOAMPING_KEY,
+  GOAMPING_SEARCH_LIST_URL
+} from "@/_utils/api/apiKey";
+import { processSubmitData } from "../utils/processSubmitData";
+import { upsertCamp } from "../actions/meetWriteAction";
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 const useMeetWriteForm = () => {
@@ -24,19 +30,28 @@ const useMeetWriteForm = () => {
   } = useForm<Input>({
     defaultValues: {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      deadline_headcount: 3
     }
   });
-  const onSubmit: SubmitHandler<Input> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Input> = processSubmitData;
 
+  /** 검색 후 드롭다운 클릭 이벤트 */
   const handleSelectCamp = (camp: Camp) => {
-    setValue("camp_id", camp.contentId);
+    setValue("contentId", camp.contentId);
 
     setIsOpen(false);
     setSearchKeyword(camp.facltNm);
-    clearErrors("camp_id"); // camp_id 에러 초기화
+    upsertCamp(camp);
+    clearErrors("contentId"); // 훅폼 contentId 에러 초기화
   };
 
+  /**
+   * input 입력 이벤트
+   *
+   * isOpen 핸들링
+   *  - e.target.value 가 "" 이면 true
+   */
   const handleChangeSearchKeyword = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {

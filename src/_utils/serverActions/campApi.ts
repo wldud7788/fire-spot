@@ -1,7 +1,13 @@
 "use server";
 
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
-import { GOAMPING_KEY, GOAMPING_URL } from "../api/apiKey";
+import {
+  GOAMPING_IMAGE_LIST_URL,
+  GOAMPING_KEY,
+  GOAMPING_URL
+} from "../api/apiKey";
+import { createClient } from "../supabase/server";
+import { CampFromDB } from "@/app/(pages)/meets/types/camp.types";
 
 export const getTotalData = async () => {
   try {
@@ -53,5 +59,36 @@ export const getCampData = async (contentId: string) => {
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;
+  }
+};
+
+export const getCampImgList = async (contentId: string) => {
+  const IMAGE_SEARCH_URL = `${GOAMPING_IMAGE_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=`;
+
+  try {
+    const res = await fetch(IMAGE_SEARCH_URL + contentId);
+    const data = await res.json();
+
+    return data.response.body.items.item;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+
+export const getCampDataFromDB = async (
+  contentId: string
+): Promise<CampFromDB> => {
+  const supabase = await createClient();
+  try {
+    const { data } = await supabase
+      .from("camp")
+      .select()
+      .eq("contentId", contentId)
+      // .returns<CampResponse>();
+      .single();
+    return data;
+  } catch (error) {
+    throw new Error("Error getCampDataFromDB ");
   }
 };

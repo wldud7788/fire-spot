@@ -2,7 +2,7 @@
 
 import { createClient } from "@/_utils/supabase/server";
 import { MeetWithCamp } from "../types/meet.types";
-import supabaseRpc from "../utils/supabase.rpc";
+import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 
 const getMeetDetail = async ({
   meetId
@@ -16,8 +16,6 @@ const getMeetDetail = async ({
   if (error) {
     throw new Error("getMeetDetail Error");
   }
-
-  console.log("data", data);
 
   data.meet.attendee_count = data.attendee_count;
 

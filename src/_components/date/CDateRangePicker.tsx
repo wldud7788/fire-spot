@@ -62,7 +62,8 @@ const CDateRangePicker = ({
           setEndDate(value);
           setValue(endFormName, value);
         }}
-        dateFormat="MMMM d일"
+        showTimeSelect
+        dateFormat="MMMM d일 aa h:mm"
         locale="ko"
         onCalendarClose={handleCloseEndDate}
       />
