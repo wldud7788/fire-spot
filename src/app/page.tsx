@@ -1,7 +1,8 @@
+import MainSearch from "@/_components/search/MainSearch";
 import {
   dehydrate,
   HydrationBoundary,
-  QueryClient,
+  QueryClient
 } from "@tanstack/react-query";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <h2>이준열짱</h2>
+      <MainSearch />
     </HydrationBoundary>
   );
 }
