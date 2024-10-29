@@ -12,15 +12,9 @@ const DropDownCampSearch: React.FC<{
     >
       {/* 드롭다운 내용 */}
       <ul className="max-h-60 overflow-y-auto">
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 1</li>
-        </Link>
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 2</li>
-        </Link>
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 3</li>
-        </Link>
+        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 1</li>
+        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 2</li>
+        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 3</li>
       </ul>
     </div>
   );
