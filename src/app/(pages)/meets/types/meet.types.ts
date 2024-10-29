@@ -1,12 +1,12 @@
-import { Camp } from "./camp.types";
+import { CampResponse } from "./camp.types";
 
 export interface MeetWithCamp {
-  meet: Meet;
-  camp: Camp;
+  meet: MeetResponse;
+  camp: CampResponse;
 }
 
 // export interface Meet extends Camp {
-export interface Meet {
+export interface MeetResponse {
   id: number;
   user_id: string;
   camp_id: number;
@@ -21,4 +21,16 @@ export interface Meet {
   deadline_headcount: number;
   deadline_date: string | null;
   attendee_count: number;
+}
+
+export interface MeetRequest {
+  camp_id: number;
+  title: string;
+  content: string;
+  supplies: string[];
+  start_date: string;
+  end_date: string;
+  is_day_trip: boolean;
+  deadline_headcount: number;
+  deadline_date: string | null;
 }

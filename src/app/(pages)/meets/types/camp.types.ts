@@ -1,4 +1,4 @@
-export interface Camp {
+export interface CampResponse {
   id: number;
   mapX: number;
   mapY: number;
