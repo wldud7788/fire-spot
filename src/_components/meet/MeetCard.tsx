@@ -31,13 +31,13 @@ const MeetCard = ({ meet }: MeetCardProps) => {
           {meet.title}
         </Link>
         <div className="info flex gap-[20px]">
-          <p className="bg-location bg-left-center bg-no-repeat pl-[20px] text-[16px]">
+          <p className="bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[16px]">
             {meet.location}
           </p>
-          <p className="bg-date bg-left-center bg-no-repeat pl-[18px] text-[16px]">
+          <p className="bg-date bg-left-center-0 bg-no-repeat pl-[18px] text-[16px]">
             {meet.date}
           </p>
-          <p className="bg-group bg-left-center bg-no-repeat pl-[18px] text-[16px]">
+          <p className="bg-group bg-left-center-0 bg-no-repeat pl-[18px] text-[16px]">
             {meet.personnelCount01}/{meet.personnelCount02}
           </p>
         </div>
