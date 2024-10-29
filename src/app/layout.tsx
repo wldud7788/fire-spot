@@ -6,6 +6,7 @@ import RQProviders from "@/_utils/reactQuery/RQProviders";
 import { UserStoreProvider } from "@/_utils/zustand/userStoreProvider";
 import Header from "@/_components/layout/Header";
 import Footer from "@/_components/layout/Footer";
+import Script from "next/script";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -29,6 +30,10 @@ export default function RootLayout({
         <UserStoreProvider>
           <Suspense fallback={<></>}>
             <RQProviders>
+              <Script
+                strategy="afterInteractive" //"beforeInteractive"으로 찾았는데 경고메세지 떠가지고 after로 수정해줬습니다.
+                src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_KEY}`}
+              ></Script>
               <Header />
               <div className="min-h-[calc(100vh-80px)] pt-[80px]">
                 {children}

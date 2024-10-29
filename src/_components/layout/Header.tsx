@@ -5,7 +5,7 @@ import HeaderAuth from "./HeaderAuth";
 import useDropdown from "@/hooks/useDropdown";
 import CSearchInput from "../search/CSearchInput";
 import DropDownSearch from "../search/DropDownSearch";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();
