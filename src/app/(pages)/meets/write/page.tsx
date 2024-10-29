@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetRequest } from "../types/meet.types";
 import useDate from "../hooks/useDate";
 import CDateRangePicker from "@/_components/date/CDateRangePicker";
+import CampSelect from "../components/meetsWrite/CampSelect";
 
 /**
  *
@@ -21,41 +22,6 @@ import CDateRangePicker from "@/_components/date/CDateRangePicker";
 
 // interface Input extends Omit<MeetRequest, "camp_id"> {}
 type Input = MeetRequest;
-
-const a = `https://apis.data.go.kr/B551011/GoCamping/searchList?serviceKey=G5%2FwdM%2BoTwjgjfBoPE4wk2zBlY3WolaJGLBI7yOEh36qItxUfgRRqvcWRHgAH86RY5vLFBD6e3i%2Fyn53pK%2Bt9w%3D%3D&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
-
-const CampSelect = () => {
-  const [test, setTest] = useState("");
-  const [se, seSe] = useState();
-
-  useEffect(() => {
-    const getCampSearchList = async () => {
-      const keyword = encodeURI(test);
-
-      const res = await fetch(a + test);
-      const data = await res.json();
-
-      console.log("data", data);
-    };
-
-    getCampSearchList();
-  }, [test]);
-  const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTest(e.target.value);
-  };
-
-  console.log(test);
-  // return <input type="text" onChange={(e) => handleSearchKeyword(e)}/>;
-  return (
-    // <div className="h-40 bg-slate-400">
-    <input
-      type="text"
-      className="mb-10 h-20 border-4"
-      onChange={handleSearchKeyword}
-    />
-    // </div>
-  );
-};
 
 const MeetWrite = () => {
   const [startDate, setStartDate] = useDate();
@@ -75,9 +41,8 @@ const MeetWrite = () => {
 
   return (
     <div>
-      <CampSelect />
-
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-44 flex-col">
+        <CampSelect />
         <CDateRangePicker
           startDate={startDate}
           setStartDate={setStartDate}
