@@ -78,21 +78,15 @@ const MeetWrite = () => {
       <CampSelect />
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-44 flex-col">
-        <div className="flex">
-          <CDateRangePicker
-            selectedDate={startDate}
-            setDate={setStartDate}
-            setValue={setValue}
-            name={"start_date"}
-          />
-          <span>~</span>
-          <CDateRangePicker
-            selectedDate={endDate}
-            setDate={setEndDate}
-            setValue={setValue}
-            name={"end_date"}
-          />
-        </div>
+        <CDateRangePicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          startFormName={"start_date"}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          endFormName={"end_date"}
+          setValue={setValue}
+        />
         {errors.title && <span>This field is required</span>}
         <input
           className="border-2"
