@@ -3,10 +3,8 @@
 import { GOAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import React, { useEffect, useState } from "react";
-// const a = `https://apis.data.go.kr/B551011/GoCamping/searchList?serviceKey=G5%2FwdM%2BoTwjgjfBoPE4wk2zBlY3WolaJGLBI7yOEh36qItxUfgRRqvcWRHgAH86RY5vLFBD6e3i%2Fyn53pK%2Bt9w%3D%3D&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
-// const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&`;
 
 const CampSelect = () => {
   const [keyword, setKeyword] = useState("");
@@ -27,17 +25,17 @@ const CampSelect = () => {
     };
 
     if (timeoutId) {
-      clearTimeout(timeoutId); // 이전 타이머 클리어
+      clearTimeout(timeoutId);
     }
 
     // 200ms 후에 API 요청
     const id = setTimeout(() => {
       getCampSearchList();
     }, 200);
-    setTimeoutId(id); // 현재 타이머 ID 저장
+    setTimeoutId(id);
 
     return () => {
-      clearTimeout(id); // 컴포넌트 언마운트 시 타이머 정리
+      clearTimeout(id);
     };
   }, [keyword]);
 
