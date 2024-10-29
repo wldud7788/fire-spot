@@ -1,20 +1,23 @@
+import { Camp } from "@/app/(pages)/camps/types/Camp";
+
 const DropDownCampSearch: React.FC<{
-  isOpen: boolean;
-  closeDropdown: () => void;
-  dropdownRef: React.RefObject<HTMLDivElement>;
-}> = ({ isOpen, closeDropdown, dropdownRef }) => {
-  if (!isOpen) return null;
+  handleSelectCamp: (camp: Camp) => void;
+  camps: Camp[];
+}> = ({ handleSelectCamp, camps }) => {
+  if (!camps) return null;
 
   return (
-    <div
-      ref={dropdownRef}
-      className="absolute top-0 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md"
-    >
-      {/* 드롭다운 내용 */}
+    <div className="absolute top-10 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md">
       <ul className="max-h-60 overflow-y-auto">
-        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 1</li>
-        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 2</li>
-        <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 3</li>
+        {camps.map((camp) => (
+          <li
+            key={camp.contentId}
+            className="cursor-pointer p-2 hover:bg-gray-100"
+            onClick={() => handleSelectCamp(camp)}
+          >
+            {camp.facltNm}
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -1,10 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { MeetRequest } from "../types/meet.types";
-import useDate from "../hooks/useDate";
+
 import CDateRangePicker from "@/_components/date/CDateRangePicker";
-import CampSelect from "../components/meetsWrite/CampSelect";
+import useMeetWriteForm from "../hooks/useMeetWriteForm";
+import DropDownCampSearch from "../components/meetsWrite/DropDownCampSearch";
 
 /**
  *
@@ -20,29 +18,47 @@ import CampSelect from "../components/meetsWrite/CampSelect";
  * 8. 준비물
  */
 
-// interface Input extends Omit<MeetRequest, "camp_id"> {}
-type Input = MeetRequest;
-
 const MeetWrite = () => {
-  const [startDate, setStartDate] = useDate();
-  const [endDate, setEndDate] = useDate();
   const {
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
     register,
     handleSubmit,
     setValue,
-    formState: { errors }
-  } = useForm<Input>({
-    defaultValues: {
-      start_date: startDate,
-      end_date: endDate
-    }
-  });
-  const onSubmit: SubmitHandler<Input> = (data) => console.log(data);
+    handleSelectCamp,
+    errors,
+    onSubmit,
+    searchKeyword,
+    handleChangeSearchKeyword,
+    isOpen,
+    searchList
+  } = useMeetWriteForm();
+
+  const showDropDown = isOpen && !!searchList && searchList.length > 0;
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex w-44 flex-col">
-        <CampSelect />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="relative flex w-full flex-col gap-10"
+      >
+        <div className="mb-20 w-[600px]">
+          <input
+            type="text"
+            className="border-4"
+            value={searchKeyword}
+            onChange={handleChangeSearchKeyword}
+            placeholder="캠핑장을 검색하세요."
+          />
+          {showDropDown && (
+            <DropDownCampSearch
+              camps={searchList}
+              handleSelectCamp={handleSelectCamp}
+            />
+          )}
+        </div>
         <CDateRangePicker
           startDate={startDate}
           setStartDate={setStartDate}
@@ -54,6 +70,7 @@ const MeetWrite = () => {
         />
         {errors.title && <span>This field is required</span>}
         <input
+          type="hidden"
           className="border-2"
           {...register("camp_id", { required: true })}
         />
@@ -63,8 +80,6 @@ const MeetWrite = () => {
         />
         <input className="border-2" {...register("content")} />
         <input className="border-2" {...register("supplies")} />
-        {/* <input className="border-2" {...register("start_date")} /> */}
-        <input className="border-2" {...register("end_date")} />
         <input className="border-2" {...register("is_day_trip")} />
         <input
           className="border-2"

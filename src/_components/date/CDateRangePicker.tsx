@@ -1,6 +1,6 @@
-import { MeetRequest } from "@/app/(pages)/meets/types/meet.types";
+import { MeetForm } from "@/app/(pages)/meets/types/meet.types";
 import React from "react";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { UseFormSetValue } from "react-hook-form";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/locale";
@@ -9,11 +9,11 @@ registerLocale("ko", ko);
 interface Props {
   startDate: Date;
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;
-  startFormName: keyof MeetRequest;
+  startFormName: keyof MeetForm;
   endDate: Date;
   setEndDate: React.Dispatch<React.SetStateAction<Date>>;
-  endFormName: keyof MeetRequest;
-  setValue: UseFormSetValue<MeetRequest>;
+  endFormName: keyof MeetForm;
+  setValue: UseFormSetValue<MeetForm>;
 }
 
 const CDateRangePicker = ({
@@ -25,32 +25,46 @@ const CDateRangePicker = ({
   endFormName,
   setValue
 }: Props) => {
+  const handleCloseStartDate = () => {
+    if (startDate < new Date()) {
+      alert("이전 날짜 입력 안됨");
+      setStartDate(new Date());
+    }
+  };
+
+  const handleCloseEndDate = () => {
+    if (endDate < startDate) {
+      alert("시작 날짜 보다 이전 이면 안됨");
+      setEndDate(startDate);
+    }
+  };
+
   return (
     <div className="flex">
       <DatePicker
-        selected={startDate} // 상태 변수를 사용
+        selected={startDate}
         onChange={(date) => {
           const value = date ? date : new Date();
-
-          setStartDate(value); // 상태 업데이트
-          setValue(startFormName, value); // react-hook-form에 날짜 설정
+          setStartDate(value);
+          setValue(startFormName, value);
         }}
         showTimeSelect
         dateFormat="MMMM d일 aa h:mm"
         locale="ko"
+        onCalendarClose={handleCloseStartDate}
       />
       <span>~</span>
       <DatePicker
-        selected={endDate} // 상태 변수를 사용
+        selected={endDate}
         onChange={(date) => {
           const value = date ? date : new Date();
 
-          setEndDate(value); // 상태 업데이트
-          setValue(endFormName, value); // react-hook-form에 날짜 설정
+          setEndDate(value);
+          setValue(endFormName, value);
         }}
-        showTimeSelect
-        dateFormat="MMMM d일 aa h:mm"
+        dateFormat="MMMM d일"
         locale="ko"
+        onCalendarClose={handleCloseEndDate}
       />
     </div>
   );

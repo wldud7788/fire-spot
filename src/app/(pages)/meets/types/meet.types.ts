@@ -23,8 +23,8 @@ export interface MeetResponse {
   attendee_count: number;
 }
 
-export interface MeetRequest {
-  camp_id: number;
+export interface MeetForm {
+  camp_id: string;
   title: string;
   content: string;
   supplies: string[];
