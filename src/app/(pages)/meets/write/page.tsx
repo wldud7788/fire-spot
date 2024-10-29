@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetRequest } from "../types/meet.types";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
-import { ko } from "date-fns/locale";
-import "react-datepicker/dist/react-datepicker.css";
-import { setHours, setMinutes } from "date-fns";
-registerLocale("ko", ko);
+import useDate from "../hooks/useDate";
+import CDateRangePicker from "@/_components/date/CDateRangePicker";
+
 /**
  *
  * write할 때 camp 테이블에 데이터 upsert
@@ -60,44 +58,41 @@ const CampSelect = () => {
 };
 
 const MeetWrite = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   setValue,
-  //   watch,
-  //   formState: { errors }
-  // } = useForm<Input>();
-
+  const [startDate, setStartDate] = useDate();
+  const [endDate, setEndDate] = useDate();
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors }
-  } = useForm<Input>();
+  } = useForm<Input>({
+    defaultValues: {
+      start_date: startDate,
+      end_date: endDate
+    }
+  });
   const onSubmit: SubmitHandler<Input> = (data) => console.log(data);
 
-  const [startDate, setStartDate] = useState<Date | null>(
-    setHours(setMinutes(new Date(), 30), 16)
-  );
-
-  console.log("startDate", startDate);
   return (
     <div>
       <CampSelect />
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-44 flex-col">
-        <DatePicker
-          selected={startDate} // 상태 변수를 사용
-          onChange={(date) => {
-            const value = date ? date : new Date();
-
-            setStartDate(value); // 상태 업데이트
-            setValue("start_date", value); // react-hook-form에 날짜 설정
-          }}
-          showTimeSelect
-          dateFormat="MMMM d일 aa h:mm"
-          locale="ko"
-        />
+        <div className="flex">
+          <CDateRangePicker
+            selectedDate={startDate}
+            setDate={setStartDate}
+            setValue={setValue}
+            name={"start_date"}
+          />
+          <span>~</span>
+          <CDateRangePicker
+            selectedDate={endDate}
+            setDate={setEndDate}
+            setValue={setValue}
+            name={"end_date"}
+          />
+        </div>
         {errors.title && <span>This field is required</span>}
         <input
           className="border-2"
