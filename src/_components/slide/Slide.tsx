@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
@@ -15,6 +15,7 @@ type SlideProps = {
   useAutoplay?: boolean;
   useNavigation?: boolean;
   usePagination?: boolean;
+  children: ReactNode;
 };
 
 // props는 해당 컴포넌트에서 직접 값을 정의함
@@ -24,19 +25,13 @@ const Slide = ({
   onChangeEvent,
   useAutoplay = true,
   useNavigation = true,
-  usePagination = true
+  usePagination = true,
+  children // children 사용하여, 안쪽 컨텐츠가 자유롭게 적용할 수 있게 함
 }: SlideProps) => {
   useEffect(() => {
     // 페이지에서 SSR로 랜더링 시 커스텀 훅으로 생성해서 전달 받아야함
     if (onChangeEvent) onChangeEvent();
   }, [onChangeEvent]);
-
-  const dummyData = [
-    { id: 1, name: "slide 1" },
-    { id: 2, name: "slide 2" },
-    { id: 3, name: "slide 3" },
-    { id: 4, name: "slide 4" }
-  ];
 
   // 활성화할 모듈을 조건부로 설정
   const modules = [
@@ -55,16 +50,15 @@ const Slide = ({
       modules={modules}
       navigation
       pagination={{ clickable: true }}
-      className="h-[300px] w-full"
+      className="w-full"
     >
-      {dummyData.map((data) => (
-        <SwiperSlide
-          key={data.id}
-          className="flex items-center justify-center bg-gray-200"
-        >
-          {data.name}
-        </SwiperSlide>
-      ))}
+      {Array.isArray(children) ? (
+        children.map((child, index) => {
+          return <SwiperSlide key={index}>{child}</SwiperSlide>;
+        })
+      ) : (
+        <SwiperSlide>{children}</SwiperSlide>
+      )}
     </Swiper>
   );
 };
