@@ -34,7 +34,7 @@ const useMeetWriteForm = () => {
       deadline_headcount: 3
     }
   });
-  const onSubmit: SubmitHandler<Input> = processSubmitData;
+  const onSubmit: SubmitHandler<Input> = (data) => processSubmitData(data);
 
   /** 검색 후 드롭다운 클릭 이벤트 */
   const handleSelectCamp = (camp: Camp) => {
