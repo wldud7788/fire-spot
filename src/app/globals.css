@@ -76,3 +76,25 @@ body {
     @apply bg-background text-foreground;
   }
 }
+/* dropdown button css start */
+.dropdown_button {
+  @apply inline-flex h-[60px] items-center rounded-2xl bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:text-lg;
+}
+.dropdown_list {
+  @apply block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white;
+}
+.search_icon {
+  @apply bg-search bg-[length:20px_20px] bg-left-center bg-no-repeat pl-10;
+}
+input:focus + .input_line {
+  width: calc(100% - 20px);
+  transform: translateX(-50%);
+  left: 50%;
+}
+.header_search input:focus {
+  border: none !important; /* 강제로 border를 없앰 */
+  outline: none !;
+}
+.header_icon {
+  @apply hidden h-10 w-10 bg-no-repeat sm:block;
+}

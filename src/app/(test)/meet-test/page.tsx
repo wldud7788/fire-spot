@@ -31,11 +31,15 @@ const MeetsTestPage = () => {
     }
   ];
   return (
-    <div className="flex flex-wrap items-center gap-[50px]">
+    <ul className="flex flex-wrap items-center gap-[50px]">
       {meets.map((meet, idx) => {
-        return <MeetCard key={idx} meet={meet} />;
+        return (
+          <li key={idx} className="w-[calc(50%-50px)]">
+            <MeetCard meet={meet} />
+          </li>
+        );
       })}
-    </div>
+    </ul>
   );
 };
 

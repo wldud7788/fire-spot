@@ -7,7 +7,7 @@ type MeetCardProps = {
 
 const MeetCard = ({ meet }: MeetCardProps) => {
   return (
-    <div className="communityCard w-[calc(50%-50px)] rounded-[20px] bg-[#F4F4F4] px-[30px] py-[25px]">
+    <div className="meet_card rounded-[20px] bg-[#F4F4F4] px-[30px] py-[25px]">
       <div className="inner">
         <div className="utils flex items-center justify-between">
           <ul className="flex gap-[10px]">
