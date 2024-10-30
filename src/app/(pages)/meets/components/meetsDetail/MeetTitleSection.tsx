@@ -3,9 +3,16 @@ import { MeetWithCamp } from "../../types/meet.types";
 import { formatDateKr } from "@/_utils/date";
 type Props = {
   meetWithCamp: MeetWithCamp;
+  attendButtonValid: {
+    isAttendButtonVisible: boolean;
+    buttonState: { text: string; type: string };
+  };
 };
-const MeetTitleSection = ({ meetWithCamp }: Props) => {
+const MeetTitleSection = ({ meetWithCamp, attendButtonValid }: Props) => {
   const { meet, camp } = meetWithCamp;
+  const { isAttendButtonVisible, buttonState } = attendButtonValid;
+
+  console.log("buttonState", buttonState);
 
   // TODO firstImageUrl 제외한 사진도 upsert 해주자
   return (
@@ -20,7 +27,9 @@ const MeetTitleSection = ({ meetWithCamp }: Props) => {
       </p>
       <p>{camp.induty.split(",")}</p>
       <p>당일치기 {meet.is_day_trip.toString()}</p>
-      <button className="bg-slate-500">참여하기</button>
+      {buttonState.type !== "skelton" && isAttendButtonVisible && (
+        <button className="bg-slate-500">참여하기</button>
+      )}
     </div>
   );
 };
