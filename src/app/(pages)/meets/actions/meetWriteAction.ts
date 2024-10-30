@@ -37,7 +37,6 @@ const postMeetAttendee = async (meetId: number) => {
     const userData = await supabase.auth.getUser();
     const userId = userData.data.user?.id;
 
-    console.log("meetId", meetId);
     const { error: meetAttendeeError } = await supabase
       .from("meet_attendee")
       .insert({ meet_id: meetId, user_id: userId });
@@ -46,7 +45,7 @@ const postMeetAttendee = async (meetId: number) => {
       console.error(meetAttendeeError);
     }
   } catch (e) {
-    console.log("postMeetAttendee Error,", e);
+    console.error("postMeetAttendee Error,", e);
   }
 };
 
