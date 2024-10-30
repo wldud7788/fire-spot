@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 type ForecastData = {
   list: Array<{
@@ -28,7 +28,7 @@ const ForecastWeatherComponent = ({
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const WEATHER_API_KEY = process.env.NEXT_PUBLIC_FUTUREWEATHER_API_KEY;
+  const WEATHER_API_KEY = process.env.NEXT_PUBLIC_FUTURE_WEATHER_API_KEY;
 
   const weatherDescriptionMap: { [key: string]: string } = {
     "clear sky": "맑음",
@@ -43,7 +43,7 @@ const ForecastWeatherComponent = ({
     "overcast clouds": "흐림"
   };
 
-  const getForecastData = async () => {
+  const getForecastData = useCallback(async () => {
     try {
       const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`;
       const weatherResponse = await fetch(weatherURL);
@@ -52,20 +52,22 @@ const ForecastWeatherComponent = ({
         throw new Error("날씨 데이터를 가져오는데 문제가 있습니다.");
       }
 
-      const weatherData = await weatherResponse.json();
+      const weatherData: ForecastData = await weatherResponse.json();
       const dailyData = weatherData.list.filter(
-        (_: any, index: number) => index % 8 === 0
+        (_: { dt: number }, index: number) => index % 8 === 0
       );
       setForecastData({ list: dailyData });
-    } catch (error: any) {
-      setError("데이터를 가져오는데 문제가 발생했습니다: " + error.message);
+    } catch (error) {
+      setError(
+        "데이터를 가져오는데 문제가 발생했습니다: " + (error as Error).message
+      );
       console.error("데이터를 가져오는데 문제가 발생했습니다:", error);
     }
-  };
+  }, [latitude, longitude, WEATHER_API_KEY]);
 
   useEffect(() => {
     getForecastData();
-  }, [latitude, longitude]);
+  }, [getForecastData]);
 
   if (error) {
     return <p>{error}</p>;
