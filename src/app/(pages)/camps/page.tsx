@@ -6,7 +6,7 @@ const CampListPage = async () => {
 
   if (!camps) return <div>데이터가 없음</div>;
 
-  return <CampList camps={camps} />;
+  return <CampList camps={camps} itemsPerPage={8} />;
 };
 
 export default CampListPage;

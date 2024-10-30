@@ -8,9 +8,7 @@ export const getTotalData = async (numOfRows?: number) => {
     const res = await fetch(
       `${GOAMPING_URL}?serviceKey=${GOAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4040}&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
-        next: {
-          revalidate: 86400
-        }
+        cache: "no-store"
       }
     );
 
@@ -31,9 +29,7 @@ export const getCampData = async (contentId: string) => {
     const res = await fetch(
       `${GOAMPING_URL}?serviceKey=${GOAMPING_KEY}&numOfRows=4000&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
-        next: {
-          revalidate: 86400
-        }
+        cache: "no-store"
       }
     );
 
