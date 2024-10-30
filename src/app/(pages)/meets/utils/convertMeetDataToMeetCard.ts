@@ -1,20 +1,16 @@
+import { getFormatDate_1 } from "@/_utils/common/dateFormat";
 import { CampFromDB } from "../types/camp.types";
 import { MeetCard, MeetResponse, MeetWithCamp } from "../types/meet.types";
-import { format, parse } from "date-fns";
-import { ko } from "date-fns/locale";
-const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
-  // console.log("meetWithCampList", meetWithCampList);
 
+const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
   const meetCardList: MeetCard[] = meetWithCampList.map((meetWithCamp) => {
     const { meet, camp, attendee_count } = meetWithCamp;
 
     const { id, title, start_date, deadline_headcount } = meet;
-    const { sigunguNm } = camp;
+    const { sigunguNm: location } = camp;
+
     const tags: string[] = getTags({ meet, camp });
-    const location = sigunguNm;
-    const date =
-      format(start_date, "MM.dd") +
-      `(${format(start_date, "E", { locale: ko })})`;
+    const date = getFormatDate_1(start_date);
 
     return {
       id,

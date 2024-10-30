@@ -18,8 +18,6 @@ const Meets = async () => {
 
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList);
 
-  // console.log("meetCardList", meetCardList);
-
   return (
     <div className="relative">
       <div className="absolute left-4 top-4">
