@@ -11,13 +11,16 @@ type Props = {
   meetWithCamp: MeetWithCamp;
 };
 const MeetController = ({ meetWithCamp }: Props) => {
-  const attendButtonValid = useMeetController(meetWithCamp);
+  const { attendButtonValid, handleAttendPost, handleAttendDelete } =
+    useMeetController(meetWithCamp);
 
   return (
     <div className="mx-auto w-full">
       <MeetTitleSection
         meetWithCamp={meetWithCamp}
         attendButtonValid={attendButtonValid}
+        handleAttendPost={handleAttendPost}
+        handleAttendDelete={handleAttendDelete}
       />
       <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />

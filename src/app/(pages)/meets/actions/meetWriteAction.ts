@@ -5,6 +5,7 @@ import { MeetForm, MeetWithCamp } from "../types/meet.types";
 import { Camp } from "../../camps/types/Camp";
 import { getCampImgList } from "@/_utils/serverActions/campApi";
 import { CampImageList } from "../types/camp.types";
+import { postMeetAttendee } from "./meetAttendAction";
 
 const postMeet = async (meet: MeetForm) => {
   const supabase = await createClient();
@@ -27,25 +28,6 @@ const postMeet = async (meet: MeetForm) => {
     postMeetAttendee(meetResult.id);
   } catch (e) {
     console.error("postMeet Error", e);
-  }
-};
-
-const postMeetAttendee = async (meetId: number) => {
-  const supabase = await createClient();
-
-  try {
-    const userData = await supabase.auth.getUser();
-    const userId = userData.data.user?.id;
-
-    const { error: meetAttendeeError } = await supabase
-      .from("meet_attendee")
-      .insert({ meet_id: meetId, user_id: userId });
-
-    if (meetAttendeeError) {
-      console.error(meetAttendeeError);
-    }
-  } catch (e) {
-    console.error("postMeetAttendee Error,", e);
   }
 };
 

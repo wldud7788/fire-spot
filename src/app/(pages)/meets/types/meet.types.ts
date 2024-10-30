@@ -39,22 +39,11 @@ export interface MeetForm {
 }
 
 export interface MeetAttendeeResponse {
-  id: number | string;
-  meet_id: number | string;
+  id: number;
+  meet_id: number;
   user_id: string;
   created_at: Date;
 }
-
-// contentId: number | string;
-// mapX: number;
-// mapY: number;
-// addr1: string;
-// induty: string;
-// facltNm: string;
-// lineIntro: string;
-// firstImageUrl: string;
-// imgUrls: string[];
-// created_at: string;
 
 export interface MeetCard {
   id: number;

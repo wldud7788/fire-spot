@@ -3,18 +3,26 @@ import { MeetWithCamp } from "../../types/meet.types";
 import { formatDateKr } from "@/_utils/date";
 type Props = {
   meetWithCamp: MeetWithCamp;
+  handleAttendPost: () => Promise<void>;
+  handleAttendDelete: () => Promise<void>;
   attendButtonValid: {
     isAttendButtonVisible: boolean;
-    buttonState: { text: string; type: string };
+    buttonState: {
+      text: string;
+      type: "post" | "delete" | "deadline" | "notLoggedIn" | "skelton";
+      enabled: boolean;
+    };
   };
 };
-const MeetTitleSection = ({ meetWithCamp, attendButtonValid }: Props) => {
+const MeetTitleSection = ({
+  meetWithCamp,
+  handleAttendPost,
+  handleAttendDelete,
+  attendButtonValid
+}: Props) => {
   const { meet, camp } = meetWithCamp;
-  const { isAttendButtonVisible, buttonState } = attendButtonValid;
+  const { buttonState } = attendButtonValid;
 
-  console.log("buttonState", buttonState);
-
-  // TODO firstImageUrl 제외한 사진도 upsert 해주자
   return (
     <div>
       <img src={camp.firstImageUrl} alt={`${camp.facltNm} 메인 사진`} />
@@ -27,8 +35,28 @@ const MeetTitleSection = ({ meetWithCamp, attendButtonValid }: Props) => {
       </p>
       <p>{camp.induty.split(",")}</p>
       <p>당일치기 {meet.is_day_trip.toString()}</p>
-      {buttonState.type !== "skelton" && isAttendButtonVisible && (
-        <button className="bg-slate-500">참여하기</button>
+      {buttonState.type === "post" && (
+        <button className="bg-slate-500" onClick={() => handleAttendPost()}>
+          {buttonState.text}
+        </button>
+      )}
+      {buttonState.type === "delete" && (
+        <button className="bg-slate-500" onClick={() => handleAttendDelete()}>
+          {buttonState.text}
+        </button>
+      )}
+      {buttonState.type === "deadline" && (
+        <button className="bg-slate-500" disabled>
+          {buttonState.text}
+        </button>
+      )}
+      {buttonState.type === "skelton" && (
+        <button
+          className="bg-slate-500"
+          onClick={() => alert("로그인한 유저만 가능합니다.")}
+        >
+          신청하기
+        </button>
       )}
     </div>
   );
