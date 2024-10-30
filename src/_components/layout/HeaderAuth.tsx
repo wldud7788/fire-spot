@@ -8,6 +8,7 @@ import useDropdown from "@/hooks/useDropdown";
 
 const HeaderAuth = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   const { dropdownRef, isDropdownOpen, toggleDropdown, closeDropdown } =
     useDropdown();
   const router = useRouter();
@@ -16,6 +17,7 @@ const HeaderAuth = () => {
     const fetchUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
+      setLoading(false);
       console.log(currentUser);
     };
     fetchUser();
@@ -26,19 +28,19 @@ const HeaderAuth = () => {
     setUser(null);
     router.push("/sign-in");
   };
-
+  if (loading) return <div className="w-[40px]"></div>;
   return (
     <>
       {!user ? (
         <Link href={"/sign-in"}>로그인</Link>
       ) : (
         <div
-          className="relative inline-block h-10 w-10 bg-profile bg-center bg-no-repeat"
+          className="relative inline-block h-10 w-10 cursor-pointer bg-profile bg-center bg-no-repeat"
           ref={dropdownRef}
           onClick={toggleDropdown}
         >
           {isDropdownOpen && (
-            <div className="absolute right-0 top-10 z-10 w-48 rounded-lg border border-gray-200 bg-white shadow-lg">
+            <div className="absolute right-0 top-10 w-48 rounded-lg border border-gray-200 bg-white shadow-lg">
               <ul className="py-2">
                 <li>
                   <Link

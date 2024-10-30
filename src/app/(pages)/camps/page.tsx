@@ -1,7 +1,12 @@
-import React from "react";
+import CampList from "@/_components/camp/CampList";
+import { getTotalData } from "@/_utils/serverActions/campApi";
 
-const Camps = () => {
-  return <div>Camps</div>;
+const CampListPage = async () => {
+  const camps = await getTotalData();
+
+  if (!camps) return <div>데이터가 없음</div>;
+
+  return <CampList camps={camps} />;
 };
 
-export default Camps;
+export default CampListPage;
