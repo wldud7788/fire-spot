@@ -14,7 +14,8 @@ const getMeetDetail = async ({
     meet_id: meetId
   });
   if (error) {
-    throw new Error("getMeetDetail Error");
+    console.error("getMeetDetail Error", error);
+    throw new Error();
   }
 
   data.meet.attendee_count = data.attendee_count;
