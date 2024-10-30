@@ -28,19 +28,14 @@ const HeaderAuth = () => {
     setUser(null);
     router.push("/sign-in");
   };
-  if (loading) {
-    return (
-      <div className="bg-profile relative inline-block h-10 w-10 bg-center bg-no-repeat"></div>
-    );
-  }
-
+  if (loading) return <div className="w-[40px]"></div>;
   return (
     <>
       {!user ? (
         <Link href={"/sign-in"}>로그인</Link>
       ) : (
         <div
-          className="bg-profile relative inline-block h-10 w-10 cursor-pointer bg-center bg-no-repeat"
+          className="relative inline-block h-10 w-10 cursor-pointer bg-profile bg-center bg-no-repeat"
           ref={dropdownRef}
           onClick={toggleDropdown}
         >
