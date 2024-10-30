@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type PaginationProps = {
   page: number;
   totalPages: number;
@@ -13,9 +15,13 @@ const Pagination = ({
 }: PaginationProps) => {
   return (
     <div className="pagination">
-      <button onClick={onMovePagePrev}>이전</button>
+      <Link href={`/camps/${page - 1}`} passHref>
+        <button disabled={page === 1}>이전</button>
+      </Link>
       {page} / {totalPages}
-      <button onClick={onMovePageNext}>다음</button>
+      <Link href={`/camps/${page + 1}`} passHref>
+        <button disabled={page === totalPages}>다음</button>
+      </Link>
     </div>
   );
 };
