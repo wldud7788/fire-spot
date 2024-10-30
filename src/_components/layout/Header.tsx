@@ -4,8 +4,11 @@ import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
 import useDropdown from "@/hooks/useDropdown";
 import CSearchInput from "../search/CSearchInput";
+import DropDownSearch from "../search/DropDownSearch";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
     useDropdown(); // 훅 사용
@@ -31,6 +34,11 @@ const Header = () => {
     };
   }, []);
 
+  //검색 관련
+  const submitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/camping?keyword=${searchValue}`);
+  };
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-10 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
@@ -47,7 +55,10 @@ const Header = () => {
         <div className="z-10 flex items-center justify-between leading-40">
           <div className="flex gap-8">
             <Link href={"/"}>로고</Link>
-            <form action="" className="relative z-20 flex items-center">
+            <form
+              onSubmit={submitSearch}
+              className="relative z-20 flex items-center"
+            >
               <div className="header_search">
                 <CSearchInput
                   value={searchValue}
@@ -85,31 +96,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const DropDownSearch: React.FC<{
-  isOpen: boolean;
-  closeDropdown: () => void;
-  dropdownRef: React.RefObject<HTMLDivElement>;
-}> = ({ isOpen, closeDropdown, dropdownRef }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div
-      ref={dropdownRef}
-      className="absolute top-0 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md"
-    >
-      {/* 드롭다운 내용 */}
-      <ul className="max-h-60 overflow-y-auto">
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 1</li>
-        </Link>
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 2</li>
-        </Link>
-        <Link href="/" onClick={closeDropdown}>
-          <li className="cursor-pointer p-2 hover:bg-gray-100">옵션 3</li>
-        </Link>
-      </ul>
-    </div>
-  );
-};

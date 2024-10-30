@@ -28,12 +28,7 @@ const HeaderAuth = () => {
     setUser(null);
     router.push("/sign-in");
   };
-  if (loading) {
-    return (
-      <div className="relative inline-block h-10 w-10 bg-profile bg-center bg-no-repeat"></div>
-    );
-  }
-
+  if (loading) return <div className="w-[40px]"></div>;
   return (
     <>
       {!user ? (
