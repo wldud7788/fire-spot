@@ -5,6 +5,7 @@ import { getMeetList } from "./actions/meetListAction";
 import { Metadata } from "next";
 import MeetCard from "@/_components/meet/MeetCard";
 import { convertMeetDataToMeetCard } from "./utils/convertMeetDataToMeetCard";
+import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

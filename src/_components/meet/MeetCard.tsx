@@ -26,7 +26,7 @@ const MeetCard = ({ meetCard }: MeetCardProps) => {
           <button type="button">북마크</button>
         </div>
         <Link
-          href="#"
+          href={`/meets/${meetCard.id}`}
           className="mb-[10px] mt-[10px] block text-[30px] font-medium"
         >
           {meetCard.title}

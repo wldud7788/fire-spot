@@ -14,7 +14,7 @@ export interface MeetResponse {
   title: string;
   content: string;
   supplies: string[]; // [ '텐트', '생수', '콘센트', '음식', '침낭' . . . ],
-  start_date: string;
+  start_date: Date;
   end_date: string;
   is_end: boolean;
   is_day_trip: boolean;
@@ -30,12 +30,19 @@ export interface MeetForm {
   title: string;
   content: string;
   supplies: string[];
-  start_date: string | Date;
+  start_date: Date;
   end_date: string | Date;
   is_day_trip: boolean;
   is_newbie: boolean;
   deadline_headcount: number;
   deadline_date: string | null;
+}
+
+export interface MeetAttendeeResponse {
+  id: number | string;
+  meet_id: number | string;
+  user_id: string;
+  created_at: Date;
 }
 
 // contentId: number | string;

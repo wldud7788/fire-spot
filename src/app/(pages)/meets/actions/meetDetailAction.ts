@@ -22,4 +22,18 @@ const getMeetDetail = async ({
   return { ...data };
 };
 
-export { getMeetDetail };
+const getAttendeeList = async (meetId: string | number) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("meet_attendee")
+    .select()
+    .eq("meet_id", meetId);
+
+  if (error) {
+    throw new Error("getAttendeeList Error", error);
+  }
+
+  return data;
+};
+
+export { getMeetDetail, getAttendeeList };
