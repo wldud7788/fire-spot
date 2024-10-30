@@ -18,7 +18,6 @@ const HeaderAuth = () => {
       const currentUser = await getUser();
       setUser(currentUser);
       setLoading(false);
-      console.log(currentUser);
     };
     fetchUser();
   }, []);
