@@ -3,10 +3,10 @@
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
 import { GOAMPING_KEY, GOAMPING_URL } from "../api/apiKey";
 
-export const getTotalData = async () => {
+export const getTotalData = async (numOfRows?: number) => {
   try {
     const res = await fetch(
-      `${GOAMPING_URL}?serviceKey=${GOAMPING_KEY}&numOfRows=4041&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
+      `${GOAMPING_URL}?serviceKey=${GOAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4040}&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
         next: {
           revalidate: 86400
