@@ -59,6 +59,8 @@ const upsertCamp = async (camp: Camp & { imgUrls?: string[] }) => {
     mapX,
     mapY,
     addr1,
+    doNm,
+    sigunguNm,
     induty,
     facltNm,
     lineIntro,
@@ -77,6 +79,8 @@ const upsertCamp = async (camp: Camp & { imgUrls?: string[] }) => {
       addr1,
       induty,
       facltNm,
+      doNm,
+      sigunguNm,
       lineIntro,
       firstImageUrl,
       imgUrls

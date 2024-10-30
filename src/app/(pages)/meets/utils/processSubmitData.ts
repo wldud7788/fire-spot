@@ -14,16 +14,16 @@ import { postMeet } from "../actions/meetWriteAction";
 // deadline_headcount: number;
 // deadline_date: string | null;
 const processSubmitData = (formData: MeetForm) => {
-  let { supplies, start_date, end_date, is_day_trip } = formData;
+  let { supplies, is_day_trip } = formData;
+  const { start_date, end_date } = formData;
 
+  supplies = [];
   is_day_trip = isSameDay(start_date, end_date);
 
-  console.log("formData", formData);
-
-  // // const meet = {...formData, supplies, is_day_trip}
   const meet = {
     ...formData,
-    is_day_trip
+    is_day_trip,
+    supplies
   };
 
   postMeet(meet);

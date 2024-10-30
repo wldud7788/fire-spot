@@ -3,6 +3,8 @@ export interface CampFromDB {
   mapX: number;
   mapY: number;
   addr1: string;
+  doNm: string;
+  sigunguNm: string;
   induty: string;
   facltNm: string;
   lineIntro: string;
