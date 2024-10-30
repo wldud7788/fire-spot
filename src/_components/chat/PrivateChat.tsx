@@ -3,8 +3,8 @@
 import { createClient } from "@/_utils/supabase/client";
 
 const supabase = createClient();
-//1대일 이미 존재하는지 확인
 
+//1대일 이미 존재하는지 확인
 export const checkPrivateChatRoomExist = async ({
   user_uid,
   action_id
@@ -52,10 +52,10 @@ export const checkPrivateChatRoomExist = async ({
 //1대일 없을 때 insert
 export const insertNewPrivateChatRoom = async ({
   action_id,
-  loginUserId
+  user_uid
 }: {
   action_id: string;
-  loginUserId: string;
+  user_uid: string;
 }) => {
   // 1) 채팅방 테이블에 insert
   // 2) action_id로 owner_id 파악하여 함께 insert
@@ -71,7 +71,7 @@ export const insertNewPrivateChatRoom = async ({
       console.error("Error getOwnerId : ", ownerIdError.message);
     }
 
-    const actionOwnerId = ownerId[0].user_id; //배열부분 나올 때마다 이해 안 됨
+    const actionOwnerId = ownerId?.[0]?.user_id ?? null; //배열부분 나올 때마다 이해 안 됨
 
     //채팅방 생성, id반환
     if (actionOwnerId !== null) {
@@ -87,12 +87,56 @@ export const insertNewPrivateChatRoom = async ({
       if (insertRoomError) {
         console.error("Error insertRoomError : ", insertRoomError.message);
       }
-      const privateChatRoom_id = roomId[0]?.id; //배열부분 나올 때마다 이해 안 됨
+      const privateChatRoom_id = roomId?.[0]?.id ?? null; //배열부분 나올 때마다 이해 안 됨
 
       //참가자 테이블 insert - 참가자 본인과 방장
       const { error: insertParticipantError } = await supabase
         .from("chat_participants")
-        .insert([{}, {}]);
+        .insert([
+          {
+            room_id: privateChatRoom_id,
+            participant_uid: user_uid,
+            participant_type: "참가자"
+          },
+          {
+            room_id: privateChatRoom_id,
+            participant_uid: actionOwnerId,
+            participant_type: "방장"
+          }
+        ]);
+
+      if (insertParticipantError) {
+        console.error(
+          "Error insertParticipantError : ",
+          insertParticipantError.message
+        );
+      }
+
+      return privateChatRoom_id;
     }
-  } catch {}
+  } catch (error) {
+    console.error("에러ㅓㅓㅓㅓㅓ", error);
+    throw error;
+  }
+};
+
+//메세지 보내기 ?
+export const sendMessage = async ({
+  sender_uid,
+  room_id,
+  content
+}: {
+  sender_uid: string;
+  room_id: string;
+  content: string;
+}) => {
+  const { error } = await supabase.from("chat_messages").insert({
+    sender_uid,
+    room_id,
+    content
+  });
+
+  if (error) {
+    console.log("error", error.message);
+  }
 };
