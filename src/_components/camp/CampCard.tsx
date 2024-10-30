@@ -16,7 +16,7 @@ type CampingDataProps = {
 const CampCard = ({ camp, type }: CampingDataProps) => {
   return (
     <div className="camping_card group">
-      <Link href={`/camps/${camp.contentId}`}>
+      <Link href={`/camps/detail/${camp.contentId}`}>
         <div className="inner">
           <div className="img_box relative overflow-hidden py-[23%]">
             <img
