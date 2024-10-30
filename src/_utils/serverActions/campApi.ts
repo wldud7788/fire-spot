@@ -63,7 +63,7 @@ export const getCampData = async (contentId: string) => {
 
 export const getSearchCampsData = async (keyword: string) => {
   const res = await fetch(
-    `${GOCAMPING_HOST}${GOCAMPING_SEARCH_API}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}`
+    `${GOCAMPING_HOST}${GOCAMPING_SEARCH_API}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=4040`
   );
   if (!res.ok) {
     throw new Error("검색 패치 오류");

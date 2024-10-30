@@ -20,14 +20,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   height = "60px"
 }) => {
   const router = useRouter();
+  // 검색어입력부분
   const [searchValue, setSearchValue] = useState("");
+  // API결과 부분
   const [results, setResults] = useState<Camp[]>([]); // 초기 상태를 빈 배열로 설정
+  // 필터한 결과 부분
   const [filteredResults, setFilteredResults] = useState<Camp[]>([]);
+  // 선택한 지역 부분
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null); // 지역
-
-  // 드롭다운
-  const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
-    useDropdown();
 
   useEffect(() => {
     const loadData = async () => {
@@ -72,6 +72,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     );
   };
 
+  // 드롭다운
+  const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
+    useDropdown();
   return (
     <div className="relative">
       {isDropdownOpen && (
@@ -93,7 +96,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             onChange={onChangeHandler}
             placeholder="검색어를 입력해 주세요"
             onClick={toggleDropdown}
-            className={`z-20 h-[${height}] w-[250px] sm:w-[300px] md:w-[600px]`} // 높이를 prop으로 설정
+            className={`z-20 h-[${height}] w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px]`} // 높이를 prop으로 설정
           />
           <DropDownSearch
             isOpen={isDropdownOpen}
