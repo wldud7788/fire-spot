@@ -13,7 +13,7 @@ import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 
 const useMeetController = (meetWithCamp: MeetWithCamp) => {
   const [attendeeId, setAttendeeId] = useState<number>(0);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("load");
   const [attendeeList, setAttendeeList] = useState<MeetAttendeeResponse[]>([]);
   const { meet, camp, attendee_count } = meetWithCamp;
 
@@ -59,7 +59,7 @@ const useMeetController = (meetWithCamp: MeetWithCamp) => {
   };
 
   const isOwner = meet.user_id === userId; // 작성자인지
-  const isLoad = userId === ""; // fetchData() 비동기 요청이 진행중인지
+  const isLoad = userId === "load"; // fetchData() 비동기 요청이 진행중인지
 
   const isUser = !!userId; // 사용자가 로그인 했는지
 
@@ -79,14 +79,13 @@ const useMeetController = (meetWithCamp: MeetWithCamp) => {
   const buttonState = useAttendButtonState(
     isLoad,
     isUser,
+    isOwner,
     isDeadline,
     !!attendeeId
   );
 
-  const attendButtonValid = { isAttendButtonVisible, buttonState };
-
   return {
-    attendButtonValid,
+    buttonState,
     handleAttendPost,
     handleAttendDelete
   };
