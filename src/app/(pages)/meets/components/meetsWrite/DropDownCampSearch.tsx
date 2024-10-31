@@ -1,4 +1,3 @@
-import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { CampToDB } from "../../types/camp.types";
 
 const DropDownCampSearch: React.FC<{

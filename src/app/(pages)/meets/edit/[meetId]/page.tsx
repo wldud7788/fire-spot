@@ -2,7 +2,6 @@
 // https://react-hook-form.com/docs/useform/reset
 
 import { getMeetDetail } from "../../actions/meetDetailAction";
-import MeetEditController from "../../components/meetEdit/MeetEditController";
 import MeetCreatorForm from "../../components/meetsDetail/MeetCreatorForm";
 
 // meets/write
@@ -16,9 +15,9 @@ interface Props {
 
 const MeetEdit = async ({ params }: Props) => {
   const { meetId } = params;
-  const meetWitchCamp = await getMeetDetail({ meetId });
+  const meetWithCamp = await getMeetDetail({ meetId });
 
-  return <MeetCreatorForm meetWitchCamp={meetWitchCamp} />;
+  return <MeetCreatorForm meetWithCamp={meetWithCamp} />;
 };
 
 export default MeetEdit;

@@ -16,7 +16,7 @@ import MeetCreatorForm from "../components/meetsDetail/MeetCreatorForm";
 import { defaultValues } from "../utils/writeFormDefaultValues";
 
 const MeetWrite = () => {
-  return <MeetCreatorForm meetWitchCamp={defaultValues} />;
+  return <MeetCreatorForm meetWithCamp={defaultValues} />;
 };
 
 export default MeetWrite;

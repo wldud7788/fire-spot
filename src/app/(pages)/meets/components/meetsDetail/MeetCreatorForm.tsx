@@ -6,11 +6,7 @@ import CDateRangePicker from "@/_components/date/CDateRangePicker";
 import { MeetWithCamp } from "../../types/meet.types";
 import useMeetCreatorForm from "../../hooks/useMeetCreatorForm";
 
-const MeetCreatorForm = ({
-  meetWitchCamp
-}: {
-  meetWitchCamp: MeetWithCamp;
-}) => {
+const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
   const {
     startDate,
     setStartDate,
@@ -26,7 +22,7 @@ const MeetCreatorForm = ({
     handleChangeSearchKeyword,
     isOpen,
     searchList
-  } = useMeetCreatorForm(meetWitchCamp);
+  } = useMeetCreatorForm(meetWithCamp);
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
 
   return (
