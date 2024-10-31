@@ -13,7 +13,9 @@ export const getTotalData = async (page?: number, numOfRows?: number) => {
     const res = await fetch(
       `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
-        cache: "no-store"
+        next: {
+          revalidate: 86400
+        }
       }
     );
 
@@ -34,7 +36,9 @@ export const getCampData = async (contentId: string) => {
     const res = await fetch(
       `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=4000&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
-        cache: "no-store"
+        next: {
+          revalidate: 86400
+        }
       }
     );
 
