@@ -9,6 +9,7 @@ import MeetCreatorInfoSection from "./meetCreatorSection/MeetCreatorInfoSection"
 import MeetCreatorTypeSection from "./meetCreatorSection/MeetCreatorTypeSection";
 import MeetCreatorHeadcountSection from "./meetCreatorSection/MeetCreatorHeadcountSection";
 import MeetCreatorDateSection from "./meetCreatorSection/MeetCreatorDateSection";
+import MeetCreatorSearchSection from "./meetCreatorSection/MeetCreatorSearchSection";
 
 const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
   const {
@@ -21,6 +22,7 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
     setValue,
     handleSelectCamp,
     errors,
+    location,
     watch,
     onSubmit,
     searchKeyword,
@@ -69,17 +71,16 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
           setValue={setValue}
         />
 
-        {/* <CDateRangePicker
-          startDate={startDate}
-          setStartDate={setStartDate}
-          startFormName={"start_date"}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          endFormName={"end_date"}
-          setValue={setValue}
-        /> */}
+        <MeetCreatorSearchSection
+          handleSelectCamp={handleSelectCamp}
+          searchKeyword={searchKeyword}
+          handleChangeSearchKeyword={handleChangeSearchKeyword}
+          searchList={searchList}
+          showDropDown={showDropDown}
+          location={location}
+        />
 
-        <div className="mb-20 w-[600px]">
+        {/* <div className="mb-20 w-[600px]">
           {errors.contentId && <span>캠핑장을 선택하세요.</span>}
           <input
             type="text"
@@ -94,7 +95,7 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
               handleSelectCamp={handleSelectCamp}
             />
           )}
-        </div>
+        </div> */}
 
         {errors.title && <span>This field is required</span>}
         <input

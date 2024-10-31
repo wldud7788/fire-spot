@@ -25,11 +25,12 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     end_date
   } = meet;
 
-  const { facltNm } = camp;
+  const { facltNm, addr1 } = camp;
 
   const [startDate, setStartDate] = useDate(start_date);
   const [endDate, setEndDate] = useDate(end_date);
   const [searchKeyword, setSearchKeyword] = useState(facltNm);
+  const [location, setLocation] = useState(addr1);
   const [isOpen, setIsOpen] = useState(false);
   const [searchList, setSearchList] = useState<CampToDB[]>([]);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
@@ -64,6 +65,7 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
 
     setIsOpen(false);
     setSearchKeyword(camp.facltNm);
+    setLocation(camp.addr1);
     upsertCamp(camp);
     clearErrors("contentId");
   };
@@ -117,6 +119,7 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     watch,
     onSubmit,
     searchKeyword,
+    location,
     searchList,
     handleChangeSearchKeyword,
     isOpen,

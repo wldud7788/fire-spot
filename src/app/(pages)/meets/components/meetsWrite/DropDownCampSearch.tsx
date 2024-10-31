@@ -7,7 +7,7 @@ const DropDownCampSearch: React.FC<{
   if (!camps) return null;
 
   return (
-    <div className="absolute top-10 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md">
+    <div className="w-full rounded-2xl border border-slate-300 bg-white shadow-md">
       <ul className="max-h-60 overflow-y-auto">
         {camps.map((camp) => (
           <li
