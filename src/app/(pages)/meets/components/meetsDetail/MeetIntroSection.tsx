@@ -1,6 +1,6 @@
 import React from "react";
 import { MeetWithCamp } from "../../types/meet.types";
-import { formatDateKr, formatFullDateKr } from "@/_utils/date";
+import { formatDate_3 } from "@/_utils/common/dateFormat";
 type Props = {
   meetWithCamp: MeetWithCamp;
 };
@@ -10,7 +10,7 @@ const MeetIntroSection = ({ meetWithCamp }: Props) => {
     <div className="mt-10">
       <h3>모임 소개</h3>
       <p>{camp.addr1}</p>
-      <p>모임날짜 {formatFullDateKr(meet.start_date)}</p>
+      <p>모임날짜 {formatDate_3(meet.start_date)}</p>
       <p>신청날짜 ? </p>
       <p>
         모집인원 {meet.attendee_count}명/{meet.deadline_headcount}명 지원

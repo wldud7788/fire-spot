@@ -10,12 +10,12 @@ import useMeetController from "../../hooks/useMeetController";
 type Props = {
   meetWithCamp: MeetWithCamp;
 };
-const MeetController = ({ meetWithCamp }: Props) => {
+const MeetDetailController = ({ meetWithCamp }: Props) => {
   const { attendButtonValid, handleAttendPost, handleAttendDelete } =
     useMeetController(meetWithCamp);
 
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <MeetTitleSection
         meetWithCamp={meetWithCamp}
         attendButtonValid={attendButtonValid}
@@ -30,4 +30,4 @@ const MeetController = ({ meetWithCamp }: Props) => {
   );
 };
 
-export default MeetController;
+export default MeetDetailController;

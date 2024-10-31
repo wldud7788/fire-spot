@@ -1,4 +1,4 @@
-import { getFormatDate_1 } from "@/_utils/common/dateFormat";
+import { formatDate_1 } from "@/_utils/common/dateFormat";
 import { CampFromDB } from "../types/camp.types";
 import { MeetCard, MeetResponse, MeetWithCamp } from "../types/meet.types";
 
@@ -10,7 +10,7 @@ const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
     const { sigunguNm: location } = camp;
 
     const tags: string[] = getTags({ meet, camp });
-    const date = getFormatDate_1(start_date);
+    const date = formatDate_1(start_date);
 
     return {
       id,

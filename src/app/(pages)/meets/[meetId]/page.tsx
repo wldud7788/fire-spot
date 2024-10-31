@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
 import { getMeetDetail } from "../actions/meetDetailAction";
-import MeetController from "../components/meetsDetail/MeetController";
+import MeetDetailController from "../components/meetsDetail/MeetDetailController";
 
 /**
  *
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
 
-  return <MeetController meetWithCamp={meetWithCamp} />;
+  return <MeetDetailController meetWithCamp={meetWithCamp} />;
 };
 
 export default MeetDetail;
