@@ -1,5 +1,5 @@
 import React from "react";
-import MainSearchBar from "./MainSearchBar";
+import SearchBar from "./SearchBar";
 
 const MainSearch = () => {
   return (
@@ -13,7 +13,14 @@ const MainSearch = () => {
         <li>#제주</li>
       </ul>
       <div className="flex-1">
-        <MainSearchBar />
+        <div className="relative">
+          <SearchBar
+            showButton={true}
+            showDropdownRegions={true}
+            height="60px"
+          />
+          {/* 메인 검색 (버튼 있음, DropdownRegions 있음, 높이 기본값 60px) */}
+        </div>
       </div>
     </div>
   );

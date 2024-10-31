@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetForm, MeetWithCamp } from "../types/meet.types";
 
-import { GOAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
+import { GOCAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
 import { processSubmitData } from "../utils/processSubmitData";
 import { upsertCamp } from "../actions/meetWriteAction";
 import { CampToDB } from "../types/camp.types";
 import { defaultValues } from "../utils/writeFormDefaultValues";
 import useDate from "./useDate";
-const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
+const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
   const { meet, camp, attendee_count } = meetWithCamp;

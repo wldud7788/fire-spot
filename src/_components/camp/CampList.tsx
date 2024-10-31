@@ -11,11 +11,13 @@ type CampListProps = {
 const CampList = ({ camps }: CampListProps) => {
   return (
     <div className="camp_list">
-      <div className="list_box flex flex-wrap gap-[30px]">
+      <ul className="list_box flex flex-wrap gap-[30px]">
         {camps.map((camp) => (
-          <CampCard key={camp.contentId} camp={camp} />
+          <li key={camp.contentId} className="w-[calc(25%-30px)]">
+            <CampCard camp={camp} />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
