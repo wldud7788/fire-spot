@@ -13,7 +13,7 @@ export const defaultValues: MeetWithCamp = {
     is_end: false,
     is_day_trip: false,
     is_newbie: true,
-    created_at: new Date().toISOString(),
+    // created_at: new Date().toISOString(),
     deadline_headcount: 3,
     deadline_date: null,
     attendee_count: 0
@@ -29,8 +29,8 @@ export const defaultValues: MeetWithCamp = {
     facltNm: "",
     lineIntro: "",
     firstImageUrl: "",
-    imgUrls: [],
-    created_at: new Date().toISOString()
+    imgUrls: []
+    // created_at: new Date().toISOString()
   },
   attendee_count: 0
 };

@@ -19,10 +19,10 @@ export interface MeetResponse {
   is_end: boolean;
   is_day_trip: boolean;
   is_newbie: boolean;
-  created_at: string;
   deadline_headcount: number;
   deadline_date: string | null;
   attendee_count: number;
+  created_at?: string;
 }
 
 export interface MeetForm {

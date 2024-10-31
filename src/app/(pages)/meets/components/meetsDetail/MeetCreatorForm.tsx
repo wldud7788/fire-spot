@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
-import useMeetWrite from "../../hooks/useMeetWrite";
 import DropDownCampSearch from "../meetsWrite/DropDownCampSearch";
 import CDateRangePicker from "@/_components/date/CDateRangePicker";
 import { MeetWithCamp } from "../../types/meet.types";
+import useMeetCreatorForm from "../../hooks/useMeetCreatorForm";
 
 const MeetCreatorForm = ({
   meetWitchCamp
@@ -24,7 +26,7 @@ const MeetCreatorForm = ({
     handleChangeSearchKeyword,
     isOpen,
     searchList
-  } = useMeetWrite();
+  } = useMeetCreatorForm(meetWitchCamp);
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
 
   return (

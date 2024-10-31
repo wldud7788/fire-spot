@@ -8,10 +8,10 @@ registerLocale("ko", ko);
 
 interface Props {
   startDate: Date;
-  setStartDate: React.Dispatch<React.SetStateAction<Date>>;
+  setStartDate: (date: Date) => void;
   startFormName: keyof MeetForm;
   endDate: Date;
-  setEndDate: React.Dispatch<React.SetStateAction<Date>>;
+  setEndDate: (date: Date) => void;
   endFormName: keyof MeetForm;
   setValue: UseFormSetValue<MeetForm>;
 }
@@ -29,6 +29,9 @@ const CDateRangePicker = ({
     if (startDate < new Date()) {
       alert("이전 날짜 입력 안됨");
       setStartDate(new Date());
+    }
+    if (startDate > endDate) {
+      setEndDate(startDate);
     }
   };
 

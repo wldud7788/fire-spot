@@ -10,7 +10,7 @@ export interface CampFromDB {
   lineIntro: string;
   firstImageUrl: string;
   imgUrls: string[];
-  created_at: string;
+  created_at?: string;
 }
 
 export interface CampToDB {

@@ -3,6 +3,7 @@
 
 import { getMeetDetail } from "../../actions/meetDetailAction";
 import MeetEditController from "../../components/meetEdit/MeetEditController";
+import MeetCreatorForm from "../../components/meetsDetail/MeetCreatorForm";
 
 // meets/write
 
@@ -17,7 +18,7 @@ const MeetEdit = async ({ params }: Props) => {
   const { meetId } = params;
   const meetWitchCamp = await getMeetDetail({ meetId });
 
-  return <MeetEditController meetWitchCamp={meetWitchCamp} />;
+  return <MeetCreatorForm meetWitchCamp={meetWitchCamp} />;
 };
 
 export default MeetEdit;

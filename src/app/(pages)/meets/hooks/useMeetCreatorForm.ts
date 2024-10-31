@@ -7,11 +7,10 @@ import { processSubmitData } from "../utils/processSubmitData";
 import { upsertCamp } from "../actions/meetWriteAction";
 import { CampToDB } from "../types/camp.types";
 import { defaultValues } from "../utils/writeFormDefaultValues";
+import useDate from "./useDate";
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
-const useMeetCreatorForm = (
-  meetWithCamp: MeetWithCamp | undefined = defaultValues
-) => {
+const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
   const { meet, camp, attendee_count } = meetWithCamp;
 
   const {
@@ -27,8 +26,8 @@ const useMeetCreatorForm = (
 
   const { facltNm } = camp;
 
-  const [startDate, setStartDate] = useState(start_date);
-  const [endDate, setEndDate] = useState(end_date);
+  const [startDate, setStartDate] = useDate(start_date);
+  const [endDate, setEndDate] = useDate(end_date);
   const [searchKeyword, setSearchKeyword] = useState(facltNm);
   const [isOpen, setIsOpen] = useState(false);
   const [searchList, setSearchList] = useState<CampToDB[]>([]);
