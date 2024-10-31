@@ -3,7 +3,7 @@
 import CampCard from "@/_components/camp/CampCard";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import Pagination from "../pagination/Pagination";
-import usePagination from "../pagination/pagination-hook";
+import usePagination from "../pagination/hooks/pagination";
 
 type CampListProps = {
   camps: Camp[];
