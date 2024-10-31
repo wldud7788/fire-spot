@@ -20,6 +20,7 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     is_newbie,
     supplies,
     deadline_headcount,
+    ground_type,
     start_date,
     end_date
   } = meet;
@@ -38,13 +39,15 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     handleSubmit,
     setValue,
     clearErrors,
+    watch,
     formState: { errors }
   } = useForm<MeetForm>({
     defaultValues: {
       contentId,
       title,
       content,
-      is_newbie: is_newbie + "",
+      ground_type,
+      is_newbie: is_newbie,
       supplies,
       deadline_headcount,
       start_date: startDate,
@@ -111,6 +114,7 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     setValue,
     handleSelectCamp,
     errors,
+    watch,
     onSubmit,
     searchKeyword,
     searchList,

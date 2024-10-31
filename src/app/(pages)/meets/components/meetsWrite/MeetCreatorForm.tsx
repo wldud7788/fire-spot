@@ -18,16 +18,25 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
     setValue,
     handleSelectCamp,
     errors,
+    watch,
     onSubmit,
     searchKeyword,
     handleChangeSearchKeyword,
     isOpen,
     searchList
   } = useMeetCreatorForm(meetWithCamp);
+
+  const groundTypes = {
+    crushedStone: "파쇄석",
+    woodenDeck: "나무데크",
+    soil: "흙",
+    any: "상관없음"
+  };
+
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
 
   return (
-    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px] pt-[30px]">
+    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px] pt-[30px] font-pretendard">
       <section className="flex h-[60px] items-center">
         <h2 className="text-5xl font-bold">모임 만들기</h2>
       </section>
@@ -43,7 +52,49 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
             만들기
           </button>
         </section>
+
         <MeetCreatorInfoSection />
+
+        <section className="mt-[123px]">
+          <h2 className="mb-[70px] text-xl font-[500]">캠핑 유형</h2>
+          <div className="flex gap-[14px] border-b-[1px] border-[#D4D4D4] pb-[37px] font-[15px]">
+            {Object.entries(groundTypes).map(([key, value]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => {
+                  // 선택된 값으로 설정
+                  setValue("ground_type", key);
+                }}
+                className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("ground_type") === key ? "bg-[#D9D9D9] font-[600]" : ""}`}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-[14px] border-b-[1px] border-[#D4D4D4] pt-[37px] font-[15px]">
+            <button
+              type="button"
+              onClick={() => {
+                // 선택된 값으로 설정
+                setValue("is_newbie", true);
+              }}
+              className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("is_newbie") === true ? "bg-[#D9D9D9] font-[600]" : ""}`}
+            >
+              초보가능
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                // 선택된 값으로 설정
+                setValue("is_newbie", false);
+              }}
+              className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("is_newbie") === false ? "bg-[#D9D9D9] font-[600]" : ""}`}
+            >
+              숙련자
+            </button>
+          </div>
+        </section>
 
         <div className="mb-20 w-[600px]">
           {errors.contentId && <span>캠핑장을 선택하세요.</span>}
@@ -86,24 +137,7 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
           placeholder="내용"
           {...register("content", { required: true })}
         />
-        <label>
-          <input
-            type="radio"
-            value="true"
-            {...register("is_newbie", { required: true })} // is_newbie 필드 등록
-          />
-          초보 가능
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            value="false"
-            {...register("is_newbie", { required: true })} // 동일한 이름으로 등록
-          />
-          초보 불가능
-        </label>
-        <input
+        {/* <input
           className="border-2"
           placeholder="준비물"
           {...register("supplies")}
@@ -116,10 +150,8 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
             max: 10,
             required: true
           })}
-        />
+        /> */}
         {errors.deadline_headcount && <span>인원수 확인</span>}
-        {/* <input className="border-2" {...register("is_day_trip")} /> */}
-        {/* <input className="border-2" {...register("deadline_date")} /> */}
       </form>
     </div>
   );

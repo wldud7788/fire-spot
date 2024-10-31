@@ -13,6 +13,7 @@ export const defaultValues: MeetWithCamp = {
     is_end: false,
     is_day_trip: false,
     is_newbie: true,
+    ground_type: "any",
     // created_at: new Date().toISOString(),
     deadline_headcount: 3,
     deadline_date: null,

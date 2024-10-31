@@ -19,6 +19,7 @@ export interface MeetResponse {
   is_end: boolean;
   is_day_trip: boolean;
   is_newbie: boolean;
+  ground_type: string;
   deadline_headcount: number;
   deadline_date: string | null;
   attendee_count: number;
@@ -34,6 +35,7 @@ export interface MeetForm {
   end_date: string | Date;
   is_day_trip: boolean;
   is_newbie: boolean | string;
+  ground_type: string;
   deadline_headcount: number;
   deadline_date: string | null;
 }
