@@ -8,10 +8,10 @@ import {
   GOCAMPING_SEARCH
 } from "../api/apiKey";
 
-export const getTotalData = async (numOfRows?: number) => {
+export const getTotalData = async (page?: number, numOfRows?: number) => {
   try {
     const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=4041&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
+      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
         cache: "no-store"
       }
