@@ -40,7 +40,9 @@ const config: Config = {
         avatar: "url('/assets/images/ico-avatar.svg')",
         scrap: "url('/assets/images/ico-scrap.svg')",
         info: "url('/assets/images/ico-info.svg')",
-        infoRound: "url('/assets/images/ico-info-round.svg')"
+        infoRound: "url('/assets/images/ico-info-round.svg')",
+        plus: "url('/assets/images/ico-plus.svg')",
+        minus: "url('/assets/images/ico-minus.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

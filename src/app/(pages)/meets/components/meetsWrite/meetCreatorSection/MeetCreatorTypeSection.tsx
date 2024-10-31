@@ -34,7 +34,7 @@ const MeetCreatorTypeSection = ({ watch, setValue }: Props) => {
         ))}
       </div>
 
-      <div className="flex gap-[14px] border-b-[1px] border-[#D4D4D4] pt-[37px] font-[15px]">
+      <div className="flex gap-[14px] border-[#D4D4D4] pt-[37px] font-[15px]">
         <button
           type="button"
           onClick={() => {
