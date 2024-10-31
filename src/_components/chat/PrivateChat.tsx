@@ -78,7 +78,7 @@ export const insertNewPrivateChatRoom = async ({
       const { data: roomId, error: insertRoomError } = await supabase
         .from("chat_rooms_info")
         .insert({
-          owner_uid: actionOwnerId,
+          owner_id: actionOwnerId,
           action_id,
           room_type: "개인"
         })

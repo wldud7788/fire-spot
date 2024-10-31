@@ -7,6 +7,9 @@ import browserClient from "@/_utils/supabase/client";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment-timezone";
 
+import { User } from "@supabase/supabase-js";
+import { getUser } from "@/_utils/auth";
+
 import "@/css/chat.css";
 // import useAuthStore from '@/store/useAuthStore';
 
@@ -17,8 +20,19 @@ const MainChat = () => {
   const queryClient = useQueryClient();
 
   //유저 정보 담기 위해
-  const [userId, setUserId] = useState("");
-  //   const { userName, userImg } = useAuthStore();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getUser();
+      setUser(currentUser);
+      console.log("currentUser", currentUser);
+    };
+    fetchUser();
+
+    getChatData();
+    console.log("messagessssssss", messages);
+  }, []);
 
   //메세지 불러오기
   const getChatData = async () => {
@@ -34,24 +48,6 @@ const MainChat = () => {
     }
     return ChatData;
   };
-
-  //유저정보 불러오기
-  useEffect(() => {
-    const getUserId = async () => {
-      const { data: userSession, error: userSessionError } =
-        await browserClient.auth.getSession();
-
-      if (userSessionError) {
-        console.log("userSessionError :>> ", userSessionError);
-      } else {
-        userSession.session && setUserId(userSession.session?.user.id);
-      }
-    };
-    getUserId();
-
-    getChatData();
-    console.log("messagessssssss", messages);
-  }, []);
 
   //작성한 메시지가 콘솔로 돌아옴....
   useEffect(() => {
@@ -82,12 +78,13 @@ const MainChat = () => {
 
   const sendMessageinRoom = async ({
     participant_uid,
-    message
+    message,
+    room_id
   }: //   room_id,
   {
     participant_uid: string;
     message: string;
-    //   room_id: number,
+    room_id: string;
   }) => {
     const { data, error } = await supabase
       .from("chat")
@@ -106,8 +103,13 @@ const MainChat = () => {
     if (sendMessage === "") return;
     setSendMessage("");
 
+    if (!user || user.id === null) {
+      alert("로그인을 해주세요");
+      return;
+    }
+
     await sendMessageinRoom({
-      participant_uid: userId,
+      participant_uid: user.id,
       message: sendMessage
       //   room_id: roomId,
     });
@@ -117,19 +119,35 @@ const MainChat = () => {
   return (
     <div className="chatBox">
       <div>
+        {}
         {messages.map((message) => {
-          return (
-            <div className="chatBox2">
-              <p>{message.participant_uid}</p>
-              <p className="chating">{message.message}</p>
-              <p>
-                {moment
-                  .utc(message.sendTime)
-                  .tz("Asia/Seoul")
-                  .format("a HH:mm")}
-              </p>
-            </div>
-          );
+          if (!user || user.id === message.participant_uid) {
+            return (
+              <div className="chatBox2">
+                <p>{message.participant_uid}</p>
+                <p className="chating">{message.message}</p>
+                <p>
+                  {moment
+                    .utc(message.sendTime)
+                    .tz("Asia/Seoul")
+                    .format("a HH:mm")}
+                </p>
+              </div>
+            );
+          } else {
+            return (
+              <div className="chatBox_you">
+                <p>{message.participant_uid}</p>
+                <p className="chating_you">{message.message}</p>
+                <p>
+                  {moment
+                    .utc(message.sendTime)
+                    .tz("Asia/Seoul")
+                    .format("a HH:mm")}
+                </p>
+              </div>
+            );
+          }
         })}
       </div>
 

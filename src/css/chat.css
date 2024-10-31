@@ -3,7 +3,6 @@
   background-color: #d6e6d6;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   padding: 10px;
 }
 
@@ -26,4 +25,17 @@
   border-radius: 15px 0 15px 15px;
   padding: 5px 10px 5px 10px;
   color: #fff;
+}
+
+.chatBox_you {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chating_you {
+  width: fit-content;
+  background-color: #ffffff;
+  border-radius: 0 15px 15px 15px;
+  padding: 5px 10px 5px 10px;
 }
