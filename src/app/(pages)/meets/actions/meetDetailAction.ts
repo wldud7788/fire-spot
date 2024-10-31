@@ -10,7 +10,7 @@ const getMeetDetail = async ({
   meetId: string;
 }): Promise<MeetWithCamp> => {
   const supabase = await createClient();
-  const { data, error } = await supabase.rpc("get_meet_detail", {
+  const { data, error } = await supabase.rpc(supabaseRpc.meet.getMeetDetail, {
     meet_id: meetId
   });
   if (error) {

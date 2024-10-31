@@ -4,13 +4,12 @@ import { createClient } from "@/_utils/supabase/server";
 import { MeetForm, MeetWithCamp } from "../types/meet.types";
 import { Camp } from "../../camps/types/Camp";
 import { getCampImgList } from "@/_utils/serverActions/campApi";
-import { CampImageList } from "../types/camp.types";
+import { CampImageList, CampToDB } from "../types/camp.types";
 import { postMeetAttendee } from "./meetAttendAction";
 
 const postMeet = async (meet: MeetForm) => {
   const supabase = await createClient();
 
-  // TODO 서버용 getUser ?
   try {
     const userData = await supabase.auth.getUser();
 
@@ -32,7 +31,7 @@ const postMeet = async (meet: MeetForm) => {
 };
 
 /** 사용자가 모임작성에서 검색 후 '클릭' 한 캠핑장은 DB에 저장 */
-const upsertCamp = async (camp: Camp & { imgUrls?: string[] }) => {
+const upsertCamp = async (camp: CampToDB) => {
   const supabase = await createClient();
 
   const {
@@ -47,6 +46,7 @@ const upsertCamp = async (camp: Camp & { imgUrls?: string[] }) => {
     lineIntro,
     firstImageUrl
   } = camp;
+
   const campImageList: CampImageList[] = await getCampImgList(contentId);
 
   const imgUrls = campImageList.map((img) => img.imageUrl);

@@ -1,25 +1,15 @@
 "use client";
-
+import React from "react";
+import { MeetWithCamp } from "../../types/meet.types";
+import useMeetEdit from "../../hooks/useMeetEdit";
+import DropDownCampSearch from "../meetsWrite/DropDownCampSearch";
 import CDateRangePicker from "@/_components/date/CDateRangePicker";
-import useMeetWrite from "../hooks/useMeetWrite";
-import DropDownCampSearch from "../components/meetsWrite/DropDownCampSearch";
-import useMeetCreatorForm from "../hooks/useMeetCreatorForm";
 
-/**
- *
- * write할 때 camp 테이블에 데이터 upsert
- *
- * 1. 제목
- * 2. 캠핑장 선택
- * 3. 시작날짜
- * 4. 종료날짜
- * 5. 초보 가능 여부
- * 6. 모집인원
- * 7. 내용
- * 8. 준비물
- */
-
-const MeetWrite = () => {
+const MeetEditController = ({
+  meetWitchCamp
+}: {
+  meetWitchCamp: MeetWithCamp;
+}) => {
   const {
     startDate,
     setStartDate,
@@ -35,9 +25,7 @@ const MeetWrite = () => {
     handleChangeSearchKeyword,
     isOpen,
     searchList
-  } = useMeetCreatorForm();
-  // } = useMeetWrite();
-
+  } = useMeetEdit(meetWitchCamp);
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
 
   return (
@@ -128,4 +116,4 @@ const MeetWrite = () => {
   );
 };
 
-export default MeetWrite;
+export default MeetEditController;

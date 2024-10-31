@@ -69,10 +69,14 @@ export const getCampImgList = async (contentId: string) => {
     const res = await fetch(IMAGE_SEARCH_URL + contentId);
     const data = await res.json();
 
+    if (!data.response.body.items || data.response.body.items === "") {
+      return [];
+    }
+
     return data.response.body.items.item;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return null;
+    return [];
   }
 };
 
