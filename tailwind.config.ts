@@ -38,7 +38,8 @@ const config: Config = {
         heart: "url('/assets/images/ico-heart.svg')",
         location: "url('/assets/images/ico-location.svg')",
         avatar: "url('/assets/images/ico-avatar.svg')",
-        scrap: "url('/assets/images/ico-scrap.svg')"
+        scrap: "url('/assets/images/ico-scrap.svg')",
+        info: "url('/assets/images/ico-info.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",
