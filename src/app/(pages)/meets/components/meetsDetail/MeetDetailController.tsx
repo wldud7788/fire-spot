@@ -5,22 +5,19 @@ import MeetTitleSection from "./MeetTitleSection";
 import MeetIntroSection from "./MeetIntroSection";
 import MeetSuppliesSection from "./MeetSuppliesSection";
 import MeetRecommendSection from "./MeetRecommendSection";
-import useMeetController from "../../hooks/useMeetController";
+import useMeetDetailController from "../../hooks/useMeetDetailController";
 
 type Props = {
   meetWithCamp: MeetWithCamp;
 };
 const MeetDetailController = ({ meetWithCamp }: Props) => {
-  const { buttonState, handleAttendPost, handleAttendDelete } =
-    useMeetController(meetWithCamp);
+  const { buttonConfig } = useMeetDetailController(meetWithCamp);
 
   return (
     <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <MeetTitleSection
         meetWithCamp={meetWithCamp}
-        buttonState={buttonState}
-        handleAttendPost={handleAttendPost}
-        handleAttendDelete={handleAttendDelete}
+        buttonConfig={buttonConfig}
       />
       <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />

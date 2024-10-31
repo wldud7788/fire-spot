@@ -11,7 +11,14 @@ import useAttendButtonState from "./useAttendButtonState";
 import { startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 
-const useMeetController = (meetWithCamp: MeetWithCamp) => {
+export interface ButtonConfig {
+  text: string;
+  className: string;
+  onClick: () => void;
+  disabled: boolean;
+}
+
+const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   const [attendeeId, setAttendeeId] = useState<number>(0);
   const [userId, setUserId] = useState("load");
   const [attendeeList, setAttendeeList] = useState<MeetAttendeeResponse[]>([]);
@@ -74,9 +81,7 @@ const useMeetController = (meetWithCamp: MeetWithCamp) => {
     subDays(startOfDay(meetWithCamp.meet.start_date), DEADLINE_APPROACHING) <=
     new Date();
 
-  const isAttendButtonVisible = !isOwner; // 작성자면 버튼이 안보여야함
-
-  const buttonState = useAttendButtonState(
+  const buttonType = useAttendButtonState(
     isLoad,
     isUser,
     isOwner,
@@ -84,11 +89,51 @@ const useMeetController = (meetWithCamp: MeetWithCamp) => {
     !!attendeeId
   );
 
+  const buttonConfig: ButtonConfig = {
+    text: "",
+    className: "bg-[#D9D9D9]",
+    onClick: () => {},
+    disabled: true
+  };
+
+  // TODO confirm, alert 사카모토
+  if (buttonType === "post") {
+    buttonConfig.text = "신청하기";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.onClick = handleAttendPost;
+    buttonConfig.disabled = false;
+  } else if (buttonType === "hasAttended") {
+    buttonConfig.text = "신청취소";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.onClick = handleAttendDelete;
+    buttonConfig.disabled = false;
+  } else if (buttonType === "isDeadline") {
+    buttonConfig.text = "신청마감";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.disabled = true;
+  } else if (buttonType === "delete") {
+    buttonConfig.text = "삭제하기";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.onClick = () => {
+      confirm("진짜 삭제?");
+    };
+    buttonConfig.disabled = false;
+  } else if (buttonType === "skelton") {
+    buttonConfig.text = "신청하기";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.disabled = true;
+  } else if (buttonType === "notLoggedIn") {
+    buttonConfig.text = "신청하기";
+    buttonConfig.className = "bg-[#D9D9D9]";
+    buttonConfig.onClick = () => {
+      alert("로그인 한 유저만 가능합니다.");
+    };
+    buttonConfig.disabled = false;
+  }
+
   return {
-    buttonState,
-    handleAttendPost,
-    handleAttendDelete
+    buttonConfig
   };
 };
 
-export default useMeetController;
+export default useMeetDetailController;

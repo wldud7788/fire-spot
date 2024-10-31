@@ -2,27 +2,13 @@ import React from "react";
 import { MeetWithCamp } from "../../types/meet.types";
 import Slide from "@/_components/slide/Slide";
 import { formatDate_4 } from "@/_utils/common/dateFormat";
+import { ButtonConfig } from "../../hooks/useMeetDetailController";
 interface Props {
   meetWithCamp: MeetWithCamp;
-  handleAttendPost: () => Promise<void>;
-  handleAttendDelete: () => Promise<void>;
-  buttonState: ButtonState;
+  buttonConfig: ButtonConfig;
 }
 
-type ButtonState = {
-  text: string;
-  type: "post" | "delete" | "notLoggedIn" | "deadline" | "skelton" | "cancel";
-  enabled: boolean;
-};
-
-type OnclickFunction = (() => void) | (() => Promise<void>);
-
-const MeetTitleSection = ({
-  meetWithCamp,
-  handleAttendPost,
-  handleAttendDelete,
-  buttonState
-}: Props) => {
+const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
   const { meet, camp } = meetWithCamp;
   const tags = camp.induty.split(",");
 
@@ -32,35 +18,6 @@ const MeetTitleSection = ({
   if (meet.is_newbie) {
     tags.push("초보가능");
   }
-
-  let className = "";
-  let onClick: OnclickFunction = () => {};
-
-  if (buttonState.type === "post") {
-    className = "bg-[#D9D9D9]";
-    onClick = handleAttendPost;
-  } else if (buttonState.type === "cancel") {
-    className = "bg-[#D9D9D9]";
-    onClick = handleAttendDelete;
-  } else if (buttonState.type === "deadline") {
-    className = "bg-[#D9D9D9]";
-  } else if (buttonState.type === "skelton") {
-    className = "bg-[#D9D9D9]";
-  } else if (buttonState.type === "notLoggedIn") {
-    className = "bg-[#D9D9D9]";
-    onClick = () => {
-      // TODO 사카모토
-      alert("로그인 한 유저만 가능합니다.");
-    };
-  } else if (buttonState.type === "delete") {
-    className = "bg-[#D9D9D9]";
-    onClick = () => {
-      // TODO
-      confirm("진짜 삭제?");
-    };
-  }
-
-  console.log("buttonState", buttonState);
 
   return (
     <div className="mt-4 flex w-full gap-[50px]">
@@ -111,70 +68,20 @@ const MeetTitleSection = ({
         </section>
         <section className="flex gap-[18px]">
           <button
-            className={`h-[67px] w-[261px] rounded-[6px] text-2xl ${className}`}
-            disabled={!buttonState.enabled}
-            onClick={onClick}
+            className={`h-[67px] w-[261px] rounded-[6px] text-2xl ${buttonConfig.className}`}
+            disabled={buttonConfig.disabled}
+            onClick={buttonConfig.onClick}
           >
-            {buttonState.text}
+            {buttonConfig.text}
           </button>
           <button
             className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-[#D0D0D0]`}
-            disabled={!buttonState.enabled}
-            onClick={onClick}
+            disabled={buttonConfig.disabled}
           >
             채팅하기
           </button>
-          {/* {buttonState.type === "post" && (
-            <button className="bg-slate-500" onClick={() => handleAttendPost()}>
-              {buttonState.text}
-            </button>
-          )}
-          {buttonState.type === "delete" && (
-            <button
-              className="bg-slate-500"
-              onClick={() => handleAttendDelete()}>
-              {buttonState.text}
-            </button>
-          )}
-          {buttonState.type === "deadline" && (
-            <button className="bg-slate-500" disabled>
-              {buttonState.text}
-            </button>
-          )}
-          {buttonState.type === "skelton" && (
-            <button
-              className="bg-slate-500"
-              onClick={() => alert("로그인한 유저만 가능합니다.")}>
-              신청하기
-            </button>
-          )} */}
         </section>
-
-        {/* <p>{camp.induty.split(",")}</p> */}
-        {/* <p>당일치기 {meet.is_day_trip.toString()}</p> */}
       </div>
-      {/* {buttonState.type === "post" && (
-        <button className="bg-slate-500" onClick={() => handleAttendPost()}>
-          {buttonState.text}
-        </button>
-      )}
-      {buttonState.type === "delete" && (
-        <button className="bg-slate-500" onClick={() => handleAttendDelete()}>
-          {buttonState.text}
-        </button>
-      )}
-      {buttonState.type === "deadline" && (
-        <button className="bg-slate-500" disabled>
-          {buttonState.text}
-        </button>
-      )}
-      {buttonState.type === "skelton" && (
-        <button
-          className="bg-slate-500"
-          onClick={() => alert("로그인한 유저만 가능합니다.")}>
-          신청하기
-        </button>
-      )} */}
     </div>
   );
 };
