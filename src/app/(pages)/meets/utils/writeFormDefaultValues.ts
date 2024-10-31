@@ -1,3 +1,4 @@
+import { MIN_HEADCOUNT } from "@/_utils/common/constant";
 import { MeetWithCamp } from "../types/meet.types";
 
 export const defaultValues: MeetWithCamp = {
@@ -15,7 +16,7 @@ export const defaultValues: MeetWithCamp = {
     is_newbie: true,
     ground_type: "any",
     // created_at: new Date().toISOString(),
-    deadline_headcount: 3,
+    deadline_headcount: MIN_HEADCOUNT,
     deadline_date: null,
     attendee_count: 0
   },

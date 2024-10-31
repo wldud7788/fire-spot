@@ -1,12 +1,37 @@
 import React from "react";
 import { MeetForm } from "../../../types/meet.types";
-import { UseFormRegister } from "react-hook-form";
+import {
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch
+} from "react-hook-form";
+import { MAX_HEADCOUNT, MIN_HEADCOUNT } from "@/_utils/common/constant";
 
 interface Props {
   register: UseFormRegister<MeetForm>;
+  setValue: UseFormSetValue<MeetForm>;
+  watch: UseFormWatch<MeetForm>;
 }
 
-const MeetCreatorHeadcountSection = ({ register }: Props) => {
+const MeetCreatorHeadcountSection = ({ register, setValue, watch }: Props) => {
+  const key = "deadline_headcount";
+  let currentValue = watch(key);
+  const handlePlus = () => {
+    if (currentValue >= MAX_HEADCOUNT) {
+      setValue(key, MAX_HEADCOUNT);
+    } else {
+      setValue(key, currentValue + 1);
+    }
+  };
+
+  const handleMinus = () => {
+    if (currentValue <= MIN_HEADCOUNT) {
+      setValue(key, MIN_HEADCOUNT);
+    } else {
+      setValue(key, currentValue - 1);
+    }
+  };
+
   return (
     <section className="mt-40 flex flex-col gap-5 rounded-[20px] border-[1px] border-[#B5B5B5] px-52 py-10">
       <div className="flex items-center gap-3">
@@ -20,8 +45,8 @@ const MeetCreatorHeadcountSection = ({ register }: Props) => {
           type="number"
           disabled
           {...register("deadline_headcount", {
-            min: 3,
-            max: 10,
+            min: MIN_HEADCOUNT,
+            max: MAX_HEADCOUNT,
             required: true
           })}
         />
@@ -29,13 +54,14 @@ const MeetCreatorHeadcountSection = ({ register }: Props) => {
           <button
             type="button"
             className="rounded-[11px] border-[1px] border-[#C3C3C3]"
-            onClick={() => {}}
+            onClick={handlePlus}
           >
             <div className="h-6 w-6 bg-plus bg-cover bg-center" />
           </button>
           <button
             type="button"
             className="rounded-[11px] border-[1px] border-[#C3C3C3]"
+            onClick={handleMinus}
           >
             <div className="h-6 w-6 bg-minus bg-cover bg-center" />
           </button>

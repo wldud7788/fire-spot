@@ -52,7 +52,11 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
 
         <MeetCreatorTypeSection watch={watch} setValue={setValue} />
 
-        <MeetCreatorHeadcountSection register={register} />
+        <MeetCreatorHeadcountSection
+          register={register}
+          setValue={setValue}
+          watch={watch}
+        />
 
         <div className="mb-20 w-[600px]">
           {errors.contentId && <span>캠핑장을 선택하세요.</span>}
