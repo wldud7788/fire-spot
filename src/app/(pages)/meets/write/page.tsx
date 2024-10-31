@@ -12,7 +12,7 @@
  * 8. 준비물
  */
 
-import MeetCreatorForm from "../components/meetsDetail/MeetCreatorForm";
+import MeetCreatorForm from "../components/meetsWrite/MeetCreatorForm";
 import { defaultValues } from "../utils/writeFormDefaultValues";
 
 const MeetWrite = () => {

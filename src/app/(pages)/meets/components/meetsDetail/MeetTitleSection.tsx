@@ -1,6 +1,7 @@
 import React from "react";
 import { MeetWithCamp } from "../../types/meet.types";
 import { formatDateKr } from "@/_utils/date";
+import Slide from "@/_components/slide/Slide";
 type Props = {
   meetWithCamp: MeetWithCamp;
   handleAttendPost: () => Promise<void>;
@@ -25,7 +26,14 @@ const MeetTitleSection = ({
 
   return (
     <div>
-      <img src={camp.firstImageUrl} alt={`${camp.facltNm} 메인 사진`} />
+      {/* <Slide slidePerview={3}
+  spaceBetween={1}
+  onChangeEvent={() => {}}>
+        {camp.imgUrls.map(url => (
+          <img key={url} src={camp.firstImageUrl} alt={`${camp.facltNm} 메인 사진`} />
+
+        ))}
+      </Slide> */}
       <h2>{meet.title}</h2>
       <p>{camp.addr1}</p>
       <p>{formatDateKr(meet.start_date)}</p>

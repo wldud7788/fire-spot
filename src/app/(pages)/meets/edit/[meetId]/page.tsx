@@ -2,7 +2,7 @@
 // https://react-hook-form.com/docs/useform/reset
 
 import { getMeetDetail } from "../../actions/meetDetailAction";
-import MeetCreatorForm from "../../components/meetsDetail/MeetCreatorForm";
+import MeetCreatorForm from "../../components/meetsWrite/MeetCreatorForm";
 
 // meets/write
 
