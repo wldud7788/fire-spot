@@ -34,6 +34,7 @@ const config: Config = {
         sos: "url('/assets/images/sos.png')",
         chat: "url('/assets/images/chat.png')",
         date: "url('/assets/images/ico-date.svg')",
+        dateStroke: "url('/assets/images/ico-date-stroke.svg')",
         group: "url('/assets/images/ico-group.svg')",
         heart: "url('/assets/images/ico-heart.svg')",
         location: "url('/assets/images/ico-location.svg')",

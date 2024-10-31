@@ -8,6 +8,7 @@ import useMeetCreatorForm from "../../hooks/useMeetCreatorForm";
 import MeetCreatorInfoSection from "./meetCreatorSection/MeetCreatorInfoSection";
 import MeetCreatorTypeSection from "./meetCreatorSection/MeetCreatorTypeSection";
 import MeetCreatorHeadcountSection from "./meetCreatorSection/MeetCreatorHeadcountSection";
+import MeetCreatorDateSection from "./meetCreatorSection/MeetCreatorDateSection";
 
 const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
   const {
@@ -58,6 +59,26 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
           watch={watch}
         />
 
+        <MeetCreatorDateSection
+          startDate={startDate}
+          setStartDate={setStartDate}
+          startFormName={"start_date"}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          endFormName={"end_date"}
+          setValue={setValue}
+        />
+
+        {/* <CDateRangePicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          startFormName={"start_date"}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          endFormName={"end_date"}
+          setValue={setValue}
+        /> */}
+
         <div className="mb-20 w-[600px]">
           {errors.contentId && <span>캠핑장을 선택하세요.</span>}
           <input
@@ -74,15 +95,7 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
             />
           )}
         </div>
-        <CDateRangePicker
-          startDate={startDate}
-          setStartDate={setStartDate}
-          startFormName={"start_date"}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          endFormName={"end_date"}
-          setValue={setValue}
-        />
+
         {errors.title && <span>This field is required</span>}
         <input
           type="hidden"
