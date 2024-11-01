@@ -1,28 +1,48 @@
 "use server";
 
 import { createClient } from "@/_utils/supabase/server";
-import { dummySchedules } from "../mock";
-import { Schedule } from "../type/schedule.types";
+import { Schedule, SCHEDULE_TYPE } from "../type/schedule.types";
 
 export const getScheduleList = async (): Promise<Schedule[]> => {
   const supabase = createClient();
-  //   const
 
-  //   const { data: feedData } = await supabase
-  //   .from('feed')
-  //   .select('*')
-  //   .eq('user_id', userId);
+  try {
+    const userData = await supabase.auth.getUser();
+    const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
 
-  // const { data: meetData } = await supabase
-  //   .from('meet')
-  //   .select('*')
-  //   .eq('user_id', userId);
+    const { data: feedData } = await supabase
+      .from("feed")
+      .select(`*, camp(*)`)
+      .eq("user_id", userId);
 
-  const schedules = await new Promise<Schedule[]>((resolve) => {
-    setTimeout(() => {
-      resolve(dummySchedules);
-    }, 100);
-  });
+    const { data: meetData } = await supabase
+      .from("meet")
+      .select(`*, camp(*)`)
+      .eq("user_id", userId);
 
-  return schedules;
+    if (!feedData || !meetData) {
+      throw new Error("No data");
+    }
+    const schedules: Schedule[] = [
+      ...feedData.map((feed) => ({
+        type: SCHEDULE_TYPE.stamp,
+        typeId: feed.camp?.contentId ?? "",
+        content: feed.camp?.facltNm ?? "",
+        startDate: feed.time ?? "",
+        endDate: feed.time ?? ""
+      })),
+      ...meetData.map((meet) => ({
+        type: SCHEDULE_TYPE.meet,
+        typeId: meet.id ?? "",
+        content: meet.title ?? "",
+        startDate: meet.start_date ?? "",
+        endDate: meet.end_date ?? ""
+      }))
+    ];
+
+    return schedules;
+  } catch (e) {
+    console.error("schedule patch error,", e);
+    return [];
+  }
 };

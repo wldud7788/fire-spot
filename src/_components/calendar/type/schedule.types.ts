@@ -1,10 +1,10 @@
 export type Schedule = {
   // id: number;
-  typeId: number;
-  type: ScheduleType;
+  typeId: number | string;
+  type: string;
   content: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
 };
 
 export type CellCardTable = {
