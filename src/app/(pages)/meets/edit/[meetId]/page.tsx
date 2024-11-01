@@ -17,7 +17,7 @@ const MeetEdit = async ({ params }: Props) => {
   const { meetId } = params;
   const meetWithCamp = await getMeetDetail({ meetId });
 
-  return <MeetCreatorForm meetWithCamp={meetWithCamp} />;
+  return <MeetCreatorForm meetId={meetId} meetWithCamp={meetWithCamp} />;
 };
 
 export default MeetEdit;

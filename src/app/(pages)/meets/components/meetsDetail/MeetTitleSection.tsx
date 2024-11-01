@@ -70,7 +70,7 @@ const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
           <button
             className={`h-[67px] w-[261px] rounded-[6px] text-2xl ${buttonConfig.className}`}
             disabled={buttonConfig.disabled}
-            onClick={buttonConfig.onClick}
+            onClick={() => buttonConfig.onClick(meet.id)}
           >
             {buttonConfig.text}
           </button>

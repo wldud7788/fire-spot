@@ -10,11 +10,12 @@ import {
 import useAttendButtonState from "./useAttendButtonState";
 import { startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
+import { useRouter } from "next/navigation";
 
 export interface ButtonConfig {
   text: string;
   className: string;
-  onClick: () => void;
+  onClick: (meetId?: number | string) => void;
   disabled: boolean;
 }
 
@@ -23,7 +24,7 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   const [userId, setUserId] = useState("load");
   const [attendeeList, setAttendeeList] = useState<MeetAttendeeResponse[]>([]);
   const { meet, camp, attendee_count } = meetWithCamp;
-
+  const router = useRouter();
   /** user, attendee 패칭 */
   const fetchData = async () => {
     const userPromise = getUser();
@@ -112,10 +113,10 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
     buttonConfig.className = "bg-[#D9D9D9]";
     buttonConfig.disabled = true;
   } else if (buttonType === "delete") {
-    buttonConfig.text = "삭제하기";
+    buttonConfig.text = "수정하기";
     buttonConfig.className = "bg-[#D9D9D9]";
-    buttonConfig.onClick = () => {
-      confirm("진짜 삭제?");
+    buttonConfig.onClick = (meetId: string | number | undefined) => {
+      router.push("/meets/edit/" + meetId);
     };
     buttonConfig.disabled = false;
   } else if (buttonType === "skelton") {

@@ -25,6 +25,33 @@ const postMeet = async (meet: MeetForm) => {
     }
 
     postMeetAttendee(meetResult.id);
+
+    return true;
+  } catch (e) {
+    console.error("postMeet Error", e);
+  }
+};
+
+const patchMeet = async (meetId: string, meet: MeetForm) => {
+  const supabase = await createClient();
+
+  try {
+    const userData = await supabase.auth.getUser();
+
+    const userId = userData.data.user?.id;
+
+    const { data: meetResult, error: meetError } = await supabase
+      .from("meet")
+      .update({ ...meet })
+      .eq("id", meetId);
+    // .select()
+    // .single();
+    if (meetError) {
+      throw new Error("postMeet Error");
+    }
+    return true;
+
+    // postMeetAttendee(meetResult.id);
   } catch (e) {
     console.error("postMeet Error", e);
   }
@@ -73,4 +100,4 @@ const upsertCamp = async (camp: CampToDB) => {
   }
 };
 
-export { postMeet, upsertCamp };
+export { postMeet, patchMeet, upsertCamp };

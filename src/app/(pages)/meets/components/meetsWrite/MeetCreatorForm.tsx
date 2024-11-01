@@ -12,7 +12,12 @@ import MeetCreatorDateSection from "./meetCreatorSection/MeetCreatorDateSection"
 import MeetCreatorSearchSection from "./meetCreatorSection/MeetCreatorSearchSection";
 import MeetCreatorContentSection from "./meetCreatorSection/MeetCreatorContentSection";
 
-const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
+interface Props {
+  meetId?: string;
+  meetWithCamp: MeetWithCamp;
+}
+
+const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const {
     startDate,
     setStartDate,
@@ -30,9 +35,10 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
     handleChangeSearchKeyword,
     isOpen,
     searchList
-  } = useMeetCreatorForm(meetWithCamp);
+  } = useMeetCreatorForm({ meetId, meetWithCamp });
 
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
+  const submitText = !!meetId ? "수정하기" : "만들기";
 
   return (
     <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px] pt-[30px] font-pretendard">
@@ -48,7 +54,7 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
             type="submit"
             className={`h-[51px] rounded-[6px] bg-[#D9D9D9] pl-12 pr-12 text-xl`}
           >
-            만들기
+            {submitText}
           </button>
         </section>
 

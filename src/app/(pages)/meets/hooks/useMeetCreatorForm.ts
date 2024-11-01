@@ -8,10 +8,17 @@ import { upsertCamp } from "../actions/meetWriteAction";
 import { CampToDB } from "../types/camp.types";
 import { defaultValues } from "../utils/writeFormDefaultValues";
 import useDate from "./useDate";
+import { useRouter } from "next/navigation";
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
-const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
+interface Props {
+  meetId?: string;
+  meetWithCamp: MeetWithCamp;
+}
+
+const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const { meet, camp, attendee_count } = meetWithCamp;
+  const router = useRouter();
 
   const {
     contentId,
@@ -56,7 +63,9 @@ const useMeetCreatorForm = (meetWithCamp: MeetWithCamp = defaultValues) => {
     }
   });
   const onSubmit: SubmitHandler<MeetForm> = (data) => {
-    processSubmitData(data);
+    processSubmitData(data, meetId);
+    // TODO 사카모토
+    router.replace("/meets");
   };
 
   /** 검색 후 드롭다운 클릭 이벤트 */

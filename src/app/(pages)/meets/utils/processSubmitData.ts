@@ -1,7 +1,8 @@
 import { isSameDay } from "date-fns";
 import { MeetForm } from "../types/meet.types";
 
-import { postMeet } from "../actions/meetWriteAction";
+import { patchMeet, postMeet } from "../actions/meetWriteAction";
+import { useRouter } from "next/navigation";
 
 // contentId: string;
 // title: string;
@@ -13,7 +14,7 @@ import { postMeet } from "../actions/meetWriteAction";
 // is_newbie: boolean;
 // deadline_headcount: number;
 // deadline_date: string | null;
-const processSubmitData = (formData: MeetForm) => {
+const processSubmitData = (formData: MeetForm, meetId?: string) => {
   let { is_day_trip } = formData;
   const { start_date, end_date } = formData;
 
@@ -24,7 +25,11 @@ const processSubmitData = (formData: MeetForm) => {
     is_day_trip
   };
 
-  postMeet(meet);
+  if (meetId) {
+    patchMeet(meetId, meet);
+  } else {
+    postMeet(meet);
+  }
 };
 
 export { processSubmitData };

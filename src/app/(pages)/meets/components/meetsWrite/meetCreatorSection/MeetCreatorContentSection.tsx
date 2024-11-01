@@ -23,6 +23,7 @@ const MeetCreatorContentSection = ({ register, watch, setValue }: Props) => {
   };
   const handleAddSupplies = () => {
     supplies.push(suppliesInput);
+    setSuppliesInput("");
     setValue(key, supplies);
   };
 
@@ -58,7 +59,14 @@ const MeetCreatorContentSection = ({ register, watch, setValue }: Props) => {
           <input
             className="h-[45px] w-[300px] rounded-[6px] border-2 bg-white px-4"
             placeholder="엔터로도 입력이 가능합니다."
+            value={suppliesInput}
             onChange={handleChangeSuppliesInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleAddSupplies(); // Enter 키를 눌렀을 때 호출할 함수
+                e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+              }
+            }}
           />
           <button
             type="button"
@@ -74,7 +82,7 @@ const MeetCreatorContentSection = ({ register, watch, setValue }: Props) => {
           {supplies.map((item, index) => (
             <li
               key={index}
-              className="flex h-[45px] items-center rounded-[22.5px] border-[1px] border-[#C3C3C3] p-2 px-4 py-[14px] text-[#A4A4A4]"
+              className="flex h-[45px] flex-wrap items-center rounded-[22.5px] border-[1px] border-[#C3C3C3] p-2 px-4 py-[14px] text-[#A4A4A4]"
             >
               <button
                 type="button"
@@ -87,7 +95,6 @@ const MeetCreatorContentSection = ({ register, watch, setValue }: Props) => {
             </li>
           ))}
         </ul>
-
         {/* <div className="flex gap-2">
           <button
             type="button"
