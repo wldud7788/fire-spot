@@ -8,7 +8,7 @@ const WriteButton = ({ children }: { children: ReactNode }) => {
   const handleClick = () => {
     router.push("./meets/write");
   };
-  return <div onClick={handleClick}>{children}</div>;
+  return <button onClick={handleClick}>{children}</button>;
 };
 
 export default WriteButton;

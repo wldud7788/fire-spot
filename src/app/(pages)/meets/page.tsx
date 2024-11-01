@@ -20,17 +20,26 @@ const Meets = async () => {
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList);
 
   return (
-    <div className="relative">
-      <div className="absolute left-4 top-4">
+    <div className="relative mx-auto w-full max-w-[1360px] px-[30px]">
+      <div className="absolute right-[30px] top-4 h-[40px]">
         <WriteButton>작성으로 가자</WriteButton>
       </div>
-      <ul className="grid grid-cols-3">
+      <ul className="mt-[40px] flex flex-wrap justify-center gap-[23px]">
+        {meetCardList.map((meetCard) => (
+          <li key={meetCard.id} className="w-[44%]">
+            {" "}
+            {/* 각 아이템을 50% 너비로 설정 */}
+            <MeetCard meetCard={meetCard} />
+          </li>
+        ))}
+      </ul>
+      {/* <ul className="grid grid-cols-3">
         {meetCardList.map((meetCard) => (
           <li key={meetCard.id}>
             <MeetCard meetCard={meetCard} />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
