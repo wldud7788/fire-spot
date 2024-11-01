@@ -43,7 +43,7 @@ const Header = () => {
           <nav className="hidden gap-5 lg:flex">
             <Link href={"/"}>캠핑 가이드</Link>
             <Link href={"/"}>캠핑장</Link>
-            <Link href={"/"}>캠핑크루</Link>
+            <Link href={"/meets"}>캠핑크루</Link>
             <Link href={"/"}>후기</Link>
           </nav>
           {/* 아이콘 */}

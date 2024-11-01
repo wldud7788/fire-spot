@@ -31,15 +31,16 @@ const MeetsTestPage = () => {
     }
   ];
   return (
-    <ul className="flex flex-wrap items-center gap-[50px]">
-      {meets.map((meet, idx) => {
-        return (
-          <li key={idx} className="w-[calc(50%-50px)]">
-            <MeetCard meet={meet} />
-          </li>
-        );
-      })}
-    </ul>
+    // <ul className="flex flex-wrap items-center gap-[50px]">
+    //   {meets.map((meet, idx) => {
+    //     return (
+    //       <li key={idx} className="w-[calc(50%-50px)]">
+    //         <MeetCard meet={meet} />
+    //       </li>
+    //     );
+    //   })}
+    // </ul>
+    <></>
   );
 };
 

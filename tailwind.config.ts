@@ -34,9 +34,16 @@ const config: Config = {
         sos: "url('/assets/images/sos.png')",
         chat: "url('/assets/images/chat.png')",
         date: "url('/assets/images/ico-date.svg')",
+        dateStroke: "url('/assets/images/ico-date-stroke.svg')",
         group: "url('/assets/images/ico-group.svg')",
         heart: "url('/assets/images/ico-heart.svg')",
-        location: "url('/assets/images/ico-location.svg')"
+        location: "url('/assets/images/ico-location.svg')",
+        avatar: "url('/assets/images/ico-avatar.svg')",
+        scrap: "url('/assets/images/ico-scrap.svg')",
+        info: "url('/assets/images/ico-info.svg')",
+        infoRound: "url('/assets/images/ico-info-round.svg')",
+        plus: "url('/assets/images/ico-plus.svg')",
+        minus: "url('/assets/images/ico-minus.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",
