@@ -26,7 +26,6 @@ const CalendarCell = ({ day, cellCardList }: Props) => {
   const meetCardStyle = getMeetCardStyle(meetCard);
   const cardBg = true ? "bg-red-500" : "bg-slate-500";
 
-  // TODO CSS 진행중
   return (
     <li className="flex min-h-[105px] w-full flex-col border-[1px]">
       <section className="flex h-[20px] w-full justify-end">
