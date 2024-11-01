@@ -32,10 +32,23 @@ const config: Config = {
         profile: "url('/assets/images/profile.png')",
         map: "url('/assets/images/map.png')",
         sos: "url('/assets/images/sos.png')",
-        chat: "url('/assets/images/chat.png')"
+        chat: "url('/assets/images/chat.png')",
+        date: "url('/assets/images/ico-date.svg')",
+        dateStroke: "url('/assets/images/ico-date-stroke.svg')",
+        group: "url('/assets/images/ico-group.svg')",
+        heart: "url('/assets/images/ico-heart.svg')",
+        location: "url('/assets/images/ico-location.svg')",
+        avatar: "url('/assets/images/ico-avatar.svg')",
+        scrap: "url('/assets/images/ico-scrap.svg')",
+        info: "url('/assets/images/ico-info.svg')",
+        infoRound: "url('/assets/images/ico-info-round.svg')",
+        plus: "url('/assets/images/ico-plus.svg')",
+        minus: "url('/assets/images/ico-minus.svg')"
       },
       backgroundPosition: {
-        "left-center": "left 10px center"
+        "left-center": "left 10px center",
+        "left-center-0": "left center",
+        "right-center-0": "right center"
       },
       colors: {
         background: "hsl(var(--background))",
