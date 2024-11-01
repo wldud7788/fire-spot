@@ -10,6 +10,7 @@ import MeetCreatorTypeSection from "./meetCreatorSection/MeetCreatorTypeSection"
 import MeetCreatorHeadcountSection from "./meetCreatorSection/MeetCreatorHeadcountSection";
 import MeetCreatorDateSection from "./meetCreatorSection/MeetCreatorDateSection";
 import MeetCreatorSearchSection from "./meetCreatorSection/MeetCreatorSearchSection";
+import MeetCreatorContentSection from "./meetCreatorSection/MeetCreatorContentSection";
 
 const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
   const {
@@ -80,39 +81,19 @@ const MeetCreatorForm = ({ meetWithCamp }: { meetWithCamp: MeetWithCamp }) => {
           location={location}
         />
 
-        {/* <div className="mb-20 w-[600px]">
-          {errors.contentId && <span>캠핑장을 선택하세요.</span>}
-          <input
-            type="text"
-            className="border-4"
-            value={searchKeyword}
-            onChange={handleChangeSearchKeyword}
-            placeholder="캠핑장을 검색하세요."
-          />
-          {showDropDown && (
-            <DropDownCampSearch
-              camps={searchList}
-              handleSelectCamp={handleSelectCamp}
-            />
-          )}
-        </div> */}
-
         {errors.title && <span>This field is required</span>}
+
+        <MeetCreatorContentSection
+          register={register}
+          watch={watch}
+          setValue={setValue}
+        />
         <input
           type="hidden"
           className="border-2"
           {...register("contentId", { required: true })}
         />
-        <input
-          className="border-2"
-          placeholder="제목"
-          {...register("title", { required: true })}
-        />
-        <input
-          className="border-2"
-          placeholder="내용"
-          {...register("content", { required: true })}
-        />
+        {/* TODO 준비물 기능, 제목 내용 CSS */}
         {/* <input
           className="border-2"
           placeholder="준비물"

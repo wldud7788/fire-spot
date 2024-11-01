@@ -51,23 +51,6 @@ const MeetCreatorSearchSection = ({
         )}
       </div>
     </section>
-
-    // <div className="absolute top-10 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md">
-    //   <ul className="max-h-60 overflow-y-auto">
-    //     {searchList.map((camp) => (
-    //       <li
-    //         key={camp.contentId}
-    //         className="cursor-pointer p-2 hover:bg-gray-100"
-    //         onClick={() => handleSelectCamp(camp)}>
-    //         {camp.facltNm}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
-    // <DropDownCampSearch
-    //   camps={searchList}
-    //   handleSelectCamp={handleSelectCamp}
-    // />
   );
 };
 

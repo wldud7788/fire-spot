@@ -15,7 +15,7 @@ interface Props {
 
 const MeetCreatorHeadcountSection = ({ register, setValue, watch }: Props) => {
   const key = "deadline_headcount";
-  let currentValue = watch(key);
+  const currentValue = watch(key);
   const handlePlus = () => {
     if (currentValue >= MAX_HEADCOUNT) {
       setValue(key, MAX_HEADCOUNT);
