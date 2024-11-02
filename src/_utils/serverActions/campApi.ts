@@ -30,36 +30,6 @@ export const getTotalData = async (page?: number, numOfRows?: number) => {
   }
 };
 
-export const getCampData = async (contentId: string) => {
-  try {
-    const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=4044&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
-      {
-        next: {
-          revalidate: 86400
-        }
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
-    const data: CampApiResponse = await res.json();
-    console.log("API Response:", data);
-
-    data.response.body.items.item.forEach((items) => {
-      console.log("items.contentId ===>", items.contentId, contentId);
-    });
-    // contentId에 맞는 캠프 데이터 찾기
-    return data.response.body.items.item;
-
-    // return camp;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
-
 // TODO - 준열,지영 각자 쓰던 함수 통일 필요, numOfRows=100 설정 체크 필요
 export const getSearchCampsData = async (keyword: string) => {
   try {
