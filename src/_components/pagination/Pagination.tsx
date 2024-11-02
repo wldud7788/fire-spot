@@ -15,13 +15,13 @@ const Pagination = ({
 }: PaginationProps) => {
   return (
     <div className="pagination">
-      <Link href={`/camps/${page - 1}`} passHref>
-        <button disabled={page === 1}>이전</button>
-      </Link>
+      <button onClick={onMovePagePrev} disabled={page === 1}>
+        이전
+      </button>
       {page} / {totalPages}
-      <Link href={`/camps/${page + 1}`} passHref>
-        <button disabled={page === totalPages}>다음</button>
-      </Link>
+      <button onClick={onMovePageNext} disabled={page === totalPages}>
+        다음
+      </button>
     </div>
   );
 };
