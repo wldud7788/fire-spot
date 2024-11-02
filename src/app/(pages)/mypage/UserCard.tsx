@@ -13,18 +13,31 @@ const UserCard: React.FC = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error("Error fetching user data:", error);
+      const { data: authData, error: authError } =
+        await supabase.auth.getUser();
+      if (authError) {
+        console.error("Error fetching user data:", authError);
         return;
       }
 
-      const user = data?.user;
+      const user = authData?.user;
       if (user) {
         setUserId(user.id);
-        setNickname(user.user_metadata.full_name || null);
-        // 프로필 URL 가져오기 (예제의 경우, user.user_metadata.avatar_url에서 가져옵니다.)
-        setProfileUrl(user.user_metadata.avatar_url || null);
+
+        // 프로필 정보 가져오기
+        const { data: profileData, error: profileError } = await supabase
+          .from("profile")
+          .select("nickname, avatar_url")
+          .eq("id", user.id)
+          .single(); // 단일 항목만 가져옴
+
+        if (profileError) {
+          console.error("Error fetching profile data:", profileError);
+          return;
+        }
+
+        setNickname(profileData.nickname || null);
+        setProfileUrl(profileData.avatar_url || null);
       }
     };
     fetchUser();
