@@ -14,12 +14,12 @@ export type CellCardTable = {
 export type CellCard = {
   id: string; // key를 위한 id (type-typeId-sequence)
   range: number; // 모임 같은 경우 몇 칸을 차지하는지
-  typeId: number;
-  type: ScheduleType;
+  typeId: number | string;
+  type: string;
   content: string;
   isExistPrev: boolean;
   isExistNext: boolean;
-  date: Date;
+  date: Date | string;
   // renderDate: Date;
   isShowContent?: boolean;
 };

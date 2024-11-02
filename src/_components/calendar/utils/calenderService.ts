@@ -3,6 +3,7 @@ import {
   differenceInDays,
   endOfWeek,
   format,
+  isSameDay,
   setHours,
   setMilliseconds,
   setMinutes,
@@ -102,6 +103,7 @@ const getWeekEndAtMidnight = (weekEnd: Date) => {
 
 const getMeetCellCard = (schedule: Schedule) => {
   const { type, typeId, content, startDate, endDate } = schedule;
+  const isDayTrip = isSameDay(startDate, endDate);
   const meetCellCardList = [] as CellCard[];
 
   // 같은 일정인데 일정이 길어짐에 따라 다른 줄(주)에서 다시 생성되는 일정임을 구별하는 변수
@@ -165,10 +167,14 @@ const getMeetCellCard = (schedule: Schedule) => {
 
 export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
   if (!meetCard) return {};
-  const paddingLeft = meetCard.isExistPrev ? "0px" : "32px";
-  const paddingRight = meetCard.isExistNext ? "0px" : "32px";
+  const { isExistPrev, isExistNext, range } = meetCard;
+  const isDayTrip = !isExistPrev && !isExistNext && range === 1;
+
+  const paddingLeft = isDayTrip ? "0px" : isExistPrev ? "0px" : "32px";
+  const paddingRight = isDayTrip ? "0px" : isExistNext ? "0px" : "32px";
+
   const style = {
-    width: `calc(101% * ${meetCard.range})`,
+    width: `calc(100% * ${range})`,
     paddingLeft,
     paddingRight
   };
