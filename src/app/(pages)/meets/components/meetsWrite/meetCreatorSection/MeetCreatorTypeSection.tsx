@@ -1,10 +1,10 @@
 import React from "react";
-import { MeetForm } from "../../../types/meet.types";
+import { MeetInsert } from "../../../types/meet.types";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 interface Props {
-  watch: UseFormWatch<MeetForm>;
-  setValue: UseFormSetValue<MeetForm>;
+  watch: UseFormWatch<MeetInsert>;
+  setValue: UseFormSetValue<MeetInsert>;
 }
 
 const groundTypes = {

@@ -11,48 +11,48 @@ export type Database = {
     Tables: {
       camp: {
         Row: {
-          addr1: string | null;
+          addr1: string;
           contentId: number;
           created_at: string;
           doNm: string | null;
-          facltNm: string | null;
+          facltNm: string;
           firstImageUrl: string | null;
-          imgUrls: Json | null;
+          imgUrls: string[];
           induty: string | null;
           intro: string | null;
           lineIntro: string | null;
-          mapX: number | null;
-          mapY: number | null;
+          mapX: number;
+          mapY: number;
           sigunguNm: string | null;
         };
         Insert: {
-          addr1?: string | null;
+          addr1: string;
           contentId: number;
           created_at?: string;
           doNm?: string | null;
-          facltNm?: string | null;
+          facltNm: string;
           firstImageUrl?: string | null;
-          imgUrls?: Json | null;
+          imgUrls?: Json;
           induty?: string | null;
           intro?: string | null;
           lineIntro?: string | null;
-          mapX?: number | null;
-          mapY?: number | null;
+          mapX: number;
+          mapY: number;
           sigunguNm?: string | null;
         };
         Update: {
-          addr1?: string | null;
+          addr1?: string;
           contentId?: number;
           created_at?: string;
           doNm?: string | null;
-          facltNm?: string | null;
+          facltNm?: string;
           firstImageUrl?: string | null;
-          imgUrls?: Json | null;
+          imgUrls?: Json;
           induty?: string | null;
           intro?: string | null;
           lineIntro?: string | null;
-          mapX?: number | null;
-          mapY?: number | null;
+          mapX?: number;
+          mapY?: number;
           sigunguNm?: string | null;
         };
         Relationships: [];
@@ -225,54 +225,64 @@ export type Database = {
       meet: {
         Row: {
           content: string;
-          contentId: number | null;
+          contentId: number;
           created_at: string;
           deadline_date: string | null;
           deadline_headcount: number;
-          end_date: string | null;
-          ground_type: string | null;
+          end_date: Date;
+          ground_type: string;
           id: number;
           is_day_trip: boolean;
           is_end: boolean | null;
-          is_newbie: boolean | null;
-          start_date: string;
-          supplies: Json | null;
+          is_newbie: boolean;
+          start_date: Date;
+          supplies: string[];
           title: string;
           user_id: string;
         };
         Insert: {
-          content: string;
-          contentId?: number | null;
-          created_at?: string;
-          deadline_date?: string | null;
-          deadline_headcount?: number;
-          end_date?: string | null;
-          ground_type?: string | null;
-          id?: number;
-          is_day_trip: boolean;
-          is_end?: boolean | null;
-          is_newbie?: boolean | null;
-          start_date: string;
-          supplies?: Json | null;
-          title: string;
           user_id: string;
+
+          contentId: number;
+          title: string;
+          content: string;
+
+          deadline_headcount: number;
+
+          start_date: Date;
+          end_date: Date;
+          is_day_trip: boolean;
+
+          ground_type: string;
+          is_newbie: boolean;
+
+          supplies: string[];
+
+          deadline_date?: string | null;
+          is_end?: boolean | null;
+          created_at?: string;
         };
         Update: {
-          content?: string;
-          contentId?: number | null;
-          created_at?: string;
-          deadline_date?: string | null;
-          deadline_headcount?: number;
-          end_date?: string | null;
-          ground_type?: string | null;
-          id?: number;
-          is_day_trip?: boolean;
-          is_end?: boolean | null;
-          is_newbie?: boolean | null;
-          start_date?: string;
-          supplies?: Json | null;
-          title?: string;
           user_id?: string;
+
+          contentId?: number;
+          title?: string;
+          content?: string;
+
+          deadline_headcount?: number;
+
+          start_date?: Date;
+          end_date?: Date;
+          is_day_trip?: boolean;
+
+          ground_type?: string;
+          is_newbie?: boolean;
+
+          supplies?: string[];
+
+          deadline_date?: string | null;
+          is_end?: boolean | null;
+          created_at?: string;
         };
         Relationships: [
           {
@@ -289,7 +299,7 @@ export type Database = {
           created_at: string;
           id: number;
           meet_id: number;
-          user_id: string | null;
+          user_id: string;
         };
         Insert: {
           created_at?: string;

@@ -2,7 +2,7 @@
 import { getUser } from "@/_utils/auth";
 import { useEffect, useState } from "react";
 import { getAttendeeList } from "../actions/meetDetailAction";
-import { MeetAttendeeResponse, MeetWithCamp } from "../types/meet.types";
+import { MeetAttendeeSelect, MeetWithCamp } from "../types/meet.types";
 import {
   deleteMeetAttendee,
   postMeetAttendee
@@ -22,13 +22,13 @@ export interface ButtonConfig {
 const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   const [attendeeId, setAttendeeId] = useState<number>(0);
   const [userId, setUserId] = useState("load");
-  const [attendeeList, setAttendeeList] = useState<MeetAttendeeResponse[]>([]);
+  const [attendeeList, setAttendeeList] = useState<MeetAttendeeSelect[]>([]);
   const { meet, camp, attendee_count } = meetWithCamp;
   const router = useRouter();
   /** user, attendee 패칭 */
   const fetchData = async () => {
     const userPromise = getUser();
-    const attendeePromise = getAttendeeList(meet.id);
+    const attendeePromise = getAttendeeList(meet.id ?? 0);
 
     const [user, attendee] = await Promise.all([userPromise, attendeePromise]);
 
@@ -52,8 +52,8 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
 
   /** 신청하기 버튼 클릭 함수 */
   const handleAttendPost = async () => {
-    const attendee: MeetAttendeeResponse = await postMeetAttendee(
-      meetWithCamp.meet.id
+    const attendee: MeetAttendeeSelect = await postMeetAttendee(
+      meetWithCamp.meet.id ?? 0
     );
     setAttendeeId(attendee.id);
     await fetchData();

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { MeetForm, MeetWithCamp } from "../types/meet.types";
+import { MeetInsert, MeetWithCamp } from "../types/meet.types";
 
 import { GOCAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
 import { processSubmitData } from "../utils/processSubmitData";
 import { upsertCamp } from "../actions/meetWriteAction";
-import { CampToDB } from "../types/camp.types";
-import { defaultValues } from "../utils/writeFormDefaultValues";
+import { CampInsert } from "../types/camp.types";
 import useDate from "./useDate";
 import { useRouter } from "next/navigation";
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
@@ -39,7 +38,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const [searchKeyword, setSearchKeyword] = useState(facltNm);
   const [location, setLocation] = useState(addr1);
   const [isOpen, setIsOpen] = useState(false);
-  const [searchList, setSearchList] = useState<CampToDB[]>([]);
+  const [searchList, setSearchList] = useState<CampInsert[]>([]);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const {
@@ -49,7 +48,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     clearErrors,
     watch,
     formState: { errors }
-  } = useForm<MeetForm>({
+  } = useForm<MeetInsert>({
     defaultValues: {
       contentId,
       title,
@@ -62,14 +61,14 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
       end_date: endDate
     }
   });
-  const onSubmit: SubmitHandler<MeetForm> = (data) => {
+  const onSubmit: SubmitHandler<MeetInsert> = (data) => {
     processSubmitData(data, meetId);
     // TODO 사카모토
     router.replace("/meets");
   };
 
   /** 검색 후 드롭다운 클릭 이벤트 */
-  const handleSelectCamp = (camp: CampToDB) => {
+  const handleSelectCamp = (camp: CampInsert) => {
     setValue("contentId", camp.contentId);
 
     setIsOpen(false);

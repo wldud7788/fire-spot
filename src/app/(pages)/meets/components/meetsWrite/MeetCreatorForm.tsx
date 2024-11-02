@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import DropDownCampSearch from "./DropDownCampSearch";
-import CDateRangePicker from "@/_components/date/CDateRangePicker";
 import { MeetWithCamp } from "../../types/meet.types";
 import useMeetCreatorForm from "../../hooks/useMeetCreatorForm";
 import MeetCreatorInfoSection from "./meetCreatorSection/MeetCreatorInfoSection";

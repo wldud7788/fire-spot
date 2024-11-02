@@ -1,8 +1,8 @@
-import { CampToDB } from "../../types/camp.types";
+import { CampInsert } from "../../types/camp.types";
 
 const DropDownCampSearch: React.FC<{
-  handleSelectCamp: (camp: CampToDB) => void;
-  camps: CampToDB[];
+  handleSelectCamp: (camp: CampInsert) => void;
+  camps: CampInsert[];
 }> = ({ handleSelectCamp, camps }) => {
   if (!camps) return null;
 

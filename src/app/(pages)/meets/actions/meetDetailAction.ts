@@ -10,16 +10,20 @@ const getMeetDetail = async ({
   meetId: string;
 }): Promise<MeetWithCamp> => {
   const supabase = await createClient();
+
   const { data, error } = await supabase.rpc(supabaseRpc.meet.getMeetDetail, {
-    meet_id: meetId
+    meet_id: Number(meetId)
   });
-  if (error) {
+
+  if (error || !data) {
     throw new Error("getMeetDetail Error");
   }
 
-  data.meet.attendee_count = data.attendee_count;
+  const typedData = data as unknown as MeetWithCamp;
 
-  return { ...data };
+  // typedData.meet.attendee_count = typedData.attendee_count;
+
+  return { ...typedData };
 };
 
 const getAttendeeList = async (meetId: string | number) => {
@@ -29,7 +33,7 @@ const getAttendeeList = async (meetId: string | number) => {
     .select()
     .eq("meet_id", meetId);
 
-  if (error) {
+  if (error || !data) {
     throw new Error("getAttendeeList Error", error);
   }
 

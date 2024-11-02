@@ -4,6 +4,6 @@ const supabaseRpc = {
     getMeetDetail: "get_meet_detail",
     getMeetList: "get_meet_list"
   }
-};
+} as const;
 
 export default supabaseRpc;

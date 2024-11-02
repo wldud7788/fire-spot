@@ -5,7 +5,11 @@ type Props = {
   meetWithCamp: MeetWithCamp;
 };
 const MeetIntroSection = ({ meetWithCamp }: Props) => {
-  const { camp, meet } = meetWithCamp;
+  const { camp, meet, attendee_count } = meetWithCamp;
+  const campInduty = camp.induty
+    ? camp.induty.replaceAll(",", "·")
+    : "정보없음";
+
   return (
     <div className="mt-12 flex w-full flex-col gap-7">
       <section>
@@ -26,13 +30,13 @@ const MeetIntroSection = ({ meetWithCamp }: Props) => {
           <div className="h-7 w-7 bg-avatar bg-cover bg-center" />
           <p className="text-[#A9A9A9]">모집인원</p>
           <p className="text-[#757575]">
-            {meet.attendee_count}명 / {meet.deadline_headcount}명 지원
+            {attendee_count}명 / {meet.deadline_headcount}명 지원
           </p>
         </div>
         <div className="flex h-[30px] items-center gap-2">
           <div className="h-7 w-7 bg-avatar bg-cover bg-center" />
           <p className="text-[#A9A9A9]">캠핑유형</p>
-          <p className="text-[#757575]">{camp.induty.replaceAll(",", "·")}</p>
+          <p className="text-[#757575]">{campInduty}</p>
         </div>
       </section>
 
