@@ -13,26 +13,6 @@ export interface MeetWithCampInsert {
   attendee_count: number;
 }
 
-// export interface Meet extends Camp {
-// export interface MeetResponse {
-//   id: number;
-//   user_id: string;
-//   contentId: number;
-//   title: string;
-//   content: string;
-//   supplies: string[]; // [ '텐트', '생수', '콘센트', '음식', '침낭' . . . ],
-//   start_date: Date;
-//   end_date: Date;
-//   is_end: boolean;
-//   is_day_trip: boolean;
-//   is_newbie: boolean;
-//   ground_type: string;
-//   deadline_headcount: number;
-//   deadline_date: string | null;
-//   attendee_count: number;
-//   created_at?: string;
-// }
-
 export type MeetSelect = Database["public"]["Tables"]["meet"]["Row"];
 
 export type MeetInsert = Database["public"]["Tables"]["meet"]["Insert"];
@@ -41,12 +21,6 @@ export type MeetUpdate = Database["public"]["Tables"]["meet"]["Update"];
 
 export type MeetAttendeeSelect =
   Database["public"]["Tables"]["meet_attendee"]["Row"];
-// {
-//   id: number;
-//   meet_id: number;
-//   user_id: string;
-//   created_at: Date;
-// }
 
 export interface MeetCard {
   id: number;
