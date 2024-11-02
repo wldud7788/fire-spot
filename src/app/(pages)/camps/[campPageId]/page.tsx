@@ -1,13 +1,17 @@
 "use client";
 
 import CampList from "@/_components/camp/CampList";
-import { getTotalData } from "@/_utils/serverActions/campApi";
 import { useQuery } from "@tanstack/react-query";
 
 type CampListProps = {
   params: {
     campPageId: string;
   };
+};
+
+const fetchTotalData = async () => {
+  const response = await fetch("/api/campApi");
+  return response.json();
 };
 
 const CampListPage = ({ params }: CampListProps) => {
@@ -17,7 +21,7 @@ const CampListPage = ({ params }: CampListProps) => {
     isError
   } = useQuery({
     queryKey: ["camps"],
-    queryFn: async () => getTotalData(),
+    queryFn: async () => fetchTotalData(),
     staleTime: 1000 * 60 * 60 * 24
   });
 
