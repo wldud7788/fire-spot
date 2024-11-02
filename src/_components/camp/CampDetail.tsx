@@ -1,6 +1,6 @@
 "use client";
 
-import { getCampData } from "@/_utils/serverActions/campApi";
+import { getTotalData } from "@/_utils/serverActions/campApi";
 import { useQuery } from "@tanstack/react-query";
 
 type CampDetailProps = {
@@ -14,7 +14,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
     isError
   } = useQuery({
     queryKey: ["camp"],
-    queryFn: async () => getCampData(paramsId),
+    queryFn: async () => getTotalData(),
     refetchOnMount: true // 마운트 시 재요청
   });
 
