@@ -4,6 +4,7 @@ import Link from "next/link";
 type CampingDataProps = {
   camp: Camp;
   type?: string;
+  listParamsId?: string;
 };
 
 /**
@@ -13,10 +14,10 @@ type CampingDataProps = {
  * 이미지,카테고리,위치,북마크,위치 삭제
  */
 
-const CampCard = ({ camp, type }: CampingDataProps) => {
+const CampCard = ({ camp, type, listParamsId }: CampingDataProps) => {
   return (
     <div className="camping_card group">
-      <Link href={`/camps/detail/${camp.contentId}`}>
+      <Link href={`/camps/${listParamsId}/${camp.contentId}`}>
         <div className="inner">
           <div className="img_box relative overflow-hidden py-[23%]">
             <img
