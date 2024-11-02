@@ -31,9 +31,12 @@ const CalendarCell = ({
   );
 
   const meetCard = cellCardList.find((cellCard) => cellCard.type === "meet");
+  const meetCardId = meetCard ? `${meetCard.type}-${meetCard.typeId}` : "";
 
   const meetCardStyle = getMeetCardStyle(meetCard);
-  const cardBg = true ? "bg-red-500" : "bg-slate-500";
+
+  const meetCardContentBg =
+    hoverItem === meetCardId ? "bg-red-50" : "bg-slate-200";
 
   return (
     <li className="flex min-h-[105px] w-full flex-col border-[1px]">
@@ -44,21 +47,15 @@ const CalendarCell = ({
         <div className="h-[50px]">
           {meetCard && (
             <div
-              // className={`absolute top-2 w-[${(30 * meetCard[0].range).toString()}px] bg-slate-500`}>
               className={`absolute top-2 z-50 cursor-pointer`}
               style={{ ...meetCardStyle }}
-              onMouseOver={() =>
-                handleHoverItem(`${meetCard.type}-${meetCard.typeId}`)
-              }
+              onMouseOver={() => handleHoverItem(meetCardId)}
               onMouseLeave={() => handleHoverItem("")}
               onClick={() => {
                 router.push(`/meets/${meetCard.typeId}`);
               }}
             >
-              {/* <div className={`w-full ${cardBg}`}>{meetCard.content}</div> */}
-              <div
-                className={`w-full ${hoverItem === `${meetCard.type}-${meetCard.typeId}` ? "bg-red-50" : "bg-slate-200"}`}
-              >
+              <div className={`w-full ${meetCardContentBg}`}>
                 {meetCard.content}
               </div>
             </div>
