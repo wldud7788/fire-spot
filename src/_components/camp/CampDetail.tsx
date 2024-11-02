@@ -15,7 +15,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   } = useQuery({
     queryKey: ["camp"],
     queryFn: async () => getTotalData(),
-    refetchOnMount: true // 마운트 시 재요청
+    staleTime: 1000 * 60 * 60 * 24
   });
 
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
