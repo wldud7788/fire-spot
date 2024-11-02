@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // 제네릭 타입 사용해서 다양한 타입의 아이템 배열을 받을 수 있도록해줌
@@ -12,6 +13,7 @@ const usePagination = <T>({
   itemsPerPage,
   paramsId
 }: UsePaginationProps<T>) => {
+  const router = useRouter();
   // 현재 페이지 상태를 관리하는 state
   const [page, setPage] = useState<number>(Number(paramsId));
   // 총 페이지 수를 계산 (데이터 총 갯수 / 설정한 페이지 갯수)
@@ -26,6 +28,7 @@ const usePagination = <T>({
   const movePagePrev = () => {
     if (page > 1) {
       setPage((prev) => prev - 1);
+      router.push(`${paramsId}?page=${page - 1}`);
     } else {
       // 사카모토 써야함
       alert("첫번째 페이집니다.");
@@ -35,6 +38,7 @@ const usePagination = <T>({
   const movePageNext = () => {
     if (page < totalPages) {
       setPage((prev) => prev + 1);
+      router.push(`${paramsId}?page=${page + 1}`);
     } else {
       // 사카모토 써야함
       alert("마지막 페이집니다.");
