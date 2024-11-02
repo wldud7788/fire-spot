@@ -6,7 +6,7 @@ import {
   startOfMonth,
   startOfWeek
 } from "date-fns";
-import React from "react";
+import React, { useMemo } from "react";
 import CalendarCell from "./CalendarCell";
 import { CellCardTable } from "./type/schedule.types";
 
@@ -32,17 +32,21 @@ const CalendarTable = ({
 
   // dayStart ~ dayEnd 까지 7줄 씩 뿌려주면 됨
 
-  const days = [];
+  const days: Date[] = useMemo(() => {
+    const dayList = [];
+    for (let i = dayStart; i <= dayEnd; i = addDays(i, 1)) {
+      dayList.push(i);
+    }
+    console.log("dayList", dayList);
+    return dayList;
+  }, [currentMonth]);
 
-  /**
-   * dayStart ~ dayEnd까지 반복
-   * 각 요소마다 일자, 그 날의 할일 등에 대한 ..
-   *
-   */
-  // TODO 메모이제이션
-  for (let i = dayStart; i <= dayEnd; i = addDays(i, 1)) {
-    days.push(i);
-  }
+  // const days = [];
+
+  // for (let i = dayStart; i <= dayEnd; i = addDays(i, 1)) {
+  //   days.push(i);
+  // }
+  // return convertScheduleDataToCellCardTable(scheduleList);
 
   return (
     <ul className="grid grid-cols-7">

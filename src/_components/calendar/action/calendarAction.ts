@@ -26,7 +26,8 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
     const schedules: Schedule[] = [
       ...feedData.map((feed) => ({
         type: SCHEDULE_TYPE.stamp,
-        typeId: feed.camp?.contentId ?? "",
+        typeId: feed.id ?? "",
+        contentId: feed.camp_id,
         content: feed.camp?.facltNm ?? "",
         startDate: feed.time ?? "",
         endDate: feed.time ?? ""
@@ -34,6 +35,7 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
       ...meetData.map((meet) => ({
         type: SCHEDULE_TYPE.meet,
         typeId: meet.id ?? "",
+        contentId: meet.contentId,
         content: meet.title ?? "",
         startDate: meet.start_date ?? "",
         endDate: meet.end_date ?? ""

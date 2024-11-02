@@ -1,6 +1,7 @@
 export type Schedule = {
   // id: number;
   typeId: number | string;
+  contentId: number;
   type: string;
   content: string;
   startDate: Date | string;
@@ -17,6 +18,7 @@ export type CellCard = {
   typeId: number | string;
   type: string;
   content: string;
+  contentId: number;
   isExistPrev: boolean;
   isExistNext: boolean;
   date: Date | string;

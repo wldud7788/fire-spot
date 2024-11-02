@@ -43,10 +43,10 @@ const CalendarCell = ({ day, cellCardList }: Props) => {
             </div>
           )}
         </div>
-        <ul className="flex w-full justify-end gap-2">
+        <ul className="grid w-full grid-cols-3 gap-2">
           {showStamp &&
             stampCardList.map((stamp) => (
-              <li key={stamp.id} className="h-12 bg-slate-500">
+              <li key={`${stamp.id}`} className="h-12 bg-slate-500">
                 {/* {stamp.content} */}
                 stamp
               </li>
