@@ -1,10 +1,14 @@
 "use client";
 
-import { getTotalData } from "@/_utils/serverActions/campApi";
 import { useQuery } from "@tanstack/react-query";
 
 type CampDetailProps = {
   paramsId: string;
+};
+
+const fetchTotalData = async () => {
+  const response = await fetch("/api/campApi");
+  return response.json();
 };
 
 const CampDetail = ({ paramsId }: CampDetailProps) => {
@@ -14,7 +18,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
     isError
   } = useQuery({
     queryKey: ["camp"],
-    queryFn: async () => getTotalData(),
+    queryFn: async () => fetchTotalData(),
     staleTime: 1000 * 60 * 60 * 24
   });
 
