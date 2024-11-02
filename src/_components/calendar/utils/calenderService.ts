@@ -107,7 +107,17 @@ const getWeekEndAtMidnight = (weekEnd: Date) => {
 };
 
 const getMeetCellCard = (schedule: Schedule) => {
-  const { type, typeId, content, startDate, endDate } = schedule;
+  const {
+    type,
+    typeId,
+    content,
+    startDate: rawStartDate,
+    endDate: rawEndDate
+  } = schedule;
+
+  const startDate = startOfDay(rawStartDate);
+  const endDate = startOfDay(rawEndDate);
+
   const meetCellCardList = [] as CellCard[];
 
   // 같은 일정인데 일정이 길어짐에 따라 다른 줄(주)에서 다시 생성되는 일정임을 구별하는 변수
@@ -115,13 +125,13 @@ const getMeetCellCard = (schedule: Schedule) => {
   // 주의 마지막
   let weekEnd = getWeekEndAtMidnight(endOfWeek(startDate, { locale: ko }));
   // 일정이 길어져 주가 변경되는 경우 같은 일정이지만 주 기준 시작 date는 다름
-  let isExistNext = isAfter(startOfDay(endDate), startOfDay(weekEnd));
+  let isExistNext = isAfter(endDate, weekEnd);
 
   let range = 1;
   if (isExistNext) {
-    range = differenceInDays(startOfDay(weekEnd), startOfDay(startDate)) + 1;
+    range = differenceInDays(weekEnd, startDate) + 1;
   } else {
-    range = differenceInDays(startOfDay(endDate), startOfDay(startDate)) + 1;
+    range = differenceInDays(endDate, startDate) + 1;
   }
 
   meetCellCardList.push({
@@ -136,11 +146,7 @@ const getMeetCellCard = (schedule: Schedule) => {
   });
 
   if (isExistNext) {
-    for (
-      let i = addDays(startOfDay(weekEnd), 1);
-      i <= startOfDay(endDate);
-      i = addDays(i, 7)
-    ) {
+    for (let i = addDays(weekEnd, 1); i <= endDate; i = addDays(i, 7)) {
       sequence++;
       // weekEnd = getWeekEndAtMidnight(endOfWeek(i));
       weekEnd = startOfDay(endOfWeek(i));
