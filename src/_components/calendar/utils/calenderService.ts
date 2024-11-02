@@ -3,13 +3,16 @@ import {
   differenceInDays,
   endOfWeek,
   format,
+  isAfter,
   isSameDay,
   setHours,
   setMilliseconds,
   setMinutes,
-  setSeconds
+  setSeconds,
+  startOfDay
 } from "date-fns";
 import { CellCard, CellCardTable, Schedule } from "../type/schedule.types";
+import { ko } from "date-fns/locale";
 
 /** 
  * 사용자의 schedule(스탬프, 모임)데이터 를 받아서 데이터 변환 
@@ -57,6 +60,8 @@ export const convertScheduleDataToCellCardTable = (
 ): CellCardTable => {
   const cellCardTable: CellCardTable = {};
 
+  // console.log("scheduleList", scheduleList);
+
   scheduleList.forEach((schedule) => {
     const { type, startDate } = schedule;
     let tableKey = format(startDate, "yyyy-MM-dd");
@@ -103,27 +108,20 @@ const getWeekEndAtMidnight = (weekEnd: Date) => {
 
 const getMeetCellCard = (schedule: Schedule) => {
   const { type, typeId, content, startDate, endDate } = schedule;
-  const isDayTrip = isSameDay(startDate, endDate);
   const meetCellCardList = [] as CellCard[];
 
   // 같은 일정인데 일정이 길어짐에 따라 다른 줄(주)에서 다시 생성되는 일정임을 구별하는 변수
   let sequence = 1;
   // 주의 마지막
-  let weekEnd = getWeekEndAtMidnight(endOfWeek(startDate));
+  let weekEnd = getWeekEndAtMidnight(endOfWeek(startDate, { locale: ko }));
   // 일정이 길어져 주가 변경되는 경우 같은 일정이지만 주 기준 시작 date는 다름
-  let isExistNext = endDate > weekEnd;
+  let isExistNext = isAfter(startOfDay(endDate), startOfDay(weekEnd));
 
-  /**
-   * div 크기가 될 변수
-   *
-   * 1. 주가 변경되어도 다음 일정이 있는 경우: 주 마지막 일자 - 시작 일자(이번주 기준)
-   * 2. 이번 주에 모든 일정이 끝나는 경우: 종료 일자 - 시작 일자(이번주 기준)
-   * */
   let range = 1;
   if (isExistNext) {
-    range = differenceInDays(weekEnd, startDate) + 1;
+    range = differenceInDays(startOfDay(weekEnd), startOfDay(startDate)) + 1;
   } else {
-    range = differenceInDays(endDate, startDate) + 1;
+    range = differenceInDays(startOfDay(endDate), startOfDay(startDate)) + 1;
   }
 
   meetCellCardList.push({
@@ -138,10 +136,16 @@ const getMeetCellCard = (schedule: Schedule) => {
   });
 
   if (isExistNext) {
-    for (let i = addDays(weekEnd, 1); i <= endDate; i = addDays(i, 7)) {
+    for (
+      let i = addDays(startOfDay(weekEnd), 1);
+      i <= startOfDay(endDate);
+      i = addDays(i, 7)
+    ) {
       sequence++;
-      weekEnd = getWeekEndAtMidnight(endOfWeek(i));
+      // weekEnd = getWeekEndAtMidnight(endOfWeek(i));
+      weekEnd = startOfDay(endOfWeek(i));
       isExistNext = endDate > weekEnd;
+
       range = 1;
       if (isExistNext) {
         range = differenceInDays(weekEnd, i) + 1;
@@ -174,7 +178,7 @@ export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
   const paddingRight = isDayTrip ? "0px" : isExistNext ? "0px" : "32px";
 
   const style = {
-    width: `calc(100% * ${range})`,
+    width: `calc(${100 * range}% + ${range}px)`,
     paddingLeft,
     paddingRight
   };

@@ -40,6 +40,8 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
       }))
     ];
 
+    console.log("schedules", schedules);
+
     return schedules;
   } catch (e) {
     console.error("schedule patch error,", e);
