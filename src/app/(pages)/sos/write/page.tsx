@@ -6,6 +6,7 @@ import { createClient } from "@/_utils/supabase/client";
 
 import { User } from "@supabase/supabase-js";
 import { getUser } from "@/_utils/auth";
+import { useRouter } from "next/navigation";
 
 let nextId = 0;
 
@@ -28,6 +29,9 @@ const SosWrite = () => {
   //사용자 가져오기
   const [user, setUser] = useState<User | null>(null);
 
+  //작성 후 페이지 이동
+  const router = useRouter();
+
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await getUser();
@@ -43,8 +47,6 @@ const SosWrite = () => {
   };
 
   const addSosWrite = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
     if (!user) {
       alert("로그인이 필요합니다");
       return;
@@ -58,8 +60,8 @@ const SosWrite = () => {
       sos_tag: inputCategory
     };
 
-    if (contents.length === 0) {
-      alert("피드백이 없네요....?🤔");
+    if (finalCategory.length === 0) {
+      alert("카테고리를 선택해주세요");
     } else {
       const { data, error } = await supabase.from("sos").insert([sosData]);
 
@@ -68,6 +70,7 @@ const SosWrite = () => {
         console.error("Error update comment : ", error.message);
       }
     }
+    return router.push("/sos");
   };
 
   console.log("setFinalCategoey", finalCategory);
@@ -204,6 +207,7 @@ const SosWrite = () => {
               value={title}
               onChange={onInputCountHandler}
               maxLength={15}
+              minLength={1}
               className="w-[96%]"
             />
             <p>

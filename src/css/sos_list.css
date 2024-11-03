@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .sos_box {
+    background-color: #f4f4f4;
+    border: 1px solid #928a8a;
+    border-radius: 20px;
+    padding: 10px 20px;
+  }
+}
