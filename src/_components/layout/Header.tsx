@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
-import SearchBar from "../search/SearchBar";
+import SearchBar from "../search/searchBar/SearchBar";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,11 +32,7 @@ const Header = () => {
         <div className="z-10 flex items-center justify-between leading-40">
           <div className="flex gap-8">
             <Link href={"/"}>로고</Link>
-            <SearchBar
-              showButton={false}
-              showDropdownRegions={false}
-              height="40px"
-            />{" "}
+            <SearchBar variant="header" />
             {/* 헤더 검색 (버튼 없음, DropdownRegions 없음, 높이 40px) */}
           </div>
           {/* 메뉴 Nav */}
