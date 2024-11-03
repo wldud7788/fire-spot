@@ -2,8 +2,6 @@ import { Metadata } from "next";
 import React from "react";
 import { getMeetDetail } from "../actions/meetDetailAction";
 import MeetDetailController from "../components/meetsDetail/MeetDetailController";
-import { fetchMeetAttendeeByUserId } from "../actions/meetAttendAction";
-import { checkHasSchedule } from "../utils/validateMeetAttendee";
 
 /**
  *
@@ -29,11 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
-
-  const hasSchedule = await checkHasSchedule(
-    meetWithCamp.meet.start_date,
-    meetWithCamp.meet.end_date
-  );
 
   return <MeetDetailController meetWithCamp={meetWithCamp} />;
 };
