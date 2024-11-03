@@ -11,10 +11,10 @@ import {
 import { createClient } from "../supabase/server";
 import { CampFromDB } from "@/app/(pages)/meets/types/camp.types";
 
-export const getTotalData = async (numOfRows?: number) => {
+export const getTotalData = async (page?: number, numOfRows?: number) => {
   try {
     const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=4041&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`,
+      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
       {
         next: {
           revalidate: 86400
@@ -30,37 +30,6 @@ export const getTotalData = async (numOfRows?: number) => {
     return data.response.body.items.item;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return null;
-  }
-};
-
-export const getCampData = async (contentId: string) => {
-  try {
-    const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=4000&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json`,
-      {
-        next: {
-          revalidate: 86400
-        }
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
-    const data: CampApiResponse = await res.json();
-    console.log("API Response:", data);
-
-    // contentId에 맞는 캠프 데이터 찾기
-    const camp = data.response.body.items.item.find(
-      (item) => item.contentId === contentId
-    );
-
-    return camp || null;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
   }
 };
 
