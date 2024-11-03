@@ -15,17 +15,8 @@ const CalendarHeader = ({
   nextMonth,
   handleFilterType
 }: Props) => {
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
   return (
-    <div className="p w-full">
+    <div className="w-full px-[21.5px] py-[31px]">
       <section className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h3 className="w-28 text-[20px]">
@@ -66,15 +57,6 @@ const CalendarHeader = ({
             모임
           </button>
         </div>
-      </section>
-      <section>
-        <ul className="grid grid-cols-7">
-          {days.map((day) => (
-            <li key={day} className="flex w-full justify-center">
-              <span>{day}</span>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );
