@@ -9,17 +9,15 @@ const CampListPage = () => {
   // 선택된 캠핑장 contentId를 저장하는 상태 변수
   const [selectedCampId, setSelectedCampId] = useState<string | null>(null);
   // 캠핑장 목록 데이터를 저장하는 상태 변수
-  const [camps, setCamps] = useState<{ contentId: string; facltNm: string }[]>(
-    []
-  );
+  const [camps, setCamps] = useState<
+    { contentId: string; facltNm: string; firstImageUrl: string }[]
+  >([]);
 
   // Supabase에서 캠핑장 목록 가져오기
   useEffect(() => {
     const fetchCamps = async () => {
       // Supabase 쿼리: camp 테이블에서 contentId와 facltNm 필드 선택
-      const { data, error } = await supabase
-        .from("camp")
-        .select("cntentId, facltNm");
+      const { data, error } = await supabase.from("camp").select("*");
       if (error) {
         console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
       } else {
@@ -56,6 +54,7 @@ const CampListPage = () => {
               time: "업데이트된 시간 또는 고정 시간",
               desc: "캠핑장 설명 또는 더 자세한 정보",
               img: ["이미지 URL"], // img는 문자열 배열이므로, 배열로 제공
+              firstImageUrl: camp.firstImageUrl,
               like: 0 // 좋아요 수 (초기값 설정)
             }}
             // type="default" // 필요에 따라 type 설정

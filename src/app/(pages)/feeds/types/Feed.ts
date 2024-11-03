@@ -5,5 +5,6 @@ export interface FeedItem {
   userName: string;
   desc: string;
   img: string[];
+  firstImageUrl: string;
   like: number;
 }

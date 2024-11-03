@@ -33,6 +33,9 @@ const FeedCard = ({ feed, type }: FeedCardProps) => {
                 {/* 이미지 겹쳐있는 컴포넌트 확인 필요*/}
                 이미지박스
               </div>
+              <div>
+                <img src={feed.firstImageUrl} />
+              </div>
             </div>
           </div>
         </div>
