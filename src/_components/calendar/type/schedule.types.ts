@@ -1,10 +1,11 @@
 export type Schedule = {
   // id: number;
-  typeId: number;
-  type: ScheduleType;
+  typeId: number | string;
+  contentId: number;
+  type: string;
   content: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
 };
 
 export type CellCardTable = {
@@ -14,12 +15,13 @@ export type CellCardTable = {
 export type CellCard = {
   id: string; // key를 위한 id (type-typeId-sequence)
   range: number; // 모임 같은 경우 몇 칸을 차지하는지
-  typeId: number;
-  type: ScheduleType;
+  typeId: number | string;
+  type: string;
   content: string;
+  contentId: number;
   isExistPrev: boolean;
   isExistNext: boolean;
-  date: Date;
+  date: Date | string;
   // renderDate: Date;
   isShowContent?: boolean;
 };

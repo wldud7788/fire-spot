@@ -8,11 +8,13 @@ import { getScheduleList } from "./action/calendarAction";
 import { queryKey } from "./hook/queryKey";
 import { useQuery } from "@tanstack/react-query";
 import { CellCardTable, Schedule } from "./type/schedule.types";
-import { convertScheduleDataToCellCardTable } from "./service/calenderService";
+import { convertScheduleDataToCellCardTable } from "./utils/calenderService";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const { data: scheduleList, isPending } = useQuery<Schedule[]>({
+  // TODO 실제 데이터로 변경되면 훅 분리하기
+  // 뭔가 이름을 통해 명확하게 가져오면 좋을 것 같음.
+  const { data: scheduleList } = useQuery<Schedule[]>({
     queryFn: () => getScheduleList(),
     queryKey: queryKey.calendar.schedule("testUser")
   });
@@ -25,7 +27,7 @@ const Calendar = () => {
     return convertScheduleDataToCellCardTable(scheduleList);
   }, [scheduleList]);
 
-  if (isPending || !cellCardTable) {
+  if (!cellCardTable) {
     return <></>;
   }
 
