@@ -11,6 +11,7 @@ import useAttendButtonState from "./useAttendButtonState";
 import { startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 import { useRouter } from "next/navigation";
+import { checkHasSchedule } from "../utils/validateMeetAttendee";
 
 export interface ButtonConfig {
   text: string;
@@ -52,11 +53,18 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
 
   /** 신청하기 버튼 클릭 함수 */
   const handleAttendPost = async () => {
-    const attendee: MeetAttendeeSelect = await postMeetAttendee(
-      meetWithCamp.meet.id ?? 0
-    );
-    setAttendeeId(attendee.id);
-    await fetchData();
+    const { start_date, end_date } = meetWithCamp.meet;
+    const hasSchedule = await checkHasSchedule(start_date, end_date);
+
+    if (hasSchedule) {
+      alert("겹치는 일정이 있습니다.");
+    } else {
+      const attendee: MeetAttendeeSelect = await postMeetAttendee(
+        meetWithCamp.meet.id ?? 0
+      );
+      setAttendeeId(attendee.id);
+      await fetchData();
+    }
   };
 
   /** 신청취소 버튼 클릭 함수 */
