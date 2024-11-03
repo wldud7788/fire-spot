@@ -15,10 +15,9 @@ export const defaultValues: MeetWithCamp = {
     is_day_trip: false,
     is_newbie: true,
     ground_type: "any",
-    // created_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
     deadline_headcount: MIN_HEADCOUNT,
-    deadline_date: null,
-    attendee_count: 0
+    deadline_date: null
   },
   camp: {
     contentId: 0,
@@ -27,12 +26,13 @@ export const defaultValues: MeetWithCamp = {
     addr1: "",
     doNm: "",
     sigunguNm: "",
+    intro: "",
     induty: "",
     facltNm: "",
     lineIntro: "",
     firstImageUrl: "",
-    imgUrls: []
-    // created_at: new Date().toISOString()
+    imgUrls: [],
+    created_at: new Date().toISOString()
   },
   attendee_count: 0
 };

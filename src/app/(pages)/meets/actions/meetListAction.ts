@@ -14,7 +14,8 @@ const getMeetList = async (): Promise<MeetWithCamp[]> => {
     throw new Error();
   }
 
-  return data;
+  const typedData = data as unknown as MeetWithCamp[];
+  return typedData;
 };
 
 export { getMeetList };

@@ -1,5 +1,5 @@
 import React from "react";
-import { MeetForm } from "../../../types/meet.types";
+import { MeetInsert } from "../../../types/meet.types";
 import {
   UseFormRegister,
   UseFormSetValue,
@@ -8,9 +8,9 @@ import {
 import { MAX_HEADCOUNT, MIN_HEADCOUNT } from "@/_utils/common/constant";
 
 interface Props {
-  register: UseFormRegister<MeetForm>;
-  setValue: UseFormSetValue<MeetForm>;
-  watch: UseFormWatch<MeetForm>;
+  register: UseFormRegister<MeetInsert>;
+  setValue: UseFormSetValue<MeetInsert>;
+  watch: UseFormWatch<MeetInsert>;
 }
 
 const MeetCreatorHeadcountSection = ({ register, setValue, watch }: Props) => {

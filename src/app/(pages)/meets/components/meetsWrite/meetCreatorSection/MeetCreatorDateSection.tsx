@@ -1,5 +1,5 @@
 import React from "react";
-import { MeetForm } from "../../../types/meet.types";
+import { MeetInsert } from "../../../types/meet.types";
 import { UseFormSetValue } from "react-hook-form";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datePicker.custom.css";
@@ -10,11 +10,11 @@ registerLocale("ko", ko);
 interface Props {
   startDate: Date;
   setStartDate: (date: Date) => void;
-  startFormName: keyof MeetForm;
+  startFormName: keyof MeetInsert;
   endDate: Date;
   setEndDate: (date: Date) => void;
-  endFormName: keyof MeetForm;
-  setValue: UseFormSetValue<MeetForm>;
+  endFormName: keyof MeetInsert;
+  setValue: UseFormSetValue<MeetInsert>;
 }
 
 const MeetCreatorDateSection = ({

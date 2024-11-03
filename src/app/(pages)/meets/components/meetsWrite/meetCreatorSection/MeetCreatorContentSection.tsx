@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MeetForm } from "../../../types/meet.types";
+import { MeetInsert } from "../../../types/meet.types";
 import {
   UseFormRegister,
   UseFormSetValue,
@@ -7,9 +7,9 @@ import {
 } from "react-hook-form";
 
 interface Props {
-  register: UseFormRegister<MeetForm>;
-  watch: UseFormWatch<MeetForm>;
-  setValue: UseFormSetValue<MeetForm>;
+  register: UseFormRegister<MeetInsert>;
+  watch: UseFormWatch<MeetInsert>;
+  setValue: UseFormSetValue<MeetInsert>;
 }
 
 const MeetCreatorContentSection = ({ register, watch, setValue }: Props) => {

@@ -9,7 +9,11 @@ import {
   GOCAMPING_SEARCH
 } from "../api/apiKey";
 import { createClient } from "../supabase/server";
-import { CampFromDB } from "@/app/(pages)/meets/types/camp.types";
+import {
+  CampInsert,
+  CampImageList,
+  CampSelect
+} from "@/app/(pages)/meets/types/camp.types";
 
 export const getTotalData = async (page?: number, numOfRows?: number) => {
   try {
@@ -33,7 +37,7 @@ export const getTotalData = async (page?: number, numOfRows?: number) => {
   }
 };
 
-export const getCampImgList = async (contentId: string) => {
+export const getCampImgList = async (contentId: number) => {
   const IMAGE_SEARCH_URL = `${GOAMPING_IMAGE_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=`;
 
   try {
@@ -44,7 +48,9 @@ export const getCampImgList = async (contentId: string) => {
       return [];
     }
 
-    return data.response.body.items.item;
+    const campImageList: CampImageList[] = data.response.body.items.item;
+    const imgUrls = campImageList.map((img) => img.imageUrl);
+    return imgUrls;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -52,8 +58,8 @@ export const getCampImgList = async (contentId: string) => {
 };
 
 export const getCampDataFromDB = async (
-  contentId: string
-): Promise<CampFromDB> => {
+  contentId: number
+): Promise<CampSelect> => {
   const supabase = await createClient();
   try {
     const { data } = await supabase
@@ -62,6 +68,11 @@ export const getCampDataFromDB = async (
       .eq("contentId", contentId)
       // .returns<CampResponse>();
       .single();
+
+    if (!data) {
+      throw new Error();
+    }
+
     return data;
   } catch (error) {
     throw new Error("Error getCampDataFromDB ");

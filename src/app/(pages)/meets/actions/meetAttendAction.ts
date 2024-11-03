@@ -15,12 +15,14 @@ const postMeetAttendee = async (meetId: number) => {
       .select()
       .single();
 
-    if (meetAttendeeError) {
+    if (meetAttendeeError || !data) {
       console.error(meetAttendeeError);
+      throw new Error("postMeetAttendee Error,");
     }
     return data;
   } catch (e) {
-    console.error("postMeetAttendee Error,", e);
+    console.error(e);
+    throw e;
   }
 };
 

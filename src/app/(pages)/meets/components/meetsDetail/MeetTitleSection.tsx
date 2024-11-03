@@ -9,8 +9,14 @@ interface Props {
 }
 
 const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
-  const { meet, camp } = meetWithCamp;
-  const tags = camp.induty.split(",");
+  const { meet, camp, attendee_count } = meetWithCamp;
+  const tags = [];
+
+  if (camp.induty) {
+    camp.induty.split(",").forEach((tag) => tags.push(tag.trim()));
+  } else {
+    tags.push("캠핑장");
+  }
 
   if (meet.is_day_trip) {
     tags.push("당일치기");
@@ -52,7 +58,7 @@ const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
           <div className="flex h-7 items-center gap-2">
             <div className="h-7 w-7 bg-avatar bg-cover bg-center" />
             <p className="text-[#757575]">
-              {meet.deadline_headcount}명 모집 {meet.attendee_count}/
+              {meet.deadline_headcount}명 모집 {attendee_count}/
               {meet.deadline_headcount}
             </p>
           </div>

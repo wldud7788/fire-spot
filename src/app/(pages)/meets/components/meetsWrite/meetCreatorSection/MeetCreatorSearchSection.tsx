@@ -1,14 +1,14 @@
 import React from "react";
 import DropDownCampSearch from "../DropDownCampSearch";
-import { CampToDB } from "../../../types/camp.types";
+import { CampInsert } from "../../../types/camp.types";
 
 interface Props {
-  handleSelectCamp: (camp: CampToDB) => void;
+  handleSelectCamp: (camp: CampInsert) => void;
   searchKeyword: string;
   handleChangeSearchKeyword: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => () => void;
-  searchList: CampToDB[];
+  searchList: CampInsert[];
   showDropDown: boolean;
   location: string;
 }
