@@ -1,7 +1,7 @@
 "use client";
 import { getUser } from "@/_utils/auth";
 import { useEffect, useState } from "react";
-import { getAttendeeList } from "../actions/meetDetailAction";
+import { fetchMeetAttendeeByMeetId } from "../actions/meetAttendAction";
 import { MeetAttendeeSelect, MeetWithCamp } from "../types/meet.types";
 import {
   deleteMeetAttendee,
@@ -28,7 +28,7 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   /** user, attendee 패칭 */
   const fetchData = async () => {
     const userPromise = getUser();
-    const attendeePromise = getAttendeeList(meet.id ?? 0);
+    const attendeePromise = fetchMeetAttendeeByMeetId(meet.id ?? 0);
 
     const [user, attendee] = await Promise.all([userPromise, attendeePromise]);
 

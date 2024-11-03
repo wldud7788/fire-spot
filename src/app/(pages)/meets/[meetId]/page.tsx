@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import React from "react";
 import { getMeetDetail } from "../actions/meetDetailAction";
 import MeetDetailController from "../components/meetsDetail/MeetDetailController";
+import { fetchMeetAttendeeByUserId } from "../actions/meetAttendAction";
 
 /**
  *
@@ -27,6 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
+
+  const meetAttendees = await fetchMeetAttendeeByUserId();
 
   return <MeetDetailController meetWithCamp={meetWithCamp} />;
 };
