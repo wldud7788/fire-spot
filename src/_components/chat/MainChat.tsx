@@ -13,7 +13,11 @@ import { getUser } from "@/_utils/auth";
 import "@/css/chat.css";
 // import useAuthStore from '@/store/useAuthStore';
 
-const MainChat = () => {
+type RoomProps = {
+  roomId: string;
+};
+
+const MainChat = ({ roomId }: RoomProps) => {
   const supabase = createClient();
   const [messages, setMessages] = useState<Chat[]>([]);
   const [sendMessage, setSendMessage] = useState("");
@@ -84,7 +88,7 @@ const MainChat = () => {
   {
     participant_uid: string;
     message: string;
-    room_id: string;
+    room_id: string; //?string인지 number인지
   }) => {
     const { data, error } = await supabase
       .from("chat")
@@ -110,8 +114,8 @@ const MainChat = () => {
 
     await sendMessageinRoom({
       participant_uid: user.id,
-      message: sendMessage
-      //   room_id: roomId,
+      message: sendMessage,
+      room_id: roomId
     });
   };
 
