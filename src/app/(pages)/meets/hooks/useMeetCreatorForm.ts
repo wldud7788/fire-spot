@@ -85,10 +85,8 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const handleChangeSearchKeyword = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("여기는 오나?");
     setIsOpen(!!e.target.value);
     setSearchKeyword(e.target.value);
-    console.log("search키워드", searchKeyword);
     const getCampSearchList = async () => {
       try {
         if (e.target.value && isOpen) {
