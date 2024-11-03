@@ -66,48 +66,24 @@ const UserCard: React.FC = () => {
     try {
       const filePath = `${userId}-${Date.now()}`;
 
-      // 파일 삭제
-      const { data: files, error: listError } = await supabase.storage
-        .from("avatars")
-        .list();
-
-      if (listError) {
-        console.error("Error fetching files:", listError);
-        return;
-      }
-
-      // userId와 일치하는 파일을 삭제합니다.
-      const filesToDelete = files
-        .filter((file) => file.name.includes(userId))
-        .map((file) => file.name);
-
-      if (filesToDelete.length > 0) {
-        const { error: deleteError } = await supabase.storage
-          .from("avatars")
-          .remove(filesToDelete);
-
-        if (deleteError) {
-          console.error("Error deleting files:", deleteError);
-          return;
-        }
-      }
-
       // 파일 업로드
       const { error: uploadError } = await supabase.storage
         .from("avatars")
-        .upload(filePath, profileImage);
+        .upload(filePath, profileImage, {
+          contentType: profileImage.type // MIME 타입 설정
+        });
 
       if (uploadError) {
         console.error("Error uploading image:", uploadError.message);
         return;
       }
 
-      const { data: publicURL, error: urlError } = await supabase.storage
+      const { data: publicURL } = supabase.storage
         .from("avatars")
         .getPublicUrl(filePath);
 
-      if (urlError || !publicURL) {
-        console.error("Error getting public URL:", urlError);
+      if (!publicURL || !publicURL.publicUrl) {
+        console.error("Error getting public URL");
         return;
       }
 
