@@ -10,8 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import { CellCardTable, Schedule } from "./type/schedule.types";
 import { convertScheduleDataToCellCardTable } from "./utils/calenderService";
 
+export type FilterType = "stamp" | "meet" | "all";
+
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [filterType, setFilterType] = useState<FilterType>("all");
+
   // TODO 실제 데이터로 변경되면 훅 분리하기
   // 뭔가 이름을 통해 명확하게 가져오면 좋을 것 같음.
   const { data: scheduleList } = useQuery<Schedule[]>({
@@ -24,13 +28,18 @@ const Calendar = () => {
     if (!scheduleList) {
       return null; // 또는 원하는 초기값
     }
-    return convertScheduleDataToCellCardTable(scheduleList);
-  }, [scheduleList]);
+
+    const filterScheduleList = scheduleList.filter((schedule) => {
+      if (filterType === "all") return true;
+      return schedule.type === filterType;
+    });
+
+    return convertScheduleDataToCellCardTable(filterScheduleList);
+  }, [scheduleList, filterType]);
 
   if (!cellCardTable) {
     return <></>;
   }
-
   // 이전 월
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -40,10 +49,16 @@ const Calendar = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
 
+  const handleFilterType = (type: FilterType) => {
+    console.log("type", type);
+    setFilterType(type);
+  };
+
   const headerProps = {
     currentMonth,
     prevMonth,
-    nextMonth
+    nextMonth,
+    handleFilterType
   };
 
   return (
