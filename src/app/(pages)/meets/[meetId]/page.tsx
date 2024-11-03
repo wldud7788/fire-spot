@@ -31,6 +31,8 @@ const MeetDetail = async ({ params }: Props) => {
 
   const meetAttendees = await fetchMeetAttendeeByUserId();
 
+  console.log("meetAttendees", meetAttendees);
+
   return <MeetDetailController meetWithCamp={meetWithCamp} />;
 };
 

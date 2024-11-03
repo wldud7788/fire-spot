@@ -25,7 +25,7 @@ const fetchMeetAttendeeByUserId = async () => {
 
     const { data, error } = await supabase
       .from("meet_attendee")
-      .select()
+      .select(`*, meet(*)`)
       .eq("user_id", userId);
 
     if (error) {
