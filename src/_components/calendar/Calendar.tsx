@@ -62,7 +62,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full font-pretendard">
       <CalendarHeader {...headerProps} />
       <CalendarTable
         currentMonth={currentMonth}
