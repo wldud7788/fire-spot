@@ -31,8 +31,6 @@ const fetchMeetAttendeeByUserId = async () => {
     if (error) {
       throw new Error("fetchMeetAttendee Error: ", error);
     }
-    console.log("fetchMeetAttendee", data);
-
     return data;
   } catch (e) {
     throw new Error(e + "");
