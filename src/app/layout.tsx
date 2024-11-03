@@ -31,9 +31,10 @@ export default function RootLayout({
           <Suspense fallback={<></>}>
             <RQProviders>
               <Script
-                strategy="afterInteractive" //"beforeInteractive"으로 찾았는데 경고메세지 떠가지고 after로 수정해줬습니다.
-                src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_KEY}`}
+                strategy="afterInteractive"
+                src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
               ></Script>
+
               <Header />
               <div className="min-h-[calc(100vh-80px)] pt-[80px]">
                 {children}
