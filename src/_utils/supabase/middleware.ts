@@ -1,3 +1,4 @@
+import { getMeetDetail } from "@/app/(pages)/meets/actions/meetDetailAction";
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -44,9 +45,6 @@ export const updateSession = async (request: NextRequest) => {
     const isProtectedRouteByOwner =
       request.nextUrl.pathname.startsWith("/meets/edit");
     // console.log("user.data", user.data.user);
-    console.log("request.nextUrl.pathname", request.nextUrl.pathname);
-    console.log("protectedRoutes", protectedRoutes);
-    console.log("isProtectedRoute", isProtectedRoute);
 
     // 로그인 상태일 때
     if (user.data.user) {
@@ -61,7 +59,20 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
+    // 수정 권한 없는 유저가 접근하는 경우 (다른 사람이 쓴 게시글 수정 페이지 같은 경우) 차단
     if (isProtectedRouteByOwner) {
+      const meetId = request.nextUrl.pathname.split("/")[3] ?? "";
+      const meetDetail = await getMeetDetail({ meetId });
+
+      // meetId로 검색한 meet 데이터가 없는 경우 메인으로 보냄
+      if (!meetDetail) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+
+      // 모임 작성한 유저와, 로그인 유저가 다른 경우 수정페이지 접근 차단 (메인으로 보냄)
+      if (meetDetail.meet.user_id !== user.data.user?.id) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
     }
 
     return response;
