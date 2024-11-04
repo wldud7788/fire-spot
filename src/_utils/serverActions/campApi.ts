@@ -16,25 +16,21 @@ import {
 } from "@/app/(pages)/meets/types/camp.types";
 
 export const getTotalData = async (page?: number, numOfRows?: number) => {
-  try {
-    const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
-      {
-        next: {
-          revalidate: 86400
-        }
+  const res = await fetch(
+    `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
+    {
+      next: {
+        revalidate: 86400
       }
-    );
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
     }
+  );
 
-    const data: CampApiResponse = await res.json();
-    return data.response.body.items.item;
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
   }
+
+  const data: CampApiResponse = await res.json();
+  return data.response.body.items.item;
 };
 
 export const getCampImgList = async (contentId: number) => {
