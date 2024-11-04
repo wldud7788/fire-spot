@@ -28,36 +28,37 @@ const CampListPage = () => {
     fetchCamps();
   }, []);
 
-  // 리뷰쓰기 모달창을 여는 함수
+  // 리뷰쓰기 모달창을 열기
   const openReviewModal = (campId: string) => {
-    setSelectedCampId(campId); // 선택된 contentId 설정
+    setSelectedCampId(campId);
   };
 
-  // 리뷰쓰기 모달창을 닫는 함수
+  // 리뷰쓰기 모달창을 닫기
   const closeReviewModal = () => {
-    setSelectedCampId(null); // 선택된 contentId 초기화 (모달창 닫기)
+    setSelectedCampId(null);
   };
 
   return (
     <div>
       <h1>캠핑장 목록</h1>
 
-      {/* Supabase에서 가져온 캠핑장 목록 렌더링 */}
+      {/* 캠핑장 목록 */}
       {camps.map((camp) => {
         return (
           <FeedCard
             key={camp.contentId}
             feed={{
-              id: Number(camp.contentId), // id: number로 변환
+              id: Number(camp.contentId),
               profileImg: "이미지 URL 또는 기본 이미지",
               userName: camp.facltNm,
               time: "업데이트된 시간 또는 고정 시간",
               desc: "캠핑장 설명 또는 더 자세한 정보",
-              img: ["이미지 URL"], // img는 문자열 배열이므로, 배열로 제공
+              img: ["이미지 URL"],
               firstImageUrl: camp.firstImageUrl,
-              like: 0 // 좋아요 수 (초기값 설정)
+              like: 0
             }}
-            // type="default" // 필요에 따라 type 설정
+            // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
+            onClickFunc={() => openReviewModal(camp.contentId)} // <- 수정된 부분
           />
         );
       })}
@@ -71,3 +72,8 @@ const CampListPage = () => {
 };
 
 export default CampListPage;
+
+// 질문 : feedCard 적용 후 부터 리뷰쓰기 모달창이 뜨지 않음 feedcard props 넘기기
+//CampingReviews.tsx: FeedCard라는 컴포넌트에 props로 onClickFunc={openReviewModal} 넘기게 처리한다\
+
+// FeedCard.tsx -> 원래 2개밖에없던 props를 위에서 onClickFunc을 넘겨주니까, 그게 있을경우에만 이름을 클릭하면 해당 함수를 실행시킨다. 라는처리

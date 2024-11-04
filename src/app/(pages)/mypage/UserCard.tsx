@@ -148,3 +148,5 @@ const UserCard: React.FC = () => {
 };
 
 export default UserCard;
+
+// 질문 : 스토리지 업로드 안됨 - 정책 막힘 어쩌구..
