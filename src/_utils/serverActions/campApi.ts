@@ -15,7 +15,10 @@ import {
   CampSelect
 } from "@/app/(pages)/meets/types/camp.types";
 
-export const getTotalData = async (page?: number, numOfRows?: number) => {
+export const getTotalData = async (
+  page?: number | null,
+  numOfRows?: number
+) => {
   const res = await fetch(
     `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
     {
