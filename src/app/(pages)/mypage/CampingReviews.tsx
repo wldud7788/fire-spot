@@ -72,8 +72,3 @@ const CampListPage = () => {
 };
 
 export default CampListPage;
-
-// 질문 : feedCard 적용 후 부터 리뷰쓰기 모달창이 뜨지 않음 feedcard props 넘기기
-//CampingReviews.tsx: FeedCard라는 컴포넌트에 props로 onClickFunc={openReviewModal} 넘기게 처리한다\
-
-// FeedCard.tsx -> 원래 2개밖에없던 props를 위에서 onClickFunc을 넘겨주니까, 그게 있을경우에만 이름을 클릭하면 해당 함수를 실행시킨다. 라는처리
