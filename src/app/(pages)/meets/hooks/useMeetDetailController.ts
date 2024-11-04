@@ -1,7 +1,7 @@
 "use client";
 import { getUser } from "@/_utils/auth";
 import { useEffect, useState } from "react";
-import { getAttendeeList } from "../actions/meetDetailAction";
+import { fetchMeetAttendeeByMeetId } from "../actions/meetAttendAction";
 import { MeetAttendeeSelect, MeetWithCamp } from "../types/meet.types";
 import {
   deleteMeetAttendee,
@@ -11,6 +11,7 @@ import useAttendButtonState from "./useAttendButtonState";
 import { startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 import { useRouter } from "next/navigation";
+import { checkAttendeeSchedule } from "../utils/validateMeetAttendee";
 
 export interface ButtonConfig {
   text: string;
@@ -28,7 +29,7 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   /** user, attendee 패칭 */
   const fetchData = async () => {
     const userPromise = getUser();
-    const attendeePromise = getAttendeeList(meet.id ?? 0);
+    const attendeePromise = fetchMeetAttendeeByMeetId(meet.id ?? 0);
 
     const [user, attendee] = await Promise.all([userPromise, attendeePromise]);
 
@@ -52,11 +53,18 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
 
   /** 신청하기 버튼 클릭 함수 */
   const handleAttendPost = async () => {
-    const attendee: MeetAttendeeSelect = await postMeetAttendee(
-      meetWithCamp.meet.id ?? 0
-    );
-    setAttendeeId(attendee.id);
-    await fetchData();
+    const { start_date, end_date } = meetWithCamp.meet;
+    const hasSchedule = await checkAttendeeSchedule(start_date, end_date);
+
+    if (hasSchedule) {
+      alert("겹치는 일정이 있습니다.");
+    } else {
+      const attendee: MeetAttendeeSelect = await postMeetAttendee(
+        meetWithCamp.meet.id ?? 0
+      );
+      setAttendeeId(attendee.id);
+      await fetchData();
+    }
   };
 
   /** 신청취소 버튼 클릭 함수 */

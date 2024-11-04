@@ -41,7 +41,7 @@ const MeetIntroSection = ({ meetWithCamp }: Props) => {
       </section>
 
       <section className="flex h-[69px] items-center gap-3 rounded-[14px] border-[2px] border-black pb-5 pl-9 pr-9 pt-5">
-        <div className="h-7 w-7 bg-avatar bg-info bg-center bg-no-repeat" />
+        <div className="h-7 w-7 bg-info bg-center bg-no-repeat" />
         <p className="text-lg text-[#757575]">
           개인 계좌 입금 유도, 개인 정보 요구, 초대 멤버가 아닌 외부 인원 초대
           등 가이드를 위반하는 경우 불멍스팟에게 신고해주세요!
