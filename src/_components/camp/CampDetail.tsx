@@ -1,15 +1,35 @@
 "use client";
 
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { useQuery } from "@tanstack/react-query";
 
 type CampDetailProps = {
-  camp: Camp;
+  paramsId: string;
 };
 
-const CampDetail = ({ camp }: CampDetailProps) => {
-  console.log(camp);
+const fetchTotalData = async () => {
+  const response = await fetch("/api/campApi");
+  return response.json();
+};
 
-  const nearbyInfo: string[] = camp.posblFcltyCl.split(",");
+const CampDetail = ({ paramsId }: CampDetailProps) => {
+  const {
+    data: camps,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ["camp"],
+    queryFn: async () => fetchTotalData(),
+    staleTime: 1000 * 60 * 60 * 24
+  });
+
+  if (isLoading) return <div>데이터가 로딩중입니다.</div>;
+  if (isError) return <div>에러가 발생했습니다.</div>;
+
+  const camp = camps?.find((item: Camp) => item.contentId === paramsId);
+  const nearbyInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
+
+  console.log(camp);
 
   return (
     <div className="camp_detail">
@@ -20,8 +40,8 @@ const CampDetail = ({ camp }: CampDetailProps) => {
           <div className="right_area">
             <div className="info">
               <div className="cont">
-                <h1>{camp.facltNm}</h1>
-                <p>{camp.addr1}</p>
+                <h1>{camp?.facltNm}</h1>
+                <p>{camp?.addr1}</p>
                 <p>
                   <span>20.5℃ 맑음</span>
                   <span>249Km</span>
@@ -46,7 +66,7 @@ const CampDetail = ({ camp }: CampDetailProps) => {
         {/* 캠핑장 소개 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 소개</h2>
-          <p>{camp.featureNm ? camp.featureNm : camp.intro}</p>
+          {/* <p>{camp.featureNm ? camp.featureNm : camp.intro}</p> */}
         </div>
         {/*// 캠핑장 소개 */}
 
@@ -54,7 +74,7 @@ const CampDetail = ({ camp }: CampDetailProps) => {
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">주변 정보</h2>
           <ul>
-            {nearbyInfo.map((item) => {
+            {nearbyInfo?.map((item) => {
               return <li key={item}>{item}</li>;
             })}
           </ul>
