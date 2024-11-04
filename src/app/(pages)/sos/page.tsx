@@ -43,19 +43,19 @@ const SosList = () => {
           {sosList.map((sos) => {
             return (
               <div key={sos.id} className="sos_box">
-                <div>
-                  <p className="font-bold">{sos.sos_state}</p>
-                  <p className="font-bold">{sos.title}</p>
+                <Link href={`sos/${sos.id}`}>
                   {sos.sos_state === true ? (
-                    <div className="mt-5 rounded-[10px] bg-[#06603b] px-5 py-2 text-[15px] text-white">
-                      완료
+                    <div className="mt-5 inline rounded-[10px] bg-[#06603b] px-5 py-2 text-[15px] text-white">
+                      종료됨
                     </div>
                   ) : (
-                    <div className="mt-5 inline rounded-[10px] bg-[#06603b] px-5 py-2 text-[15px] text-white">
+                    <div className="mt-5 inline rounded-[10px] bg-[#FFB180] px-5 py-2 text-[15px] text-[#B24600]">
                       진행중
                     </div>
-                  )}
-                </div>
+                  )}{" "}
+                  <p className="font-bold">{sos.sos_state}</p>
+                  <p className="font-bold">{sos.title}</p>
+                </Link>
               </div>
             );
           })}
