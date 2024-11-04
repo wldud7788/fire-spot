@@ -5,16 +5,11 @@ import Pagination from "../pagination/Pagination";
 import usePagination from "../pagination/hooks/pagination";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { fetchTotalData } from "@/_utils/api/campsApi";
 
 type CampListProps = {
   itemsPerPage: number;
   paramsId: string;
-};
-
-const fetchTotalData = async (): Promise<Camp[]> => {
-  const response = await fetch("/api/campApi");
-  return response.json();
 };
 
 const CampList = ({ itemsPerPage, paramsId }: CampListProps) => {
