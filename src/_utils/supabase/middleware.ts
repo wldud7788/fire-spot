@@ -35,9 +35,19 @@ export const updateSession = async (request: NextRequest) => {
       }
     );
     const user = await supabase.auth.getUser(); // 세션이 만료된 경우 자동 갱신(현재 사용자 정보를 가져옴)
-    const protectedRoutes = ["/mypage"];
-    const isProtectedRoute = protectedRoutes.includes(request.nextUrl.pathname);
-    console.log("user.data", user.data.user);
+    const protectedRoutes = ["/mypage", "/meets/write"];
+    const isProtectedRoute =
+      protectedRoutes.includes(request.nextUrl.pathname) ||
+      request.nextUrl.pathname.startsWith("/meets/edit"); // 모임 수정 페이지 접근 차단 (동적 URL이라 startsWith 사용)
+
+    // // 모임 수정 페이지 권한 확인용
+    const isProtectedRouteByOwner =
+      request.nextUrl.pathname.startsWith("/meets/edit");
+    // console.log("user.data", user.data.user);
+    console.log("request.nextUrl.pathname", request.nextUrl.pathname);
+    console.log("protectedRoutes", protectedRoutes);
+    console.log("isProtectedRoute", isProtectedRoute);
+
     // 로그인 상태일 때
     if (user.data.user) {
       // 만약 접근하고자 하는 경로가 '/sign-in'이라면 마이페이지로 리다이렉션
@@ -50,6 +60,10 @@ export const updateSession = async (request: NextRequest) => {
     if (isProtectedRoute && user.error) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
+
+    if (isProtectedRouteByOwner) {
+    }
+
     return response;
   } catch (e) {
     console.log(e, "error");
