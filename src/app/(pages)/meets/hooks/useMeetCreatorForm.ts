@@ -72,9 +72,9 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     if (hasSchedule) {
       alert("겹치는 일정이 있습니다.");
     } else {
-      // processSubmitData(data, meetId);
+      processSubmitData(data, meetId);
       // TODO 사카모토
-      // router.replace("/meets");
+      router.replace("/meets");
     }
   };
 
