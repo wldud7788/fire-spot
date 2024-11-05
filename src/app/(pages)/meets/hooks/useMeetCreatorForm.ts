@@ -12,6 +12,8 @@ import { upsertCamp } from "../actions/meetWriteAction";
 import { CampInsert } from "../types/camp.types";
 import useDate from "./useDate";
 import { useRouter } from "next/navigation";
+import { checkMeetPostSchedule } from "../utils/validateMeetAttendee";
+import { revalidatePath } from "next/cache";
 const SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 interface Props {
@@ -24,6 +26,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const router = useRouter();
 
   const {
+    id,
     contentId,
     title,
     content,
@@ -65,10 +68,17 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
       end_date: endDate
     }
   });
-  const onSubmit: SubmitHandler<MeetInsert> = (data) => {
-    processSubmitData(data, meetId);
-    // TODO 사카모토
-    router.replace("/meets");
+  const onSubmit: SubmitHandler<MeetInsert> = async (data) => {
+    const hasSchedule = await checkMeetPostSchedule(id, startDate, endDate);
+    if (hasSchedule) {
+      alert("겹치는 일정이 있습니다.");
+    } else {
+      // TODO 사카모토
+      await processSubmitData(data, meetId);
+      //서버액션으로 빼서 액션을 호출
+      revalidatePath("/meets"); // 이거는 서버측에서 동작해야함
+      router.replace("/meets");
+    }
   };
 
   /** 검색 후 드롭다운 클릭 이벤트 */

@@ -1,36 +1,62 @@
 import React from "react";
 import { format } from "date-fns";
+import { FilterType } from "./Calendar";
 
 type Props = {
   currentMonth: Date;
   prevMonth: () => void;
   nextMonth: () => void;
+  handleFilterType: (type: FilterType) => void;
 };
 
-// TODO 모임, 스탬프 필터 추가해야함
-const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }: Props) => {
-  const days = ["일", "월", "화", "수", "목", "금", "토"];
+const CalendarHeader = ({
+  currentMonth,
+  prevMonth,
+  nextMonth,
+  handleFilterType
+}: Props) => {
   return (
-    <div className="w-full">
-      <section className="flex">
-        <div className="">
-          <span className="">
+    <div className="w-full px-[21.5px] py-[31px]">
+      <section className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h3 className="w-28 text-[20px]">
             {format(currentMonth, "yyyy")}년 {format(currentMonth, "M")}월
-          </span>
+          </h3>
+          <div className="flex">
+            <button
+              onClick={prevMonth}
+              className="flex h-[22px] w-[15px] items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9]"
+            >
+              <div className="h-[21px] w-[18px] bg-prev bg-cover bg-center" />
+            </button>
+            <button
+              onClick={nextMonth}
+              className="flex h-[22px] w-[15px] items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9]"
+            >
+              <div className="h-[21px] w-[18px] bg-next bg-cover bg-center" />
+            </button>
+          </div>
         </div>
         <div className="flex">
-          <div onClick={prevMonth}>{"<="}</div>
-          <div onClick={nextMonth}>{"=>"}</div>
+          <button
+            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            onClick={() => handleFilterType("all")}
+          >
+            같이 보기
+          </button>
+          <button
+            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            onClick={() => handleFilterType("stamp")}
+          >
+            후기
+          </button>
+          <button
+            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            onClick={() => handleFilterType("meet")}
+          >
+            모임
+          </button>
         </div>
-      </section>
-      <section>
-        <ul className="grid grid-cols-7">
-          {days.map((day) => (
-            <li key={day} className="flex w-full justify-center bg-slate-300">
-              <span>{day}</span>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );
