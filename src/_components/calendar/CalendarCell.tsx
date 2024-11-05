@@ -36,7 +36,7 @@ const CalendarCell = ({
   const meetCardStyle = getMeetCardStyle(meetCard);
 
   const meetCardContentBg =
-    hoverItem === meetCardId ? "bg-red-50" : "bg-slate-200";
+    hoverItem === meetCardId ? "bg-red-300" : "bg-red-100";
 
   return (
     <li className="flex min-h-[105px] w-full flex-col border-[0.5px]">
@@ -61,13 +61,19 @@ const CalendarCell = ({
             </div>
           )}
         </div>
-        <ul className="grid w-full grid-cols-3 gap-2">
+        <ul className="flex w-full flex-row-reverse flex-wrap justify-between gap-2 p-[10px]">
           {showStamp &&
             stampCardList.map((stamp) => (
-              <li key={`${stamp.id}`} className="h-12 bg-slate-500">
-                {/* {stamp.content} */}
-                stamp
-              </li>
+              <div
+                key={stamp.id}
+                className="flex w-[calc(33%-8px)] flex-row-reverse items-center"
+              >
+                <div className="h-[23px] w-[20px] bg-stamp bg-cover bg-center" />
+              </div>
+              // <li key={`${stamp.id}`} className="h-12 bg-slate-500">
+              //* {stamp.content} */}
+              // stamp
+              // </li>
             ))}
         </ul>
       </section>
