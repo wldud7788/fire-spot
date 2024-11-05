@@ -3,7 +3,7 @@ import { MeetInsert, MeetUpdate } from "../types/meet.types";
 
 import { patchMeet, postMeet } from "../actions/meetWriteAction";
 
-const processSubmitData = (formData: MeetInsert, meetId?: string) => {
+const processSubmitData = async (formData: MeetInsert, meetId?: string) => {
   let { is_day_trip } = formData;
   const { start_date, end_date } = formData;
 
@@ -18,9 +18,9 @@ const processSubmitData = (formData: MeetInsert, meetId?: string) => {
     const meetUpdate: MeetUpdate = {
       ...meet
     };
-    patchMeet(meetId, meetUpdate);
+    await patchMeet(meetId, meetUpdate);
   } else {
-    postMeet(meet);
+    await postMeet(meet);
   }
 };
 

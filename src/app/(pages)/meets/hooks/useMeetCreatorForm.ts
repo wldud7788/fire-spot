@@ -9,6 +9,7 @@ import { CampInsert } from "../types/camp.types";
 import useDate from "./useDate";
 import { useRouter } from "next/navigation";
 import { checkMeetPostSchedule } from "../utils/validateMeetAttendee";
+import { revalidatePath } from "next/cache";
 const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 interface Props {
@@ -64,16 +65,13 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     }
   });
   const onSubmit: SubmitHandler<MeetInsert> = async (data) => {
-    // console.log("start_date", start_date);
-    // console.log("end_date", end_date);
-    console.log("id", id);
-
     const hasSchedule = await checkMeetPostSchedule(id, startDate, endDate);
     if (hasSchedule) {
       alert("겹치는 일정이 있습니다.");
     } else {
-      processSubmitData(data, meetId);
       // TODO 사카모토
+      await processSubmitData(data, meetId);
+      revalidatePath("/meets");
       router.replace("/meets");
     }
   };

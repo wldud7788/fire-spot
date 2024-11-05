@@ -8,7 +8,7 @@ const getMeetDetail = async ({
   meetId
 }: {
   meetId: string;
-}): Promise<MeetWithCamp> => {
+}): Promise<MeetWithCamp | null> => {
   const supabase = await createClient();
 
   const { data, error } = await supabase.rpc(supabaseRpc.meet.getMeetDetail, {
@@ -16,7 +16,7 @@ const getMeetDetail = async ({
   });
 
   if (error || !data) {
-    throw new Error("getMeetDetail Error");
+    return null;
   }
 
   const typedData = data as unknown as MeetWithCamp;

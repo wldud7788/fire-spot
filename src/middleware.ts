@@ -8,5 +8,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/mypage", "/sign-in"]
+  // matcher: ["/mypage", "/sign-in", "/meets/write", "/meets/edit/:**"]
+  matcher: ["/mypage", "/sign-in", "/meets/write", "/meets/edit/:meetId*"]
 };
