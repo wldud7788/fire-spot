@@ -46,7 +46,9 @@ const config: Config = {
         minus: "url('/assets/images/ico-minus.svg')",
         prev: "url('/assets/images/ico-prev.svg')",
         next: "url('/assets/images/ico-next.svg')",
-        stamp: "url('/assets/images/ico-stamp.svg')"
+        stamp: "url('/assets/images/ico-stamp.svg')",
+        flag: "url('/assets/images/ico-flag.svg')",
+        meet: "url('/assets/images/ico-meet.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

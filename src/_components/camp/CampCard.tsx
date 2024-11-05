@@ -12,6 +12,8 @@ type CampingDataProps = {
  * 이미지,카테고리,타이틀,북마크,짧은글(태그인데, 태그 처리가 안될경우?),후기갯수,북마크갯수
  * [일반 카드]
  * 이미지,카테고리,위치,북마크,위치 삭제
+ *
+ * 김민규 짱 ㅋ
  */
 
 const CampCard = ({ camp, type, listParamsId }: CampingDataProps) => {
