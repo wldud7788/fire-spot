@@ -9,7 +9,8 @@ const FeedTestPage = () => {
       userName: "민규",
       desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
       img: ["", "", ""],
-      like: 1
+      like: 1,
+      firstImageUrl: ""
     },
     {
       id: 2,
@@ -18,7 +19,8 @@ const FeedTestPage = () => {
       userName: "rurulralalra",
       desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
       img: ["", "", ""],
-      like: 5
+      like: 5,
+      firstImageUrl: ""
     },
     {
       id: 3,
@@ -27,7 +29,8 @@ const FeedTestPage = () => {
       userName: "Wkdalsrb",
       desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
       img: ["", "", ""],
-      like: 12
+      like: 12,
+      firstImageUrl: ""
     }
   ];
   return (
