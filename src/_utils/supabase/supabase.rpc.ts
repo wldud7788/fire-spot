@@ -3,6 +3,9 @@ const supabaseRpc = {
   meet: {
     getMeetDetail: "get_meet_detail",
     getMeetList: "get_meet_list"
+  },
+  meetAttendee: {
+    getMeetAttendeeWithMeetAndCamp: "get_meet_attendee_with_meet_and_camp"
   }
 } as const;
 

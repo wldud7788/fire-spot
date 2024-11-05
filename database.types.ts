@@ -1,3 +1,6 @@
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { MeetSelect, MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+
 export type Json =
   | string
   | number
@@ -423,6 +426,17 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_meet_attendee_with_meet_and_camp: {
+        Args: {
+          user_id: string;
+        };
+        // Returns: {
+        //   attendee_count: number;
+        //   meet: MeetSelect;
+        //   camp: CampSelect;
+        // }[];
+        Returns: MeetWithCamp[];
+      };
       get_meet_detail:
         | {
             Args: Record<PropertyKey, never>;

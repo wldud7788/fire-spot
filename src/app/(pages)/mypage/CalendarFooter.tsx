@@ -24,6 +24,7 @@ const CalendarFooter = () => {
           </div>
         </div>
       </section>
+
       <section className="flex h-[137px] w-[calc(50%-55px)] flex-col gap-2 rounded-[12px] bg-[#F4F4F4] px-7 py-[35px]">
         <div className="flex items-center">
           <span className="h-5 w-5 bg-flag" />

@@ -1,4 +1,4 @@
-import { Database } from "../../../../../database.types";
+import { Database } from "../../../../../database.types.ts";
 
 export type CampInsert = Database["public"]["Tables"]["camp"]["Insert"];
 export type CampSelect = Database["public"]["Tables"]["camp"]["Row"];

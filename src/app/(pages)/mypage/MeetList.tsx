@@ -1,7 +1,19 @@
 "use client";
 import React from "react";
+import { useMeetList } from "./hooks/useMeetList";
 const MeetList = () => {
-  return <div>나의 모임 목록이 표시됩니다.</div>;
+  const { meets } = useMeetList();
+
+  // console.log("meetAttendee", meets);
+
+  return (
+    <ul>
+      {meets.map((meet) => (
+        // <li></li>
+        <></>
+      ))}
+    </ul>
+  );
 };
 
 export default MeetList;

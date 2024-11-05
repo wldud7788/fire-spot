@@ -1,7 +1,7 @@
 import React from "react";
 import WriteButton from "./components/meets/WriteButton";
 import { MeetWithCamp } from "./types/meet.types";
-import { getMeetList } from "./actions/meetListAction";
+import { fetchMeetList } from "./actions/meetListAction";
 import { Metadata } from "next";
 import MeetCard from "@/_components/meet/MeetCard";
 import { convertMeetDataToMeetCard } from "./utils/convertMeetDataToMeetCard";
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Meets = async () => {
-  const meetWithCampList: MeetWithCamp[] = await getMeetList();
+  const meetWithCampList: MeetWithCamp[] = await fetchMeetList();
 
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList);
 
