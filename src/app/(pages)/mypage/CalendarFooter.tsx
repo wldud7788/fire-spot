@@ -1,16 +1,10 @@
 "use client";
 
-import { getScheduleList } from "@/_components/calendar/action/calendarAction";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { getFeedCount } from "./action/mypageAction";
-import { fetchFeedData } from "../feeds/action/feedAction";
 import { useCalendarFooter } from "./hooks/useCalendar";
 
 const CalendarFooter = () => {
   const { feedCount, meetAttendeeCount } = useCalendarFooter();
-  console.log("🚀 ~ CalendarFooter ~ feedCount:", feedCount);
-  console.log("🚀 ~ CalendarFooter ~ meetAttendeeCount:", meetAttendeeCount);
 
   return (
     <div className="flex w-full justify-between gap-[55px]">
