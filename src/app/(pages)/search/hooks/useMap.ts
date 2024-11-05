@@ -1,26 +1,29 @@
-// hooks/useMap.ts
 import { useEffect, useRef, useCallback } from "react";
-import { Camp } from "../../camps/types/Camp";
-import { MapInstance } from "../types/map";
+import type {
+  MapInstance,
+  MapOptions,
+  NaverLatLng,
+  NaverMarker
+} from "../types/map";
 import { MAP_CONFIG } from "../constants/map";
+import { Camp } from "../../camps/types/Camp";
 
 export const useMap = (camps: Camp[]) => {
   const mapInstanceRef = useRef<MapInstance | null>(null);
 
   const initializeMap = useCallback(() => {
-    // 이미 초기화된 맵이 있다면 제거
     if (mapInstanceRef.current) {
       mapInstanceRef.current.map.destroy();
       mapInstanceRef.current = null;
     }
 
-    // DOM이 완전히 준비되었는지 확인
     const mapElement = document.getElementById("map");
-    if (!mapElement || !window.naver || !window.naver.maps) return;
+    if (!mapElement || typeof window === "undefined" || !window.naver?.maps)
+      return;
 
     try {
-      const mapOptions = {
-        center: new naver.maps.LatLng(
+      const mapOptions: MapOptions = {
+        center: new window.naver.maps.LatLng(
           MAP_CONFIG.INITIAL_CENTER.lat,
           MAP_CONFIG.INITIAL_CENTER.lng
         ),
@@ -29,12 +32,12 @@ export const useMap = (camps: Camp[]) => {
         mapDataControl: false,
         zoomControl: true,
         zoomControlOptions: {
-          position: naver.maps.Position.TOP_RIGHT
+          position: window.naver.maps.Position.TOP_RIGHT
         }
       };
 
-      const map = new naver.maps.Map(mapElement, mapOptions);
-      const infoWindow = new naver.maps.InfoWindow({ content: "" });
+      const map = new window.naver.maps.Map(mapElement, mapOptions);
+      const infoWindow = new window.naver.maps.InfoWindow({ content: "" });
 
       mapInstanceRef.current = {
         map,
@@ -50,10 +53,10 @@ export const useMap = (camps: Camp[]) => {
   }, []);
 
   const moveToMarker = useCallback((selectedCamp: Camp) => {
-    if (!mapInstanceRef.current) return;
+    if (!mapInstanceRef.current || !window.naver?.maps) return;
 
     const { map, infoWindow } = mapInstanceRef.current;
-    const position = new naver.maps.LatLng(
+    const position = new window.naver.maps.LatLng(
       Number(selectedCamp.mapY),
       Number(selectedCamp.mapX)
     );
@@ -77,20 +80,21 @@ export const useMap = (camps: Camp[]) => {
   }, []);
 
   const createMarkers = useCallback(() => {
-    if (!mapInstanceRef.current || !camps.length) return;
+    if (!mapInstanceRef.current || !camps.length || !window.naver?.maps) return;
 
     const { map } = mapInstanceRef.current;
 
-    // 기존 마커 제거
     if (mapInstanceRef.current.markers.length) {
       mapInstanceRef.current.markers.forEach((marker) => marker.setMap(null));
       mapInstanceRef.current.markers = [];
     }
 
-    // 새로운 마커 생성
-    const newMarkers = camps.map((camp) => {
-      return new naver.maps.Marker({
-        position: new naver.maps.LatLng(Number(camp.mapY), Number(camp.mapX)),
+    const newMarkers: NaverMarker[] = camps.map((camp) => {
+      return new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(
+          Number(camp.mapY),
+          Number(camp.mapX)
+        ),
         map
       });
     });
@@ -98,9 +102,7 @@ export const useMap = (camps: Camp[]) => {
     mapInstanceRef.current.markers = newMarkers;
   }, [camps]);
 
-  // 지도 초기화
   useEffect(() => {
-    // 약간의 지연을 주어 DOM이 완전히 준비되도록 함
     const timer = setTimeout(() => {
       const mapInstance = initializeMap();
       if (mapInstance && camps.length > 0) {
