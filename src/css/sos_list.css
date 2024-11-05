@@ -3,10 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  .sosMainBox {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
   .sos_box {
-    background-color: #f4f4f4;
     border: 1px solid #928a8a;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 10px 20px;
+    margin: 15px 0;
   }
 }

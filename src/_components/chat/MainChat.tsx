@@ -14,7 +14,7 @@ import "@/css/chat.css";
 // import useAuthStore from '@/store/useAuthStore';
 
 type RoomProps = {
-  roomId: string;
+  roomId: number;
 };
 
 const MainChat = ({ roomId }: RoomProps) => {
@@ -25,6 +25,7 @@ const MainChat = ({ roomId }: RoomProps) => {
 
   //유저 정보 담기 위해
   const [user, setUser] = useState<User | null>(null);
+  console.log("roomId", roomId);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -42,7 +43,8 @@ const MainChat = ({ roomId }: RoomProps) => {
   const getChatData = async () => {
     const { data: ChatData, error: ChatDataError } = await supabase
       .from("chat")
-      .select("*");
+      .select("*")
+      .eq("room_id", roomId); //room_id를 넣어서 채팅 분류
     //   .order('created_at', { ascending: true }); //order를 통해 데이터 정렬
     if (ChatDataError) {
       console.error("Error loading fetchChatData:", ChatDataError.message);
@@ -84,15 +86,14 @@ const MainChat = ({ roomId }: RoomProps) => {
     participant_uid,
     message,
     room_id
-  }: //   room_id,
-  {
+  }: {
     participant_uid: string;
     message: string;
-    room_id: string; //?string인지 number인지
+    room_id: number; //?string인지 number인지
   }) => {
     const { data, error } = await supabase
       .from("chat")
-      .insert({ participant_uid, message }); //데이터 넣기, 나중에 에러 변수 수정
+      .insert({ participant_uid, message, room_id }); //데이터 넣기, 나중에 에러 변수 수정
     console.log(data);
 
     if (error) {
@@ -127,7 +128,7 @@ const MainChat = ({ roomId }: RoomProps) => {
         {messages.map((message) => {
           if (!user || user.id === message.participant_uid) {
             return (
-              <div className="chatBox2">
+              <div className="chatBox2" key={message.id}>
                 <p>{message.participant_uid}</p>
                 <p className="chating">{message.message}</p>
                 <p>
@@ -140,7 +141,7 @@ const MainChat = ({ roomId }: RoomProps) => {
             );
           } else {
             return (
-              <div className="chatBox_you">
+              <div className="chatBox_you" key={message.id}>
                 <p>{message.participant_uid}</p>
                 <p className="chating_you">{message.message}</p>
                 <p>

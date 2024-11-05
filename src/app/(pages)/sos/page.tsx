@@ -14,6 +14,7 @@ type SosListType = {
   user_uid: string;
   sos_tag: (number | string)[];
   sos_state: boolean;
+  location: string;
 };
 
 const SosList = () => {
@@ -37,27 +38,32 @@ const SosList = () => {
 
   return (
     <>
-      <div>
+      <div className="sosMainBox">
         <Link href={"/sos/write"}>도움 요청하기</Link>
         <div>
           {sosList.map((sos) => {
-            return (
-              <div key={sos.id} className="sos_box">
-                <Link href={`sos/${sos.id}`}>
-                  {sos.sos_state === true ? (
-                    <div className="mt-5 inline rounded-[10px] bg-[#06603b] px-5 py-2 text-[15px] text-white">
-                      종료됨
-                    </div>
-                  ) : (
-                    <div className="mt-5 inline rounded-[10px] bg-[#FFB180] px-5 py-2 text-[15px] text-[#B24600]">
-                      진행중
-                    </div>
-                  )}{" "}
-                  <p className="font-bold">{sos.sos_state}</p>
-                  <p className="font-bold">{sos.title}</p>
-                </Link>
-              </div>
-            );
+            if (!sos) {
+              return <p>등록된 게시물이 없습니다.</p>;
+            } else {
+              return (
+                <div key={sos.id} className="sos_box">
+                  <Link href={`sos/${sos.id}`}>
+                    {sos.sos_state === true ? (
+                      <div className="mt-5 inline rounded-[30px] bg-[#06603b] px-5 py-2 text-[15px] text-white">
+                        종료됨
+                      </div>
+                    ) : (
+                      <div className="mt-5 inline rounded-[30px] bg-[#FFB180] px-5 py-2 text-[14px] text-[#B24600]">
+                        진행중
+                      </div>
+                    )}{" "}
+                    <p className="font-bold">{sos.sos_state}</p>
+                    <p className="font-bold">{sos.title}</p>
+                    <p>{sos.location}</p>
+                  </Link>
+                </div>
+              );
+            }
           })}
         </div>
       </div>

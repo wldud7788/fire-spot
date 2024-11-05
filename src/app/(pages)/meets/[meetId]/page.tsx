@@ -3,6 +3,10 @@ import React from "react";
 import { getMeetDetail } from "../actions/meetDetailAction";
 import MeetDetailController from "../components/meetsDetail/MeetDetailController";
 
+import PrivateChatingInsert from "@/_components/chat/PrivateInsest";
+import GroupChatingInsert from "@/_components/chat/GroupChatInset";
+import MainChat from "@/_components/chat/MainChat";
+
 /**
  *
  * 1. supabase에서 meet 테이블의 데이터를 불러온 뒤, 외부 API를 불러오는 방식
@@ -28,7 +32,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
 
-  return <MeetDetailController meetWithCamp={meetWithCamp} />;
+  return (
+    <>
+      {" "}
+      <PrivateChatingInsert
+        params={{
+          id: params.meetId
+        }}
+      />
+      <GroupChatingInsert
+        params={{
+          id: params.meetId
+        }}
+      />
+      <MeetDetailController meetWithCamp={meetWithCamp} />
+    </>
+  );
 };
 
 export default MeetDetail;

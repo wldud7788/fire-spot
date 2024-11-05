@@ -20,4 +20,7 @@ export interface Chat_rooms_info {
   owner_id: string;
   room_type: string;
   recruit_number: number;
+  action_id: number;
 }
+
+export interface Chat_List {}
