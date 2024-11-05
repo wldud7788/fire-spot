@@ -76,7 +76,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
       // TODO 사카모토
       await processSubmitData(data, meetId);
       //서버액션으로 빼서 액션을 호출
-      revalidatePath("/meets"); // 이거는 서버측에서 동작해야함
+
       router.replace("/meets");
     }
   };
