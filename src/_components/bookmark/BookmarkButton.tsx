@@ -5,11 +5,15 @@ import { useState, useEffect } from "react";
 
 interface BookmarkButtonProps {
   contentId: string;
+  onBookmarkRemoved: (contentId: string) => void; // 상위 컴포넌트에서 전달받은 콜백
 }
 
-const BookmarkButton: React.FC<BookmarkButtonProps> = ({ contentId }) => {
+const BookmarkButton: React.FC<BookmarkButtonProps> = ({
+  contentId,
+  onBookmarkRemoved
+}) => {
   const supabase = createClient();
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(true); // 기본값을 'true'로 설정
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(true); // 기본값을 true로 설정
 
   const handleRemoveBookmark = async () => {
     try {
@@ -24,6 +28,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ contentId }) => {
       }
 
       setIsBookmarked(false);
+      onBookmarkRemoved(contentId); // 상위 컴포넌트에 변경 사항 알림
     } catch (error) {
       console.error("에러 발생:", error);
     }

@@ -3,11 +3,19 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import CampCard from "../camp/CampCard";
-import BookmarkButton from "../bookmark/BookmarkButton"; // 북마크 버튼 import
+import BookmarkButton from "../bookmark/BookmarkButton";
 import { createClient } from "@/_utils/supabase/client";
 
 interface Bookmark {
   contentId: string;
+  camp: {
+    facltNm: string;
+    firstImageUrl: string;
+    intro: string;
+    addr1: string;
+    induty: string;
+  };
+  featureNm: string;
 }
 
 const BookmarkList: React.FC = () => {
@@ -21,7 +29,6 @@ const BookmarkList: React.FC = () => {
       const { data, error } = await supabase
         .from("bookmarks")
         .select("*, camp(*)");
-      console.log(data);
 
       if (error) throw error;
       if (!data || data.length === 0) {
@@ -34,6 +41,13 @@ const BookmarkList: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // 북마크 제거 후 목록 업데이트 함수
+  const handleBookmarkRemoved = (contentId: string) => {
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.filter((bookmark) => bookmark.contentId !== contentId)
+    );
   };
 
   useEffect(() => {
@@ -56,15 +70,18 @@ const BookmarkList: React.FC = () => {
                   contentId: bookmark.contentId,
                   facltNm: bookmark.camp.facltNm,
                   firstImageUrl: bookmark.camp.firstImageUrl,
-                  featureNm: bookmark.camp.featureNm,
+                  featureNm: bookmark.featureNm,
                   intro: bookmark.camp.intro,
                   addr1: bookmark.camp.addr1,
                   induty: bookmark.camp.induty
                 }}
                 type="bookmark"
               />
-              {/* 북마크 제거 버튼 추가 */}
-              <BookmarkButton contentId={bookmark.contentId} />
+              {/* 북마크 제거 버튼에 handleBookmarkRemoved 전달 */}
+              <BookmarkButton
+                contentId={bookmark.contentId}
+                onBookmarkRemoved={handleBookmarkRemoved}
+              />
             </div>
           ))}
         </div>
