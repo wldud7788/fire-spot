@@ -1,10 +1,12 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import Link from "next/link";
+import { useCallback } from "react";
 
 type CampingDataProps = {
   camp: Camp;
   type?: string;
   listParamsId?: string;
+  onBookmarkClick?: (contentId: number, campName: string) => void;
 };
 
 /**
@@ -14,7 +16,22 @@ type CampingDataProps = {
  * 이미지,카테고리,위치,북마크,위치 삭제
  */
 
-const CampCard = ({ camp, type, listParamsId }: CampingDataProps) => {
+const CampCard = ({
+  camp,
+  type,
+  listParamsId,
+  onBookmarkClick
+}: CampingDataProps) => {
+  const contentId =
+    typeof camp.contentId === "string"
+      ? parseInt(camp.contentId)
+      : camp.contentId;
+
+  const handleBookmarkClick = useCallback(() => {
+    if (onBookmarkClick) {
+      onBookmarkClick(contentId, camp.facltNm);
+    }
+  }, [onBookmarkClick, contentId, camp.facltNm]);
   return (
     <div className="camping_card group">
       <Link href={`/camps/${listParamsId}/${camp.contentId}`}>
@@ -25,8 +42,13 @@ const CampCard = ({ camp, type, listParamsId }: CampingDataProps) => {
               className="relative transform transition-all duration-500 ease-in-out group-hover:scale-110"
               alt={camp.facltNm}
             />
-            {!type ? (
-              <div className="absolute right-[15px] top-[15px]">북마크</div>
+            {!type && onBookmarkClick ? (
+              <button
+                onClick={handleBookmarkClick}
+                className="absolute right-[15px] top-[15px]"
+              >
+                북마크
+              </button>
             ) : null}
           </div>
 
