@@ -75,8 +75,6 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     } else {
       // TODO 사카모토
       await processSubmitData(data, meetId);
-      //서버액션으로 빼서 액션을 호출
-
       router.replace("/meets");
     }
   };
