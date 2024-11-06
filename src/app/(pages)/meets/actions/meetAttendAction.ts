@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/_utils/supabase/server";
+import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 
 const fetchMeetAttendeeByMeetId = async (meetId: string | number) => {
   const supabase = await createClient();
@@ -30,6 +31,28 @@ const fetchMeetAttendeeByUserId = async () => {
 
     if (error) {
       throw new Error("fetchMeetAttendee Error: ", error);
+    }
+    return data;
+  } catch (e) {
+    throw new Error(e + "");
+  }
+};
+
+const fetchMeetAttendeeWithMeetAndCampByUserId = async () => {
+  const supabase = await createClient();
+
+  try {
+    const userData = await supabase.auth.getUser();
+    const userId = userData.data.user?.id ?? "";
+
+    const { data, error } = await supabase.rpc(
+      supabaseRpc.meetAttendee.getMeetAttendeeWithMeetAndCamp,
+      { user_id: userId }
+    );
+
+    if (error || !data) {
+      return [];
+      // throw new Error("fetchMeetAttendee Error: ", error);
     }
     return data;
   } catch (e) {
@@ -85,5 +108,6 @@ export {
   postMeetAttendee,
   deleteMeetAttendee,
   fetchMeetAttendeeByMeetId,
-  fetchMeetAttendeeByUserId
+  fetchMeetAttendeeByUserId,
+  fetchMeetAttendeeWithMeetAndCampByUserId
 };

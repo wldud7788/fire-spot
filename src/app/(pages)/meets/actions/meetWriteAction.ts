@@ -6,7 +6,7 @@ import { Camp } from "../../camps/types/Camp";
 import { getCampImgList } from "@/_utils/serverActions/campApi";
 import { CampImageList, CampInsert } from "../types/camp.types";
 import { postMeetAttendee } from "./meetAttendAction";
-import { Database } from "../../../../../database.types";
+import { Database } from "../../../../../database.types.ts";
 
 type Test = Database["public"]["Tables"]["meet"]["Insert"];
 

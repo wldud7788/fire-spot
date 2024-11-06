@@ -85,11 +85,6 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   const isDeadlineByHeadcount = meet.deadline_headcount <= attendee_count;
   const isDeadline = isDeadlineByDate || isDeadlineByHeadcount;
 
-  // 마감 임박 (당장 쓸 필요 X)
-  const isDeadlineApproaching =
-    subDays(startOfDay(meetWithCamp.meet.start_date), DEADLINE_APPROACHING) <=
-    new Date();
-
   const buttonType = useAttendButtonState(
     isLoad,
     isUser,

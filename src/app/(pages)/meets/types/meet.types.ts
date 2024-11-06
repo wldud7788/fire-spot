@@ -30,4 +30,6 @@ export interface MeetCard {
   tags: string[]; // 마감임박, 글램핑, 초보가능 . . .
   location: string | null; // 지역
   attendee_count: number; //참여자 수
+  isDeadlineApproaching: boolean; // 마감 임박
+  isDeadline: boolean; // 마감
 }
