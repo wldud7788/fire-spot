@@ -9,6 +9,8 @@ const UserCard: React.FC = () => {
   const [newNickname, setNewNickname] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [reviewCount, setReviewCount] = useState<number>(0); // 후기 갯수 상태
+  const [meetingCount, setMeetingCount] = useState<number>(0); // 모임 갯수 상태
   const supabase = createClient();
 
   useEffect(() => {
@@ -38,10 +40,34 @@ const UserCard: React.FC = () => {
 
         setNickname(profileData.nickname || null);
         setProfileUrl(profileData.avatar_url || null);
+
+        // 후기와 모임 총 갯수 가져오기
+        await fetchCounts(user.id);
       }
     };
+
     fetchUser();
   }, [supabase]);
+
+  // 후기 및 모임 갯수 가져오는 함수
+  const fetchCounts = async (userId: string) => {
+    try {
+      const { count: reviewCount } = await supabase
+        .from("review")
+        .select("*", { count: "exact" })
+        .eq("userId", userId);
+
+      const { count: meetingCount } = await supabase
+        .from("meet")
+        .select("*", { count: "exact" })
+        .eq("user_id", userId);
+
+      setReviewCount(reviewCount ?? 0);
+      setMeetingCount(meetingCount ?? 0);
+    } catch (error) {
+      console.error("Error fetching counts:", error);
+    }
+  };
 
   const handleNicknameUpdate = async () => {
     if (!newNickname || !userId) return;
@@ -70,7 +96,7 @@ const UserCard: React.FC = () => {
       const { error: uploadError } = await supabase.storage
         .from("avatars")
         .upload(filePath, profileImage, {
-          contentType: profileImage.type // MIME 타입 설정
+          contentType: profileImage.type
         });
 
       if (uploadError) {
@@ -99,7 +125,7 @@ const UserCard: React.FC = () => {
         console.error("Error updating avatar_url:", updateError.message);
       } else {
         alert("프로필 이미지 업데이트 성공");
-        setProfileUrl(uploadedImageUrl); // URL 업데이트
+        setProfileUrl(uploadedImageUrl);
       }
     } catch (error) {
       console.error("Error handling profile image:", error);
@@ -142,6 +168,12 @@ const UserCard: React.FC = () => {
         >
           프로필 사진 수정
         </button>
+
+        {/* 후기 및 모임 총 갯수 표시 */}
+        <div className="mt-4 text-center">
+          <p>후기 총 갯수: {reviewCount}</p>
+          <p>참여한 모임 총 갯수: {meetingCount}</p>
+        </div>
       </div>
     </div>
   );
