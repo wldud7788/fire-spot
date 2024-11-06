@@ -1,5 +1,6 @@
 import { MIN_HEADCOUNT } from "@/_utils/common/constant";
 import { MeetWithCamp } from "../types/meet.types";
+import { addDays } from "date-fns";
 
 export const defaultValues: MeetWithCamp = {
   meet: {
@@ -9,8 +10,8 @@ export const defaultValues: MeetWithCamp = {
     title: "",
     content: "",
     supplies: [],
-    start_date: new Date(),
-    end_date: new Date(),
+    start_date: addDays(new Date(), 1),
+    end_date: addDays(new Date(), 1),
     is_end: false,
     is_day_trip: false,
     is_newbie: true,
