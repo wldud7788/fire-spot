@@ -4,7 +4,10 @@ import { MeetCard, MeetSelect, MeetWithCamp } from "../types/meet.types";
 import { isAfter, isBefore, startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 
-const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
+const convertMeetDataToMeetCard = (
+  meetWithCampList: MeetWithCamp[],
+  isProgress?: boolean
+) => {
   const meetCardList: MeetCard[] = meetWithCampList.map((meetWithCamp) => {
     const { meet, camp, attendee_count } = meetWithCamp;
 
@@ -33,7 +36,11 @@ const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
     };
   });
 
-  return meetCardList;
+  const filterMeetCardList = meetCardList.filter((meetCard) => {
+    return !(meetCard.isDeadline && isProgress);
+  });
+
+  return filterMeetCardList;
 };
 
 const getTags = ({

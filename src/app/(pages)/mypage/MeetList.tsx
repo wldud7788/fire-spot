@@ -5,7 +5,7 @@ import MeetCard from "@/_components/meet/MeetCard";
 import { convertMeetDataToMeetCard } from "../meets/utils/convertMeetDataToMeetCard";
 const MeetList = () => {
   const { meetWithCampList, isProgress, toggleShowType } = useMeetList();
-  const meetCardList = convertMeetDataToMeetCard(meetWithCampList);
+  const meetCardList = convertMeetDataToMeetCard(meetWithCampList, isProgress);
 
   console.log("meetAttendee", meetWithCampList);
 
@@ -21,7 +21,7 @@ const MeetList = () => {
         ))}
       </ul>
       <div className="flex w-[37%] flex-col gap-[21px] bg-gray-400">
-        <button>모집중</button>
+        <button onClick={toggleShowType}>모집중</button>
       </div>
     </section>
   );
