@@ -43,7 +43,9 @@ const config: Config = {
         info: "url('/assets/images/ico-info.svg')",
         infoRound: "url('/assets/images/ico-info-round.svg')",
         plus: "url('/assets/images/ico-plus.svg')",
-        minus: "url('/assets/images/ico-minus.svg')"
+        minus: "url('/assets/images/ico-minus.svg')",
+        prev: "url('/assets/images/ico-prev.svg')",
+        next: "url('/assets/images/ico-next.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",
