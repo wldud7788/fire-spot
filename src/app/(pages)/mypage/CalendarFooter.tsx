@@ -10,7 +10,7 @@ const CalendarFooter = () => {
     <div className="flex w-full justify-between gap-[55px]">
       <section className="flex h-[137px] w-[calc(50%-55px)] items-center justify-center gap-[71px] rounded-[12px] bg-[#F6F2E5]">
         <div className="flex gap-[11px]">
-          <div className="h-[53px] w-[40px] bg-stamp bg-cover" />
+          <div className="h-[53px] w-[40px] bg-stampBig bg-cover" />
           <div className="flex flex-col items-start justify-start">
             <span>나의 스탬프</span>
             <span>{feedCount} 개</span>

@@ -148,7 +148,7 @@ export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
   const paddingRight = isDayTrip ? "12px" : isExistNext ? "0px" : "32px";
 
   const style = {
-    width: `calc(${100 * range}% + ${range}px)`,
+    width: `calc(${100 * range}% + ${range * 7}px)`,
     paddingLeft,
     paddingRight
   };

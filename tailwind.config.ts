@@ -47,6 +47,7 @@ const config: Config = {
         prev: "url('/assets/images/ico-prev.svg')",
         next: "url('/assets/images/ico-next.svg')",
         stamp: "url('/assets/images/ico-stamp.svg')",
+        stampBig: "url('/assets/images/ico-stamp-big.svg')",
         flag: "url('/assets/images/ico-flag.svg')",
         meet: "url('/assets/images/ico-meet.svg')"
       },

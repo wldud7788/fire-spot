@@ -36,10 +36,10 @@ const CalendarCell = ({
   const meetCardStyle = getMeetCardStyle(meetCard);
 
   const meetCardContentBg =
-    hoverItem === meetCardId ? "bg-red-300" : "bg-red-100";
+    hoverItem === meetCardId ? "bg-[#FF731A]" : "bg-[#FFD0B2]";
 
   return (
-    <li className="flex min-h-[105px] w-full flex-col border-[0.5px]">
+    <li className="flex min-h-[105px] w-full flex-col border-[1px]">
       <section className="flex h-[20px] w-full justify-end">
         <p className="p-[10px]">{format(day, "d")}</p>
       </section>
