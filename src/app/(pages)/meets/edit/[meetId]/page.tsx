@@ -1,6 +1,7 @@
 // TODO 리훅폼 reset
 // https://react-hook-form.com/docs/useform/reset
 
+import { redirect } from "next/navigation";
 import { getMeetDetail } from "../../actions/meetDetailAction";
 import MeetCreatorForm from "../../components/meetsWrite/MeetCreatorForm";
 
@@ -16,6 +17,9 @@ interface Props {
 const MeetEdit = async ({ params }: Props) => {
   const { meetId } = params;
   const meetWithCamp = await getMeetDetail({ meetId });
+  if (!meetWithCamp) {
+    redirect("/");
+  }
 
   return <MeetCreatorForm meetId={meetId} meetWithCamp={meetWithCamp} />;
 };

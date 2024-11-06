@@ -40,7 +40,8 @@ export const getRecruitingNumber = async (room_id: string) => {
       throw recruitingNumberError;
     }
 
-    const recruitingNumber = recruiting[0]?.meet?.deadline_headcount || 0;
+    const recruitingNumber = recruiting[0]?.meet[0]?.deadline_headcount || 0;
+    console.log("recruiting", recruiting);
 
     return recruitingNumber;
   } catch (error) {

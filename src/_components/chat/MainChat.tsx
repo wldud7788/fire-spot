@@ -39,6 +39,13 @@ const MainChat = ({ roomId }: RoomProps) => {
     console.log("messagessssssss", messages);
   }, []);
 
+  const getNickname = async () => {
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+    console.log("닉네임", user?.user_metadata.full_name);
+  };
+  getNickname();
   //메세지 불러오기
   const getChatData = async () => {
     const { data: ChatData, error: ChatDataError } = await supabase

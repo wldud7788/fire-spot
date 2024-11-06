@@ -86,7 +86,7 @@ const ModalChatList = ({ params }: Props) => {
 
       <Modal
         modalType={""} // 모달 타입
-        width={"500"} // 컨텐츠 넓이
+        width={"800"} // 컨텐츠 넓이
         isOpen={isOpen}
         onClose={handleModalClose}
       >

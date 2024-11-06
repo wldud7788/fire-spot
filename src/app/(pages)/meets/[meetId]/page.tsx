@@ -5,7 +5,6 @@ import MeetDetailController from "../components/meetsDetail/MeetDetailController
 
 import PrivateChatingInsert from "@/_components/chat/PrivateInsest";
 import GroupChatingInsert from "@/_components/chat/GroupChatInset";
-import MainChat from "@/_components/chat/MainChat";
 
 /**
  *
@@ -13,6 +12,7 @@ import MainChat from "@/_components/chat/MainChat";
  * 2. 튜터님: camp 테이블 등에 데이터를 넣어놓고, join해서 가져오기, 만약 그 데이터가 없을 시 upsert
  *    https://supabase.com/docs/reference/javascript/upsert
  */
+import { redirect } from "next/navigation";
 
 type Props = {
   params: {
@@ -21,16 +21,22 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const meetDetail = await getMeetDetail({ meetId: params.meetId });
+  const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
+  if (!meetWithCamp) {
+    redirect("/");
+  }
 
   return {
-    title: meetDetail.camp.facltNm,
-    description: meetDetail.camp.lineIntro
+    title: meetWithCamp.camp.facltNm,
+    description: meetWithCamp.camp.lineIntro
   };
 }
 
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
+  if (!meetWithCamp) {
+    redirect("/");
+  }
 
   return (
     <>
