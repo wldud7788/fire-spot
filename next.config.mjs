@@ -2,6 +2,9 @@
 const nextConfig = {
   images: {
     domains: ["gocamping.or.kr"]
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 };
 

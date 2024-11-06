@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./datePicker.custom.css";
 import { ko } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
+import { addDays } from "date-fns";
 registerLocale("ko", ko);
 
 interface Props {
@@ -27,9 +28,9 @@ const MeetCreatorDateSection = ({
   setValue
 }: Props) => {
   const handleCloseStartDate = () => {
-    if (startDate < new Date()) {
-      alert("이전 날짜 입력 안됨");
-      setStartDate(new Date());
+    if (startDate < addDays(new Date(), 1)) {
+      alert("최소 하루 뒤부터 작성이 가능합니다.");
+      setStartDate(addDays(new Date(), 1));
     }
     if (startDate > endDate) {
       setEndDate(startDate);
@@ -55,7 +56,7 @@ const MeetCreatorDateSection = ({
           <DatePicker
             selected={startDate}
             onChange={(date) => {
-              const value = date ? date : new Date();
+              const value = date ? date : addDays(new Date(), 1);
               setStartDate(value);
               setValue(startFormName, value);
             }}
@@ -69,7 +70,7 @@ const MeetCreatorDateSection = ({
           <DatePicker
             selected={endDate}
             onChange={(date) => {
-              const value = date ? date : new Date();
+              const value = date ? date : addDays(new Date(), 1);
 
               setEndDate(value);
               setValue(endFormName, value);
