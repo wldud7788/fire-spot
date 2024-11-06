@@ -62,19 +62,24 @@ export const getCampDataFromDB = async (
 ): Promise<CampSelect> => {
   const supabase = await createClient();
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("camp")
       .select()
       .eq("contentId", contentId)
       // .returns<CampResponse>();
       .single();
 
+    if (error) {
+      throw new Error(error.message);
+    }
+
     if (!data) {
-      throw new Error();
+      throw new Error("캠핑 데이터가 없습니다.");
     }
 
     return data;
   } catch (error) {
+    console.error(error);
     throw new Error("Error getCampDataFromDB ");
   }
 };
