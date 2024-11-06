@@ -15,10 +15,10 @@ export const GET = async (request: NextRequest) => {
 
     // 새로운 필터 파라미터들
     const petAllowed = searchParams.get("petAllowed"); // "가능" 또는 "불가능"
-    const facilities = searchParams.get("facilities")?.split(","); // 콤마로 구분된 시설 목록
-    const campingType = searchParams.get("campingType")?.split(","); // 콤마로 구분된 업종 목록
-    const amenities = searchParams.get("amenities")?.split(","); // 콤마로 구분된 편의시설 목록
-    const groundTypes = searchParams.get("groundTypes")?.split(","); // 콤마로 구분된 바닥 유형
+    // const facilities = searchParams.get("facilities")?.split(","); // 콤마로 구분된 시설 목록
+    // const campingType = searchParams.get("campingType")?.split(","); // 콤마로 구분된 업종 목록
+    // const amenities = searchParams.get("amenities")?.split(","); // 콤마로 구분된 편의시설 목록
+    // const groundTypes = searchParams.get("groundTypes")?.split(","); // 콤마로 구분된 바닥 유형
 
     let apiUrl;
 
