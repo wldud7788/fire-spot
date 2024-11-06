@@ -36,7 +36,6 @@ export const getTotalData = async (page?: number, numOfRows?: number) => {
     console.error("Error fetching data:", error);
   }
 };
-
 export const getCampImgList = async (contentId: number): Promise<string[]> => {
   const IMAGE_SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_IMAGE}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=${contentId}`;
 

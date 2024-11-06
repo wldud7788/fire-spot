@@ -75,7 +75,6 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     } else {
       // TODO 사카모토
       await processSubmitData(data, meetId);
-      revalidatePath("/meets");
       router.replace("/meets");
     }
   };
@@ -96,12 +95,12 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   ) => {
     setIsOpen(!!e.target.value);
     setSearchKeyword(e.target.value);
-
     const getCampSearchList = async () => {
       try {
         if (e.target.value && isOpen) {
           const res = await fetch(SEARCH_URL + encodeURI(e.target.value));
           const data = await res.json();
+          console.log("SEARCH_URL", SEARCH_URL);
 
           setSearchList(data.response.body.items.item);
         } else {
