@@ -6,7 +6,7 @@ import {
 } from "@/_utils/api/apiKey";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { NextRequest } from "next/server";
-
+export const dynamic = "force-dynamic";
 export const GET = async (request: NextRequest) => {
   try {
     const searchParams = request.nextUrl.searchParams;
@@ -28,7 +28,11 @@ export const GET = async (request: NextRequest) => {
       apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=10`;
     }
 
-    const res = await fetch(apiUrl);
+    const res = await fetch(apiUrl, {
+      next: {
+        revalidate: 86400
+      }
+    });
     if (!res.ok) {
       const errorMessage = await res.text();
       console.error("API 요청 오류:", errorMessage);
