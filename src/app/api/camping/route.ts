@@ -15,10 +15,10 @@ export const GET = async (request: NextRequest) => {
 
     // 새로운 필터 파라미터들
     const petAllowed = searchParams.get("petAllowed"); // "가능" 또는 "불가능"
-    const facilities = searchParams.get("facilities")?.split(","); // 콤마로 구분된 시설 목록
-    const campingType = searchParams.get("campingType")?.split(","); // 콤마로 구분된 업종 목록
-    const amenities = searchParams.get("amenities")?.split(","); // 콤마로 구분된 편의시설 목록
-    const groundTypes = searchParams.get("groundTypes")?.split(","); // 콤마로 구분된 바닥 유형
+    // const facilities = searchParams.get("facilities")?.split(","); // 콤마로 구분된 시설 목록
+    // const campingType = searchParams.get("campingType")?.split(","); // 콤마로 구분된 업종 목록
+    // const amenities = searchParams.get("amenities")?.split(","); // 콤마로 구분된 편의시설 목록
+    // const groundTypes = searchParams.get("groundTypes")?.split(","); // 콤마로 구분된 바닥 유형
 
     let apiUrl;
 
@@ -55,51 +55,51 @@ export const GET = async (request: NextRequest) => {
     }
 
     // 부대시설 필터링
-    if (facilities && facilities.length > 0) {
-      items = items.filter((camp) =>
-        facilities.every((facility) => camp.sbrsCl?.includes(facility))
-      );
-    }
+    // if (facilities && facilities.length > 0) {
+    //   items = items.filter((camp) =>
+    //     facilities.every((facility) => camp.sbrsCl?.includes(facility))
+    //   );
+    // }
 
-    // 업종(종류) 필터링
-    if (campingType && campingType.length > 0) {
-      items = items.filter((camp) =>
-        campingType.some((type) => camp.induty?.includes(type))
-      );
-    }
+    // // 업종(종류) 필터링
+    // if (campingType && campingType.length > 0) {
+    //   items = items.filter((camp) =>
+    //     campingType.some((type) => camp.induty?.includes(type))
+    //   );
+    // }
 
-    // 편의시설 필터링
-    if (amenities && amenities.length > 0) {
-      items = items.filter((camp) =>
-        amenities.some(
-          (amenity) =>
-            camp.glampInnerFclty?.includes(amenity) ||
-            camp.caravInnerFclty?.includes(amenity)
-        )
-      );
-    }
+    // // 편의시설 필터링
+    // if (amenities && amenities.length > 0) {
+    //   items = items.filter((camp) =>
+    //     amenities.some(
+    //       (amenity) =>
+    //         camp.glampInnerFclty?.includes(amenity) ||
+    //         camp.caravInnerFclty?.includes(amenity)
+    //     )
+    //   );
+    // }
 
     // 바닥 유형 필터링
-    if (groundTypes && groundTypes.length > 0) {
-      items = items.filter((camp) => {
-        return groundTypes.some((type) => {
-          switch (type) {
-            case "잔디":
-              return Number(camp.siteBottomCl1) > 0;
-            case "파쇄석":
-              return Number(camp.siteBottomCl2) > 0;
-            case "테크":
-              return Number(camp.siteBottomCl3) > 0;
-            case "자갈":
-              return Number(camp.siteBottomCl4) > 0;
-            case "맨흙":
-              return Number(camp.siteBottomCl5) > 0;
-            default:
-              return false;
-          }
-        });
-      });
-    }
+    // if (groundTypes && groundTypes.length > 0) {
+    //   items = items.filter((camp) => {
+    //     return groundTypes.some((type) => {
+    //       switch (type) {
+    //         case "잔디":
+    //           return Number(camp.siteBottomCl1) > 0;
+    //         case "파쇄석":
+    //           return Number(camp.siteBottomCl2) > 0;
+    //         case "테크":
+    //           return Number(camp.siteBottomCl3) > 0;
+    //         case "자갈":
+    //           return Number(camp.siteBottomCl4) > 0;
+    //         case "맨흙":
+    //           return Number(camp.siteBottomCl5) > 0;
+    //         default:
+    //           return false;
+    //       }
+    //     });
+    //   });
+    // }
 
     return new Response(JSON.stringify(items), {
       headers: {
