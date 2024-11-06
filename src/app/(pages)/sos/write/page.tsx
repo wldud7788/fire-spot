@@ -10,10 +10,8 @@ import { useRouter } from "next/navigation";
 
 //지역 넣기 위한
 import { MeetWithCamp, CampInsert } from "./Camptype";
-
-import { GOCAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
-
 import DropDownCampSearch from "./DropDownCampSearch";
+import { GOCAMPING_HOST, GOCAMPING_SEARCH } from "@/_utils/api/apiKey";
 
 let nextId = 0;
 
@@ -56,7 +54,8 @@ const SosWrite = () => {
   const [contentId, setContentId] = useState(0);
 
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
-  const SEARCH_URL = `https://apis.data.go.kr/B551011/GoCamping/searchList?serviceKey=G5%2FwdM%2BoTwjgjfBoPE4wk2zBlY3WolaJGLBI7yOEh36qItxUfgRRqvcWRHgAH86RY5vLFBD6e3i%2Fyn53pK%2Bt9w%3D%3D&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=${contentId}`;
+  const SEARCH_URL = `${GOCAMPING_HOST}/${GOCAMPING_SEARCH}/?serviceKey=G5%2FwdM%2BoTwjgjfBoPE4wk2zBlY3WolaJGLBI7yOEh36qItxUfgRRqvcWRHgAH86RY5vLFBD6e3i%2Fyn53pK%2Bt9w%3D%3D&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=${contentId}`;
+
   //캠핑장이 하나만 나온다는 단점이 있음.
   useEffect(() => {
     const fetchUser = async () => {

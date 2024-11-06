@@ -15,9 +15,9 @@ export const GET = async (request: NextRequest) => {
     let apiUrl;
 
     if (!keyword) {
-      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=10&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`;
+      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=50&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`;
     } else {
-      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=10`;
+      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=50`;
     }
 
     const res = await fetch(apiUrl, {

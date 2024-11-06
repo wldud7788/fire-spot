@@ -44,7 +44,7 @@ const Header = () => {
           </nav>
           {/* 아이콘 */}
           <div className="flex items-center">
-            <Link href={"/"} className="header_icon bg-map"></Link>
+            <Link href={"/search"} className="header_icon bg-map"></Link>
             <Link href={"/"} className="header_icon bg-chat"></Link>
             <Link href={"/"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
