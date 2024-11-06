@@ -2,6 +2,41 @@
 
 import { createClient } from "@/_utils/supabase/server";
 
+const fetchMeetAttendeeByMeetId = async (meetId: string | number) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("meet_attendee")
+    .select()
+    .eq("meet_id", meetId);
+
+  if (error || !data) {
+    throw new Error("fetchMeetAttendeeByMeetId Error", error);
+  }
+
+  return data;
+};
+
+const fetchMeetAttendeeByUserId = async () => {
+  const supabase = await createClient();
+
+  try {
+    const userData = await supabase.auth.getUser();
+    const userId = userData.data.user?.id ?? "";
+
+    const { data, error } = await supabase
+      .from("meet_attendee")
+      .select(`*, meet(*)`)
+      .eq("user_id", userId);
+
+    if (error) {
+      throw new Error("fetchMeetAttendee Error: ", error);
+    }
+    return data;
+  } catch (e) {
+    throw new Error(e + "");
+  }
+};
+
 const postMeetAttendee = async (meetId: number) => {
   const supabase = await createClient();
 
@@ -46,4 +81,9 @@ const deleteMeetAttendee = async (attendeeId: number) => {
   }
 };
 
-export { postMeetAttendee, deleteMeetAttendee };
+export {
+  postMeetAttendee,
+  deleteMeetAttendee,
+  fetchMeetAttendeeByMeetId,
+  fetchMeetAttendeeByUserId
+};

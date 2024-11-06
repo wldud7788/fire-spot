@@ -39,15 +39,15 @@ const CalendarCell = ({
     hoverItem === meetCardId ? "bg-red-50" : "bg-slate-200";
 
   return (
-    <li className="flex min-h-[105px] w-full flex-col border-[1px]">
+    <li className="flex min-h-[105px] w-full flex-col border-[0.5px]">
       <section className="flex h-[20px] w-full justify-end">
-        <p>{format(day, "d")}</p>
+        <p className="p-[10px]">{format(day, "d")}</p>
       </section>
       <section className="relative flex flex-col justify-end">
         <div className="h-[50px]">
           {meetCard && (
             <div
-              className={`absolute top-2 z-50 cursor-pointer`}
+              className={`absolute top-[10px] z-50 cursor-pointer`}
               style={{ ...meetCardStyle }}
               onMouseOver={() => handleHoverItem(meetCardId)}
               onMouseLeave={() => handleHoverItem("")}
