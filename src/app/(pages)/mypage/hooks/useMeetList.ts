@@ -1,21 +1,22 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchMeetAttendeeWithMeetAndCampByUserId } from "../../meets/actions/meetAttendAction";
+import { useState } from "react";
 
 export const useMeetList = () => {
-  const { data: meetAttendeeData } = useQuery({
+  const [isProgress, setIsProgress] = useState(true);
+
+  const { data: meetWithCampList } = useSuspenseQuery({
     queryFn: () => fetchMeetAttendeeWithMeetAndCampByUserId(),
-    queryKey: ["meetAttendee", "testUser"]
+    queryKey: ["meetAttendee", "testUser"],
+    initialData: [],
+    staleTime: 0
   });
 
-  console.log("meetAttendeeData", meetAttendeeData);
+  const toggleShowType = () => {
+    setIsProgress(!isProgress);
+  };
 
-  const meets = meetAttendeeData?.map(
-    (meetAttendee) =>
-      // const meetWithCamp:MeetWithCamp
-      meetAttendee.meet
-  );
-
-  return { meets };
+  return { meetWithCampList, isProgress, toggleShowType };
 };

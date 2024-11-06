@@ -12,6 +12,17 @@ const MeetCard = ({ meetCard }: MeetCardProps) => {
       <div className="inner">
         <div className="utils flex items-center justify-between">
           <ul className="flex gap-[10px]">
+            {meetCard.isDeadline && (
+              <li className="rounded-[15px] bg-[#D9D9D9] px-[15px] py-[3px] text-[15px]">
+                마감
+              </li>
+            )}
+            {meetCard.isDeadlineApproaching && (
+              <li className="rounded-[15px] bg-[#D9D9D9] px-[15px] py-[3px] text-[15px]">
+                마감임박
+              </li>
+            )}
+
             {meetCard.tags.map((tag) => {
               return (
                 <li

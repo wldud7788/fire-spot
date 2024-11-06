@@ -45,26 +45,14 @@ const fetchMeetAttendeeWithMeetAndCampByUserId = async () => {
     const userData = await supabase.auth.getUser();
     const userId = userData.data.user?.id ?? "";
 
-    // const { data, error } = await supabase
-    //   .from("meet_attendee")
-    //   .select(
-    //     `
-    //     *,
-    //   count(*),
-    //   meet (
-    //     *,
-    //     camp (*)
-    //   ),
-    // `
-    //   )
-    //   .eq("user_id", userId);
     const { data, error } = await supabase.rpc(
       supabaseRpc.meetAttendee.getMeetAttendeeWithMeetAndCamp,
       { user_id: userId }
     );
 
     if (error || !data) {
-      throw new Error("fetchMeetAttendee Error: ", error);
+      return [];
+      // throw new Error("fetchMeetAttendee Error: ", error);
     }
     return data;
   } catch (e) {
