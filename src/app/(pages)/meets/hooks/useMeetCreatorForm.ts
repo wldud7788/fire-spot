@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetInsert, MeetWithCamp } from "../types/meet.types";
 
-import { GOCAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
+import {
+  GOCAMPING_KEY,
+  GOCAMPING_HOST,
+  GOCAMPING_SEARCH
+} from "@/_utils/api/apiKey";
 import { processSubmitData } from "../utils/processSubmitData";
 import { upsertCamp } from "../actions/meetWriteAction";
 import { CampInsert } from "../types/camp.types";
@@ -10,7 +14,7 @@ import useDate from "./useDate";
 import { useRouter } from "next/navigation";
 import { checkMeetPostSchedule } from "../utils/validateMeetAttendee";
 import { revalidatePath } from "next/cache";
-const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
+const SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 interface Props {
   meetId?: string;

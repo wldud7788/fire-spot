@@ -2,11 +2,11 @@
 
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
 import {
-  GOAMPING_IMAGE_LIST_URL,
   GOCAMPING_HOST,
   GOCAMPING_KEY,
   GOCAMPING_ALL,
-  GOCAMPING_SEARCH
+  GOCAMPING_SEARCH,
+  GOCAMPING_IMAGE
 } from "../api/apiKey";
 import { createClient } from "../supabase/server";
 import {
@@ -38,10 +38,10 @@ export const getTotalData = async (page?: number, numOfRows?: number) => {
 };
 
 export const getCampImgList = async (contentId: number) => {
-  const IMAGE_SEARCH_URL = `${GOAMPING_IMAGE_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=`;
+  const IMAGE_SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_IMAGE}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=${contentId}`;
 
   try {
-    const res = await fetch(IMAGE_SEARCH_URL + contentId);
+    const res = await fetch(IMAGE_SEARCH_URL);
     const data = await res.json();
 
     if (!data.response.body.items || data.response.body.items === "") {
