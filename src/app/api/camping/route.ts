@@ -55,51 +55,51 @@ export const GET = async (request: NextRequest) => {
     }
 
     // 부대시설 필터링
-    if (facilities && facilities.length > 0) {
-      items = items.filter((camp) =>
-        facilities.every((facility) => camp.sbrsCl?.includes(facility))
-      );
-    }
+    // if (facilities && facilities.length > 0) {
+    //   items = items.filter((camp) =>
+    //     facilities.every((facility) => camp.sbrsCl?.includes(facility))
+    //   );
+    // }
 
-    // 업종(종류) 필터링
-    if (campingType && campingType.length > 0) {
-      items = items.filter((camp) =>
-        campingType.some((type) => camp.induty?.includes(type))
-      );
-    }
+    // // 업종(종류) 필터링
+    // if (campingType && campingType.length > 0) {
+    //   items = items.filter((camp) =>
+    //     campingType.some((type) => camp.induty?.includes(type))
+    //   );
+    // }
 
-    // 편의시설 필터링
-    if (amenities && amenities.length > 0) {
-      items = items.filter((camp) =>
-        amenities.some(
-          (amenity) =>
-            camp.glampInnerFclty?.includes(amenity) ||
-            camp.caravInnerFclty?.includes(amenity)
-        )
-      );
-    }
+    // // 편의시설 필터링
+    // if (amenities && amenities.length > 0) {
+    //   items = items.filter((camp) =>
+    //     amenities.some(
+    //       (amenity) =>
+    //         camp.glampInnerFclty?.includes(amenity) ||
+    //         camp.caravInnerFclty?.includes(amenity)
+    //     )
+    //   );
+    // }
 
     // 바닥 유형 필터링
-    if (groundTypes && groundTypes.length > 0) {
-      items = items.filter((camp) => {
-        return groundTypes.some((type) => {
-          switch (type) {
-            case "잔디":
-              return Number(camp.siteBottomCl1) > 0;
-            case "파쇄석":
-              return Number(camp.siteBottomCl2) > 0;
-            case "테크":
-              return Number(camp.siteBottomCl3) > 0;
-            case "자갈":
-              return Number(camp.siteBottomCl4) > 0;
-            case "맨흙":
-              return Number(camp.siteBottomCl5) > 0;
-            default:
-              return false;
-          }
-        });
-      });
-    }
+    // if (groundTypes && groundTypes.length > 0) {
+    //   items = items.filter((camp) => {
+    //     return groundTypes.some((type) => {
+    //       switch (type) {
+    //         case "잔디":
+    //           return Number(camp.siteBottomCl1) > 0;
+    //         case "파쇄석":
+    //           return Number(camp.siteBottomCl2) > 0;
+    //         case "테크":
+    //           return Number(camp.siteBottomCl3) > 0;
+    //         case "자갈":
+    //           return Number(camp.siteBottomCl4) > 0;
+    //         case "맨흙":
+    //           return Number(camp.siteBottomCl5) > 0;
+    //         default:
+    //           return false;
+    //       }
+    //     });
+    //   });
+    // }
 
     return new Response(JSON.stringify(items), {
       headers: {
