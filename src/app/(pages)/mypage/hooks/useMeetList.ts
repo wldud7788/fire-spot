@@ -14,8 +14,8 @@ export const useMeetList = () => {
     staleTime: 0
   });
 
-  const toggleShowType = () => {
-    setIsProgress(!isProgress);
+  const toggleShowType = (condition: boolean) => {
+    setIsProgress(condition);
   };
 
   return { meetWithCampList, isProgress, toggleShowType };
