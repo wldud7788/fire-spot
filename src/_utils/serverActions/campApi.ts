@@ -44,7 +44,7 @@ export const getCampImgList = async (contentId: number): Promise<string[]> => {
     const res = await fetch(IMAGE_SEARCH_URL);
     const data = await res.json();
 
-    if (!data.response.body.items || data.response.body.items === "") {
+    if (!data.response?.body?.items) {
       return [];
     }
 
