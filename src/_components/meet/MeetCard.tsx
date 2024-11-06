@@ -1,4 +1,3 @@
-import { Meet } from "@/app/(pages)/meets/types/Meet";
 import { MeetCard as IMeetCard } from "@/app/(pages)/meets/types/meet.types";
 import Link from "next/link";
 

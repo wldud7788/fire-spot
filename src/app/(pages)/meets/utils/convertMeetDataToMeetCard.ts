@@ -1,7 +1,7 @@
 import { formatDate_1 } from "@/_utils/common/dateFormat";
 import { CampSelect } from "../types/camp.types";
 import { MeetCard, MeetSelect, MeetWithCamp } from "../types/meet.types";
-import { isAfter, isBefore, startOfDay, subDays } from "date-fns";
+import { isBefore, startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 
 const convertMeetDataToMeetCard = (
@@ -14,7 +14,7 @@ const convertMeetDataToMeetCard = (
     const { id, title, start_date, deadline_headcount } = meet;
     const { sigunguNm: location } = camp;
 
-    const tags = getTags({ camp, meet, attendee_count });
+    const tags = getTags({ camp, meet });
     const date = formatDate_1(start_date);
 
     const isDeadlineApproaching =
@@ -43,15 +43,7 @@ const convertMeetDataToMeetCard = (
   return filterMeetCardList;
 };
 
-const getTags = ({
-  camp,
-  meet,
-  attendee_count
-}: {
-  camp: CampSelect;
-  meet: MeetSelect;
-  attendee_count: number;
-}) => {
+const getTags = ({ camp, meet }: { camp: CampSelect; meet: MeetSelect }) => {
   const tags: string[] = [];
 
   if (camp.induty) {

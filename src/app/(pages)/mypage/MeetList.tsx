@@ -7,15 +7,11 @@ const MeetList = () => {
   const { meetWithCampList, isProgress, toggleShowType } = useMeetList();
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList, isProgress);
 
-  console.log("meetAttendee", meetWithCampList);
-
   return (
     <section className="flex w-full items-start gap-[38px]">
       <ul className="w-[67%]">
         {meetCardList.map((meetCard) => (
           <li key={meetCard.id} className="w-full">
-            {" "}
-            {/* 각 아이템을 50% 너비로 설정 */}
             <MeetCard meetCard={meetCard} />
           </li>
         ))}
