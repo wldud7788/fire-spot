@@ -1,0 +1,41 @@
+.chatBox {
+  width: 50%;
+  background-color: #d6e6d6;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.chatBox input {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.chatBox2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chating {
+  width: fit-content;
+  background-color: #008000;
+  border-radius: 15px 0 15px 15px;
+  padding: 5px 10px 5px 10px;
+  color: #fff;
+}
+
+.chatBox_you {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chating_you {
+  width: fit-content;
+  background-color: #ffffff;
+  border-radius: 0 15px 15px 15px;
+  padding: 5px 10px 5px 10px;
+}
