@@ -1,4 +1,13 @@
 import { Database } from "../../../../database.types";
+import { ProfileSelect } from "./Profile.types";
+
+export type ChatRoomList = {
+  chatAttendee: ChatAttendeeSelect;
+  chatRoom: ChatRoomSelect;
+  chatMessage: ChatMessageSelect;
+  profile: ProfileSelect;
+  headcount: number;
+}[];
 
 export type ChatMessageSelect =
   Database["public"]["Tables"]["chat_message"]["Row"];

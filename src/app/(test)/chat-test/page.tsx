@@ -1,7 +1,11 @@
+"use client";
+
+import useChatList from "@/_components/chat/hooks/useChatList";
 import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const ChatList = () => {
+  useChatList();
+  return <div>chatList</div>;
 };
 
-export default page;
+export default ChatList;

@@ -1,3 +1,12 @@
+import {
+  ChatAttendeeSelect,
+  ChatMessageSelect,
+  ChatRoomList,
+  ChatRoomSelect
+} from "@/_components/chat/types/chat.types";
+import { ProfileSelect } from "@/_components/chat/types/Profile.types";
+import { User } from "@supabase/supabase-js";
+
 export type Json =
   | string
   | number
@@ -448,6 +457,10 @@ export type Database = {
           meet: unknown;
           camp: unknown;
         }[];
+      };
+      get_chat_room_list: {
+        Args: Record<string, string>;
+        Returns: ChatRoomList;
       };
       get_meet_list1: {
         Args: Record<PropertyKey, never>;

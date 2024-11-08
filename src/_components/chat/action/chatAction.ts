@@ -1,26 +1,30 @@
+"use server";
+
+import { createClient } from "@/_utils/supabase/server";
 import { Order, ORDER_STRING } from "@/types/order.types";
 
-/** 
- * userId 기준으로 채팅방 목록 가져옴 
- * 
-* select 
-    C.*, 
-    M.title, 
-    S.title 
-  from chat_room C 
-  left outer join meet M 
-    on C.meet_id = M.id 
-  left outer join sos S
-    on C.sos_id = S.id
-  where C.user_id = {userId}
- * 
-*/
-export const fetchChatRoomListByUserId = (order: Order = ORDER_STRING.desc) => {
-  // const sortedData = data.sort((a, b) => {
-  //   if (a.is_pin && !b.is_pin) return -1;
-  //   if (!a.is_pin && b.is_pin) return 1;
-  //   return a.id - b.id;
-  // });
+export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
+  const supabase = createClient();
+
+  try {
+    const userData = await supabase.auth.getUser();
+    const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
+
+    const { data, error } = await supabase.rpc("get_chat_room_list", {
+      user_id: userId
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      return [];
+    }
+    return data;
+  } catch (e) {
+    console.error("fetchChatRoomList error", e);
+  }
 };
 
 /**
@@ -61,19 +65,5 @@ const a = {
     }
   ]
 };
-
-/**
- * 
- * last_read가 가장 중요한 역할 ?
-
-- 사용자가 들어온 시점
-- 사용자가 나간 시점
-- 해당 방에서 신규 메시지가 전송된 경우 이벤트를 받은 모든 사용자에 한하여 
-
-위 경우에 해당하여 last_read를 업데이트
-
-
-그리고 
- */
 
 export const fetchChatMessageByRoomId = (roomId: number) => {};
