@@ -10,7 +10,7 @@ type UsePaginationProps<T> = {
 const usePagination = <T>({ items, itemsPerPage }: UsePaginationProps<T>) => {
   const router = useRouter();
   // 현재 페이지 상태를 관리하는 state
-  const [page, setPage] = useState<number>(Number(1));
+  const [page, setPage] = useState<number>(1);
   // 총 페이지 수를 계산 (데이터 총 갯수 / 설정한 페이지 갯수)
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
