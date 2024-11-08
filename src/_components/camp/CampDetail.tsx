@@ -1,7 +1,8 @@
 "use client";
 
-import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
+import ForecastWeatherComponent from "../weather/FutureWeather";
+import { Camp } from "@/app/(pages)/camps/types/Camp";
 
 type CampDetailProps = {
   paramsId: string;
@@ -28,6 +29,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
   const camp = camps?.find((item: Camp) => item.contentId === paramsId);
   const nearbyInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
+
+  const latitude = camp?.mapY || 0;
+  const longitude = camp?.mapX || 0;
+  const campingName = camp?.facltNm || "알 수 없는 캠핑장";
 
   console.log(camp);
 
@@ -90,6 +95,11 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 날씨를 알려드려요 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 날씨를 알려드려요</h2>
+          <ForecastWeatherComponent
+            latitude={latitude}
+            longitude={longitude}
+            campingName={campingName}
+          />
         </div>
         {/*// 캠핑장 날씨를 알려드려요 */}
 
