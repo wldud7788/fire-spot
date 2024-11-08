@@ -13,7 +13,7 @@ export const getFollowsData = async () => {
   return followsData;
 };
 
-export const getFollowerData = async (userId: string) => {
+export const getFollowerData = async (userId: string | null) => {
   const { data: followers } = await supabase
     .from("follows")
     .select(`*`)
@@ -21,7 +21,7 @@ export const getFollowerData = async (userId: string) => {
   return followers;
 };
 
-export const getFollowingData = async (userId: string) => {
+export const getFollowingData = async (userId: string | null) => {
   const { data: followings } = await supabase
     .from("follows")
     .select(`*`)
@@ -54,4 +54,47 @@ export const getUserProfileAll = async () => {
     throw new Error(error.message);
   }
   return userProfileAll;
+};
+
+export const followUser = async (loginUserId: string, followUserId: string) => {
+  try {
+    // 팔로우 추가
+    const { data, error } = await supabase
+      .from("follows")
+      .insert([{ follower_id: loginUserId, following_id: followUserId }]);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    console.log("팔로우 성공:", data);
+    return data; // 성공적으로 팔로우가 추가되면 데이터를 반환
+  } catch (error) {
+    console.error("팔로우 실패:", error);
+    throw error;
+  }
+};
+
+export const unfollowUser = async (
+  loginUserId: string,
+  followUserId: string
+) => {
+  try {
+    // 팔로우 취소
+    const { data, error } = await supabase
+      .from("follows")
+      .delete()
+      .eq("follower_id", loginUserId)
+      .eq("following_id", followUserId);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    console.log("팔로우 취소 성공:", data);
+    return data; // 성공적으로 팔로우가 취소되면 데이터를 반환
+  } catch (error) {
+    console.error("팔로우 취소 실패:", error);
+    throw error;
+  }
 };
