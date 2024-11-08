@@ -22,8 +22,8 @@ export interface Camp {
   zipcode: string;
   addr1: string;
   addr2: string;
-  mapX: string;
-  mapY: string;
+  mapX: number;
+  mapY: number;
   direction: string;
   tel: string;
   homepage: string;
