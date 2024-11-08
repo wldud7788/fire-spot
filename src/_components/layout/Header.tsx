@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-10 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
+      className={`fixed left-0 right-0 top-0 z-40 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
     >
       <div className="relative mx-auto max-w-[1540px] bg-white p-5">
         {/* 로고 + 검색 영역 */}
