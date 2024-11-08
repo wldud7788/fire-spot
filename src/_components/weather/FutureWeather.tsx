@@ -18,12 +18,14 @@ type ForecastWeatherComponentProps = {
   latitude: number;
   longitude: number;
   campingName: string;
+  date?: Date;
 };
 
 const ForecastWeatherComponent = ({
   latitude,
   longitude,
-  campingName
+  campingName,
+  date = new Date()
 }: ForecastWeatherComponentProps) => {
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
   const [error, setError] = useState<string | null>(null);

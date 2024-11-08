@@ -101,7 +101,16 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             campingName={campingName}
           />
         </div>
-        {/*// 캠핑장 날씨를 알려드려요 */}
+
+        {/* 캠핑장 날씨 */}
+        <div className="detail_section mt-[60px]">
+          <h2 className="text-[36px] font-bold">캠핑장 날씨를 알려드려요</h2>
+          <ForecastWeatherComponent
+            latitude={latitude}
+            longitude={longitude}
+            campingName={campingName}
+          />
+        </div>
 
         {/* 캠핑장 리뷰 */}
         <div className="detail_section mt-[60px]">

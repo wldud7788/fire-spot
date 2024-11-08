@@ -24,7 +24,7 @@ const CampListPage = ({ params }: CampListProps) => {
     queryFn: async () => fetchTotalData(),
     staleTime: 1000 * 60 * 60 * 24
   });
-
+  console.log(camps);
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
   if (isError || !camps) return <div>에러가 발생했습니다.</div>;
 
