@@ -5,17 +5,12 @@ import { useState } from "react";
 type UsePaginationProps<T> = {
   items: T[]; // 페이지네이션할 아이템 배열
   itemsPerPage: number; // 한 페이지에 보여줄 수 있는 아이템 수
-  paramsId: string; // 리스트 페이지 params 값
 };
 
-const usePagination = <T>({
-  items,
-  itemsPerPage,
-  paramsId
-}: UsePaginationProps<T>) => {
+const usePagination = <T>({ items, itemsPerPage }: UsePaginationProps<T>) => {
   const router = useRouter();
   // 현재 페이지 상태를 관리하는 state
-  const [page, setPage] = useState<number>(Number(paramsId));
+  const [page, setPage] = useState<number>(Number(1));
   // 총 페이지 수를 계산 (데이터 총 갯수 / 설정한 페이지 갯수)
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -28,7 +23,7 @@ const usePagination = <T>({
   const movePagePrev = () => {
     if (page > 1) {
       setPage((prev) => prev - 1);
-      router.push(`${paramsId}?page=${page - 1}`);
+      router.push(`?page=${page - 1}`);
     } else {
       // 사카모토 써야함
       alert("첫번째 페이집니다.");
@@ -38,7 +33,7 @@ const usePagination = <T>({
   const movePageNext = () => {
     if (page < totalPages) {
       setPage((prev) => prev + 1);
-      router.push(`${paramsId}?page=${page + 1}`);
+      router.push(`?page=${page + 1}`);
     } else {
       // 사카모토 써야함
       alert("마지막 페이집니다.");

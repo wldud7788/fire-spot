@@ -9,10 +9,9 @@ import { fetchTotalData } from "@/_utils/api/campsApi";
 
 type CampListProps = {
   itemsPerPage: number;
-  paramsId: string;
 };
 
-const CampList = ({ itemsPerPage, paramsId }: CampListProps) => {
+const CampList = ({ itemsPerPage }: CampListProps) => {
   const {
     data: camps,
     isLoading,
@@ -24,7 +23,7 @@ const CampList = ({ itemsPerPage, paramsId }: CampListProps) => {
   });
 
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
-    usePagination({ items: camps || [], itemsPerPage, paramsId });
+    usePagination({ items: camps || [], itemsPerPage });
 
   // 페이지 번호가 변경되면 해당 페이지로 스크롤 이동
   useEffect(() => {
@@ -39,7 +38,7 @@ const CampList = ({ itemsPerPage, paramsId }: CampListProps) => {
       <ul className="list_box flex flex-wrap gap-[30px]">
         {currentItems.map((camp) => (
           <li key={camp.contentId} className="w-[calc(25%-30px)]">
-            <CampCard camp={camp} listParamsId={paramsId} />
+            <CampCard camp={camp} />
           </li>
         ))}
       </ul>
