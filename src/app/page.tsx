@@ -4,6 +4,7 @@ import MainSection from "@/_components/main/MainSection";
 import MainSlide from "@/_components/main/MainSlide";
 import MainTop from "@/_components/main/MainTop";
 import MainUserCard from "@/_components/main/MainUserCard";
+import MainSearch from "@/_components/search/MainSearch";
 
 import {
   dehydrate,
@@ -21,6 +22,7 @@ export default function Home() {
           {/* main_top */}
           <MainSection>
             <MainTop />
+            <MainSearch />
           </MainSection>
           {/*// main_top */}
 
