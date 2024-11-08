@@ -11,6 +11,12 @@ export type ChatRoomInfo = {
   headcount: number;
 };
 
+export type ChatRoomTitle = {
+  chatRoom: ChatRoomSelect;
+  meet: MeetSelect;
+  headcount: number;
+};
+
 export type ChatMessageSelect =
   Database["public"]["Tables"]["chat_message"]["Row"];
 export type ChatMessageInsert =

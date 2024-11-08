@@ -2,7 +2,8 @@ import {
   ChatAttendeeSelect,
   ChatMessageSelect,
   ChatRoomInfo,
-  ChatRoomSelect
+  ChatRoomSelect,
+  ChatRoomTitle
 } from "@/_components/chat/types/chat.types";
 import { ProfileSelect } from "@/_components/chat/types/Profile.types";
 import { User } from "@supabase/supabase-js";
@@ -461,6 +462,10 @@ export type Database = {
       get_chat_room_list: {
         Args: Record<string, string>;
         Returns: ChatRoomInfo[];
+      };
+      get_chat_room_title: {
+        Args: Record<string, number>;
+        Returns: ChatRoomTitle[];
       };
       get_meet_list1: {
         Args: Record<PropertyKey, never>;
