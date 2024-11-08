@@ -1,20 +1,23 @@
-import { getUser } from "@/_utils/auth";
-import { User } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-import { fetchChatRoomList } from "../action/chatAction";
+import { useQuery } from "@tanstack/react-query";
+import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
+import { ChatRoomInfo } from "../types/chat.types";
+import { fetchChatRoomList } from "../service/chatService";
 
 const useChatList = () => {
-  const [chatRoomList, setChatRoomList] = useState<any>();
+  const { data: chatRoomList = [] as ChatRoomInfo[], error } = useQuery<
+    ChatRoomInfo[]
+  >({
+    queryKey: queryKey.chat.chatRoomList,
+    // queryFn: async () => {
+    //   const res = await fetch(SERVER_API_URL.chatRoomList, { method: "GET" });
+    //   const data = await res.json();
+    //   return data;
+    // }
+    queryFn: () => fetchChatRoomList()
+  });
+  if (error) throw new Error(error.message);
 
-  useEffect(() => {
-    const fetchChatRoomData = async () => {
-      const chatRoomList = await fetchChatRoomList();
-
-      setChatRoomList(chatRoomList);
-      console.log("chatRoomList", chatRoomList);
-    };
-    fetchChatRoomData();
-  }, []);
+  return { chatRoomList };
 };
 
 export default useChatList;

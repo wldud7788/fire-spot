@@ -1,7 +1,7 @@
 import {
   ChatAttendeeSelect,
   ChatMessageSelect,
-  ChatRoomList,
+  ChatRoomInfo,
   ChatRoomSelect
 } from "@/_components/chat/types/chat.types";
 import { ProfileSelect } from "@/_components/chat/types/Profile.types";
@@ -460,7 +460,7 @@ export type Database = {
       };
       get_chat_room_list: {
         Args: Record<string, string>;
-        Returns: ChatRoomList;
+        Returns: ChatRoomInfo[];
       };
       get_meet_list1: {
         Args: Record<PropertyKey, never>;

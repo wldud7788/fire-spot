@@ -1,13 +1,15 @@
+import { MeetSelect } from "@/app/(pages)/meets/types/meet.types";
 import { Database } from "../../../../database.types";
 import { ProfileSelect } from "./Profile.types";
 
-export type ChatRoomList = {
+export type ChatRoomInfo = {
   chatAttendee: ChatAttendeeSelect;
   chatRoom: ChatRoomSelect;
   chatMessage: ChatMessageSelect;
   profile: ProfileSelect;
+  meet: MeetSelect;
   headcount: number;
-}[];
+};
 
 export type ChatMessageSelect =
   Database["public"]["Tables"]["chat_message"]["Row"];

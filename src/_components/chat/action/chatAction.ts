@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/_utils/supabase/server";
+import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 import { Order, ORDER_STRING } from "@/types/order.types";
 
 export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
@@ -10,9 +11,12 @@ export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
     const userData = await supabase.auth.getUser();
     const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
 
-    const { data, error } = await supabase.rpc("get_chat_room_list", {
-      user_id: userId
-    });
+    const { data, error } = await supabase.rpc(
+      supabaseRpc.chat.getChatRoomList,
+      {
+        user_id: userId
+      }
+    );
 
     if (error) {
       throw new Error(error.message);
