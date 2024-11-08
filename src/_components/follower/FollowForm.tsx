@@ -4,45 +4,38 @@ import {
   getFollowingData,
   getUserProfileAll
 } from "@/_utils/service/followService";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import FollowCard from "./FollowCard";
+import {
+  QK_FOLLOWER_USER_PROFILE,
+  QK_FOLLOWING_USER_PROFILE,
+  QK_USER_PROFILE_ALL
+} from "@/_utils/api/queryKeys/followQueryKeys";
 
-type flowFormProps = {
+type FollowFormProps = {
   loginUserId: string;
   profileUser: string;
 };
 
-const FollowForm = ({ loginUserId, profileUser }: flowFormProps) => {
+const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
   const [isFollower, setIsFollower] = useState(true);
 
-  const {
-    data: follower,
-    isLoading: followerLoading,
-    isError: followerError
-  } = useSuspenseQuery({
-    queryKey: ["profileUserFollower", profileUser],
+  const { data: follower, isError: followerError } = useSuspenseQuery({
+    queryKey: QK_FOLLOWER_USER_PROFILE(profileUser),
     queryFn: () => getFollowerData(profileUser),
     staleTime: 0
   });
 
-  const {
-    data: following,
-    isLoading: followingLoading,
-    isError: followingError
-  } = useSuspenseQuery({
-    queryKey: ["profileUserFollowing", profileUser],
+  const { data: following, isError: followingError } = useSuspenseQuery({
+    queryKey: QK_FOLLOWING_USER_PROFILE(profileUser),
     queryFn: () => getFollowingData(profileUser),
     staleTime: 0
   });
 
   // 유저 프로필을 가져오는 쿼리
-  const {
-    data: userProfileAll,
-    isLoading: userProfileAllLoading,
-    isError: userProfileAllError
-  } = useSuspenseQuery({
-    queryKey: ["userProfileAll", profileUser],
+  const { data: userProfileAll } = useSuspenseQuery({
+    queryKey: QK_USER_PROFILE_ALL(profileUser),
     queryFn: () => getUserProfileAll(),
     staleTime: 0
   });
@@ -57,25 +50,8 @@ const FollowForm = ({ loginUserId, profileUser }: flowFormProps) => {
     followingUser.includes(profile.id)
   );
 
-  if (followerLoading) return <div>팔로워 로딩중</div>;
   if (followerError) return <div>팔로워 에러</div>;
-  if (followingLoading) return <div>팔로잉 로딩중</div>;
   if (followingError) return <div>팔로잉 에러</div>;
-  if (userProfileAllLoading) return <div>프로필 로딩중</div>;
-  if (userProfileAllError) return <div>프로필 에러</div>;
-
-  console.log(
-    loginUserId,
-    profileUser,
-    "followerUser ==>",
-    followerUser,
-    "followingUser ==>",
-    followingUser,
-    "matchingFollowerProfiles",
-    matchingFollowerProfiles,
-    "matchingFollowingProfiles",
-    matchingFollowingProfiles
-  );
 
   return (
     <div className="follow_form">
@@ -91,7 +67,7 @@ const FollowForm = ({ loginUserId, profileUser }: flowFormProps) => {
         {isFollower ? (
           <>
             {/* 팔로워 */}
-            {matchingFollowerProfiles?.map((profile) => {
+            {matchingFollowingProfiles?.map((profile) => {
               return (
                 <li key={profile.id}>
                   <FollowCard loginUserId={loginUserId} profile={profile} />
@@ -102,7 +78,7 @@ const FollowForm = ({ loginUserId, profileUser }: flowFormProps) => {
         ) : (
           <>
             {/* 팔로잉 */}
-            {matchingFollowingProfiles?.map((profile) => {
+            {matchingFollowerProfiles?.map((profile) => {
               return (
                 <li key={profile.id}>
                   <FollowCard loginUserId={loginUserId} profile={profile} />
