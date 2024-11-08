@@ -37,16 +37,16 @@ const Header = () => {
           </div>
           {/* 메뉴 Nav */}
           <nav className="hidden gap-5 lg:flex">
-            <Link href={"/"}>캠핑 가이드</Link>
-            <Link href={"/"}>캠핑장</Link>
-            <Link href={"/meets"}>캠핑크루</Link>
-            <Link href={"/"}>후기</Link>
+            <Link href={"./guide"}>캠핑 가이드</Link>
+            <Link href={"./camps"}>캠핑장</Link>
+            <Link href={"./meets"}>커뮤니티</Link>
+            <Link href={"./"}>후기</Link>
           </nav>
           {/* 아이콘 */}
           <div className="flex items-center">
-            <Link href={"/"} className="header_icon bg-map"></Link>
-            <Link href={"/"} className="header_icon bg-chat"></Link>
-            <Link href={"/"} className="header_icon bg-sos"></Link>
+            <Link href={"/search"} className="header_icon bg-map"></Link>
+            <Link href={"/chat"} className="header_icon bg-chat"></Link>
+            <Link href={"/sos"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
           </div>
         </div>

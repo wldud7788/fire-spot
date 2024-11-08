@@ -1,21 +1,29 @@
 import React from "react";
 import SearchBar from "./searchBar/SearchBar";
+import Link from "next/link";
 
 const MainSearch = () => {
   return (
-    <div className="mt-[100px] flex flex-col items-center">
-      <h2 className="text-5xl font-black">어디로 가시나요?</h2>
-      <ul className="mt-[50px] flex gap-5">
-        <li>#제주</li>
-        <li>#제주</li>
-        <li>#제주</li>
-        <li>#제주</li>
-        <li>#제주</li>
+    <div className="mt-10 flex flex-col items-center">
+      <ul className="flex gap-5">
+        <Link href={"./search/"}>
+          <li>#캠핑여행</li>
+        </Link>
+        <Link href={"./"}>
+          <li>#차박</li>
+        </Link>
+        <Link href={"./"}>
+          <li>#오토캠핑</li>
+        </Link>
+        <Link href={"./"}>
+          <li>#글램핑</li>
+        </Link>
+        <Link href={"./"}>
+          <li>#내부화장실</li>
+        </Link>
       </ul>
-      <div className="flex-1">
-        <div className="relative">
-          <SearchBar variant="main" />
-        </div>
+      <div className="mt-[14px] w-full max-w-[800px] flex-1">
+        <SearchBar variant="main" />
       </div>
     </div>
   );
