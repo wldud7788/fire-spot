@@ -7,6 +7,7 @@ import { getCampImgList } from "@/_utils/serverActions/campApi";
 import { CampImageList, CampInsert } from "../types/camp.types";
 import { postMeetAttendee } from "./meetAttendAction";
 import { Database } from "../../../../../database.types";
+import { revalidatePath } from "next/cache";
 
 type Test = Database["public"]["Tables"]["meet"]["Insert"];
 
@@ -28,7 +29,7 @@ const postMeet = async (meet: Test) => {
     }
 
     postMeetAttendee(meetResult.id ?? 0);
-
+    revalidatePath("/meets");
     return true;
   } catch (e) {
     console.error("postMeet Error", e);
@@ -54,6 +55,7 @@ const patchMeet = async (meetId: string, meet: MeetUpdate) => {
     if (meetError) {
       throw new Error("postMeet Error");
     }
+    revalidatePath("/meets");
     return true;
 
     // postMeetAttendee(meetResult.id);

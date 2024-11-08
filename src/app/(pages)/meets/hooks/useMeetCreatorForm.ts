@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetInsert, MeetWithCamp } from "../types/meet.types";
 
-import { GOCAMPING_KEY, GOAMPING_SEARCH_LIST_URL } from "@/_utils/api/apiKey";
+import {
+  GOCAMPING_KEY,
+  GOCAMPING_HOST,
+  GOCAMPING_SEARCH
+} from "@/_utils/api/apiKey";
 import { processSubmitData } from "../utils/processSubmitData";
 import { upsertCamp } from "../actions/meetWriteAction";
 import { CampInsert } from "../types/camp.types";
 import useDate from "./useDate";
 import { useRouter } from "next/navigation";
 import { checkMeetPostSchedule } from "../utils/validateMeetAttendee";
-const SEARCH_URL = `${GOAMPING_SEARCH_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
+import { revalidatePath } from "next/cache";
+const SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=5&_type=json&keyword=`;
 
 interface Props {
   meetId?: string;
@@ -64,17 +69,13 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     }
   });
   const onSubmit: SubmitHandler<MeetInsert> = async (data) => {
-    // console.log("start_date", start_date);
-    // console.log("end_date", end_date);
-    console.log("id", id);
-
     const hasSchedule = await checkMeetPostSchedule(id, startDate, endDate);
     if (hasSchedule) {
       alert("겹치는 일정이 있습니다.");
     } else {
-      // processSubmitData(data, meetId);
       // TODO 사카모토
-      // router.replace("/meets");
+      await processSubmitData(data, meetId);
+      router.replace("/meets");
     }
   };
 
@@ -94,12 +95,12 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   ) => {
     setIsOpen(!!e.target.value);
     setSearchKeyword(e.target.value);
-
     const getCampSearchList = async () => {
       try {
         if (e.target.value && isOpen) {
           const res = await fetch(SEARCH_URL + encodeURI(e.target.value));
           const data = await res.json();
+          console.log("SEARCH_URL", SEARCH_URL);
 
           setSearchList(data.response.body.items.item);
         } else {

@@ -2,11 +2,11 @@
 
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
 import {
-  GOAMPING_IMAGE_LIST_URL,
   GOCAMPING_HOST,
   GOCAMPING_KEY,
   GOCAMPING_ALL,
-  GOCAMPING_SEARCH
+  GOCAMPING_SEARCH,
+  GOCAMPING_IMAGE
 } from "../api/apiKey";
 import { createClient } from "../supabase/server";
 import {
@@ -35,15 +35,14 @@ export const getTotalData = async (
   const data: CampApiResponse = await res.json();
   return data.response.body.items.item;
 };
-
-export const getCampImgList = async (contentId: number) => {
-  const IMAGE_SEARCH_URL = `${GOAMPING_IMAGE_LIST_URL}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=`;
+export const getCampImgList = async (contentId: number): Promise<string[]> => {
+  const IMAGE_SEARCH_URL = `${GOCAMPING_HOST}${GOCAMPING_IMAGE}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&pageNo=1&numOfRows=30&_type=json&contentId=${contentId}`;
 
   try {
-    const res = await fetch(IMAGE_SEARCH_URL + contentId);
+    const res = await fetch(IMAGE_SEARCH_URL);
     const data = await res.json();
 
-    if (!data.response.body.items || data.response.body.items === "") {
+    if (!data.response?.body?.items) {
       return [];
     }
 
@@ -61,19 +60,24 @@ export const getCampDataFromDB = async (
 ): Promise<CampSelect> => {
   const supabase = await createClient();
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("camp")
       .select()
       .eq("contentId", contentId)
       // .returns<CampResponse>();
       .single();
 
+    if (error) {
+      throw new Error(error.message);
+    }
+
     if (!data) {
-      throw new Error();
+      throw new Error("캠핑 데이터가 없습니다.");
     }
 
     return data;
   } catch (error) {
+    console.error(error);
     throw new Error("Error getCampDataFromDB ");
   }
 };
