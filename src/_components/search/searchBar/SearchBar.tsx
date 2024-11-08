@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useRef } from "react";
 import CSearchInput from "../CSearchInput";
-import DropDownSearch from "../DropDownSearch";
+import DropDownSearch from "../dropdown/DropDownSearch";
 import { useRouter } from "next/navigation";
-import DropdownRegions from "../../dropdownRegions/DropdownRegions";
+import DropdownRegions from "../dropdown/DropdownRegions";
 import { useCamps } from "@/app/queries/useQueries";
 import { variants } from "./style";
 import { cn } from "@/_lib/utils";

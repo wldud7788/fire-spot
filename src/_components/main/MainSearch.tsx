@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./searchBar/SearchBar";
+import SearchBar from "../search/searchBar/SearchBar";
 import Link from "next/link";
 
 const MainSearch = () => {
