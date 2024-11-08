@@ -8,11 +8,6 @@ const useChatList = () => {
     ChatRoomInfo[]
   >({
     queryKey: queryKey.chat.chatRoomList,
-    // queryFn: async () => {
-    //   const res = await fetch(SERVER_API_URL.chatRoomList, { method: "GET" });
-    //   const data = await res.json();
-    //   return data;
-    // }
     queryFn: () => fetchChatRoomList()
   });
   if (error) throw new Error(error.message);
