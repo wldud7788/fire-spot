@@ -29,18 +29,6 @@ export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
 
 export const fetchChatRoomTitleData = async (roomId: number) => {
   try {
-    // const { data, error } = await supabase
-    //   .from("chat_room")
-    //   .select(
-    //     `
-    //     *,
-    //     meet(*),
-    //     headcount:chat_attendee(count)
-    //     `
-    //   )
-    //   .eq("id", roomId)
-    //   .single();
-
     const { data, error } = await supabase.rpc(
       supabaseRpc.chat.getChatRoomTitle,
       {
