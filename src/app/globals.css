@@ -4,12 +4,10 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  word-break: keep-all;
 }
 
 @layer base {
@@ -91,4 +89,91 @@ body {
 }
 .input_focus_none {
   @apply focus:border-0 focus:outline-none focus:ring-0 focus:ring-offset-0;
+}
+
+@layer utilities {
+  .color-main {
+    color: #ff924c;
+  }
+  .color-sub {
+    color: #ffd0b2;
+  }
+  .color-gray01 {
+    color: #404040;
+  }
+  .color-gray02 {
+    color: #737373;
+  }
+  .color-gray03 {
+    color: #8c8c8c;
+  }
+  .color-gray04 {
+    color: #a6a6a6;
+  }
+  .bg-main {
+    background: #ff924c;
+  }
+  .bg-sub {
+    background: #ffd0b2;
+  }
+  .bg-brown {
+    background: #b24600;
+  }
+  .bd-color-main {
+    border-color: #ff924c;
+  }
+  .bd-color-sub {
+    border-color: #ffd0b2;
+  }
+  .ani {
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+  .ani-ltr {
+    transform: translateX(-30%);
+  }
+  .ani-rtl {
+    transform: translateX(30%);
+  }
+  .ani-ttb {
+    transform: translateY(30%);
+  }
+  .ani-btt {
+    transform: translateY(-30%);
+  }
+
+  .main-slide-wrap .swiper-button-prev,
+  .main-slide-wrap .swiper-button-next {
+    width: 48px;
+  }
+  .main-slide-wrap .swiper-button-prev:after,
+  .main-slide-wrap .swiper-button-next:after {
+    width: 100%;
+    color: rgba(0, 0, 0, 0);
+    background: url("/assets/images/main/ico-main-slide-arrow.svg") no-repeat
+      center center;
+    transition: all 0.5s ease;
+  }
+  .main-slide-wrap .swiper-button-next:after {
+    transform: rotate(180deg);
+  }
+  .main-slide-wrap .swiper-button-prev:hover:after {
+    transform: scale(1.1);
+  }
+  .main-slide-wrap .swiper-button-next:hover:after {
+    transform: rotate(180deg) scale(1.1);
+  }
+  .main-slide-wrap .swiper {
+    height: 100%;
+  }
+  .main-user-before:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 20px;
+    background: #d9d9d9;
+  }
 }

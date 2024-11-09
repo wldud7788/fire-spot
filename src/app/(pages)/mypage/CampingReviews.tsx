@@ -51,11 +51,13 @@ const CampListPage = () => {
               id: Number(camp.contentId),
               profileImg: "이미지 URL 또는 기본 이미지",
               userName: camp.facltNm,
-              time: "업데이트된 시간 또는 고정 시간",
+              time: new Date("업데이트된 시간 또는 고정 시간").getTime(),
               desc: "캠핑장 설명 또는 더 자세한 정보",
-              img: ["이미지 URL"],
+              img: "이미지 URL",
               firstImageUrl: camp.firstImageUrl,
-              like: 0
+              like: 0,
+              title: "캠핑장 이름",
+              date: new Date().toLocaleDateString()
             }}
             // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
             onClickFunc={() => openReviewModal(camp.contentId)} // <- 수정된 부분
