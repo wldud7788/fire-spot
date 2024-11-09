@@ -1,7 +1,9 @@
-import FeedCard from "@/_components/feed/FeedCard";
+import FeedCard from "../feed/FeedCard";
 
-const FeedTestPage = () => {
-  const dummyData = [
+const MainReviews = () => {
+  // [이윤지 작업] 리뷰 랜덤으로 5개 리스트 출력해주면 됩니다.
+  // 메인 임시로 적용하기 위해 더미데이터 사용함 (실제 데이터 사용하면 아래 지워주세요!!)
+  const feeds = [
     {
       id: 1,
       like: 4,
@@ -58,12 +60,13 @@ const FeedTestPage = () => {
       date: "2024,10,27"
     }
   ];
+
   return (
-    <ul className="reviewTestPage">
-      {dummyData.map((data, idx) => {
+    <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
+      {feeds.map((feed) => {
         return (
-          <li key={idx}>
-            <FeedCard feed={data} />
+          <li key={feed.id}>
+            <FeedCard feed={feed} type={"main"} />
           </li>
         );
       })}
@@ -71,4 +74,4 @@ const FeedTestPage = () => {
   );
 };
 
-export default FeedTestPage;
+export default MainReviews;

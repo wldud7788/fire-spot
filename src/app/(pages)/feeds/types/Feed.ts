@@ -1,10 +1,12 @@
 export interface FeedItem {
   id: number;
-  time: string;
+  like: number;
+  title: string;
+  desc: string;
+  img: string;
+  firstImageUrl?: string;
   profileImg: string;
   userName: string;
-  desc: string;
-  img: string[];
-  firstImageUrl: string;
-  like: number;
+  date: string;
+  time?: number;
 }
