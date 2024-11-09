@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChatMessagePost, ChatRoomMessageInfo } from "./types/chat.types";
+import { ChatMessageInsert, ChatRoomMessageInfo } from "./types/chat.types";
 import { cn } from "@/_lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -29,7 +29,7 @@ const ChatRoomMessageSection = ({
       message: messageInput,
       room_id: roomId,
       user_id: loginUserId
-    } as ChatMessagePost;
+    } as ChatMessageInsert;
 
     postChatMessage(messagePost);
   };

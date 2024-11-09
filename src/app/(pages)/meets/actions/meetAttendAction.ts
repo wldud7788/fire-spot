@@ -1,5 +1,6 @@
 "use server";
 
+import { postChatRoom } from "@/_components/chat/service/chatService";
 import { createClient } from "@/_utils/supabase/server";
 
 const fetchMeetAttendeeByMeetId = async (meetId: string | number) => {
@@ -54,6 +55,7 @@ const postMeetAttendee = async (meetId: number) => {
       console.error(meetAttendeeError);
       throw new Error("postMeetAttendee Error,");
     }
+
     return data;
   } catch (e) {
     console.error(e);

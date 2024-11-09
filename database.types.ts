@@ -4,7 +4,8 @@ import {
   ChatRoomInfo,
   ChatRoomMessageInfo,
   ChatRoomSelect,
-  ChatRoomTitle
+  ChatRoomTitle,
+  ChatRoomType
 } from "@/_components/chat/types/chat.types";
 import { ProfileSelect } from "@/_components/chat/types/Profile.types";
 import { User } from "@supabase/supabase-js";
@@ -162,21 +163,21 @@ export type Database = {
           id: number;
           meet_id: number | null;
           sos_id: number | null;
-          type: string;
+          type: ChatRoomType;
         };
         Insert: {
           created_at?: string;
           id?: number;
           meet_id?: number | null;
           sos_id?: number | null;
-          type?: string;
+          type?: ChatRoomType;
         };
         Update: {
           created_at?: string;
           id?: number;
           meet_id?: number | null;
           sos_id?: number | null;
-          type?: string;
+          type?: ChatRoomType;
         };
         Relationships: [
           {
