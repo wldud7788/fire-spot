@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/_components/ui/select";
+} from "@/_components/search/dropdown/select";
 import { REGIONS } from "@/_utils/regions";
 
 interface DropdownRegionsProps {

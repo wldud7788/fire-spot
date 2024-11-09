@@ -30,7 +30,7 @@ const CSearchInput = forwardRef<HTMLInputElement, Props>(
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         className={clsx(
-          "search_icon relative z-10 w-full rounded-2xl border border-slate-300 bg-transparent focus:outline-none",
+          "search_icon input_focus_none relative z-10 w-full rounded-2xl border border-slate-300 bg-transparent",
           className
         )}
         aria-label="검색어 입력"
