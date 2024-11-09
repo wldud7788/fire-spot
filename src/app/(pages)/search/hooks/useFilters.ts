@@ -33,13 +33,13 @@ export const useFilters = (camps: Camp[]) => {
 
     if (filters.campingTypes.length > 0) {
       result = result.filter((camp) =>
-        filters.campingTypes.some((type) => camp.induty?.includes(type))
+        filters.campingTypes.every((type) => camp.induty?.includes(type))
       );
     }
 
     if (filters.amenities.length > 0) {
       result = result.filter((camp) =>
-        filters.amenities.some(
+        filters.amenities.every(
           (amenity) =>
             camp.glampInnerFclty?.includes(amenity) ||
             camp.caravInnerFclty?.includes(amenity)
@@ -49,7 +49,7 @@ export const useFilters = (camps: Camp[]) => {
 
     if (filters.groundTypes.length > 0) {
       result = result.filter((camp) =>
-        filters.groundTypes.some((type) => {
+        filters.groundTypes.every((type) => {
           const bottomTypes = {
             잔디: camp.siteBottomCl1,
             파쇄석: camp.siteBottomCl2,
