@@ -35,26 +35,34 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
   return (
     <div className="camp_detail">
-      <div className="inner">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
         {/* 캠핑장 상세 최상단 */}
-        <div className="detail_section">
-          <div className="left_area">슬라이드 영역</div>
-          <div className="right_area">
-            <div className="info">
+        <div className="detail_section flex items-center gap-[40px]">
+          <div className="left_area w-[calc(100%-500px)] w-full overflow-hidden rounded-[12px]">
+            <img src={camp?.firstImageUrl} alt={`${camp?.facltNm} 이미지`} />
+          </div>
+          <div className="right_area w-full max-w-[460px] rounded-[12px] shadow-custom">
+            <div className="info px-[50px] py-[40px]">
               <div className="cont">
-                <h1>{camp?.facltNm}</h1>
-                <p>{camp?.addr1}</p>
-                <p>
-                  <span>20.5℃ 맑음</span>
-                  <span>249Km</span>
-                </p>
+                <h1 className="text-[24px] font-bold">{camp?.facltNm}</h1>
+                <p className="mb-[20px] mt-[10px]">{camp?.addr1}</p>
                 <ul>
-                  <li>#파쇄석 바닥</li>
-                  <li>#사진 맛집</li>
-                  <li>#프라이빗</li>
-                  <li>#야경이 예쁜</li>
-                  <li>#반려견 동반</li>
+                  <li>
+                    {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
+                  </li>
+                  <li>
+                    {/* [이윤지 작업] 리뷰 갯수 = 리뷰 ${리뷰 카운트}개  */}
+                    <button type="button">리뷰 00개</button>
+                  </li>
                 </ul>
+                <dl>
+                  <dt>캠핑장 소개</dt>
+                  <dd>{camp?.induty}</dd>
+                </dl>
+                <dl>
+                  <dt>주변 정보</dt>
+                  <dd>{camp?.sbrsEtc}</dd>
+                </dl>
               </div>
               <div className="btn_area">
                 <button>스크랩</button>
@@ -68,7 +76,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 소개 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 소개</h2>
-          {/* <p>{camp.featureNm ? camp.featureNm : camp.intro}</p> */}
+          <p>{camp?.featureNm ? camp?.featureNm : camp?.intro}</p>
+          <ul>
+            <li>{camp?.caravInnerFclty}</li>
+          </ul>
         </div>
         {/*// 캠핑장 소개 */}
 
