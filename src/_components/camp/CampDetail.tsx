@@ -1,5 +1,6 @@
 "use client";
 
+import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 
@@ -88,6 +89,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 위치 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 위치</h2>
+          {camp && <DetailMap camp={camp} />}
         </div>
         {/*// 캠핑장 위치 */}
 

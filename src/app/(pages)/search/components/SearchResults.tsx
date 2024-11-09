@@ -1,6 +1,6 @@
 import SearchBar from "@/_components/search/searchBar/SearchBar";
 import { Camp } from "../../camps/types/Camp";
-import { useMap } from "../hooks/useMap";
+import { useMap } from "../hooks/useSearchMap";
 import { FilterState } from "../types/filters";
 import { FilterSelect } from "./filter/FilterSelect";
 import {

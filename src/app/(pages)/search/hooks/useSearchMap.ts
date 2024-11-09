@@ -1,56 +1,28 @@
 import { useEffect, useRef, useCallback } from "react";
-import type {
-  MapInstance,
-  MapOptions,
-  NaverLatLng,
-  NaverMarker
-} from "../types/map";
+import type { MapOptions, NaverMarker } from "../../../../type/map";
 import { MAP_CONFIG } from "../constants/map";
 import { Camp } from "../../camps/types/Camp";
+import { useBaseMap } from "../../../../_hooks/useBaseMap";
 
 export const useMap = (camps: Camp[]) => {
-  const mapInstanceRef = useRef<MapInstance | null>(null);
+  const { mapInstanceRef, initializeMapBase, cleanup } = useBaseMap();
 
   const initializeMap = useCallback(() => {
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.map.destroy();
-      mapInstanceRef.current = null;
-    }
-
-    const mapElement = document.getElementById("map");
-    if (!mapElement || typeof window === "undefined" || !window.naver?.maps)
-      return;
-
-    try {
-      const mapOptions: MapOptions = {
-        center: new window.naver.maps.LatLng(
-          MAP_CONFIG.INITIAL_CENTER.lat,
-          MAP_CONFIG.INITIAL_CENTER.lng
-        ),
-        zoom: MAP_CONFIG.INITIAL_ZOOM,
-        scaleControl: false,
-        mapDataControl: false,
-        zoomControl: true,
-        zoomControlOptions: {
-          position: window.naver.maps.Position.TOP_RIGHT
-        }
-      };
-
-      const map = new window.naver.maps.Map(mapElement, mapOptions);
-      const infoWindow = new window.naver.maps.InfoWindow({ content: "" });
-
-      mapInstanceRef.current = {
-        map,
-        markers: [],
-        infoWindow
-      };
-
-      return mapInstanceRef.current;
-    } catch (error) {
-      console.error("Map initialization error:", error);
-      return null;
-    }
-  }, []);
+    const options: MapOptions = {
+      center: new window.naver.maps.LatLng(
+        MAP_CONFIG.INITIAL_CENTER.lat,
+        MAP_CONFIG.INITIAL_CENTER.lng
+      ),
+      zoom: MAP_CONFIG.INITIAL_ZOOM,
+      scaleControl: false,
+      mapDataControl: false,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: window.naver.maps.Position.TOP_RIGHT
+      }
+    };
+    return initializeMapBase("map", options);
+  }, [initializeMapBase]);
 
   const moveToMarker = useCallback((selectedCamp: Camp) => {
     if (!mapInstanceRef.current || !window.naver?.maps) return;
@@ -112,12 +84,9 @@ export const useMap = (camps: Camp[]) => {
 
     return () => {
       clearTimeout(timer);
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.map.destroy();
-        mapInstanceRef.current = null;
-      }
+      cleanup();
     };
-  }, [camps, initializeMap, createMarkers]);
+  }, [camps, initializeMap, createMarkers, cleanup]);
 
   return { moveToMarker };
 };
