@@ -1,6 +1,6 @@
 export const variants = {
   main: {
-    container: "w-[400px] sm:w-[500px] md:w-[600px] lg:w-[800px]",
+    container: "",
     input: "h-[60px]",
     button:
       "h-[60px] w-[70px] rounded-2xl bg-blue-700 text-white hover:bg-blue-800",
