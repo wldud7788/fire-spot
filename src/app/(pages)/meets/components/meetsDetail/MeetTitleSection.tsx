@@ -6,9 +6,14 @@ import { ButtonConfig } from "../../hooks/useMeetDetailController";
 interface Props {
   meetWithCamp: MeetWithCamp;
   buttonConfig: ButtonConfig;
+  hasChatAccess: boolean;
 }
 
-const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
+const MeetTitleSection = ({
+  meetWithCamp,
+  buttonConfig,
+  hasChatAccess
+}: Props) => {
   const { meet, camp, attendee_count } = meetWithCamp;
   const tags = [];
 
@@ -80,12 +85,21 @@ const MeetTitleSection = ({ meetWithCamp, buttonConfig }: Props) => {
           >
             {buttonConfig.text}
           </button>
-          <button
-            className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-[#D0D0D0]`}
-            disabled={buttonConfig.disabled}
-          >
-            채팅하기
-          </button>
+          {hasChatAccess && (
+            <button
+              className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-black`}
+            >
+              모임 톡
+            </button>
+          )}
+          {!hasChatAccess && (
+            <button
+              className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-[#D0D0D0]`}
+              disabled
+            >
+              모임 톡
+            </button>
+          )}
         </section>
       </div>
     </div>
