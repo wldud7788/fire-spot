@@ -4,13 +4,14 @@ import { ChatRoomInfo } from "../types/chat.types";
 import { fetchChatRoomList } from "../service/chatService";
 
 const useChatList = () => {
-  const { data: chatRoomList = [] as ChatRoomInfo[], error } = useQuery<
-    ChatRoomInfo[]
-  >({
+  const {
+    data: chatRoomList = [] as ChatRoomInfo[],
+    error: chatRoomListError
+  } = useQuery<ChatRoomInfo[]>({
     queryKey: queryKey.chat.chatRoomList,
     queryFn: () => fetchChatRoomList()
   });
-  if (error) throw new Error(error.message);
+  if (chatRoomListError) throw new Error(chatRoomListError.message);
 
   return { chatRoomList };
 };

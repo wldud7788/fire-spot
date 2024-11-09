@@ -16,9 +16,7 @@ export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
       }
     );
 
-    if (error) {
-      throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return data ?? ([] as ChatRoomInfo[]);
   } catch (e) {
@@ -36,9 +34,7 @@ export const fetchChatRoomTitleData = async (roomId: number) => {
       }
     );
 
-    if (error) {
-      throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return data[0];
   } catch (e) {
@@ -48,14 +44,23 @@ export const fetchChatRoomTitleData = async (roomId: number) => {
 
 /**
  *
- * title: meet  meet.id = chat_room.meet_id
  * headcount: chat_attendee by roomId
- * message :
+ * message : chat_message room_id = CR.id
  *
  *
+ * message 위치는 유저와 비교
  */
 export const fetchChatMessageList = async (roomId: number) => {
-  // var a = {
-  //   headcount,
-  // }
+  try {
+    const { data, error } = await supabase.rpc(
+      supabaseRpc.chat.getChatMessage,
+      {
+        room_id: roomId
+      }
+    );
+    if (error) throw new Error(error.message);
+    return data;
+  } catch (e) {
+    console.error("Error fetchChatMessageList ", e);
+  }
 };

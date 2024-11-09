@@ -7,7 +7,7 @@ type Props = {
 
 const ChatRoomTitleSection = ({ chatRoomTitle }: Props) => {
   if (!chatRoomTitle) return <>더미 채팅방 헤더</>;
-  const { chatRoom, meet, headcount } = chatRoomTitle;
+  const { meet, headcount } = chatRoomTitle;
 
   return (
     <div className="mb-20 flex gap-4">

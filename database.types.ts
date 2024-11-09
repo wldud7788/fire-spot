@@ -2,6 +2,7 @@ import {
   ChatAttendeeSelect,
   ChatMessageSelect,
   ChatRoomInfo,
+  ChatRoomMessageInfo,
   ChatRoomSelect,
   ChatRoomTitle
 } from "@/_components/chat/types/chat.types";
@@ -466,6 +467,10 @@ export type Database = {
       get_chat_room_title: {
         Args: Record<string, number>;
         Returns: ChatRoomTitle[];
+      };
+      get_chat_message: {
+        Args: Record<string, number>;
+        Returns: ChatRoomMessageInfo[];
       };
       get_meet_list1: {
         Args: Record<PropertyKey, never>;

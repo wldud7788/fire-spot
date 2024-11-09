@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
-import { ChatRoomInfo, ChatRoomTitle } from "../types/chat.types";
+import { ChatRoomMessageInfo, ChatRoomTitle } from "../types/chat.types";
 import {
-  fetchChatRoomList,
+  fetchChatMessageList,
   fetchChatRoomTitleData
 } from "../service/chatService";
 
@@ -14,4 +14,17 @@ export const useChatRoomTitle = (roomId: number) => {
   if (error) throw new Error(error.message);
 
   return { chatRoomTitle };
+};
+
+export const useChatRoomMessage = (roomId: number) => {
+  const { data: chatMessage, error } = useQuery<
+    ChatRoomMessageInfo[] | undefined
+  >({
+    queryKey: queryKey.chat.chatRoomMessage(roomId),
+    queryFn: () => fetchChatMessageList(roomId)
+  });
+
+  if (error) throw new Error(error.message);
+
+  return { chatMessage };
 };

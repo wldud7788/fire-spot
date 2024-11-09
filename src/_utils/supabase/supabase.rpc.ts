@@ -6,7 +6,8 @@ const supabaseRpc = {
   },
   chat: {
     getChatRoomList: "get_chat_room_list",
-    getChatRoomTitle: "get_chat_room_title"
+    getChatRoomTitle: "get_chat_room_title",
+    getChatMessage: "get_chat_message"
   }
 } as const;
 
