@@ -8,6 +8,18 @@ interface CampCardProps {
 }
 
 export const CampCard: React.FC<CampCardProps> = ({ camp, onSelect }) => {
+  const getGroundTypes = () => {
+    const groundTypes = {
+      잔디: camp.siteBottomCl1,
+      파쇄석: camp.siteBottomCl2,
+      데크: camp.siteBottomCl3,
+      자갈: camp.siteBottomCl4,
+      맨흙: camp.siteBottomCl5
+    };
+    return Object.entries(groundTypes)
+      .filter(([_, value]) => Number(value) > 0)
+      .map(([type]) => type);
+  };
   return (
     <div className="rounded-lg border bg-white p-4 shadow-sm transition-all hover:shadow-md">
       <button
@@ -49,9 +61,12 @@ export const CampCard: React.FC<CampCardProps> = ({ camp, onSelect }) => {
               <span className="font-medium text-gray-900">249Km</span>
               <span className="h-1 w-1 rounded-full bg-gray-300"></span>
               <span>{camp.induty}</span>
-              <span className="h-1 w-1 rounded-full bg-gray-300"></span>
-              <span>파쇄석</span>
-              <span className="h-1 w-1 rounded-full bg-gray-300"></span>
+              {getGroundTypes().map((type) => (
+                <React.Fragment key={type}>
+                  <span className="h-1 w-1 rounded-full bg-gray-300"></span>
+                  <span>{type}</span>
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>
