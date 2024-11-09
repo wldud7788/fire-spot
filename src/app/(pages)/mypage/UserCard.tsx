@@ -2,6 +2,16 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { createClient } from "@/_utils/supabase/client";
+import FollowsCount from "@/_components/follower/FollowsCount";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import {
+  getFollowerData,
+  getFollowingData
+} from "@/_utils/service/followService";
+import {
+  QK_FOLLOWERS,
+  QK_FOLLOWINGS
+} from "@/_utils/api/queryKeys/followQueryKeys";
 
 const UserCard: React.FC = () => {
   const [nickname, setNickname] = useState<string | null>(null);
@@ -10,6 +20,17 @@ const UserCard: React.FC = () => {
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const supabase = createClient();
+
+  const { data: followers, isError: isFollowersError } = useSuspenseQuery({
+    queryKey: QK_FOLLOWERS(userId),
+    queryFn: () => getFollowerData(userId),
+    staleTime: 0
+  });
+  const { data: followings, isError: isFollowingsError } = useSuspenseQuery({
+    queryKey: QK_FOLLOWINGS(userId),
+    queryFn: () => getFollowingData(userId),
+    staleTime: 0
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -106,6 +127,9 @@ const UserCard: React.FC = () => {
     }
   }, [profileImage, userId, supabase]);
 
+  if (isFollowersError) return <div>팔로워 데이터를 전달받지 못했습니다.</div>;
+  if (isFollowingsError) return <div>팔로잉 데이터를 전달받지 못했습니다.</div>;
+
   return (
     <div className="max-w-sm rounded-lg border p-4 shadow-md">
       {profileUrl && (
@@ -116,6 +140,12 @@ const UserCard: React.FC = () => {
         />
       )}
       <h2 className="mb-2 text-center text-lg font-semibold">{nickname}</h2>
+      <div className="follower_card">
+        <FollowsCount
+          followerCount={followings?.length}
+          followingCount={followers?.length}
+        />
+      </div>
       <div className="flex flex-col space-y-2">
         <input
           type="text"

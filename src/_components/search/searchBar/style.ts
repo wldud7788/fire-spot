@@ -15,8 +15,8 @@ export const variants = {
     showRegions: false
   },
   search: {
-    container: "w-[70px]",
-    input: "h-[50px]",
+    container: "",
+    input: "h-[50px] w-[370px]",
     button: "",
     showButton: false,
     showRegions: false

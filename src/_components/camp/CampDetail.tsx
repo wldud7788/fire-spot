@@ -26,7 +26,9 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
-  const camp = camps?.find((item: Camp) => item.contentId === paramsId);
+  const camp: Camp | undefined = camps?.find(
+    (item: Camp) => item.contentId === paramsId
+  );
   const nearbyInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
 
   console.log(camp);
@@ -74,9 +76,11 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">주변 정보</h2>
           <ul>
-            {nearbyInfo?.map((item) => {
-              return <li key={item}>{item}</li>;
-            })}
+            {nearbyInfo ? (
+              nearbyInfo?.map((item) => <li key={item}>{item}</li>)
+            ) : (
+              <li>주변 정보가 없습니다.</li>
+            )}
           </ul>
         </div>
         {/*// 주변 정보 */}
