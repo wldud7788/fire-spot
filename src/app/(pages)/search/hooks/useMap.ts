@@ -69,7 +69,7 @@ export const useMap = (camps: Camp[]) => {
         <h4 style="margin-bottom:5px;font-weight:bold;">${selectedCamp.facltNm}</h4>
         <p style="margin:5px 0;">${selectedCamp.addr1}</p>
         <p style="margin:5px 0;">${selectedCamp.sbrsEtc}</p>
-        <a href="/camps/${selectedCamp.contentId}" 
+        <a href="/camp-detail/${selectedCamp.contentId}" 
            style="display:inline-block;margin-top:5px;text-decoration:none;color:black;">
           자세히보기
         </a>
