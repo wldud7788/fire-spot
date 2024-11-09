@@ -140,8 +140,11 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
     buttonConfig.disabled = false;
   }
 
+  console.log("attendeeId", attendeeId);
+
   return {
-    buttonConfig
+    buttonConfig,
+    hasChatAccess: !!attendeeId
   };
 };
 

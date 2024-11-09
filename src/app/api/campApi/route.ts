@@ -12,20 +12,15 @@ export async function GET(request: Request) {
   const page = searchParams.get("page");
   const numOfRows = searchParams.get("numOfRows");
 
+  const res = await fetch(
+    `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`
+  );
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
   try {
-    const res = await fetch(
-      `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`,
-      {
-        next: {
-          revalidate: 86400
-        }
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
     const data: CampApiResponse = await res.json();
     return NextResponse.json(data.response.body.items.item);
   } catch (error) {

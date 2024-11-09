@@ -89,9 +89,6 @@ body {
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
 }
-.header_search {
-  position: relative;
-}
-.header_search input:focus {
-  border: none !important;
+.input_focus_none {
+  @apply focus:border-0 focus:outline-none focus:ring-0 focus:ring-offset-0;
 }

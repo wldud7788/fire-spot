@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-10 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
+      className={`fixed left-0 right-0 top-0 z-40 bg-white ${isScrolled ? "shadow-md" : "shadow-none"}`}
     >
       <div className="relative mx-auto max-w-[1540px] bg-white p-5">
         {/* 로고 + 검색 영역 */}
@@ -38,19 +38,19 @@ const Header = () => {
           </div>
           {/* 메뉴 Nav */}
           <nav className="hidden gap-5 lg:flex">
-            <Link href={"/"}>캠핑 가이드</Link>
-            <Link href={"/"}>캠핑장</Link>
-            <Link href={"/meets"}>캠핑크루</Link>
-            <Link href={"/"}>후기</Link>
+            <Link href={"./guide"}>캠핑 가이드</Link>
+            <Link href={"./camps"}>캠핑장</Link>
+            <Link href={"./meets"}>커뮤니티</Link>
+            <Link href={"./"}>후기</Link>
           </nav>
           {/* 아이콘 */}
           <div className="flex items-center">
-            <Link href={"/"} className="header_icon bg-map"></Link>
+            <Link href={"/search"} className="header_icon bg-map"></Link>
             <Link
               href={`${SERVER_PAGE_URL.chat}`}
               className="header_icon bg-chat"
             ></Link>
-            <Link href={"/"} className="header_icon bg-sos"></Link>
+            <Link href={"/sos"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
           </div>
         </div>
