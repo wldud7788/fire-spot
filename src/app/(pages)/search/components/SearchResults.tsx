@@ -3,7 +3,13 @@ import { Camp } from "../../camps/types/Camp";
 import { useMap } from "../hooks/useMap";
 import { FilterState } from "../types/filters";
 import { FilterSelect } from "./filter/FilterSelect";
-import { FACILITIES_OPTIONS, PET_OPTIONS } from "../constants/filterOptions";
+import {
+  AMENITIES,
+  CAMPING_TYPES,
+  FACILITIES_OPTIONS,
+  GROUND_TYPES,
+  PET_OPTIONS
+} from "../constants/filterOptions";
 import { REGIONS } from "@/_utils/regions";
 import { CampCard } from "./CampCard";
 import { ActiveFilters } from "./filter/ActiveFilters";
@@ -51,6 +57,27 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
             options={FACILITIES_OPTIONS}
             placeholder="부대시설"
             onChange={(value) => toggleArrayFilter("facilities", value)}
+            isMulti
+          />
+          <FilterSelect
+            value={filters.campingTypes}
+            options={CAMPING_TYPES}
+            placeholder="종류"
+            onChange={(value) => toggleArrayFilter("campingTypes", value)}
+            isMulti
+          />
+          <FilterSelect
+            value={filters.amenities}
+            options={AMENITIES}
+            placeholder="편의시설"
+            onChange={(value) => toggleArrayFilter("amenities", value)}
+            isMulti
+          />
+          <FilterSelect
+            value={filters.groundTypes}
+            options={GROUND_TYPES}
+            placeholder="사이트"
+            onChange={(value) => toggleArrayFilter("groundTypes", value)}
             isMulti
           />
         </div>

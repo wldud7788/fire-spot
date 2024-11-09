@@ -53,7 +53,7 @@ export const useFilters = (camps: Camp[]) => {
           const bottomTypes = {
             잔디: camp.siteBottomCl1,
             파쇄석: camp.siteBottomCl2,
-            테크: camp.siteBottomCl3,
+            데크: camp.siteBottomCl3,
             자갈: camp.siteBottomCl4,
             맨흙: camp.siteBottomCl5
           };
