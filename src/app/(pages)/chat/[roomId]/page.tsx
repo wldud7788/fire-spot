@@ -27,7 +27,11 @@ const ChatRoom = ({ params }: Props) => {
   return (
     <div>
       <ChatRoomTitleSection chatRoomTitle={chatRoomTitle} />
-      <ChatRoomMessageSection chatMessage={chatMessage} loginUserId={user.id} />
+      <ChatRoomMessageSection
+        chatMessage={chatMessage}
+        loginUserId={user.id}
+        roomId={roomId}
+      />
     </div>
   );
 };

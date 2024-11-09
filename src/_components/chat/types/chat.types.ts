@@ -23,6 +23,12 @@ export type ChatRoomMessageInfo = {
   headcount: number;
 };
 
+export type ChatMessagePost = {
+  message: string;
+  room_id: number;
+  user_id: string;
+};
+
 export type ChatMessageSelect =
   Database["public"]["Tables"]["chat_message"]["Row"];
 export type ChatMessageInsert =

@@ -1,7 +1,11 @@
 import { createClient } from "@/_utils/supabase/client";
 import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 import { Order, ORDER_STRING } from "@/types/order.types";
-import { ChatRoomInfo, ChatRoomTitle } from "../types/chat.types";
+import {
+  ChatMessagePost,
+  ChatRoomInfo,
+  ChatRoomTitle
+} from "../types/chat.types";
 
 const supabase = createClient();
 export const fetchChatRoomList = async (order: Order = ORDER_STRING.desc) => {
@@ -58,6 +62,18 @@ export const fetchChatMessageList = async (roomId: number) => {
         room_id: roomId
       }
     );
+    if (error) throw new Error(error.message);
+    return data;
+  } catch (e) {
+    console.error("Error fetchChatMessageList ", e);
+  }
+};
+
+export const postChatMessage = async (messagePost: ChatMessagePost) => {
+  try {
+    const { data, error } = await supabase
+      .from("chat_message")
+      .insert({ ...messagePost });
     if (error) throw new Error(error.message);
     return data;
   } catch (e) {
