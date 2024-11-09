@@ -32,8 +32,8 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
   return (
     <div className="flex h-screen w-[400px] flex-col border-r">
       <div className="flex-shrink-0 border-b p-4">
-        <SearchBar variant="search" className="w-full" />
-        <div className="flex flex-wrap gap-2">
+        <SearchBar variant="search" />
+        <div className="my-7 flex flex-wrap gap-2">
           <FilterSelect
             value={filters.region}
             options={REGIONS}
@@ -53,7 +53,6 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
             onChange={(value) => toggleArrayFilter("facilities", value)}
             isMulti
           />
-          {/* Similar FilterSelect components for other filters */}
         </div>
       </div>
 

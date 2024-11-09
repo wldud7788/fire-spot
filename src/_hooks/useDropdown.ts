@@ -1,14 +1,29 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
+import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
 
-const useDropdown = () => {
+const useDropdown = (dropdownType: "main" | "header" | "search") => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const isTogglingRef = useRef(false);
 
+  const activeDropdown = useDropdownStore((state) => state.activeDropdown);
+  const setActiveDropdown = useDropdownStore(
+    (state) => state.setActiveDropdown
+  );
+
   const toggleDropdown = () => {
     isTogglingRef.current = true;
-    setIsDropdownOpen((prev) => !prev);
-    // 토글 후 짧은 시간 뒤에 플래그 초기화
+    const newState = !isDropdownOpen;
+
+    if (newState) {
+      setActiveDropdown(dropdownType);
+      setIsDropdownOpen(true);
+    } else {
+      setActiveDropdown(null);
+      setIsDropdownOpen(false);
+    }
+
     setTimeout(() => {
       isTogglingRef.current = false;
     }, 100);
@@ -16,10 +31,12 @@ const useDropdown = () => {
 
   const closeDropdown = () => {
     setIsDropdownOpen(false);
+    if (activeDropdown === dropdownType) {
+      setActiveDropdown(null);
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    // 토글 중이면 외부 클릭 무시
     if (isTogglingRef.current) {
       return;
     }
@@ -28,7 +45,6 @@ const useDropdown = () => {
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      // input 엘리먼트 클릭 시 무시
       const target = event.target as HTMLElement;
       if (target.tagName.toLowerCase() === "input") {
         return;
@@ -44,6 +60,12 @@ const useDropdown = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (activeDropdown && activeDropdown !== dropdownType && isDropdownOpen) {
+      closeDropdown();
+    }
+  }, [activeDropdown]);
 
   return {
     isDropdownOpen,
