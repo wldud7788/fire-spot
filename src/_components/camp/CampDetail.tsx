@@ -29,9 +29,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   const camp: Camp | undefined = camps?.find(
     (item: Camp) => item.contentId === paramsId
   );
-  const nearbyInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
+  const posblFcltyClInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
+  const sbrsClInfo: string[] | undefined = camp?.sbrsCl.split(",");
 
-  console.log(camp);
+  console.log(camp, sbrsClInfo);
 
   return (
     <div className="camp_detail">
@@ -57,11 +58,27 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </ul>
                 <dl>
                   <dt>캠핑장 소개</dt>
-                  <dd>{camp?.induty}</dd>
+                  <dd>
+                    <p>{camp?.induty}</p>
+                    <p>{camp?.caravInnerFclty}</p>
+                    {sbrsClInfo
+                      ? sbrsClInfo.map((item, idx) => {
+                          return <p key={`${item}-${idx}`}>{item}</p>;
+                        })
+                      : ""}
+                  </dd>
                 </dl>
                 <dl>
                   <dt>주변 정보</dt>
-                  <dd>{camp?.sbrsEtc}</dd>
+                  <dd>
+                    {posblFcltyClInfo ? (
+                      posblFcltyClInfo?.map((item, idx) => (
+                        <p key={`${item}-${idx}`}>{item}</p>
+                      ))
+                    ) : (
+                      <p>주변 정보가 없습니다.</p>
+                    )}
+                  </dd>
                 </dl>
               </div>
               <div className="btn_area">
@@ -78,8 +95,31 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
           <h2 className="text-[36px] font-bold">캠핑장 소개</h2>
           <p>{camp?.featureNm ? camp?.featureNm : camp?.intro}</p>
           <ul>
+            <li>{camp?.induty}</li>
             <li>{camp?.caravInnerFclty}</li>
+            {sbrsClInfo
+              ? sbrsClInfo.map((item, idx) => {
+                  return <li key={`${item}-${idx}`}>{item}</li>;
+                })
+              : ""}
           </ul>
+        </div>
+        {/*// 캠핑장 소개 */}
+
+        {/* 캠핑장 소개 */}
+        <div className="detail_section mt-[60px]">
+          <h2 className="text-[36px] font-bold">캠핑장 예약하기</h2>
+          <ul>
+            <li>
+              예약 가능한 날:{" "}
+              {camp?.operDeCl ? camp?.operDeCl : "정보를 확인할 수 없습니다."}
+            </li>
+            <li>
+              예약 사이트:{" "}
+              {camp?.resveUrl ? camp?.resveUrl : "정보를 확인할 수 없습니다."}
+            </li>
+          </ul>
+          <p>자세한 예약 방법은 캠핑장으로 확인해주세요.</p>
         </div>
         {/*// 캠핑장 소개 */}
 
@@ -87,8 +127,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">주변 정보</h2>
           <ul>
-            {nearbyInfo ? (
-              nearbyInfo?.map((item) => <li key={item}>{item}</li>)
+            {posblFcltyClInfo ? (
+              posblFcltyClInfo?.map((item) => <li key={item}>{item}</li>)
             ) : (
               <li>주변 정보가 없습니다.</li>
             )}
