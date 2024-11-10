@@ -6,7 +6,7 @@ import {
   useChatRoomMessage,
   useChatRoomTitle
 } from "@/_components/chat/hooks/useChatRoom";
-import useUser from "@/hooks/useUser";
+import useUser from "@/_hooks/useUser";
 import React from "react";
 
 type Props = {
