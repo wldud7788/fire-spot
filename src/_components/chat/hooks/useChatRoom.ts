@@ -44,7 +44,9 @@ export const useChatRoomMessage = (roomId: number) => {
       },
       (payload) => {
         console.log(payload);
-        queryClient.invalidateQueries(queryKey.chat.chatRoomMessage(roomId));
+        queryClient.invalidateQueries({
+          queryKey: queryKey.chat.chatRoomMessage(roomId)
+        });
       }
     )
     .subscribe();
