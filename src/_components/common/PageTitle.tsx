@@ -1,5 +1,5 @@
 type PageTitleProps = {
-  text: string;
+  text: string | undefined;
 };
 
 const PageTitle = ({ text }: PageTitleProps) => {
