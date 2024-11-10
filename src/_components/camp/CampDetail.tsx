@@ -2,6 +2,7 @@
 
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
+import CampReviewSlide from "./CampReviewSlide";
 
 type CampDetailProps = {
   paramsId: string;
@@ -93,9 +94,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         </div>
         {/*// 캠핑장 날씨를 알려드려요 */}
 
-        {/* 캠핑장 리뷰 */}
+        {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 리뷰</h2>
+          <CampReviewSlide campId={paramsId} />
         </div>
         {/*// 캠핑장 리뷰 */}
 
