@@ -3,6 +3,7 @@
 import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 type CampDetailProps = {
   paramsId: string;
@@ -77,7 +78,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                         <p key={`${item}-${idx}`}>{item}</p>
                       ))
                     ) : (
-                      <p>주변 정보가 없습니다.</p>
+                      <p>정보없음</p>
                     )}
                   </dd>
                 </dl>
@@ -139,33 +140,43 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
         {/* 캠핑장 위치 */}
         <div className="detail_section mt-[60px]">
-          <h2 className="text-[36px] font-bold">캠핑장 위치</h2>
+          <div className="tit_area">
+            <h2 className="text-[36px] font-bold">캠핑장 위치</h2>
+          </div>
           {camp && <DetailMap camp={camp} />}
         </div>
         {/*// 캠핑장 위치 */}
 
         {/* 캠핑장 날씨를 알려드려요 */}
         <div className="detail_section mt-[60px]">
-          <h2 className="text-[36px] font-bold">캠핑장 날씨를 알려드려요</h2>
+          <div className="tit_area">
+            <h2 className="text-[36px] font-bold">캠핑장 날씨를 알려드려요.</h2>
+            <span>캠핑장 이때 방문하면 좋아요 : {camp?.operPdCl}</span>
+          </div>
         </div>
         {/*// 캠핑장 날씨를 알려드려요 */}
 
         {/* 캠핑장 리뷰 */}
         <div className="detail_section mt-[60px]">
-          <h2 className="text-[36px] font-bold">캠핑장 리뷰</h2>
+          <div className="tit_area">
+            <div className="left_area">
+              <h2 className="text-[36px] font-bold">캠핑장 리뷰</h2>
+              {/* 이윤지 작업 */}
+              <span>33</span>
+            </div>
+            <div className="right_area">
+              <button type="button">리뷰 쓰기</button>
+            </div>
+          </div>
+          {/* 이윤지 작업 - 리뷰 리스트*/}
         </div>
         {/*// 캠핑장 리뷰 */}
 
-        {/* 댓글 쓰기 */}
-        <div className="detail_section mt-[60px]">
-          <h2 className="text-[36px] font-bold">댓글 쓰기</h2>
-        </div>
-        {/*// 댓글 쓰기 */}
-
         {/* 이 장소와 함께 봤어요 */}
         <div className="detail_section mt-[60px]">
-          <h2 className="text-[36px] font-bold">이 장소와 함께 봤어요</h2>
+          <h2 className="text-[36px] font-bold">비슷한 캠핑장 추천</h2>
         </div>
+        <Link href="/camps">더보기</Link>
         {/*// 이 장소와 함께 봤어요 */}
       </div>
     </div>
