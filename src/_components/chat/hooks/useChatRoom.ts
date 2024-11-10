@@ -1,5 +1,5 @@
 import { createClient } from "@/_utils/supabase/client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
 import { ChatRoomMessageInfo, ChatRoomTitle } from "../types/chat.types";
 import {
@@ -19,12 +19,18 @@ export const useChatRoomTitle = (roomId: number) => {
 
 export const useChatRoomMessage = (roomId: number) => {
   const supabase = createClient();
+  const queryClient = useQueryClient();
   const { data: chatMessage, error } = useQuery<
     ChatRoomMessageInfo[] | undefined
   >({
     queryKey: queryKey.chat.chatRoomMessage(roomId),
     queryFn: () => fetchChatMessageList(roomId)
   });
+
+  console.log(
+    "queryKey.chat.chatRoomMessage(roomId),",
+    queryKey.chat.chatRoomMessage(roomId)
+  );
 
   const channel = supabase
     .channel("schema-db-changes")
@@ -36,7 +42,10 @@ export const useChatRoomMessage = (roomId: number) => {
         table: "chat_message"
         // filter:
       },
-      (payload) => console.log(payload)
+      (payload) => {
+        console.log(payload);
+        queryClient.invalidateQueries(queryKey.chat.chatRoomMessage(roomId));
+      }
     )
     .subscribe();
 
