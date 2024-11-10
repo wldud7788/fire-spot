@@ -4,19 +4,17 @@ import { cn } from "@/_lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { postChatMessage } from "./service/chatService";
+import { useChatRoomMessage } from "./hooks/useChatRoom";
 
 type Props = {
-  chatMessage: ChatRoomMessageInfo[] | undefined;
   loginUserId: string;
   roomId: number;
 };
 
-const ChatRoomMessageSection = ({
-  chatMessage,
-  loginUserId,
-  roomId
-}: Props) => {
+const ChatRoomMessageSection = ({ loginUserId, roomId }: Props) => {
   const [messageInput, setMessageInput] = useState("");
+
+  const { chatMessage } = useChatRoomMessage(roomId);
 
   if (!chatMessage) return <>채팅 목록 불러오는중</>;
 

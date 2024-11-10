@@ -20,18 +20,13 @@ const ChatRoom = ({ params }: Props) => {
   const roomId = Number(params.roomId);
   const user = useUser();
   const { chatRoomTitle } = useChatRoomTitle(roomId);
-  const { chatMessage } = useChatRoomMessage(roomId);
 
   if (!user) return <></>;
 
   return (
     <div>
       <ChatRoomTitleSection chatRoomTitle={chatRoomTitle} />
-      <ChatRoomMessageSection
-        chatMessage={chatMessage}
-        loginUserId={user.id}
-        roomId={roomId}
-      />
+      <ChatRoomMessageSection loginUserId={user.id} roomId={roomId} />
     </div>
   );
 };
