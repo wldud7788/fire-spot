@@ -21,8 +21,10 @@ const Pagination = ({
         이전
       </button>
       <div className="pagination-count relative flex h-[40px] items-center justify-center gap-[5px]">
-        <p className="bg-sub color-main bd-color-main font-bold">{page}</p>/
-        <span className="border border-[#bfbfbf]">{totalPages}</span>
+        <p className="bg-sub color-main bd-color-main border font-bold">
+          {page}
+        </p>
+        /<span className="border border-[#bfbfbf]">{totalPages}</span>
       </div>
       <button
         onClick={onMovePageNext}
