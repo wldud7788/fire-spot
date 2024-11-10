@@ -5,6 +5,7 @@ import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
+import CampNoData from "./CampNoData";
 
 type CampDetailProps = {
   paramsId: string;
@@ -113,7 +114,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                     주변 정보
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap">
-                    {posblFcltyClInfo ? (
+                    {camp?.posblFcltyCl ? (
                       posblFcltyClInfo?.map((item, idx) => (
                         <p
                           className="color-main rounded-[5px] bg-[#FFEFE5] p-[5px] text-[12px]"
@@ -123,7 +124,9 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                         </p>
                       ))
                     ) : (
-                      <p>정보없음</p>
+                      <p className="color-main rounded-[5px] bg-[#FFEFE5] p-[5px] text-[12px]">
+                        정보없음
+                      </p>
                     )}
                   </dd>
                 </dl>
@@ -164,9 +167,19 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               캠핑장 소개
             </h2>
           </div>
-          <p className="color-gray01 text-[16px]">
-            {camp?.featureNm ? camp?.featureNm : camp?.intro}
-          </p>
+
+          {camp?.featureNm || camp?.intro ? (
+            <p className="color-gray01 text-[16px]">
+              {camp?.featureNm ? camp?.featureNm : camp?.intro}
+            </p>
+          ) : (
+            <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
+              <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
+                등록된 캠핑장 소개가 없어요.
+              </p>
+            </div>
+          )}
+
           <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
             {camp?.induty ? (
               <li className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]">
@@ -212,7 +225,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </li>
           </ul>
           <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
-            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[30px] text-[16px]">
+            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
               자세한 예약 방법은 캠핑장으로 확인해주세요.
             </p>
           </div>
@@ -226,20 +239,25 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               주변 정보
             </h2>
           </div>
-          <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
-            {posblFcltyClInfo ? (
-              posblFcltyClInfo?.map((item) => (
+
+          {camp?.posblFcltyCl ? (
+            <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
+              {posblFcltyClInfo?.map((item) => (
                 <li
                   className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]"
                   key={item}
                 >
                   {item}
                 </li>
-              ))
-            ) : (
-              <li>주변 정보가 없습니다.</li>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
+              <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
+                등록된 주변 정보가 없어요.
+              </p>
+            </div>
+          )}
         </div>
         {/*// 주변 정보 */}
 
@@ -269,13 +287,17 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
         {/* 캠핑장 리뷰 */}
         <div className="detail_section mt-[60px]">
-          <div className="tit_area">
-            <div className="left_area mb-[30px] flex items-center gap-[15px]">
+          <div className="tit_area mb-[30px] flex items-center justify-between">
+            <div className="left_area flex items-center gap-[15px]">
               <h2 className="bg-campTit06 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
                 캠핑장 리뷰
               </h2>
               {/* 이윤지 작업 */}
               <ul className="flex items-center">
+                <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold">
+                  {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
+                  33
+                </li>
                 <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
                   <img
@@ -287,18 +309,35 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               </ul>
             </div>
             <div className="right_area">
-              <button type="button">리뷰 쓰기</button>
+              <button
+                type="button"
+                className="color-main bd-color-main rounded-[8px] border p-[10px] text-[18px]"
+              >
+                리뷰 쓰기
+              </button>
             </div>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
+          {false ? (
+            "데이터 넣어주세요. false에 데이터 있는지 없는지 처리, 현재는 노데이터 스타일하려고 false로 임의로해놓았습니다."
+          ) : (
+            <CampNoData text={"등록된 리뷰가 없어요."} />
+          )}
         </div>
         {/*// 캠핑장 리뷰 */}
 
         {/* 이 장소와 함께 봤어요 */}
         <div className="detail_section mb-[30px] mt-[60px]">
-          <h2 className="bg-campTit07 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
-            비슷한 캠핑장 추천
-          </h2>
+          <div className="tit_area mb-[30px]">
+            <h2 className="bg-campTit07 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+              비슷한 캠핑장 추천
+            </h2>
+          </div>
+          {false ? (
+            "데이터 넣어주세요. false에 데이터 있는지 없는지 처리, 현재는 노데이터 스타일하려고 false로 임의로해놓았습니다."
+          ) : (
+            <CampNoData text={"추천 캠핑장이 없어요."} />
+          )}
         </div>
         {/*// 이 장소와 함께 봤어요 */}
 
@@ -306,7 +345,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         <div className="detail_section my-[100px] flex justify-center">
           <Link
             href="/camps"
-            className="color-gray01 block w-full max-w-[300px] rounded-[12px] border border-[#404040] bg-[#a6a6a6] py-[20px] text-center font-bold"
+            className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold"
           >
             목록으로 이동
           </Link>
