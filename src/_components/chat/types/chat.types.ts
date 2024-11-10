@@ -9,6 +9,7 @@ export type ChatRoomInfo = {
   profile: ProfileSelect;
   meet: MeetSelect;
   headcount: number;
+  unreadCount: number;
 };
 
 export type ChatRoomTitle = {

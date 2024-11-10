@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { postChatMessage } from "./service/chatService";
 import { useChatRoomMessage } from "./hooks/useChatRoom";
+import { useChatOnChanges } from "./hooks/useChatRealtime";
 
 type Props = {
   loginUserId: string;
@@ -15,6 +16,7 @@ const ChatRoomMessageSection = ({ loginUserId, roomId }: Props) => {
   const [messageInput, setMessageInput] = useState("");
 
   const { chatMessage } = useChatRoomMessage(roomId);
+  useChatOnChanges(roomId);
 
   if (!chatMessage) return <>채팅 목록 불러오는중</>;
 
@@ -30,6 +32,7 @@ const ChatRoomMessageSection = ({ loginUserId, roomId }: Props) => {
     } as ChatMessageInsert;
 
     postChatMessage(messagePost);
+    setMessageInput("");
   };
 
   return (

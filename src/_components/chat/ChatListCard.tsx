@@ -8,13 +8,21 @@ type Props = {
 };
 
 const ChatListCard = ({ chatRoomInfo }: Props) => {
-  const { chatAttendee, chatRoom, chatMessage, profile, headcount, meet } =
-    chatRoomInfo;
+  const {
+    chatAttendee,
+    chatRoom,
+    chatMessage,
+    profile,
+    headcount,
+    meet,
+    unreadCount
+  } = chatRoomInfo;
 
   // 채팅 메시지가 한 개도 없는 경우 프로필 정보 없음
   return (
     <div className="mb-10 flex gap-4">
       {chatAttendee.is_pin && "핀 버튼"}
+      안읽은 메시지 {unreadCount}
       <div>
         <img
           src={profile?.avatar_url || ""}
