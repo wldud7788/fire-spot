@@ -5,6 +5,7 @@ import {
   ChatMessageInsert,
   ChatRoomInfo,
   ChatRoomInsert,
+  ChatRoomMessageInfo,
   ChatRoomTitle,
   ChatRoomType
 } from "../types/chat.types";
@@ -65,6 +66,8 @@ export const fetchChatMessageList = async (roomId: number) => {
       }
     );
     if (error) throw new Error(error.message);
+
+    if (!data) return [] as ChatRoomMessageInfo[];
     return data;
   } catch (e) {
     console.error("Error fetchChatMessageList ", e);
@@ -116,12 +119,7 @@ export const postChatRoom = async (type: ChatRoomType, typeId: number) => {
 
 // TODO 이거 함수까지 작성함 (postMeetAttendee 함수에서 postChatRoom, postChatAttendee 두 개 연결해야함)
 /**
- * 11-09 기준
- * 채팅 message insert만 됨
  *
- * 이제 실제 chat_room 생성해야하고
- * 채팅방 생성될 때 chat_attendee 에 작성자 추가해야하고
- * 모임 참여할 때 chat_attendee에 참여자 추가해야하고
  * 뭐 할 때마다 chat_attendee 수정해야하고 (last 어쩌구)
  * 채팅 메시지 insert될 때 on event 주어야하고,
  *

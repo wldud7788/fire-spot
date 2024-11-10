@@ -1,3 +1,4 @@
+import { createClient } from "@/_utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
 import { ChatRoomMessageInfo, ChatRoomTitle } from "../types/chat.types";
@@ -17,12 +18,27 @@ export const useChatRoomTitle = (roomId: number) => {
 };
 
 export const useChatRoomMessage = (roomId: number) => {
+  const supabase = createClient();
   const { data: chatMessage, error } = useQuery<
     ChatRoomMessageInfo[] | undefined
   >({
     queryKey: queryKey.chat.chatRoomMessage(roomId),
     queryFn: () => fetchChatMessageList(roomId)
   });
+
+  const channel = supabase
+    .channel("schema-db-changes")
+    .on(
+      "postgres_changes",
+      {
+        event: "INSERT",
+        schema: "public",
+        table: "chat_message"
+        // filter:
+      },
+      (payload) => console.log(payload)
+    )
+    .subscribe();
 
   if (error) throw new Error(error.message);
 
