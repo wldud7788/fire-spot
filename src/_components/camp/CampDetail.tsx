@@ -3,6 +3,7 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 import CampReviewSlide from "./CampReviewSlide";
+import ReviewModal from "../modal/ReviewModal";
 
 type CampDetailProps = {
   paramsId: string;
@@ -97,6 +98,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         <div className="detail_section mt-[60px]">
           <h2 className="text-[36px] font-bold">캠핑장 리뷰</h2>
+          <button>리뷰쓰기</button>
+          <ReviewModal campId={paramsId} onClose={() => {}} />
           <CampReviewSlide campId={paramsId} />
         </div>
         {/*// 캠핑장 리뷰 */}
