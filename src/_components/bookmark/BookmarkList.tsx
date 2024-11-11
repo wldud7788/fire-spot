@@ -5,18 +5,25 @@ import React from "react";
 import CampCard from "../camp/CampCard";
 import BookmarkButton from "../bookmark/BookmarkButton";
 import { createClient } from "@/_utils/supabase/client";
+import { Database } from "../../../database.types";
+import { Camp } from "@/app/(pages)/camps/types/Camp";
 
-interface Bookmark {
-  contentId: string;
-  camp: {
-    facltNm: string;
-    firstImageUrl: string;
-    intro: string;
-    addr1: string;
-    induty: string;
-  };
+// interface Bookmark {
+//   contentId: string;
+//   camp: {
+//     facltNm: string;
+//     firstImageUrl: string;
+//     intro: string;
+//     addr1: string;
+//     induty: string;
+//   };
+//   featureNm: string;
+// }
+// type Camp = Database["public"]["Tables"]["camp"]["Row"];
+type Bookmark = Database["public"]["Tables"]["bookmarks"]["Row"] & {
+  camp: Camp;
   featureNm: string;
-}
+};
 
 const BookmarkList: React.FC = () => {
   const supabase = createClient();
@@ -46,7 +53,9 @@ const BookmarkList: React.FC = () => {
   // 북마크 제거 후 목록 업데이트 함수
   const handleBookmarkRemoved = (contentId: string) => {
     setBookmarks((prevBookmarks) =>
-      prevBookmarks.filter((bookmark) => bookmark.contentId !== contentId)
+      prevBookmarks.filter(
+        (bookmark) => bookmark.contentId !== Number(contentId)
+      )
     );
   };
 
@@ -67,7 +76,7 @@ const BookmarkList: React.FC = () => {
             <div key={bookmark.contentId} className="camp-card-wrapper">
               <CampCard
                 camp={{
-                  contentId: bookmark.contentId,
+                  contentId: String(bookmark.contentId),
                   facltNm: bookmark.camp.facltNm,
                   firstImageUrl: bookmark.camp.firstImageUrl,
                   featureNm: bookmark.featureNm,
@@ -79,7 +88,7 @@ const BookmarkList: React.FC = () => {
               />
               {/* 북마크 제거 버튼에 handleBookmarkRemoved 전달 */}
               <BookmarkButton
-                contentId={bookmark.contentId}
+                contentId={`${bookmark.contentId}`}
                 onBookmarkRemoved={handleBookmarkRemoved}
               />
             </div>
@@ -91,3 +100,5 @@ const BookmarkList: React.FC = () => {
 };
 
 export default BookmarkList;
+
+// 수퍼베이스랑 공공데이터의 타입이 맞지 않음 -> 오류 발생
