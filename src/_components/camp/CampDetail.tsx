@@ -3,6 +3,8 @@
 import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
+import CampReviewSlide from "./CampReviewSlide";
+import ReviewModal from "../modal/ReviewModal";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
 import ForecastWeatherComponent from "../weather/FutureWeather";
@@ -287,7 +289,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         </div>
         {/*// 캠핑장 날씨를 알려드려요 */}
 
-        {/* 캠핑장 리뷰 */}
+        {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area">
             <div className="left_area mb-[30px] flex items-center gap-[15px]">
@@ -311,6 +313,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </div>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
+          <ReviewModal campId={paramsId} onClose={() => {}} />
+          <CampReviewSlide campId={paramsId} />
         </div>
         {/*// 캠핑장 리뷰 */}
 
