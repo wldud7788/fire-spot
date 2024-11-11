@@ -20,9 +20,9 @@ const ChatRoom = ({ params }: Props) => {
   // 미들웨어에서 접근 차단 및 roomId NaN 같은거 나와도 차단
   const roomId = Number(params.roomId);
   const user = useUser();
-  useChatSubscriptionMessageList(roomId);
   const { chatRoomTitle } = useChatRoomTitle(roomId);
   const { chatMessage } = useChatRoomMessage(roomId);
+  useChatSubscriptionMessageList(user?.id || "", roomId);
 
   useEffect(() => {
     return () => {};
