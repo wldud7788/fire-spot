@@ -3,9 +3,11 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
 import SearchBar from "../search/searchBar/SearchBar";
+import { TAGS } from "@/_utils/common/constant";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showTags, setShowTags] = useState(false);
 
   // 스크롤 관련
   const handleScroll = () => {
@@ -13,6 +15,12 @@ const Header = () => {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
+    }
+    // 태그 표시를 위한 스크롤 추가
+    if (window.scrollY > 260) {
+      setShowTags(true);
+    } else {
+      setShowTags(false);
     }
   };
 
@@ -36,8 +44,8 @@ const Header = () => {
             {/* 헤더 검색 (버튼 없음, DropdownRegions 없음, 높이 40px) */}
           </div>
           {/* 메뉴 Nav */}
-          <nav className="hidden gap-5 lg:flex">
-            <Link href={"./guide"}>캠핑 가이드</Link>
+          <nav className="hidden gap-5 text-lg font-semibold lg:flex">
+            <Link href={"./guide"}>캠핑가이드</Link>
             <Link href={"./camps"}>캠핑장</Link>
             <Link href={"./meets"}>커뮤니티</Link>
             <Link href={"./"}>후기</Link>
@@ -48,6 +56,20 @@ const Header = () => {
             <Link href={"/chat"} className="header_icon bg-chat"></Link>
             <Link href={"/sos"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
+          </div>
+        </div>
+        {/* 태그 박스 */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            showTags ? "mt-4 h-[20px] pl-14 opacity-100" : "h-0 opacity-0"
+          }`}
+        >
+          <div className="flex items-center gap-5">
+            {TAGS.map((tag) => (
+              <Link key={tag.name} href={tag.href}>
+                {tag.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
