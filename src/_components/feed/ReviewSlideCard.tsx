@@ -1,15 +1,16 @@
 "use client";
 
 import React from "react";
+import { Database } from "../../../database.types";
 
-type Review = {
-  id: number;
-  campId: string;
-  title: string;
-  content: string;
-  likes: number;
-};
-
+// type Review = {
+//   id: number;
+//   campId: string;
+//   title: string;
+//   content: string;
+//   likes: number;
+// };
+type Review = Database["public"]["Tables"]["review"]["Row"];
 type ReviewSlideCardProps = {
   review: Review;
 };

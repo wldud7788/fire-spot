@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../feed/ReviewSlideCard";
 import Slide from "../slide/Slide";
+import { Database } from "../../../database.types";
 
 const supabase = createClient();
 
-type Review = {
-  id: number;
-  campId: string;
-  title: string;
-  content: string;
-  likes: number;
-};
+// type Review = {
+//   id: number;
+//   campId: string;
+//   title: string;
+//   content: string;
+//   likes: number;
+// };
+
+type Review = Database["public"]["Tables"]["review"]["Row"];
 
 type CampReviewSlideProps = {
   campId: string;

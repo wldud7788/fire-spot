@@ -11,7 +11,7 @@ interface ReviewModalProps {
 const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0);
   const supabase = createClient(); // Supabase 클라이언트 생성
 
   // Supabase를 통해 현재 사용자 정보 가져오기
@@ -35,7 +35,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
       const { data, error } = await supabase.from("review").insert([
         {
           userId: user.id, // 현재 사용자 ID
-          campId: campId,
+          campId: Number(campId),
           title: title, // 전달받은 캠핑장 ID
           content: content, // 입력한 리뷰 내용
           rating: rating, // 입력한 평점
