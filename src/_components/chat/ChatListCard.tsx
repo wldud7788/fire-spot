@@ -20,7 +20,7 @@ const ChatListCard = ({ chatRoomInfo }: Props) => {
 
   // 채팅 메시지가 한 개도 없는 경우 프로필 정보 없음
   return (
-    <div className="mb-10 flex gap-4">
+    <div className="mb-10 flex gap-4 border-2 border-black">
       {chatAttendee.is_pin && "핀 버튼"}
       안읽은 메시지 {unreadCount}
       <div>
@@ -40,7 +40,10 @@ const ChatListCard = ({ chatRoomInfo }: Props) => {
           {headcount} 명
         </Link>
       </div>
-      <button>뭐 이상한 버튼</button>
+      <div>
+        <button className="border-2 border-gray-500">핀 고정</button>
+        <button className="border-2 border-gray-500">읽음 처리</button>
+      </div>
     </div>
   );
 };

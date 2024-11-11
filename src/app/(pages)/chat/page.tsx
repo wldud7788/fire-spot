@@ -6,12 +6,18 @@ import { useChatSubscriptionRoomList } from "@/_components/chat/hooks/useChatSub
 import React from "react";
 
 const ChatList = () => {
-  const { chatRoomList } = useChatList();
+  const { pinnedChatRoomList, unPinnedChatRoomList } = useChatList();
   useChatSubscriptionRoomList();
 
   return (
     <div>
-      {chatRoomList.map((chatRoomInfo) => (
+      {pinnedChatRoomList.map((chatRoomInfo) => (
+        <ChatListCard
+          key={chatRoomInfo.chatRoom.id}
+          chatRoomInfo={chatRoomInfo}
+        />
+      ))}
+      {unPinnedChatRoomList.map((chatRoomInfo) => (
         <ChatListCard
           key={chatRoomInfo.chatRoom.id}
           chatRoomInfo={chatRoomInfo}

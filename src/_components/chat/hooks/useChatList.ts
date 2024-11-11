@@ -13,7 +13,18 @@ const useChatList = () => {
   });
   if (chatRoomListError) throw new Error(chatRoomListError.message);
 
-  return { chatRoomList };
+  const pinnedChatRoomList = [] as ChatRoomInfo[];
+  const unPinnedChatRoomList = [] as ChatRoomInfo[];
+
+  chatRoomList.forEach((chatRoom) => {
+    if (chatRoom.chatAttendee.is_pin) {
+      pinnedChatRoomList.push(chatRoom);
+    } else {
+      unPinnedChatRoomList.push(chatRoom);
+    }
+  });
+
+  return { pinnedChatRoomList, unPinnedChatRoomList };
 };
 
 export default useChatList;
