@@ -25,28 +25,43 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
               src={
                 camp.firstImageUrl
                   ? camp.firstImageUrl
-                  : `/assets/image/common/img-camp-card.jpg`
+                  : `/assets/images/common/img-camp-card.jpg`
               }
-              className="relative h-full w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
+              className="relative h-full min-h-[300px] w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
               alt={camp.facltNm}
             />
             {!type ? (
-              <div className="absolute right-[15px] top-[15px]">북마크</div>
+              <div className="absolute right-[15px] top-[15px]">
+                <button type="button">
+                  <img
+                    src="/assets/images/camp/ico-camp-list-bookmark.svg"
+                    alt="북마크"
+                  />
+                  {/* 
+                    이윤지 작업 - 북마크 액티브 되면 아래의 아이콘 쓰시면 됩니다. 
+                    <img
+                      src="/assets/images/camp/ico-camp-list-bookmark-on.svg"
+                      alt="북마크"
+                    /> 
+                  */}
+                </button>
+              </div>
             ) : null}
           </div>
 
           {!type ? (
-            <div className="camp_info">
-              <h2 className="text-[20px]">{camp.facltNm}</h2>
-              <p>{camp.featureNm ? camp.featureNm : camp.intro}</p>
-              <div className="info">
-                <p>{camp.addr1}</p>
-                <p>249Km</p>
-                <p>
-                  <span>{camp.induty}</span>
-                  <span>파쇄석</span>
-                  <span>20도 맑음</span>
-                </p>
+            <div className="camp_info pb-[60px] pt-[20px]">
+              <h2 className="text-[20px] font-bold">{camp.facltNm}</h2>
+              <p className="mb-[8px] mt-[5px] block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
+                {camp.addr1}
+              </p>
+              <p className="color-gray02 line-clamp-3 text-[12px]">
+                {camp.featureNm ? camp.featureNm : camp.intro}
+              </p>
+              <div className="info mt-[10px]">
+                <span className="color-gray01 bg-sub rounded-[8px] px-[10px] py-[5px] text-[12px]">
+                  {camp.induty}
+                </span>
               </div>
             </div>
           ) : (
