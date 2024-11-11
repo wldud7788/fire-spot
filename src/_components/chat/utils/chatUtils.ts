@@ -1,4 +1,8 @@
-import { ChatRoomMessageInfo, MessagesByDate } from "../types/chat.types";
+import {
+  ChatAttendeeUpdate,
+  ChatRoomMessageInfo,
+  MessagesByDate
+} from "../types/chat.types";
 
 /** 하나의 리스트로 되어 있는 메시지를 날짜별로 분리 */
 export const convertMessageListToMessagesByDate = (

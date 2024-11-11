@@ -24,10 +24,6 @@ const ChatRoom = ({ params }: Props) => {
   const { messagesByDate } = useChatRoomMessage(roomId);
   useChatSubscriptionMessageList(user?.id || "", roomId);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   if (!user) return <></>;
 
   return (

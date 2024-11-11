@@ -1,9 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
-import { ChatRoomInfo } from "../types/chat.types";
-import { fetchChatRoomList } from "../service/chatService";
+import { ChatAttendeeUpdate, ChatRoomInfo } from "../types/chat.types";
+import { fetchChatRoomList, patchChatAttendee } from "../service/chatService";
+import useUser from "@/_hooks/useUser";
 
 const useChatList = () => {
+  const queryClient = useQueryClient();
+  const user = useUser();
+
   const {
     data: chatRoomList = [] as ChatRoomInfo[],
     error: chatRoomListError
@@ -24,7 +28,21 @@ const useChatList = () => {
     }
   });
 
-  return { pinnedChatRoomList, unPinnedChatRoomList };
+  const userId = user?.id || "";
+
+  const togglePin = async (roomId: number, isPin: boolean) => {
+    const chatAttendee = {
+      is_pin: isPin
+    };
+
+    await patchChatAttendee(userId, roomId, chatAttendee);
+
+    queryClient.invalidateQueries({
+      queryKey: queryKey.chat.chatRoomList
+    });
+  };
+
+  return { pinnedChatRoomList, unPinnedChatRoomList, togglePin };
 };
 
 export default useChatList;
