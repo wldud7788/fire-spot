@@ -12,6 +12,7 @@ import {
   HydrationBoundary,
   QueryClient
 } from "@tanstack/react-query";
+import Link from "next/link";
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -49,8 +50,13 @@ export default function Home() {
           {/* main_sec02 */}
           <MainSection background="#fff">
             <h2 className="flex items-center justify-center text-center text-[32px] font-bold">
-              캠핑장
+              Hot Best Pick
             </h2>
+            <div className="mb-[30px] mt-[20px] flex items-center justify-end">
+              <Link href={"/camps"} className="text-[18px]">
+                캠핑장 더보기
+              </Link>
+            </div>
             <MainCamps />
           </MainSection>
           {/*// main_sec02 */}

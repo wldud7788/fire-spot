@@ -17,11 +17,7 @@ const Followers = () => {
     getLoginUserId();
   }, []);
 
-  return (
-    <>
-      <FollowForm loginUserId={loginUserId} profileUser={loginUserId} />
-    </>
-  );
+  return <FollowForm loginUserId={loginUserId} profileUser={loginUserId} />;
 };
 
 export default Followers;

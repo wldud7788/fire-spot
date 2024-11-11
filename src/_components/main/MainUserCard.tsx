@@ -34,7 +34,7 @@ const MainUserCard = () => {
           로그인 후 사용하세요.
         </p>
         <div className="flex w-full">
-          <MainButton text={"로그인"} href="/sign-in" background="brown" />
+          <MainButton text={"로그인"} href="/sign-in" background="#b24600" />
         </div>
       </div>
     );
