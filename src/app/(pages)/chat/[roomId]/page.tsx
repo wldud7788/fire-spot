@@ -2,7 +2,7 @@
 
 import ChatRoomMessageSection from "@/_components/chat/ChatRoomMessageSection";
 import ChatRoomTitleSection from "@/_components/chat/ChatRoomTitleSection";
-import { useChatOnChanges } from "@/_components/chat/hooks/useChatRealtime";
+import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChatSubscriptionMessageList";
 import {
   useChatRoomMessage,
   useChatRoomTitle
@@ -20,7 +20,7 @@ const ChatRoom = ({ params }: Props) => {
   // 미들웨어에서 접근 차단 및 roomId NaN 같은거 나와도 차단
   const roomId = Number(params.roomId);
   const user = useUser();
-  useChatOnChanges(roomId);
+  useChatSubscriptionMessageList(roomId);
   const { chatRoomTitle } = useChatRoomTitle(roomId);
   const { chatMessage } = useChatRoomMessage(roomId);
 

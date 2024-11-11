@@ -2,12 +2,12 @@
 
 import ChatListCard from "@/_components/chat/ChatListCard";
 import useChatList from "@/_components/chat/hooks/useChatList";
-import { useChatOnChanges } from "@/_components/chat/hooks/useChatRealtime";
+import { useChatSubscriptionRoomList } from "@/_components/chat/hooks/useChatSubscriptionRoomList";
 import React from "react";
 
 const ChatList = () => {
   const { chatRoomList } = useChatList();
-  useChatOnChanges();
+  useChatSubscriptionRoomList();
 
   return (
     <div>
