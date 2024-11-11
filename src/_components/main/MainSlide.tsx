@@ -4,14 +4,26 @@ import Slide from "../slide/Slide";
 const MainSlide = () => {
   return (
     <Slide useAutoplay={false} usePagination={false}>
-      <div className="flex h-[370px] items-center justify-center bg-[#151515] text-[#fff]">
-        슬라이드 1
+      <div className="h-full">
+        <img
+          className="h-full w-full object-cover"
+          src="/assets/images/main/img-main-slider.jpg"
+          alt="메인 슬라이드"
+        />
       </div>
-      <div className="flex h-[370px] items-center justify-center bg-[#151515] text-[#fff]">
-        슬라이드 2
+      <div className="h-full">
+        <img
+          className="h-full w-full object-cover"
+          src="/assets/images/main/img-main-slider.jpg"
+          alt="메인 슬라이드"
+        />
       </div>
-      <div className="flex h-[370px] items-center justify-center bg-[#151515] text-[#fff]">
-        슬라이드 3
+      <div className="h-full">
+        <img
+          className="h-full w-full object-cover"
+          src="/assets/images/main/img-main-slider.jpg"
+          alt="메인 슬라이드"
+        />
       </div>
     </Slide>
   );

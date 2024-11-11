@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { getUser, signOut } from "@/_utils/auth";
 import { useRouter } from "next/navigation";
-import useDropdown from "@/hooks/useDropdown";
+import useDropdown from "@/_hooks/useDropdown";
 
 const HeaderAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const { dropdownRef, isDropdownOpen, toggleDropdown, closeDropdown } =
-    useDropdown();
+    useDropdown("header");
   const router = useRouter();
 
   useEffect(() => {

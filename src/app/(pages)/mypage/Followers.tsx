@@ -1,8 +1,27 @@
 "use client";
-import React from "react";
+import FollowForm from "@/_components/follower/FollowForm";
+import { getUser } from "@/_utils/auth";
+import React, { useEffect, useState } from "react";
+
 const Followers = () => {
-  return <div>팔로워 목록이 표시됩니다.</div>;
+  // 클릭한 유저의 프로필
+  const [loginUserId, setLoginUserId] = useState("");
+
+  useEffect(() => {
+    const getLoginUserId = async () => {
+      const getUserId = await getUser();
+      if (!getUserId) return <div>유저 정보를 가져오지 못했습니다.</div>;
+
+      setLoginUserId(getUserId.id);
+    };
+    getLoginUserId();
+  }, []);
+
+  return (
+    <>
+      <FollowForm loginUserId={loginUserId} profileUser={loginUserId} />
+    </>
+  );
 };
 
 export default Followers;
-// 감사합니다 민규님 감사합니다
