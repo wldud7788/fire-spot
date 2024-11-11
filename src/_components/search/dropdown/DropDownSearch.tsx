@@ -20,7 +20,7 @@ const DropDownSearch: React.FC<{
         {results?.length > 0 ? (
           results.map((camp) => (
             <Link
-              href={`camps/${camp.contentId}`}
+              href={`camp-detail/${camp.contentId}`}
               onClick={closeDropdown}
               key={camp.contentId}
             >
