@@ -21,7 +21,7 @@ const ChatRoom = ({ params }: Props) => {
   const roomId = Number(params.roomId);
   const user = useUser();
   const { chatRoomTitle } = useChatRoomTitle(roomId);
-  const { chatMessage } = useChatRoomMessage(roomId);
+  const { messagesByDate } = useChatRoomMessage(roomId);
   useChatSubscriptionMessageList(user?.id || "", roomId);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const ChatRoom = ({ params }: Props) => {
       <ChatRoomMessageSection
         loginUserId={user.id}
         roomId={roomId}
-        chatMessage={chatMessage}
+        messagesByDate={messagesByDate}
       />
     </div>
   );

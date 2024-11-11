@@ -24,6 +24,10 @@ export type ChatRoomMessageInfo = {
   headcount: number;
 };
 
+export type MessagesByDate = {
+  [key: string]: ChatRoomMessageInfo[]; // "YYYY-MM-DD"
+};
+
 export type ChatMessageSelect =
   Database["public"]["Tables"]["chat_message"]["Row"];
 export type ChatMessageInsert =
