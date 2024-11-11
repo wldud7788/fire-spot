@@ -31,7 +31,12 @@ const Header = () => {
         {/* 로고 + 검색 영역 */}
         <div className="z-10 flex items-center justify-between leading-40">
           <div className="flex gap-8">
-            <Link href={"/"}>로고</Link>
+            <Link
+              href={"/"}
+              className="h-[40px] w-[230px] bg-logo bg-contain bg-no-repeat"
+            >
+              <p className="sr-only">로고</p>
+            </Link>
             <SearchBar variant="header" />
             {/* 헤더 검색 (버튼 없음, DropdownRegions 없음, 높이 40px) */}
           </div>

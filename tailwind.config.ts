@@ -47,6 +47,7 @@ const config: Config = {
         prev: "url('/assets/images/ico-prev.svg')",
         next: "url('/assets/images/ico-next.svg')",
         // 공통
+        logo: "url('/assets/images/logo.svg')",
         polygon: "url('/assets/images/common/ico-polygon.svg')",
         import: "url('/assets/images/common/ico-import.svg')",
         plusColor: "url('/assets/images/common/ico-plus-c.svg')",
