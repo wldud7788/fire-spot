@@ -8,7 +8,6 @@ import {
   useChatRoomTitle
 } from "@/_components/chat/hooks/useChatRoom";
 import useUser from "@/_hooks/useUser";
-import React, { useEffect } from "react";
 
 type Props = {
   params: {

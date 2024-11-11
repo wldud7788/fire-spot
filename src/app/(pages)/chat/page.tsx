@@ -1,12 +1,15 @@
 "use client";
 
 import ChatListCard from "@/_components/chat/ChatListCard";
+import useChatAttendee from "@/_components/chat/hooks/useChatAttendee";
 import useChatList from "@/_components/chat/hooks/useChatList";
 import { useChatSubscriptionRoomList } from "@/_components/chat/hooks/useChatSubscriptionRoomList";
 import React from "react";
 
 const ChatList = () => {
-  const { pinnedChatRoomList, unPinnedChatRoomList, togglePin } = useChatList();
+  const { pinnedChatRoomList, unPinnedChatRoomList } = useChatList();
+  const { togglePin, handleMessageRead } = useChatAttendee();
+
   useChatSubscriptionRoomList();
 
   return (
@@ -16,6 +19,7 @@ const ChatList = () => {
           key={chatRoomInfo.chatRoom.id}
           chatRoomInfo={chatRoomInfo}
           togglePin={togglePin}
+          handleMessageRead={handleMessageRead}
         />
       ))}
       {unPinnedChatRoomList.map((chatRoomInfo) => (
@@ -23,6 +27,7 @@ const ChatList = () => {
           key={chatRoomInfo.chatRoom.id}
           chatRoomInfo={chatRoomInfo}
           togglePin={togglePin}
+          handleMessageRead={handleMessageRead}
         />
       ))}
     </div>

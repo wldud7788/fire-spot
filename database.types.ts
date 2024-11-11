@@ -1,14 +1,9 @@
 import {
-  ChatAttendeeSelect,
-  ChatMessageSelect,
   ChatRoomInfo,
   ChatRoomMessageInfo,
-  ChatRoomSelect,
   ChatRoomTitle,
   ChatRoomType
 } from "@/_components/chat/types/chat.types";
-import { ProfileSelect } from "@/_components/chat/types/Profile.types";
-import { User } from "@supabase/supabase-js";
 
 export type Json =
   | string

@@ -36,6 +36,7 @@ export const useChatSubscriptionMessageList = (
     }
   };
 
+  /** 채팅 메시지 실시간 구독  */
   useEffect(() => {
     toggleChatRoomInOut(null);
     fetchLastMessage();

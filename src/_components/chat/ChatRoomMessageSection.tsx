@@ -1,5 +1,4 @@
-import { ChatRoomMessageInfo, MessagesByDate } from "./types/chat.types";
-import { cn } from "@/_lib/utils";
+import { MessagesByDate } from "./types/chat.types";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { useChatRoomMessageSection } from "./hooks/useChatRoomMessageSection";

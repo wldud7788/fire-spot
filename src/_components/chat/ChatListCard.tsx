@@ -6,9 +6,14 @@ import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 type Props = {
   chatRoomInfo: ChatRoomInfo;
   togglePin: (roomId: number, isPin: boolean) => Promise<void>;
+  handleMessageRead: (roomId: number, messageId: number) => Promise<void>;
 };
 
-const ChatListCard = ({ chatRoomInfo, togglePin }: Props) => {
+const ChatListCard = ({
+  chatRoomInfo,
+  togglePin,
+  handleMessageRead
+}: Props) => {
   const {
     chatAttendee,
     chatRoom,
@@ -58,7 +63,12 @@ const ChatListCard = ({ chatRoomInfo, togglePin }: Props) => {
           </button>
         )}
 
-        <button className="border-2 border-gray-500">읽음 처리</button>
+        <button
+          className="border-2 border-gray-500"
+          onClick={() => handleMessageRead(chatRoom.id, chatMessage.id)}
+        >
+          읽음 처리
+        </button>
       </div>
     </div>
   );

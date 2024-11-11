@@ -4,11 +4,9 @@ import { Order, ORDER_STRING } from "@/types/order.types";
 import {
   ChatAttendeeUpdate,
   ChatMessageInsert,
-  ChatMessageSelect,
   ChatRoomInfo,
   ChatRoomInsert,
   ChatRoomMessageInfo,
-  ChatRoomTitle,
   ChatRoomType
 } from "../types/chat.types";
 
@@ -204,8 +202,3 @@ export const patchChatAttendee = async (
     console.error("Error patchChatAttendee ", e);
   }
 };
-// export const patchChatAttendee = async (
-//   id: number,
-//   lastReadMessageId?: number,
-//   isPin?: boolean
-// ) => {};

@@ -1,5 +1,4 @@
-import { createClient } from "@/_utils/supabase/client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
 import { ChatRoomMessageInfo, ChatRoomTitle } from "../types/chat.types";
 import {
@@ -8,6 +7,7 @@ import {
 } from "../service/chatService";
 import { convertMessageListToMessagesByDate } from "../utils/chatUtils";
 
+/** 채팅방 상단 정보 */
 export const useChatRoomTitle = (roomId: number) => {
   const { data: chatRoomTitle, error } = useQuery<ChatRoomTitle | undefined>({
     queryKey: queryKey.chat.chatRoomTitle(roomId),
@@ -18,6 +18,7 @@ export const useChatRoomTitle = (roomId: number) => {
   return { chatRoomTitle };
 };
 
+/** 채팅방 메시지 목록 */
 export const useChatRoomMessage = (roomId: number) => {
   const { data, error } = useQuery<ChatRoomMessageInfo[] | undefined>({
     queryKey: queryKey.chat.chatRoomMessage(roomId),
