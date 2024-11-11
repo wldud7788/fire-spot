@@ -2,6 +2,7 @@ import { createClient } from "@/_utils/supabase/client";
 import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 import { Order, ORDER_STRING } from "@/types/order.types";
 import {
+  ChatAttendeeUpdate,
   ChatMessageInsert,
   ChatRoomInfo,
   ChatRoomInsert,
@@ -117,14 +118,6 @@ export const postChatRoom = async (type: ChatRoomType, typeId: number) => {
   }
 };
 
-// TODO 이거 함수까지 작성함 (postMeetAttendee 함수에서 postChatRoom, postChatAttendee 두 개 연결해야함)
-/**
- *
- * 뭐 할 때마다 chat_attendee 수정해야하고 (last 어쩌구)
- * 채팅 메시지 insert될 때 on event 주어야하고,
- *
- * 그리고 채팅 목록 queryKey 고민해야함
- */
 /** 모임 참가자 생성 (모임 or sos 작성, 참가 시 호출 ) */
 export const postChatAttendee = async (userId: string, roomId: number) => {
   try {
@@ -160,8 +153,18 @@ export const fetchChatRoomByMeetId = async (type: string, typeId: number) => {
   }
 };
 
+/**
+ * TODO 이제 채팅방 들어가면 last_read_어쩌구 업데이트 해줘야됨(null로) (나갈때는 마지막 id)
+ * 이거 되면 안읽은 메시지 표시하는것도 끝
+ *
+ * */
+
 export const patchChatAttendee = async (
   id: number,
-  lastReadMessageId?: number,
-  isPin?: boolean
+  chatAttendee: ChatAttendeeUpdate
 ) => {};
+// export const patchChatAttendee = async (
+//   id: number,
+//   lastReadMessageId?: number,
+//   isPin?: boolean
+// ) => {};

@@ -1,39 +1,24 @@
-import React, { useState } from "react";
-import { ChatMessageInsert, ChatRoomMessageInfo } from "./types/chat.types";
+import { ChatRoomMessageInfo } from "./types/chat.types";
 import { cn } from "@/_lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { postChatMessage } from "./service/chatService";
-import { useChatRoomMessage } from "./hooks/useChatRoom";
-import { useChatOnChanges } from "./hooks/useChatRealtime";
+import { useChatRoomMessageSection } from "./hooks/useChatRoomMessageSection";
 
 type Props = {
   loginUserId: string;
   roomId: number;
+  chatMessage: ChatRoomMessageInfo[] | undefined;
 };
 
-const ChatRoomMessageSection = ({ loginUserId, roomId }: Props) => {
-  const [messageInput, setMessageInput] = useState("");
-
-  const { chatMessage } = useChatRoomMessage(roomId);
-  useChatOnChanges(roomId);
+const ChatRoomMessageSection = ({
+  loginUserId,
+  roomId,
+  chatMessage
+}: Props) => {
+  const { messageInput, handleChangeInput, sendMessage } =
+    useChatRoomMessageSection(roomId, loginUserId);
 
   if (!chatMessage) return <>채팅 목록 불러오는중</>;
-
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessageInput(e.target.value);
-  };
-
-  const sendMessage = async () => {
-    const messagePost = {
-      message: messageInput,
-      room_id: roomId,
-      user_id: loginUserId
-    } as ChatMessageInsert;
-
-    postChatMessage(messagePost);
-    setMessageInput("");
-  };
 
   return (
     <div>

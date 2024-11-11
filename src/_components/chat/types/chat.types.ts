@@ -33,6 +33,8 @@ export type ChatAttendeeSelect =
   Database["public"]["Tables"]["chat_attendee"]["Row"];
 export type ChatAttendeeInsert =
   Database["public"]["Tables"]["chat_attendee"]["Insert"];
+export type ChatAttendeeUpdate =
+  Database["public"]["Tables"]["chat_attendee"]["Update"];
 
 export type ChatRoomSelect = Database["public"]["Tables"]["chat_room"]["Row"];
 export type ChatRoomInsert =
