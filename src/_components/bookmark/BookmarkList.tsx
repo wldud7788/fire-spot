@@ -66,16 +66,19 @@ const BookmarkList: React.FC = () => {
           {bookmarks.map((bookmark) => (
             <div key={bookmark.contentId} className="camp-card-wrapper">
               <CampCard
-                camp={{
-                  contentId: bookmark.contentId,
-                  facltNm: bookmark.camp.facltNm,
-                  firstImageUrl: bookmark.camp.firstImageUrl,
-                  featureNm: bookmark.featureNm,
-                  intro: bookmark.camp.intro,
-                  addr1: bookmark.camp.addr1,
-                  induty: bookmark.camp.induty
-                }}
+                // camp={{
+                //   contentId: bookmark.contentId,
+                //   facltNm: bookmark.camp.facltNm,
+                //   firstImageUrl: bookmark.camp.firstImageUrl,
+                //   featureNm: bookmark.featureNm,
+                //   intro: bookmark.camp.intro,
+                //   addr1: bookmark.camp.addr1,
+                //   induty: bookmark.camp.induty
+                // }}
+                camp={bookmark.camp}
                 type="bookmark"
+
+                // 캠프 타입을 통으로 받는게 맞나여? 옵셔널,,,로 바꾸기
               />
               {/* 북마크 제거 버튼에 handleBookmarkRemoved 전달 */}
               <BookmarkButton
