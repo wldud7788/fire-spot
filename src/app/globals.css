@@ -184,3 +184,6 @@ body {
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
 }
+.button_style {
+  @apply rounded-[28px] bg-[#FF924C] px-[28px] text-lg font-semibold text-black;
+}
