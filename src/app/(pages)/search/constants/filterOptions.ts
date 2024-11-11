@@ -16,4 +16,4 @@ export const AMENITIES = [
   "에어컨",
   "냉장고"
 ];
-export const GROUND_TYPES = ["잔디", "파쇄석", "테크", "자갈", "맨흙"];
+export const GROUND_TYPES = ["잔디", "파쇄석", "데크", "자갈", "맨흙"];
