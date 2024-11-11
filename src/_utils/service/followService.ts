@@ -13,7 +13,7 @@ export const getFollowsData = async () => {
   return followsData;
 };
 
-export const getFollowerData = async (userId: string | null) => {
+export const getFollowerData = async (userId: string | "") => {
   const { data: followers } = await supabase
     .from("follows")
     .select(`*`)
@@ -21,7 +21,7 @@ export const getFollowerData = async (userId: string | null) => {
   return followers;
 };
 
-export const getFollowingData = async (userId: string | null) => {
+export const getFollowingData = async (userId: string | "") => {
   const { data: followings } = await supabase
     .from("follows")
     .select(`*`)

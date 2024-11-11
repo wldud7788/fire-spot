@@ -6,6 +6,7 @@ import MeetIntroSection from "./MeetIntroSection";
 import MeetSuppliesSection from "./MeetSuppliesSection";
 import MeetRecommendSection from "./MeetRecommendSection";
 import useMeetDetailController from "../../hooks/useMeetDetailController";
+import ForecastWeatherComponent from "@/_components/weather/FutureWeather";
 import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 
@@ -26,6 +27,11 @@ const MeetDetailController = ({ meetWithCamp }: Props) => {
       <MeetContentSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />
       <DetailMap camp={camp} />
+      <ForecastWeatherComponent
+        latitude={meetWithCamp.camp.mapY}
+        longitude={meetWithCamp.camp.mapX}
+        campingName={meetWithCamp.camp.facltNm}
+      />
       <MeetRecommendSection />
     </div>
   );

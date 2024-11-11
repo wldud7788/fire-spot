@@ -28,16 +28,12 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     getLoginUserId();
   }, []);
 
-  const {
-    data: userProfile,
-    isLoading: userProfileLoading,
-    isError: userProfileError
-  } = useQuery({
+  const { data: userProfile, isError: userProfileError } = useQuery({
     queryKey: ["profile", profileUser],
     queryFn: () => getUserProfile(profileUser)
   });
 
-  if (userProfileLoading) return <>로딩중</>;
+  if (!userProfile) return <>로딩중</>;
   if (userProfileError) return <>에러</>;
 
   return (

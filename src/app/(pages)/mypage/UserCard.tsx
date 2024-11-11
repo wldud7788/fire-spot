@@ -23,12 +23,12 @@ const UserCard: React.FC = () => {
 
   const { data: followers, isError: isFollowersError } = useSuspenseQuery({
     queryKey: QK_FOLLOWERS(userId),
-    queryFn: () => getFollowerData(userId),
+    queryFn: () => getFollowerData(userId || ""),
     staleTime: 0
   });
   const { data: followings, isError: isFollowingsError } = useSuspenseQuery({
     queryKey: QK_FOLLOWINGS(userId),
-    queryFn: () => getFollowingData(userId),
+    queryFn: () => getFollowingData(userId || ""),
     staleTime: 0
   });
 

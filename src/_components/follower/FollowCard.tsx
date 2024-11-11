@@ -1,10 +1,13 @@
+import { Database } from "../../../database.types";
 import FollowButton from "./FollowButton";
 
-type Profile = {
-  id: string;
-  avatar_url: string;
-  nickname: string;
-};
+// type Profile = {
+//   id: string;
+//   avatar_url: string;
+//   nickname: string;
+// };
+
+type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
 type FollowCardProps = {
   loginUserId: string;
@@ -16,7 +19,7 @@ const FollowCard = ({ loginUserId, profile }: FollowCardProps) => {
     <div className="follow_card">
       <div className="inner">
         <div className="img_box">
-          <img src={profile.avatar_url} alt="" />
+          <img src={profile.avatar_url || ""} alt="" />
         </div>
         <strong>{profile.nickname}</strong>
         <FollowButton
