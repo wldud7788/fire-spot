@@ -5,6 +5,7 @@ import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
+import ForecastWeatherComponent from "../weather/FutureWeather";
 
 type CampDetailProps = {
   paramsId: string;
@@ -32,6 +33,13 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   const camp: Camp | undefined = camps?.find(
     (item: Camp) => item.contentId === paramsId
   );
+
+  // 이윤지 날씨 추가 수정
+
+  const latitude = camp?.mapY || 0;
+  const longitude = camp?.mapX || 0;
+  const campingName = camp?.facltNm || "알 수 없는 캠핑장";
+
   const posblFcltyClInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
   const sbrsClInfo: string[] | undefined = camp?.sbrsCl.split(",");
 
@@ -80,7 +88,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                   249Km
                 </p>
                 <dl>
-                  <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
+                  <dt className="bg-campChk mt-[30px] bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
                     캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
@@ -109,7 +117,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                   </dd>
                 </dl>
                 <dl>
-                  <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
+                  <dt className="bg-campChk mt-[30px] bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
                     주변 정보
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap">
@@ -260,6 +268,18 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             <h2 className="bg-campTit05 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
               캠핑장 날씨를 알려드려요.
             </h2>
+            {/* 캠핑장 날씨 최신 수정 */}
+            <div className="detail_section mt-[60px]">
+              <h2 className="text-[36px] font-bold">
+                캠핑장 날씨를 알려드려요
+              </h2>
+              <ForecastWeatherComponent
+                latitude={latitude}
+                longitude={longitude}
+                campingName={campingName}
+              />
+            </div>
+
             <p className="color-gray03 rounded-[8px] border border-[#D9D9D9] bg-[#f2f2f2] p-[10px] text-[16px]">
               캠핑장 이때 방문하면 좋아요 : {camp?.operPdCl}
             </p>
