@@ -63,7 +63,7 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
           <li className="li-before-line relative mr-[8px] pr-[8px]">
             <button
               onClick={() => setIsFollower(true)}
-              className="text-[14px] text-[#bfbfbf]"
+              className={`${isFollower && "active color-[#000] font-bold"} text-[14px] text-[#bfbfbf]`}
             >
               팔로워보기
             </button>
@@ -71,7 +71,7 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
           <li>
             <button
               onClick={() => setIsFollower(false)}
-              className="text-[14px] text-[#bfbfbf]"
+              className={`${!isFollower && "active color-[#000] font-bold"} text-[14px] text-[#bfbfbf]`}
             >
               팔로잉보기
             </button>
