@@ -214,6 +214,17 @@ body {
     background: #a6a6a6;
     transform: translateY(-50%);
   }
+  /* my page */
+  .li-before-line:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 10px;
+    background: #bfbfbf;
+    transform: translateY(-50%);
+  }
 }
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */
