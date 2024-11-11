@@ -7,33 +7,33 @@ interface TabListProps {
 
 const TabList: React.FC<TabListProps> = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="mb-[40px] flex items-center justify-center gap-[70px] border-b border-b-[#BFBFBF]">
+    <div className="mypage_tab mb-[40px] flex items-center justify-center gap-[70px] border-b border-b-[#BFBFBF]">
       <button
-        className="color-gray01 relative pb-[25px] text-[18px]"
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "myMeetings" && "active font-bold"}`}
         onClick={() => setActiveTab("myMeetings")}
       >
         나의 모임
       </button>
       <button
-        className="color-gray01 relative pb-[25px] text-[18px]"
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "campingReviews" && "active font-bold"}`}
         onClick={() => setActiveTab("campingReviews")}
       >
         캠핑후기
       </button>
       <button
-        className="color-gray01 relative pb-[25px] text-[18px]"
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "calendar" && "active font-bold"}`}
         onClick={() => setActiveTab("calendar")}
       >
         캘린더
       </button>
       <button
-        className="color-gray01 relative pb-[25px] text-[18px]"
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "bookmarks" && "active font-bold"}`}
         onClick={() => setActiveTab("bookmarks")}
       >
         북마크
       </button>
       <button
-        className="color-gray01 relative pb-[25px] text-[18px]"
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "followers" && "active font-bold"}`}
         onClick={() => setActiveTab("followers")}
       >
         팔로워
