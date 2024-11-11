@@ -1,16 +1,5 @@
-import SearchBar from "@/_components/search/searchBar/SearchBar";
 import { Camp } from "../../camps/types/Camp";
 import { useMap } from "../hooks/useSearchMap";
-import { FilterSelect } from "./filter/FilterSelect";
-import {
-  AMENITIES,
-  CAMPING_TYPES,
-  FACILITIES_OPTIONS,
-  GROUND_TYPES,
-  PET_OPTIONS
-} from "../constants/filterOptions";
-import { REGIONS } from "@/_utils/regions";
-import { CampCard } from "./CampCard";
 import { ActiveFilters } from "./filter/ActiveFilters";
 import { useFilters } from "../hooks/useFilters";
 import SearchHeader from "./SearchHeader";
