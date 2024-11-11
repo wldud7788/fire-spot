@@ -82,14 +82,14 @@ const FollowButton = ({
         <>
           {isFollow ? (
             <button
-              className="bd-color-sub w-full rounded-[8px] border py-[5px] text-[12px] text-[#803200]"
+              className="bd-color-sub w-full rounded-[8px] bg-[#FFD0B2] py-[5px] text-[12px] text-[#803200]"
               onClick={() => unfollowMutation.mutate()}
             >
               언팔로우
             </button>
           ) : (
             <button
-              className="bd-[#FFD0B2] w-full rounded-[8px] py-[5px] text-[12px] text-[#803200]"
+              className="w-full rounded-[8px] border border-[#FFD0B2] py-[5px] text-[12px] text-[#803200]"
               onClick={() => followMutation.mutate()}
             >
               팔로우
