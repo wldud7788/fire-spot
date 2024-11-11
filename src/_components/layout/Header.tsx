@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
 import SearchBar from "../search/searchBar/SearchBar";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,7 +46,10 @@ const Header = () => {
           {/* 아이콘 */}
           <div className="flex items-center">
             <Link href={"/search"} className="header_icon bg-map"></Link>
-            <Link href={"/chat"} className="header_icon bg-chat"></Link>
+            <Link
+              href={`${SERVER_PAGE_URL.chat}`}
+              className="header_icon bg-chat"
+            ></Link>
             <Link href={"/sos"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
           </div>
