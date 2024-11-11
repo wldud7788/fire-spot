@@ -46,8 +46,24 @@ const config: Config = {
         minus: "url('/assets/images/ico-minus.svg')",
         prev: "url('/assets/images/ico-prev.svg')",
         next: "url('/assets/images/ico-next.svg')",
+        // 공통
+        logo: "url('/assets/images/logo.svg')",
+        polygon: "url('/assets/images/common/ico-polygon.svg')",
+        import: "url('/assets/images/common/ico-import.svg')",
+        plusColor: "url('/assets/images/common/ico-plus-c.svg')",
+        // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
-        chkOn: "url('/assets/images/common/ico-checkbox-on.svg')"
+        chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",
+        // 캠핑 상세
+        reviewArrow: "url('/assets/images/camp/ico-review-arrow.svg')",
+        campChk: "url('/assets/images/camp/ico-camp-chk.svg')",
+        campTit01: "url('/assets/images/camp/ico-camp-tit01.svg')",
+        campTit02: "url('/assets/images/camp/ico-camp-tit02.svg')",
+        campTit03: "url('/assets/images/camp/ico-camp-tit03.svg')",
+        campTit04: "url('/assets/images/camp/ico-camp-tit04.svg')",
+        campTit05: "url('/assets/images/camp/ico-camp-tit05.svg')",
+        campTit06: "url('/assets/images/camp/ico-camp-tit06.svg')",
+        campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

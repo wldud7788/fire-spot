@@ -7,7 +7,7 @@ const MainCamps = async () => {
 
   if (!camps) return <div>캠프 데이터가 없습니다.</div>;
   return (
-    <ul className="mt-[40px] flex gap-[20px]">
+    <ul className="flex gap-[20px]">
       {camps.map((camp) => {
         return (
           <li className="main_camps flex-1" key={camp.contentId}>
