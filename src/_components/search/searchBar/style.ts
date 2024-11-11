@@ -1,6 +1,6 @@
 export const variants = {
   main: {
-    container: "w-[500px]",
+    container: "",
     input: "h-[60px]",
     button:
       "h-[60px] w-[70px] rounded-2xl bg-blue-700 text-white hover:bg-blue-800",
@@ -15,8 +15,8 @@ export const variants = {
     showRegions: false
   },
   search: {
-    container: "w-[70px]",
-    input: "h-[50px]",
+    container: "",
+    input: "h-[50px] w-[370px]",
     button: "",
     showButton: false,
     showRegions: false

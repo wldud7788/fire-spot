@@ -136,7 +136,8 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
   }
 
   return {
-    buttonConfig
+    buttonConfig,
+    hasChatAccess: !!attendeeId
   };
 };
 

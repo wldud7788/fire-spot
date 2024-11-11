@@ -3,7 +3,7 @@ import React from "react";
 import CampCard from "../camp/CampCard";
 
 const MainCamps = async () => {
-  const camps = await getTotalData(4);
+  const camps = await getTotalData(null, 4);
 
   if (!camps) return <div>캠프 데이터가 없습니다.</div>;
   return (

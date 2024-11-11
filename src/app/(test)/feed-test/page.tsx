@@ -3,34 +3,59 @@ import FeedCard from "@/_components/feed/FeedCard";
 const FeedTestPage = () => {
   const dummyData = [
     {
-      id: 0,
-      time: "몇시간 전",
-      profileImg: "프로필 이미지",
-      userName: "민규",
-      desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
-      img: ["", "", ""],
-      like: 1,
-      firstImageUrl: ""
+      id: 1,
+      like: 4,
+      img: "/assets/images/dummy/@dummy-main-review-01.jpg",
+      title: "너무 만족합니다!",
+      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
+      profileImg:
+        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
+      userName: "킹갓제너럴이준열",
+      date: "2024,10,27"
     },
     {
       id: 2,
-      time: "몇시간 전",
-      profileImg: "프로필 이미지",
-      userName: "rurulralalra",
-      desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
-      img: ["", "", ""],
-      like: 5,
-      firstImageUrl: ""
+      like: 4,
+      img: "/assets/images/dummy/@dummy-main-review-02.jpg",
+      title: "너무 만족합니다!",
+      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
+      profileImg:
+        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
+      userName: "킹갓제너럴이준열",
+      date: "2024,10,27"
     },
     {
       id: 3,
-      time: "몇시간 전",
-      profileImg: "프로필 이미지",
-      userName: "Wkdalsrb",
-      desc: "캠핑은 단순한 여행을 넘어 우리에게 잊지 못할 추억과 쉼의 가치를 알려준 소중한 경험이었으며, 앞으로도 가족과 함께 자연 속에서 또 다른 추억을 쌓을 생각에 마음이 설렙니다.",
-      img: ["", "", ""],
-      like: 12,
-      firstImageUrl: ""
+      like: 4,
+      img: "/assets/images/dummy/@dummy-main-review-03.jpg",
+      title: "너무 만족합니다!",
+      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
+      profileImg:
+        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
+      userName: "킹갓제너럴이준열",
+      date: "2024,10,27"
+    },
+    {
+      id: 4,
+      like: 4,
+      img: "/assets/images/dummy/@dummy-main-review-01.jpg",
+      title: "너무 만족합니다!",
+      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
+      profileImg:
+        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
+      userName: "킹갓제너럴이준열",
+      date: "2024,10,27"
+    },
+    {
+      id: 5,
+      like: 4,
+      img: "/assets/images/dummy/@dummy-main-review-02.jpg",
+      title: "너무 만족합니다!",
+      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
+      profileImg:
+        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
+      userName: "킹갓제너럴이준열",
+      date: "2024,10,27"
     }
   ];
   return (

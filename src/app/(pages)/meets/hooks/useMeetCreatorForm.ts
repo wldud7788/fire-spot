@@ -3,8 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { MeetInsert, MeetWithCamp } from "../types/meet.types";
 
 import {
-  GOCAMPING_HOST,
   GOCAMPING_KEY,
+  GOCAMPING_HOST,
   GOCAMPING_SEARCH
 } from "@/_utils/api/apiKey";
 import { processSubmitData } from "../utils/processSubmitData";
@@ -75,8 +75,6 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     } else {
       // TODO 사카모토
       await processSubmitData(data, meetId);
-      //서버액션으로 빼서 액션을 호출
-      revalidatePath("/meets"); // 이거는 서버측에서 동작해야함
       router.replace("/meets");
     }
   };

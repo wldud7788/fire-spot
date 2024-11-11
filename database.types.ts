@@ -1,5 +1,11 @@
-import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
-import { MeetSelect, MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+import { MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+
+import {
+  ChatRoomInfo,
+  ChatRoomMessageInfo,
+  ChatRoomTitle,
+  ChatRoomType
+} from "@/_components/chat/types/chat.types";
 
 export type Json =
   | string
@@ -12,6 +18,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookmarks: {
+        Row: {
+          contentId: number;
+          created_at: string;
+          id: number;
+          userId: string;
+        };
+        Insert: {
+          contentId: number;
+          created_at?: string;
+          id?: number;
+          userId: string;
+        };
+        Update: {
+          contentId?: number;
+          created_at?: string;
+          id?: number;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "bookmarks_userId_fkey";
+            columns: ["userId"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       camp: {
         Row: {
           addr1: string;
@@ -60,120 +102,156 @@ export type Database = {
         };
         Relationships: [];
       };
-      chat: {
+      chat_attendee: {
         Row: {
+          created_at: string;
           id: number;
-          message: string | null;
-          participant_uid: string;
-          room_id: number | null;
-          sendTime: string | null;
+          is_pin: boolean;
+          last_read_message_id: number | null;
+          room_id: number;
+          user_id: string;
         };
         Insert: {
+          created_at?: string;
           id?: number;
-          message?: string | null;
-          participant_uid: string;
-          room_id?: number | null;
-          sendTime?: string | null;
+          is_pin?: boolean;
+          last_read_message_id?: number | null;
+          room_id: number;
+          user_id: string;
         };
         Update: {
+          created_at?: string;
           id?: number;
-          message?: string | null;
-          participant_uid?: string;
-          room_id?: number | null;
-          sendTime?: string | null;
+          is_pin?: boolean;
+          last_read_message_id?: number | null;
+          room_id?: number;
+          user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "chat_participant_uid_fkey";
-            columns: ["participant_uid"];
+            foreignKeyName: "chat_attendee_last_read_message_id_fkey";
+            columns: ["last_read_message_id"];
             isOneToOne: false;
-            referencedRelation: "profile";
+            referencedRelation: "chat_message";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "chat_room_id_fkey";
+            foreignKeyName: "chat_attendee_room_id_fkey";
             columns: ["room_id"];
             isOneToOne: false;
-            referencedRelation: "chat_rooms_info";
+            referencedRelation: "chat_room";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "chat_attendee_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profile";
             referencedColumns: ["id"];
           }
         ];
       };
-      chat_participants: {
+      chat_message: {
         Row: {
           created_at: string;
           id: number;
-          participant_type: string | null;
-          participant_uid: string;
-          room_id: number | null;
+          message: string;
+          room_id: number;
+          user_id: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          participant_type?: string | null;
-          participant_uid: string;
-          room_id?: number | null;
+          message: string;
+          room_id: number;
+          user_id: string;
         };
         Update: {
           created_at?: string;
           id?: number;
-          participant_type?: string | null;
-          participant_uid?: string;
-          room_id?: number | null;
+          message?: string;
+          room_id?: number;
+          user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "chat_participants_participant_uid_fkey";
-            columns: ["participant_uid"];
+            foreignKeyName: "chat_message_room_id_fkey";
+            columns: ["room_id"];
             isOneToOne: false;
-            referencedRelation: "profile";
+            referencedRelation: "chat_room";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "chat_participants_room_id_fkey";
-            columns: ["room_id"];
+            foreignKeyName: "chat_message_user_id_fkey";
+            columns: ["user_id"];
             isOneToOne: false;
-            referencedRelation: "chat_rooms_info";
+            referencedRelation: "profile";
             referencedColumns: ["id"];
           }
         ];
       };
-      chat_rooms_info: {
+      chat_room: {
         Row: {
-          action_id: number | null;
           created_at: string;
           id: number;
-          owner_id: string;
-          recruit_number: number | null;
-          room_type: string | null;
+          meet_id: number | null;
+          sos_id: number | null;
+          type: ChatRoomType;
         };
         Insert: {
-          action_id?: number | null;
           created_at?: string;
           id?: number;
-          owner_id: string;
-          recruit_number?: number | null;
-          room_type?: string | null;
+          meet_id?: number | null;
+          sos_id?: number | null;
+          type?: ChatRoomType;
         };
         Update: {
-          action_id?: number | null;
           created_at?: string;
           id?: number;
-          owner_id?: string;
-          recruit_number?: number | null;
-          room_type?: string | null;
+          meet_id?: number | null;
+          sos_id?: number | null;
+          type?: ChatRoomType;
         };
         Relationships: [
           {
-            foreignKeyName: "chat_rooms_info_action_id_fkey";
-            columns: ["action_id"];
+            foreignKeyName: "chat_room_sos_id_fkey";
+            columns: ["sos_id"];
+            isOneToOne: false;
+            referencedRelation: "sos";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "chat_room_type_id_fkey";
+            columns: ["meet_id"];
             isOneToOne: false;
             referencedRelation: "meet";
             referencedColumns: ["id"];
-          },
+          }
+        ];
+      };
+      follows: {
+        Row: {
+          created_at: string;
+          follower_id: string | null;
+          following_id: string | null;
+          id: number;
+        };
+        Insert: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Update: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Relationships: [
           {
-            foreignKeyName: "chat_rooms_info_owner_id_fkey";
-            columns: ["owner_id"];
+            foreignKeyName: "\bfollows_follower_id_fkey";
+            columns: ["follower_id"];
             isOneToOne: false;
             referencedRelation: "profile";
             referencedColumns: ["id"];
@@ -356,32 +434,35 @@ export type Database = {
       review: {
         Row: {
           at: string;
-          campId: string;
+          campId: number;
           content: string;
           id: string;
+          likes: number | null;
           rating: number;
           title: string;
-          updatede: string | null;
+          updated: string | null;
           userId: string;
         };
         Insert: {
           at: string;
-          campId: string;
+          campId: number;
           content: string;
           id?: string;
+          likes?: number | null;
           rating: number;
           title: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Update: {
           at?: string;
-          campId?: string;
+          campId?: number;
           content?: string;
           id?: string;
+          likes?: number | null;
           rating?: number;
           title?: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Relationships: [
@@ -389,8 +470,8 @@ export type Database = {
             foreignKeyName: "review_campId_fkey";
             columns: ["campId"];
             isOneToOne: false;
-            referencedRelation: "profile";
-            referencedColumns: ["id"];
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
           }
         ];
       };
@@ -455,6 +536,18 @@ export type Database = {
           meet: unknown;
           camp: unknown;
         }[];
+      };
+      get_chat_room_list: {
+        Args: Record<string, string>;
+        Returns: ChatRoomInfo[];
+      };
+      get_chat_room_title: {
+        Args: Record<string, number>;
+        Returns: ChatRoomTitle[];
+      };
+      get_chat_message: {
+        Args: Record<string, number>;
+        Returns: ChatRoomMessageInfo[];
       };
       get_meet_list1: {
         Args: Record<PropertyKey, never>;

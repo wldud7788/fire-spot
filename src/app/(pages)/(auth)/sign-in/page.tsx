@@ -3,28 +3,26 @@ import { createClient } from "@/_utils/supabase/client";
 import Link from "next/link";
 import React from "react";
 
+type Provider = "kakao" | "google";
 const SignIn = () => {
+  const url = process.env.NEXT_PUBLIC_VERCEL_URL;
+  // console.log("여기는 윈도우", window.location.host);
+  console.log("여기는 url", url);
+  // const url = process.env.NEXT_PUBLIC_VERCEL_URL
   const supabase = createClient();
-  const signInWithKakao = async () => {
+  const signInWithProvider = async (provider: Provider) => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: "kakao",
+      provider,
       options: {
-        redirectTo: `${window.location.host}/auth/callback` //ToDo - 배포 이후 버셀로 도메인 변경 서버로 바꾸면 window가 없어서 고장남
+        redirectTo: `${url}/auth/callback` //ToDo - 배포 이후 버셀로 도메인 변경 서버로 바꾸면 window가 없어서 고장남
       }
     });
     if (error) {
-      return <div>kakao 로그인 오류 {error.message}</div>;
-    }
-  };
-  const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.host}/auth/callback`
-      }
-    });
-    if (error) {
-      return <div>google 로그인 오류 {error.message}</div>;
+      return (
+        <div>
+          {provider} 로그인 오류 {error.message}
+        </div>
+      );
     }
   };
 
@@ -36,14 +34,14 @@ const SignIn = () => {
         </h2>
         <div className="flex flex-col items-center gap-4">
           <button
-            onClick={signInWithKakao}
+            onClick={() => signInWithProvider("kakao")}
             className="mt-3 flex h-[50px] w-[348px] items-center justify-center gap-4 rounded-md bg-[#FAE64C] font-bold text-black shadow-buttonShadow hover:bg-[#fded6f]"
           >
             <img src="/assets/images/kakao.png" alt="" />
             <span>카카오로 시작하기</span>
           </button>
           <button
-            onClick={signInWithGoogle}
+            onClick={() => signInWithProvider("google")}
             className="mt-3 flex h-[50px] w-[348px] items-center justify-center gap-4 rounded-md font-bold text-black shadow-buttonShadow hover:bg-slate-50"
           >
             <img src="/assets/images/google.png" alt="" />

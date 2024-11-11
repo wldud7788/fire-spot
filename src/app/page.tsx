@@ -1,9 +1,11 @@
 import MainCamps from "@/_components/main/MainCamps";
 import MainIcons from "@/_components/main/MainIcons";
+import MainReviews from "@/_components/main/MainReviews";
 import MainSection from "@/_components/main/MainSection";
 import MainSlide from "@/_components/main/MainSlide";
 import MainTop from "@/_components/main/MainTop";
 import MainUserCard from "@/_components/main/MainUserCard";
+import MainSearch from "@/_components/main/MainSearch";
 
 import {
   dehydrate,
@@ -21,16 +23,17 @@ export default function Home() {
           {/* main_top */}
           <MainSection>
             <MainTop />
+            <MainSearch />
           </MainSection>
           {/*// main_top */}
 
           {/* main_sec01 */}
-          <MainSection background="#F2F2F2">
-            <div className="flex items-center justify-stretch gap-[20px]">
-              <div className="w-[calc(100%-465px)] rounded-[20px]">
+          <MainSection background="#fff">
+            <div className="flex flex-wrap content-stretch gap-[20px]">
+              <div className="main-slide-wrap w-[calc(100%-515px)] overflow-hidden rounded-[12px]">
                 <MainSlide />
               </div>
-              <div className="flex-1 rounded-[20px] bg-[#E0E0E0] p-[40px]">
+              <div className="flex-1 rounded-[12px] border border-[#d9d9d9] bg-[#fff] p-[30px]">
                 <MainUserCard />
               </div>
             </div>
@@ -57,6 +60,7 @@ export default function Home() {
             <h2 className="flex items-center justify-center text-center text-[32px] font-bold">
               후기
             </h2>
+            <MainReviews />
           </MainSection>
           {/*// main_sec03 */}
         </div>

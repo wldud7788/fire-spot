@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useRef } from "react";
 import CSearchInput from "../CSearchInput";
-import useDropdown from "@/hooks/useDropdown";
-import DropDownSearch from "../DropDownSearch";
+import DropDownSearch from "../dropdown/DropDownSearch";
 import { useRouter } from "next/navigation";
-import DropdownRegions from "../../dropdownRegions/DropdownRegions";
+import DropdownRegions from "../dropdown/DropdownRegions";
 import { useCamps } from "@/app/queries/useQueries";
 import { variants } from "./style";
 import { cn } from "@/_lib/utils";
+import useDropdown from "@/_hooks/useDropdown";
 
 interface SearchBarProps {
   variant: "main" | "header" | "search";
@@ -28,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
     selectedRegion
   );
   const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
-    useDropdown();
+    useDropdown(variant);
 
   const handleRegionSelect = (region: string | null) => {
     setSelectedRegion(region ?? undefined);
@@ -61,7 +61,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
     <div className="relative">
       {isDropdownOpen && (
         <div
-          className="fixed inset-0 z-10 bg-black opacity-50"
+          className={cn(
+            "fixed inset-0 z-10 bg-black opacity-50",
+            variant === "header" ? "z-30" : "z-20"
+          )}
           onClick={(e) => {
             e.stopPropagation();
             closeDropdown();
@@ -69,13 +72,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
         />
       )}
       <form
-        className="relative z-20 flex w-full gap-1"
+        className={cn(
+          "relative z-20 flex w-full gap-1",
+          variant === "header" ? "z-40" : "z-30"
+        )}
         onSubmit={onSubmitHandler}
       >
         {variantStyles.showRegions && (
           <DropdownRegions onSelectRegion={handleRegionSelect} />
         )}
-        <div className="header_search">
+        <div className="header_search relative w-full">
           <CSearchInput
             ref={inputRef}
             value={searchValue}
