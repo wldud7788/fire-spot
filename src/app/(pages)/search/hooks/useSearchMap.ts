@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import type { MapOptions, NaverMarker } from "../../../../type/map";
 import { MAP_CONFIG } from "../constants/map";
 import { Camp } from "../../camps/types/Camp";
