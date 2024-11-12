@@ -1,6 +1,5 @@
 import React from "react";
 import { SosSelect } from "../../../types/sos.types";
-import useSosRemainingTime from "../../../hooks/useSosRemainingTime";
 type Props = {
   sos: SosSelect;
 };
