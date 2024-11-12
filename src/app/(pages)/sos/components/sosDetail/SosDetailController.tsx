@@ -26,6 +26,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   useChatSubscriptionMessageList({ roomId });
   if (!user) return <></>;
 
+  // TODO 민규님: SOS 상세 섹션별 분리
   return (
     <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <SosTitleSection sos={sos} />

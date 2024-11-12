@@ -31,6 +31,8 @@ const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
   const submitText = !!sosId ? "수정하기" : "만들기";
 
+  // TODO 민규님: SOS 작성 섹션별 분리
+
   return (
     <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px] pt-[30px] font-pretendard">
       <section className="flex h-[60px] items-center">
@@ -49,14 +51,21 @@ const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
           </button>
         </section>
 
+        {/* TODO 민규님: sos 타입 (긴급, 캠핑질문 등 선택 섹션) */}
         <SosCreatorTypeSection watch={watch} setValue={setValue} />
+
+        {/* TODO 민규님: sos 정보  */}
         <SosCreatorInfoSection />
 
         {errors.title && <span>This field is required</span>}
 
+        {/* TODO 민규님: sos 타이틀, 내용  */}
         <SosCreatorContentSection register={register} />
+
+        {/* TODO 민규님: sos 태그 */}
         <SosCreatorTagSection watch={watch} setValue={setValue} />
 
+        {/* TODO 민규님: sos 캠핑장 검색 */}
         <SosCreatorSearchSection
           handleSelectCamp={handleSelectCamp}
           searchKeyword={searchKeyword}

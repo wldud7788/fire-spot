@@ -27,6 +27,7 @@ const SosCreatorTagSection = ({ watch, setValue }: Props) => {
     setValue(key, tag);
   };
 
+  // TODO 민규님: Tag 작성 섹션
   return (
     <section className="flex w-full flex-col gap-24 rounded-[20px] border-[1px] border-[##B5B5B5] px-[53px] py-24">
       <div className="flex flex-col gap-[20px]">
@@ -55,6 +56,7 @@ const SosCreatorTagSection = ({ watch, setValue }: Props) => {
         </div>
 
         <ul className="flex gap-2">
+          {/* TODO 민규님: tag: string[] 반복문 돌려서 태그 보여줍니다.*/}
           {tag.map((item, index) => (
             <li
               key={index}

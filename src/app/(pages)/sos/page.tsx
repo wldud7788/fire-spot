@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const SosList = async () => {
   const sosWithCampList: SosWithCamp[] = await getSosList();
 
+  // TODO 민규님: SOS 목록 페이지
   return (
     <div className="relative mx-auto w-full max-w-[1360px] px-[30px]">
       <div className="absolute right-[30px] top-4 h-[40px]">
