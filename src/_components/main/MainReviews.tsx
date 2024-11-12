@@ -1,4 +1,4 @@
-import FeedCard from "../feed/FeedCard";
+import ReviewCard from "../review/ReviewCard";
 
 const MainReviews = () => {
   // [이윤지 작업] 리뷰 랜덤으로 5개 리스트 출력해주면 됩니다.
@@ -66,7 +66,7 @@ const MainReviews = () => {
       {feeds.map((feed) => {
         return (
           <li key={feed.id}>
-            <FeedCard feed={feed} type={"main"} />
+            <ReviewCard feed={feed} type={"main"} />
           </li>
         );
       })}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/_utils/supabase/client"; // Supabase 클라이언트 가져오기
 import ReviewModal from "@/_components/modal/ReviewModal";
-import FeedCard from "@/_components/feed/FeedCard";
+import ReviewCard from "@/_components/review/ReviewCard";
 import { CampSelect } from "../meets/types/camp.types";
 
 const supabase = createClient();
@@ -44,7 +44,7 @@ const CampListPage = () => {
       {/* 캠핑장 목록 */}
       {camps.map((camp) => {
         return (
-          <FeedCard
+          <ReviewCard
             key={camp.contentId}
             feed={{
               id: Number(camp.contentId),

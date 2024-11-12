@@ -1,4 +1,4 @@
-import FeedCard from "@/_components/feed/FeedCard";
+import ReviewCard from "@/_components/review/ReviewCard";
 
 const FeedTestPage = () => {
   const dummyData = [
@@ -63,7 +63,7 @@ const FeedTestPage = () => {
       {dummyData.map((data, idx) => {
         return (
           <li key={idx}>
-            <FeedCard feed={data} />
+            <ReviewCard feed={data} />
           </li>
         );
       })}

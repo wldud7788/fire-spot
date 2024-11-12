@@ -1,4 +1,4 @@
-export interface FeedItem {
+export interface ReviewItem {
   id: number;
   like: number;
   title: string;
