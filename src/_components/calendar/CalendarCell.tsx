@@ -68,7 +68,7 @@ const CalendarCell = ({
                 key={stamp.id}
                 className="flex w-[calc(33%-8px)] flex-row-reverse items-center"
               >
-                <div className="h-[23px] w-[20px] bg-stamp bg-cover bg-center" />
+                <div className="bg-stamp h-[23px] w-[20px] bg-cover bg-center" />
               </div>
               // <li key={`${stamp.id}`} className="h-12 bg-slate-500">
               //* {stamp.content} */}
