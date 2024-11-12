@@ -8,6 +8,9 @@ const supabaseRpc = {
     getChatRoomList: "get_chat_room_list",
     getChatRoomTitle: "get_chat_room_title",
     getChatMessage: "get_chat_message"
+  },
+  sos: {
+    getSosList: "get_sos_list"
   }
 } as const;
 

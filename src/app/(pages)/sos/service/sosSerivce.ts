@@ -1,12 +1,13 @@
 "use server";
 
 import { createClient } from "@/_utils/supabase/server";
-import { SosInsert, SosUpdate } from "../types/sos.types";
+import { SosInsert, SosUpdate, SosWithCamp } from "../types/sos.types";
 import { revalidatePath } from "next/cache";
 import {
   postChatAttendee,
   postChatRoom
 } from "@/_components/chat/service/chatService";
+import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 
 export const postSos = async (sos: SosInsert) => {
   const supabase = await createClient();
@@ -58,4 +59,19 @@ export const patchSos = async (sosId: number, sos: SosUpdate) => {
   } catch (e) {
     console.error("patchSos Error", e);
   }
+};
+
+export const getSosList = async (): Promise<SosWithCamp[]> => {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc(supabaseRpc.sos.getSosList);
+
+  if (error) {
+    console.error("getMeetList Error", error);
+    throw new Error();
+  }
+
+  if (!data) return [] as SosWithCamp[];
+
+  return data;
 };

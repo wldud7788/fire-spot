@@ -4,6 +4,8 @@ import {
   ChatRoomTitle,
   ChatRoomType
 } from "@/_components/chat/types/chat.types";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { SosSelect } from "@/app/(pages)/sos/types/sos.types";
 
 export type Json =
   | string
@@ -479,20 +481,11 @@ export type Database = {
         Args: Record<string, number>;
         Returns: ChatRoomMessageInfo[];
       };
-      get_meet_list1: {
+      get_sos_list: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
-        }[];
-      };
-      get_meet_list2: {
-        Args: Record<PropertyKey, never>;
-        Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
+          sos: SosSelect;
+          camp: CampSelect;
         }[];
       };
     };
