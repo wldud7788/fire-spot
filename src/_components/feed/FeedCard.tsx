@@ -10,8 +10,8 @@ type FeedCardProps = {
 
 const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
   const TOTAL_STAR = 5;
-  const activeStars = Array.from({ length: feed.like });
-  const defaultStars = Array.from({ length: TOTAL_STAR - feed.like });
+  const activeStars = Array.from({ length: feed.rating });
+  const defaultStars = Array.from({ length: TOTAL_STAR - feed.rating });
 
   return (
     <>
@@ -22,7 +22,7 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
             <div className="ibox overflow-hidden">
               <img
                 className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
-                src={feed.img}
+                src={feed.camp?.firstImageUrl || ""}
                 alt={`${feed.title} 이미지`}
               />
             </div>
@@ -51,30 +51,34 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
                 {feed.title}
               </strong>
               <p className="color-gray01 line-clamp-3 min-h-[51px] text-[12px]">
-                {feed.desc}
+                {feed.content}
               </p>
               <div className="user_area mt-[10px] flex items-center gap-[10px] border-t border-[#dbdbdb] pt-[10px]">
                 <div className="user_img h-[36px] w-[36px] overflow-hidden rounded-[100%]">
                   {/* [이윤지 적용] 링크는 /profile/${유저아이디}로 적용 부탁드립니다. */}
                   <Link href={`/profile/378b4f02-105a-4812-bfca-b3f75114bd0e`}>
                     <img
-                      src={feed.profileImg}
-                      alt={`${feed.userName} 이미지`}
+                      src={
+                        feed.profile?.avatar_url ||
+                        "/assets/images/default_profile.jpeg"
+                      }
+                      alt={`${feed.profile?.nickname || "유저 정보 없음"} 의 프로필 사진`}
                       className="h-full w-full object-cover"
                     />
                   </Link>
                 </div>
                 <div className="user_info flex flex-col">
                   <p className="color-gray01 line-clamp-1 w-full text-[14px]">
-                    {feed.userName}
+                    {feed.profile?.nickname}
                   </p>
-                  <span className="color-gray03 text-[12px]">{feed.date}</span>
+                  <span className="color-gray03 text-[12px]">{feed.at}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       ) : (
+        // 나는 이윤지 짱
         // type default
         <div className="feed_card">
           <div className="inner">
@@ -84,18 +88,25 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
                 onClick={onClickFunc ? () => onClickFunc() : undefined} // 클릭 함수가 있는 경우에만 실행
                 style={{ cursor: onClickFunc ? "pointer" : "default" }} // 클릭 가능한 경우 포인터 커서 표시
               >
-                {feed.userName}
+                {feed.profile?.nickname}
               </div>
-              <div>{feed.profileImg}</div>
-              <div>{feed.time}</div>
+              <img
+                src={
+                  feed.profile?.avatar_url ||
+                  "/assets/images/default_profile.jpeg"
+                }
+                alt={`${feed.profile?.nickname} 의 프로필 사진`}
+                className="h-full w-full object-cover"
+              />
+              <div>{feed.at}</div>
             </div>
             <div className="feed_desc">
-              <p>{feed.desc}</p>
+              <p>{feed.content}</p>
             </div>
             <div className="utils">
               <div className="btn_area">
                 {/* 좋아요 컴포넌트 적용 필요 */}
-                <button>좋아요 1개</button>
+                <button>{feed.likes}</button>
                 <button>답글 달기</button>
               </div>
               <div className="img_box">
@@ -103,7 +114,7 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
                 이미지박스
               </div>
               <div>
-                <img src={feed.firstImageUrl} alt="캠핑장 이미지" />
+                <img src={feed.camp?.firstImageUrl || ""} alt="캠핑장 이미지" />
               </div>
             </div>
           </div>
@@ -112,5 +123,13 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
     </>
   );
 };
-
+// 24-11-04
+// 좋아하는 사람이 생겼다.
+/**
+ *
+ * 그의 이니셜은 M.K
+ *
+ * 하지만 그는 여자친구가 있다.
+ * 난 어떻게 해야할까?
+ */
 export default FeedCard;

@@ -340,7 +340,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </div>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
-          {false ? (
+          {true ? (
             <>
               <ReviewModal campId={paramsId} onClose={() => {}} />
               <CampReviewSlide campId={paramsId} />

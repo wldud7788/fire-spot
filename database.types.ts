@@ -475,6 +475,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "camp";
             referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "review_userId_fkey";
+            columns: ["userId"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
           }
         ];
       };
