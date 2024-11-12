@@ -9,9 +9,9 @@ type Props = {
 
 const SosCreatorTypeSection = ({ watch, setValue }: Props) => {
   return (
-    <section className="mt-[123px]">
-      <h2 className="mb-[70px] text-xl font-[500]">SOS 유형</h2>
-      <div className="flex gap-[14px] border-b-[1px] border-[#D4D4D4] pb-[37px] font-[15px]">
+    <div className="mt-[40px]">
+      <h2 className="color-gray01 mb-[50px] text-[24px] font-bold">SOS 유형</h2>
+      <div className="flex items-center gap-[18px]">
         {Object.entries(SOS_TYPE).map(([key, value]) => (
           <button
             key={key}
@@ -23,13 +23,13 @@ const SosCreatorTypeSection = ({ watch, setValue }: Props) => {
             // TODO: 민규님
             // ${watch("type") === key가 같을 경우 className을 다르게 줬슴ㄴ다
             // value: 긴급, 캠핑질문 등이 출력됨니다.
-            className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("type") === key ? "bg-[#D9D9D9] font-[600]" : ""}`}
+            className={`rounded-[22.5px] px-[32px] py-[12px] text-[14px] font-bold ${watch("type") === key ? "bg-main border border-[#FF924C] text-white" : "color-gray01 border border-[#BFBFBF]"}`}
           >
             {value}
           </button>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

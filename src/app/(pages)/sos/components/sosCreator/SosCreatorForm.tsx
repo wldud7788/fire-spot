@@ -1,4 +1,5 @@
 "use client";
+import PageTitle from "@/_components/common/PageTitle";
 import useSosCreatorForm from "../../hooks/useSosCreatorForm";
 import { SosWithCamp } from "../../types/sos.types";
 import SosCreatorContentSection from "./formSection/SosCreatorContentSection";
@@ -31,55 +32,54 @@ const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
   const submitText = !!sosId ? "수정하기" : "만들기";
 
-  // TODO 민규님: SOS 작성 섹션별 분리
-
   return (
-    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px] pt-[30px] font-pretendard">
-      <section className="flex h-[60px] items-center">
-        <h2 className="text-5xl font-bold">SOS 만들기</h2>
-      </section>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="relative mt-20 flex w-full flex-col"
-      >
-        <section className="flex h-[120px] items-center justify-end border-b-[2px] border-t-[2px]">
-          <button
-            type="submit"
-            className={`h-[51px] rounded-[6px] bg-[#D9D9D9] pl-12 pr-12 text-xl`}
-          >
-            {submitText}
-          </button>
-        </section>
+    <div className="meet_write mb-[60px] mt-[90px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+        <PageTitle text={"SOS 요청하기"} />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="relative flex w-full flex-col"
+        >
+          <section className="mt-[40px] flex items-center justify-end gap-[12px] border-b border-b-[#DFE1E6] pb-[15px]">
+            <button
+              type="submit"
+              className={`h-[51px] rounded-[6px] bg-[#D9D9D9] pl-12 pr-12 text-xl`}
+            >
+              {submitText}
+            </button>
+          </section>
 
-        {/* TODO 민규님: sos 타입 (긴급, 캠핑질문 등 선택 섹션) */}
-        <SosCreatorTypeSection watch={watch} setValue={setValue} />
+          {/* (긴급, 캠핑질문 등 선택 섹션) */}
+          <SosCreatorTypeSection watch={watch} setValue={setValue} />
 
-        {/* TODO 민규님: sos 정보  */}
-        <SosCreatorInfoSection />
+          {/* sos 정보  */}
+          <SosCreatorInfoSection />
 
-        {errors.title && <span>This field is required</span>}
+          {errors.title && <span>This field is required</span>}
 
-        {/* TODO 민규님: sos 타이틀, 내용  */}
-        <SosCreatorContentSection register={register} />
+          {/* sos 타이틀, 내용  */}
+          <SosCreatorContentSection register={register} />
 
-        {/* TODO 민규님: sos 태그 */}
-        <SosCreatorTagSection watch={watch} setValue={setValue} />
+          {/* 캠핑장 검색 */}
+          <SosCreatorSearchSection
+            handleSelectCamp={handleSelectCamp}
+            searchKeyword={searchKeyword}
+            handleChangeSearchKeyword={handleChangeSearchKeyword}
+            searchList={searchList}
+            showDropDown={showDropDown}
+            location={location}
+          />
 
-        {/* TODO 민규님: sos 캠핑장 검색 */}
-        <SosCreatorSearchSection
-          handleSelectCamp={handleSelectCamp}
-          searchKeyword={searchKeyword}
-          handleChangeSearchKeyword={handleChangeSearchKeyword}
-          searchList={searchList}
-          showDropDown={showDropDown}
-          location={location}
-        />
-        <input
-          type="hidden"
-          className="border-2"
-          {...register("contentId", { required: true })}
-        />
-      </form>
+          {/* sos 태그 */}
+          <SosCreatorTagSection watch={watch} setValue={setValue} />
+
+          <input
+            type="hidden"
+            className="border-2"
+            {...register("contentId", { required: true })}
+          />
+        </form>
+      </div>
     </div>
   );
 };

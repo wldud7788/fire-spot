@@ -29,12 +29,14 @@ const SosCreatorTagSection = ({ watch, setValue }: Props) => {
 
   // TODO 민규님: Tag 작성 섹션
   return (
-    <section className="flex w-full flex-col gap-24 rounded-[20px] border-[1px] border-[##B5B5B5] px-[53px] py-24">
+    <section className="mt-[40px] rounded-[12px] border border-[#D9D9D9] px-[30px] py-[40px]">
       <div className="flex flex-col gap-[20px]">
-        <h2 className="text-[20px]">태그</h2>
-        <div className="flex gap-[22px]">
+        <h2 className="color-gray01 flex items-center gap-[5px] text-[24px] font-bold">
+          태그
+        </h2>
+        <div className="flex gap-[10px]">
           <input
-            className="h-[45px] w-[300px] rounded-[6px] border-2 bg-white px-4"
+            className="h-[45px] w-[300px] rounded-[6px] border border-[#c3c3c3] bg-white px-4"
             placeholder="엔터로도 입력이 가능합니다."
             value={tagInput}
             onChange={handleChangeTagInput}
@@ -47,7 +49,7 @@ const SosCreatorTagSection = ({ watch, setValue }: Props) => {
           />
           <button
             type="button"
-            className="flex items-center rounded-[11px] border-[1px] border-[#C3C3C3] p-[8px]"
+            className="flex items-center rounded-[6px] border-[1px] border-[#c3c3c3] p-[8px]"
             onClick={handleAddTag}
           >
             <div className="h-6 w-6 bg-plus bg-cover bg-center" />
@@ -55,12 +57,12 @@ const SosCreatorTagSection = ({ watch, setValue }: Props) => {
           </button>
         </div>
 
-        <ul className="flex gap-2">
+        <ul className="flex gap-[20px]">
           {/* TODO 민규님: tag: string[] 반복문 돌려서 태그 보여줍니다.*/}
           {tag.map((item, index) => (
             <li
               key={index}
-              className="flex h-[45px] flex-wrap items-center rounded-[22.5px] border-[1px] border-[#C3C3C3] p-2 px-4 py-[14px] text-[#A4A4A4]"
+              className="flex flex-wrap items-center rounded-[22.5px] border-[1px] border-[#c3c3c3] p-2 px-[16px] py-[10px] text-[#A4A4A4]"
             >
               <button
                 type="button"

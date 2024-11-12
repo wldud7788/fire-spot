@@ -14,7 +14,11 @@ const WriteButton = ({
   const handleClick = () => {
     router.push(url);
   };
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <button onClick={handleClick} className="btn-add">
+      {children}
+    </button>
+  );
 };
 
 export default WriteButton;
