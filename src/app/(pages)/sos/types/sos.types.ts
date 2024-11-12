@@ -8,6 +8,11 @@ export type SosWithCamp = {
   profile: ProfileSelect;
 };
 
+export type SosWithCampInsert = {
+  sos: SosSelect;
+  camp: CampSelect;
+};
+
 export const SOS_TYPE = {
   emergency: "긴급",
   asking: "캠핑질문",

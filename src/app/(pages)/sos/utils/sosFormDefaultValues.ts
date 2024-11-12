@@ -1,4 +1,4 @@
-import { SosWithCamp } from "../types/sos.types";
+import { SosWithCamp, SosWithCampInsert } from "../types/sos.types";
 
 export const sosFormDefaultValues: SosWithCamp = {
   sos: {
@@ -24,5 +24,13 @@ export const sosFormDefaultValues: SosWithCamp = {
     firstImageUrl: "",
     imgUrls: [],
     created_at: new Date().toISOString()
+  },
+  profile: {
+    avatar_url: "",
+    created_at: "",
+    email: "",
+    id: "",
+    nickname: "",
+    user_name: ""
   }
 };
