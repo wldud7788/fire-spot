@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
-import ReviewSlideCard from "../feed/ReviewSlideCard";
+import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
 import { Database } from "../../../database.types";
 
