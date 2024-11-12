@@ -10,6 +10,7 @@ import SosChatSection from "./section/SosChatSection";
 import { useChatRoomMessage } from "@/_components/chat/hooks/useChatRoom";
 import useUser from "@/_hooks/useUser";
 import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChatSubscriptionMessageList";
+import SosContentSection from "./section/SosContentSection";
 
 type Props = {
   sosWithCamp: SosWithCamp;
@@ -31,6 +32,8 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
     <div className="mx-auto mb-[100px] mt-[75px] w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <SosTitleSection sos={sos} />
       <SosUserSection sosWithCamp={sosWithCamp} />
+
+      <SosContentSection sos={sos} />
 
       <SosChatSection
         messagesByDate={messagesByDate}
