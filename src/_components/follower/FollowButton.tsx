@@ -70,7 +70,7 @@ const FollowButton = ({
   if (followersError) return <div>에러가 노출되었습니다.</div>;
   console.log("followers ==>", followers);
 
-  const followChk = followers?.some(
+  const isFollow = followers?.some(
     (following) => following.following_id === followUserId
   );
 
@@ -80,10 +80,20 @@ const FollowButton = ({
     <>
       {followUserId === loginUserId ? null : (
         <>
-          {followChk ? (
-            <button onClick={() => unfollowMutation.mutate()}>언팔로우</button>
+          {isFollow ? (
+            <button
+              className="bd-color-sub w-full rounded-[8px] border border-[#ffd0b2] bg-[#FFD0B2] py-[5px] text-[12px] text-[#803200]"
+              onClick={() => unfollowMutation.mutate()}
+            >
+              언팔로우
+            </button>
           ) : (
-            <button onClick={() => followMutation.mutate()}>팔로우</button>
+            <button
+              className="w-full rounded-[8px] border border-[#FFD0B2] py-[5px] text-[12px] text-[#803200]"
+              onClick={() => followMutation.mutate()}
+            >
+              팔로우
+            </button>
           )}
         </>
       )}

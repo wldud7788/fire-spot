@@ -18,6 +18,7 @@ type ForecastWeatherComponentProps = {
   latitude: number;
   longitude: number;
   campingName: string;
+  date?: Date;
 };
 
 const ForecastWeatherComponent = ({

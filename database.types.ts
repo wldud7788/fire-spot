@@ -1,3 +1,5 @@
+import { MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+
 import {
   ChatRoomInfo,
   ChatRoomMessageInfo,
@@ -18,6 +20,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookmarks: {
+        Row: {
+          contentId: number;
+          created_at: string;
+          id: number;
+          userId: string;
+        };
+        Insert: {
+          contentId: number;
+          created_at?: string;
+          id?: number;
+          userId: string;
+        };
+        Update: {
+          contentId?: number;
+          created_at?: string;
+          id?: number;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "bookmarks_userId_fkey";
+            columns: ["userId"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       camp: {
         Row: {
           addr1: string;
@@ -33,6 +71,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm: string | null;
+          featureNm?: string | null;
         };
         Insert: {
           addr1: string;
@@ -48,6 +87,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Update: {
           addr1?: string;
@@ -63,6 +103,7 @@ export type Database = {
           mapX?: number;
           mapY?: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Relationships: [];
       };
@@ -189,6 +230,35 @@ export type Database = {
             columns: ["meet_id"];
             isOneToOne: false;
             referencedRelation: "meet";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      follows: {
+        Row: {
+          created_at: string;
+          follower_id: string | null;
+          following_id: string | null;
+          id: number;
+        };
+        Insert: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Update: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "\bfollows_follower_id_fkey";
+            columns: ["follower_id"];
+            isOneToOne: false;
+            referencedRelation: "profile";
             referencedColumns: ["id"];
           }
         ];
@@ -369,32 +439,35 @@ export type Database = {
       review: {
         Row: {
           at: string;
-          campId: string;
+          campId: number;
           content: string;
           id: string;
+          likes: number | null;
           rating: number;
           title: string;
-          updatede: string | null;
+          updated: string | null;
           userId: string;
         };
         Insert: {
           at: string;
-          campId: string;
+          campId: number;
           content: string;
           id?: string;
+          likes?: number | null;
           rating: number;
           title: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Update: {
           at?: string;
-          campId?: string;
+          campId?: number;
           content?: string;
           id?: string;
+          likes?: number | null;
           rating?: number;
           title?: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Relationships: [
@@ -402,8 +475,8 @@ export type Database = {
             foreignKeyName: "review_campId_fkey";
             columns: ["campId"];
             isOneToOne: false;
-            referencedRelation: "profile";
-            referencedColumns: ["id"];
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
           }
         ];
       };
@@ -450,6 +523,17 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_meet_attendee_with_meet_and_camp: {
+        Args: {
+          user_id: string;
+        };
+        // Returns: {
+        //   attendee_count: number;
+        //   meet: MeetSelect;
+        //   camp: CampSelect;
+        // }[];
+        Returns: MeetWithCamp[];
+      };
       get_meet_detail:
         | {
             Args: Record<PropertyKey, never>;

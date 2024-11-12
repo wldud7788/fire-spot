@@ -1,10 +1,7 @@
 "use server";
 
-import {
-  postChatAttendee,
-  postChatRoom
-} from "@/_components/chat/service/chatService";
 import { createClient } from "@/_utils/supabase/server";
+import supabaseRpc from "@/_utils/supabase/supabase.rpc";
 
 const fetchMeetAttendeeByMeetId = async (meetId: string | number) => {
   const supabase = await createClient();
@@ -41,36 +38,46 @@ const fetchMeetAttendeeByUserId = async () => {
   }
 };
 
-// TODO (postMeetAttendee 함수에서 postChatRoom, postChatAttendee 두 개 연결해야함)
+const fetchMeetAttendeeWithMeetAndCampByUserId = async () => {
+  const supabase = await createClient();
+
+  try {
+    const userData = await supabase.auth.getUser();
+    const userId = userData.data.user?.id ?? "";
+
+    const { data, error } = await supabase.rpc(
+      supabaseRpc.meetAttendee.getMeetAttendeeWithMeetAndCamp,
+      { user_id: userId }
+    );
+
+    if (error || !data) {
+      return [];
+      // throw new Error("fetchMeetAttendee Error: ", error);
+    }
+    return data;
+  } catch (e) {
+    throw new Error(e + "");
+  }
+};
+
 const postMeetAttendee = async (meetId: number) => {
   const supabase = await createClient();
 
   try {
     const userData = await supabase.auth.getUser();
-    const userId = userData.data.user?.id || "";
+    const userId = userData.data.user?.id;
 
-    const { data: meetAttendee, error: meetAttendeeError } = await supabase
+    const { data, error: meetAttendeeError } = await supabase
       .from("meet_attendee")
       .insert({ meet_id: meetId, user_id: userId })
       .select()
       .single();
 
-    if (meetAttendeeError || !meetAttendee) {
+    if (meetAttendeeError || !data) {
       console.error(meetAttendeeError);
       throw new Error("postMeetAttendee Error,");
     }
-
-    const typeId = meetAttendee.meet_id;
-
-    const chatRoom = await postChatRoom("meet", typeId);
-
-    if (!chatRoom) {
-      throw new Error("Error No chatRoom data");
-    }
-
-    await postChatAttendee(userId, chatRoom.id);
-
-    return meetAttendee;
+    return data;
   } catch (e) {
     console.error(e);
     throw e;
@@ -101,5 +108,6 @@ export {
   postMeetAttendee,
   deleteMeetAttendee,
   fetchMeetAttendeeByMeetId,
-  fetchMeetAttendeeByUserId
+  fetchMeetAttendeeByUserId,
+  fetchMeetAttendeeWithMeetAndCampByUserId
 };
