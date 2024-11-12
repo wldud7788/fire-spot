@@ -1,9 +1,11 @@
+import { ProfileSelect } from "@/_components/chat/types/Profile.types";
 import { Database } from "../../../../../database.types";
 import { CampSelect } from "../../meets/types/camp.types";
 
 export type SosWithCamp = {
   sos: SosSelect;
   camp: CampSelect;
+  profile: ProfileSelect;
 };
 
 export const SOS_TYPE = {

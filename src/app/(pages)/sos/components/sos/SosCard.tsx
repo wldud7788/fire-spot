@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { SosWithCamp } from "../../types/sos.types";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
-import useSosCard from "../../hooks/useSosCard";
+import useSosRemainingTime from "../../hooks/useSosRemainingTime";
 
 type Props = {
   sosWithCamp: SosWithCamp;
@@ -11,7 +11,7 @@ type Props = {
 const SosCard = ({ sosWithCamp }: Props) => {
   const { sos, camp } = sosWithCamp;
 
-  const { isProgress, remainingTimeString } = useSosCard(
+  const { isProgress, remainingTimeString } = useSosRemainingTime(
     new Date(sos.created_at)
   );
 

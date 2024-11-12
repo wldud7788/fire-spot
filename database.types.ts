@@ -5,7 +5,7 @@ import {
   ChatRoomType
 } from "@/_components/chat/types/chat.types";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
-import { SosSelect } from "@/app/(pages)/sos/types/sos.types";
+import { SosSelect, SosWithCamp } from "@/app/(pages)/sos/types/sos.types";
 
 export type Json =
   | string
@@ -483,10 +483,11 @@ export type Database = {
       };
       get_sos_list: {
         Args: Record<PropertyKey, never>;
-        Returns: {
-          sos: SosSelect;
-          camp: CampSelect;
-        }[];
+        Returns: SosWithCamp[];
+      };
+      get_sos_detail: {
+        Args: Record<string, number>;
+        Returns: SosWithCamp[];
       };
     };
     Enums: {

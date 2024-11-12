@@ -75,3 +75,17 @@ export const getSosList = async (): Promise<SosWithCamp[]> => {
 
   return data;
 };
+
+export const getSosDetail = async (sosId: number) => {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc(supabaseRpc.sos.getSosDetail, {
+    sos_id: Number(sosId)
+  });
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data[0];
+};

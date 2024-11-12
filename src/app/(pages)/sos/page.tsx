@@ -4,6 +4,14 @@ import React from "react";
 import { SosWithCamp } from "./types/sos.types";
 import { getSosList } from "./service/sosSerivce";
 import SosCard from "./components/sos/SosCard";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "불멍스팟 SOS",
+    description: "불멍스팟 SOS 목록 페이지"
+  };
+}
 
 const SosList = async () => {
   const sosWithCampList: SosWithCamp[] = await getSosList();

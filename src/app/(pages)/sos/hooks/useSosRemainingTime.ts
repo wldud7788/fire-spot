@@ -7,7 +7,7 @@ const initialDuration = {
   seconds: 0
 } as Duration;
 
-const useSosCard = (date: Date) => {
+const useSosRemainingTime = (date: Date) => {
   const [timeRemaining, setTimeRemaining] = useState<Duration>(initialDuration);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const useSosCard = (date: Date) => {
   return { isProgress, remainingTimeString };
 };
 
-export default useSosCard;
+export default useSosRemainingTime;
