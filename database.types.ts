@@ -416,22 +416,22 @@ export type Database = {
           type: string;
         };
         Insert: {
-          content?: string;
-          contentId?: number | null;
-          created_at?: string;
-          id?: number;
-          tag?: string[];
+          content: string;
+          tag: string[];
           title: string;
-          type?: string;
+          type: string;
+          contentId?: number | null;
+          // id?: number;
+          // created_at?: string;
         };
         Update: {
           content?: string;
           contentId?: number | null;
-          created_at?: string;
-          id?: number;
           tag?: string[];
           title?: string;
           type?: string;
+          // id?: number;
+          // created_at?: string;
         };
         Relationships: [
           {

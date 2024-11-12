@@ -1,3 +1,5 @@
+import { Database } from "../../../../../database.types";
+
 export const SOS_TYPE = {
   emergency: "긴급",
   asking: "캠핑질문",
@@ -7,3 +9,7 @@ export const SOS_TYPE = {
 } as const;
 
 export type SosTypeType = keyof typeof SOS_TYPE;
+
+export type SosSelect = Database["public"]["Tables"]["sos"]["Row"];
+export type SosInsert = Database["public"]["Tables"]["sos"]["Insert"];
+export type SosUpdate = Database["public"]["Tables"]["sos"]["Update"];
