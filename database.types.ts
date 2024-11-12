@@ -69,6 +69,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm: string | null;
+          featureNm?: string | null;
         };
         Insert: {
           addr1: string;
@@ -84,6 +85,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Update: {
           addr1?: string;
@@ -99,6 +101,7 @@ export type Database = {
           mapX?: number;
           mapY?: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Relationships: [];
       };

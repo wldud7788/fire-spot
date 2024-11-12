@@ -1,9 +1,10 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
 import { useCallback } from "react";
 
 type CampingDataProps = {
-  camp: Camp;
+  camp: CampSelect | Camp;
   type?: string;
   listParamsId?: string;
   onBookmarkClick?: (contentId: number, campName: string) => void;
@@ -104,7 +105,7 @@ const CampCard = ({
                   <img
                     className="relative top-[-1px]"
                     src="/assets/images/main/ico-main-review-count.svg"
-                    alt={`${camp.facltDivNm} 후기 갯수 이미지`}
+                    alt={`${camp.facltNm} 후기 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 후기 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>
@@ -112,7 +113,7 @@ const CampCard = ({
                 <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
                   <img
                     src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltDivNm} 북마크 갯수 이미지`}
+                    alt={`${camp.facltNm} 북마크 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 북마크 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>

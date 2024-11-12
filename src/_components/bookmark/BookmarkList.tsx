@@ -7,6 +7,7 @@ import BookmarkButton from "../bookmark/BookmarkButton";
 import { createClient } from "@/_utils/supabase/client";
 import { Database } from "../../../database.types";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 
 // interface Bookmark {
 //   contentId: string;
@@ -21,8 +22,8 @@ import { Camp } from "@/app/(pages)/camps/types/Camp";
 // }
 // type Camp = Database["public"]["Tables"]["camp"]["Row"];
 type Bookmark = Database["public"]["Tables"]["bookmarks"]["Row"] & {
-  camp: Camp;
-  featureNm: string;
+  camp: CampSelect;
+  // featureNm: string;
 };
 
 const BookmarkList: React.FC = () => {
@@ -75,15 +76,16 @@ const BookmarkList: React.FC = () => {
           {bookmarks.map((bookmark) => (
             <div key={bookmark.contentId} className="camp-card-wrapper">
               <CampCard
-                camp={{
-                  contentId: String(bookmark.contentId),
-                  facltNm: bookmark.camp.facltNm,
-                  firstImageUrl: bookmark.camp.firstImageUrl,
-                  featureNm: bookmark.featureNm,
-                  intro: bookmark.camp.intro,
-                  addr1: bookmark.camp.addr1,
-                  induty: bookmark.camp.induty
-                }}
+                camp={bookmark.camp}
+                // camp={{
+                //   contentId:bookmark.contentId || 0,
+                //   facltNm: bookmark.camp.facltNm || "",
+                //   firstImageUrl: bookmark.camp.firstImageUrl || "",
+                //   featureNm: bookmark.featureNm || "",
+                //   intro: bookmark.camp.intro || "",
+                //   addr1: bookmark.camp.addr1 || "",
+                //   induty: bookmark.camp.induty || ""
+                // }}
                 type="bookmark"
               />
               {/* 북마크 제거 버튼에 handleBookmarkRemoved 전달 */}
