@@ -4,6 +4,7 @@ import React from "react";
 import { getSosDetail } from "../service/sosSerivce";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 import SosDetailController from "../components/sosDetail/SosDetailController";
+import { fetchChatRoomBySosId } from "@/_components/chat/service/chatService";
 
 type Props = {
   params: {
@@ -29,10 +30,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const SosDetail = async ({ params }: Props) => {
   const sosWithCamp = await getSosDetail(Number(params.sosId));
+  const chatRoom = await fetchChatRoomBySosId(Number(params.sosId));
+
   if (!sosWithCamp) {
     redirect(SERVER_PAGE_URL.sosList);
   }
-  return <SosDetailController sosWithCamp={sosWithCamp} />;
+
+  if (!chatRoom) {
+    throw new Error("채팅방이 없습니다.");
+  }
+
+  return <SosDetailController sosWithCamp={sosWithCamp} chatRoom={chatRoom} />;
 };
 
 export default SosDetail;

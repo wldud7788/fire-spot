@@ -35,4 +35,18 @@ const formatDate_5 = (date: Date | string) => {
   return format(date, "yyyy-MM-dd");
 };
 
-export { formatDate_1, formatDate_2, formatDate_3, formatDate_4, formatDate_5 };
+/** date -> 오후 12:05 */
+const formatDate_6 = (date: Date | string) => {
+  return format(date, "aa hh:mm", {
+    locale: ko
+  });
+};
+
+export {
+  formatDate_1,
+  formatDate_2,
+  formatDate_3,
+  formatDate_4,
+  formatDate_5,
+  formatDate_6
+};
