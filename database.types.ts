@@ -407,30 +407,41 @@ export type Database = {
       };
       sos: {
         Row: {
-          contents: string | null;
+          content: string;
+          contentId: number | null;
           created_at: string;
           id: number;
-          sos_category: string | null;
-          sos_image: string | null;
-          title: string | null;
+          tag: string[];
+          title: string;
+          type: string;
         };
         Insert: {
-          contents?: string | null;
+          content?: string;
+          contentId?: number | null;
           created_at?: string;
           id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          tag?: string[];
+          title: string;
+          type?: string;
         };
         Update: {
-          contents?: string | null;
+          content?: string;
+          contentId?: number | null;
           created_at?: string;
           id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          tag?: string[];
+          title?: string;
+          type?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "sos_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          }
+        ];
       };
     };
     Views: {
