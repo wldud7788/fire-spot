@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/_utils/supabase/client"; // Supabase 클라이언트 가져오기
-import ReviewModal from "../../../_components/modal/ReviewModal";
+import ReviewModal from "@/_components/modal/ReviewModal";
 import FeedCard from "@/_components/feed/FeedCard";
 import { CampSelect } from "../meets/types/camp.types";
 

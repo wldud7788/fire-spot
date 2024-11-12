@@ -1,3 +1,5 @@
+import { MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+
 import {
   ChatRoomInfo,
   ChatRoomMessageInfo,
@@ -67,6 +69,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm: string | null;
+          featureNm?: string | null;
         };
         Insert: {
           addr1: string;
@@ -82,6 +85,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Update: {
           addr1?: string;
@@ -97,6 +101,7 @@ export type Database = {
           mapX?: number;
           mapY?: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Relationships: [];
       };
@@ -505,6 +510,17 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_meet_attendee_with_meet_and_camp: {
+        Args: {
+          user_id: string;
+        };
+        // Returns: {
+        //   attendee_count: number;
+        //   meet: MeetSelect;
+        //   camp: CampSelect;
+        // }[];
+        Returns: MeetWithCamp[];
+      };
       get_meet_detail:
         | {
             Args: Record<PropertyKey, never>;

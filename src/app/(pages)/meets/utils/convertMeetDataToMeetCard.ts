@@ -1,8 +1,13 @@
 import { formatDate_1 } from "@/_utils/common/dateFormat";
 import { CampSelect } from "../types/camp.types";
 import { MeetCard, MeetSelect, MeetWithCamp } from "../types/meet.types";
+import { isBefore, startOfDay, subDays } from "date-fns";
+import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 
-const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
+const convertMeetDataToMeetCard = (
+  meetWithCampList: MeetWithCamp[],
+  isProgress?: boolean
+) => {
   const meetCardList: MeetCard[] = meetWithCampList.map((meetWithCamp) => {
     const { meet, camp, attendee_count } = meetWithCamp;
 
@@ -12,6 +17,12 @@ const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
     const tags = getTags({ camp, meet });
     const date = formatDate_1(start_date);
 
+    const isDeadlineApproaching =
+      subDays(startOfDay(meetWithCamp.meet.start_date), DEADLINE_APPROACHING) <=
+      new Date();
+
+    const isDeadline = isBefore(meetWithCamp.meet.start_date, new Date());
+
     return {
       id,
       title,
@@ -19,11 +30,17 @@ const convertMeetDataToMeetCard = (meetWithCampList: MeetWithCamp[]) => {
       deadline_headcount,
       tags,
       location,
-      attendee_count
+      attendee_count,
+      isDeadlineApproaching,
+      isDeadline
     };
   });
 
-  return meetCardList;
+  const filterMeetCardList = meetCardList.filter((meetCard) => {
+    return !(meetCard.isDeadline && isProgress);
+  });
+
+  return filterMeetCardList;
 };
 
 const getTags = ({ camp, meet }: { camp: CampSelect; meet: MeetSelect }) => {
@@ -35,7 +52,23 @@ const getTags = ({ camp, meet }: { camp: CampSelect; meet: MeetSelect }) => {
     tags.push("캠핑장");
   }
 
-  const isNewbie = meet.is_newbie ? "초보 가능" : "초보 불가능";
+  const isNewbie = meet.is_newbie ? "초보 가능" : "숙련자";
+
+  // const isDeadlineApproaching =
+  //   subDays(startOfDay(meet.start_date), DEADLINE_APPROACHING) <= new Date();
+
+  // const isDeadline =
+  //   isBefore(meet.start_date, new Date()) ||
+  //   meet.deadline_headcount <= attendee_count;
+
+  // if (isDeadlineApproaching) {
+  //   tags.push("마감임박");
+  // }
+
+  // if (isDeadline) {
+  //   tags.push("마감");
+  // }
+
   tags.push(isNewbie);
 
   return tags;

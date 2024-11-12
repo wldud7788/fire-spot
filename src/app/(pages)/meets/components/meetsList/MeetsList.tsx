@@ -1,7 +1,7 @@
 "use client";
 
 import MeetCard from "@/_components/meet/MeetCard";
-import { getMeetList } from "../../actions/meetListAction";
+import { fetchMeetList } from "../../actions/meetListAction";
 import { MeetWithCamp } from "../../types/meet.types";
 import { convertMeetDataToMeetCard } from "../../utils/convertMeetDataToMeetCard";
 import WriteButton from "../meets/WriteButton";
@@ -20,7 +20,7 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const { data: meetWithCampList, isError } = useQuery<MeetWithCamp[]>({
     queryKey: ["meets"],
-    queryFn: async () => getMeetList()
+    queryFn: async () => fetchMeetList()
   });
 
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
