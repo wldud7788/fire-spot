@@ -51,6 +51,7 @@ const config: Config = {
         polygon: "url('/assets/images/common/ico-polygon.svg')",
         import: "url('/assets/images/common/ico-import.svg')",
         plusColor: "url('/assets/images/common/ico-plus-c.svg')",
+        pin: "url('/assets/images/common/ico-pin.svg')",
         // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",
