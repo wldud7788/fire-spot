@@ -31,76 +31,97 @@ const MeetTitleSection = ({
   }
 
   return (
-    <div className="mt-4 flex w-full gap-[50px]">
-      <div className="h-[472px] w-[472px] rounded-3xl bg-black">
+    <div className="mt-4 flex w-full gap-[45px]">
+      <div className="h-[350px] w-[460px] flex-none overflow-hidden rounded-[20px] border border-[#A6A6A6]">
         <Slide slidePerview={1} onChangeEvent={() => {}}>
           {camp.imgUrls.map((url) => (
             <div
               key={url}
-              className="h-[472px] w-[472px] bg-contain bg-center bg-no-repeat"
+              className="h-[350px] w-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${url})` }}
             ></div>
           ))}
         </Slide>
       </div>
-      <div className="flex h-[472] w-[776px] flex-col gap-8 rounded-xl border-[2px] p-[50px]">
+      <div className="flex w-full max-w-[calc(rgba(100%-505px))] flex-col rounded-[18px] border border-[#A6A6A6] p-[27px]">
         <section className="flex items-center justify-between">
-          <h2 className="text-4xl">{meet.title}</h2>
-          <div className="flex gap-6 text-4xl">
-            <div className="h-[52px] w-[52px] bg-heart bg-cover bg-center" />
-            <div className="h-[52px] w-[52px] bg-scrap bg-contain bg-center bg-no-repeat" />
+          <h2 className="text-[28px] font-bold">{meet.title}</h2>
+          <div className="flex items-center justify-end gap-[10px]">
+            <button type="button">
+              <img src="/assets/images/ico-heart.svg" alt="북마크" />
+            </button>
+            <button type="button">
+              <img src="/assets/images/common/ico-share.svg" alt="공유하기" />
+            </button>
           </div>
         </section>
-        <section className="flex flex-col gap-1">
-          <div className="flex h-7 items-center gap-2">
-            <div className="h-7 w-7 bg-location bg-cover bg-center" />
-            <p className="text-[#757575]">{camp.addr1}</p>
+
+        <section className="mt-[40px] flex flex-col gap-[18px]">
+          <div className="flex items-center">
+            <p className="color-gray02 meet-text-line relative mr-[13px] bg-meetCalendar bg-left-center-0 bg-no-repeat pl-[36px] pr-[13px]">
+              <span className="inline-block w-[60px] text-justify text-[16px] font-bold">
+                일시
+              </span>
+            </p>
+            <p className="color-gray02 text-[16px]">
+              {formatDate_4(meet.start_date)}
+            </p>
           </div>
-          <div className="flex h-7 items-center gap-2">
-            <div className="h-7 w-7 bg-date bg-cover bg-center" />
-            <p className="text-[#757575]">{formatDate_4(meet.start_date)}</p>
+          <div className="flex items-center">
+            <p className="color-gray02 meet-text-line relative mr-[13px] bg-meetLocation bg-left-center-0 bg-no-repeat pl-[36px] pr-[13px]">
+              <span className="inline-block w-[60px] text-justify text-[16px] font-bold">
+                장소
+              </span>
+            </p>
+            <p className="color-gray02 text-[16px]">{camp.addr1}</p>
           </div>
-          <div className="flex h-7 items-center gap-2">
-            <div className="h-7 w-7 bg-avatar bg-cover bg-center" />
-            <p className="text-[#757575]">
+          <div className="flex items-center">
+            <p className="color-gray02 meet-text-line relative mr-[13px] bg-meetAvatar bg-left-center-0 bg-no-repeat pl-[36px] pr-[13px]">
+              <span className="inline-block w-[60px] text-justify text-[16px] font-bold">
+                모집인원
+              </span>
+            </p>
+            <p className="color-gray02 text-[16px]">
+              {" "}
               {meet.deadline_headcount}명 모집 {attendee_count}/
               {meet.deadline_headcount}
             </p>
           </div>
         </section>
-        <section className="flex gap-6">
-          {tags.map((tag) => (
-            <div key={tag} className="flex flex-col items-center gap-3">
-              <div className="h-12 w-12 rounded-full bg-[#EAEAEA]"></div>
-
-              <p className="text-[#757575]">{tag}</p>
-            </div>
-          ))}
-        </section>
-        <section className="flex gap-[18px]">
-          <button
-            className={`h-[67px] w-[261px] rounded-[6px] text-2xl ${buttonConfig.className}`}
-            disabled={buttonConfig.disabled}
-            onClick={() => buttonConfig.onClick(meet.id)}
-          >
-            {buttonConfig.text}
-          </button>
-          {hasChatAccess && (
+        <div className="mt-[30px] flex items-center justify-between">
+          <section className="flex gap-6">
+            {tags.map((tag) => (
+              <div key={tag} className="flex flex-col items-center gap-[6px]">
+                <div className="h-[40px] w-[40px] rounded-full bg-[#d9d9d9]"></div>
+                <p className="color-gray01 text-[14px]">{tag}</p>
+              </div>
+            ))}
+          </section>
+          <section className="flex gap-[18px]">
             <button
-              className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-black`}
+              className={`flex h-[60px] w-[230px] items-center justify-center rounded-[18px] border bg-[#B24600] text-[18px] font-bold text-white ${buttonConfig.className && "opacity-[0.5]"}`}
+              disabled={buttonConfig.disabled}
+              onClick={() => buttonConfig.onClick(meet.id)}
             >
-              모임 톡
+              {buttonConfig.text}
             </button>
-          )}
-          {!hasChatAccess && (
-            <button
-              className={`h-[67px] w-[261px] rounded-[6px] border-[2px] border-black text-2xl text-[#D0D0D0]`}
-              disabled
-            >
-              모임 톡
-            </button>
-          )}
-        </section>
+            {hasChatAccess && (
+              <button
+                className={`flex h-[60px] w-[230px] items-center justify-center rounded-[18px] border bg-[#ac8064] text-[18px] font-bold text-white`}
+              >
+                모임 톡
+              </button>
+            )}
+            {!hasChatAccess && (
+              <button
+                className={`flex h-[60px] w-[150px] items-center justify-center rounded-[18px] border bg-[#ac8064] text-[18px] font-bold text-white opacity-[0.5]`}
+                disabled
+              >
+                모임 톡
+              </button>
+            )}
+          </section>
+        </div>
       </div>
     </div>
   );

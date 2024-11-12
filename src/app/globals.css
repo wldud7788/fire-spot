@@ -307,6 +307,30 @@ body {
   .community_top a.active:before {
     height: 2px;
   }
+  /* 모임 */
+  .meet-text-line:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 9px;
+    background: #d9d9d9;
+    transform: translateY(-50%);
+  }
+  /* 모임 캘린더 */
+  .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--selected,
+  .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--selected:hover {
+    background-color: #ff924c !important;
+  }
 }
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */

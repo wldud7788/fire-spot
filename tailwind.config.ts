@@ -64,7 +64,13 @@ const config: Config = {
         campTit04: "url('/assets/images/camp/ico-camp-tit04.svg')",
         campTit05: "url('/assets/images/camp/ico-camp-tit05.svg')",
         campTit06: "url('/assets/images/camp/ico-camp-tit06.svg')",
-        campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')"
+        campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')",
+        // 모임
+        meetAvatar: "url('/assets/images/meet/ico-meet-avatar.svg')",
+        meetCalendar: "url('/assets/images/meet/ico-meet-calendar.svg')",
+        meetLocation: "url('/assets/images/meet/ico-meet-location.svg')",
+        meetCategory: "url('/assets/images/meet/ico-meet-category.svg')",
+        meetImport: "url('/assets/images/meet/ico-import.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

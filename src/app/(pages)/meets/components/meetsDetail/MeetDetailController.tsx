@@ -17,22 +17,30 @@ const MeetDetailController = ({ meetWithCamp }: Props) => {
   const { buttonConfig, hasChatAccess } = useMeetDetailController(meetWithCamp);
   const camp = meetWithCamp.camp as unknown as Camp;
   return (
-    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px]">
+    <div className="mx-auto mb-[100px] mt-[40px] w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <MeetTitleSection
         meetWithCamp={meetWithCamp}
         buttonConfig={buttonConfig}
         hasChatAccess={hasChatAccess}
       />
-      <MeetIntroSection meetWithCamp={meetWithCamp} />
+
       <MeetContentSection meetWithCamp={meetWithCamp} />
+      <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />
-      <DetailMap camp={camp} />
-      <ForecastWeatherComponent
-        latitude={meetWithCamp.camp.mapY}
-        longitude={meetWithCamp.camp.mapX}
-        campingName={meetWithCamp.camp.facltNm}
-      />
-      <MeetRecommendSection />
+      <div className="mt-[80px]">
+        <h2 className="color-gray01 mb-[30px] text-[24px] font-bold">
+          모임장소
+        </h2>
+        <DetailMap camp={camp} />
+      </div>
+      <div className="mt-[80px]">
+        <h2 className="color-gray01 mb-[30px] text-[24px] font-bold">날씨</h2>
+        <ForecastWeatherComponent
+          latitude={meetWithCamp.camp.mapY}
+          longitude={meetWithCamp.camp.mapX}
+          campingName={meetWithCamp.camp.facltNm}
+        />
+      </div>
     </div>
   );
 };
