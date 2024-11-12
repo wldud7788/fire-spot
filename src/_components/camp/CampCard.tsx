@@ -1,19 +1,32 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
+import { useCallback } from "react";
 
 type CampingDataProps = {
-  camp: Camp;
+  camp: CampSelect | Camp;
   type?: string;
+  listParamsId?: string;
+  onBookmarkClick?: (contentId: number, campName: string) => void;
 };
 
-/**
- * [메인]
- * 이미지,카테고리,타이틀,북마크,짧은글(태그인데, 태그 처리가 안될경우?),후기갯수,북마크갯수
- * [일반 카드]
- * 이미지,카테고리,위치,북마크,위치 삭제
- */
+const CampCard = ({
+  camp,
+  type,
+  listParamsId,
+  onBookmarkClick
+}: CampingDataProps) => {
+  const contentId =
+    typeof camp.contentId === "string"
+      ? parseInt(camp.contentId)
+      : camp.contentId;
 
-const CampCard = ({ camp, type }: CampingDataProps) => {
+  const handleBookmarkClick = useCallback(() => {
+    if (onBookmarkClick) {
+      onBookmarkClick(contentId, camp.facltNm);
+    }
+  }, [onBookmarkClick, contentId, camp.facltNm]);
+
   const bookmarkActive = false;
 
   return (
@@ -25,28 +38,43 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
               src={
                 camp.firstImageUrl
                   ? camp.firstImageUrl
-                  : `/assets/image/common/img-camp-card.jpg`
+                  : `/assets/images/common/img-camp-card.jpg`
               }
-              className="relative h-full w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
+              className="relative h-full min-h-[300px] w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
               alt={camp.facltNm}
             />
             {!type ? (
-              <div className="absolute right-[15px] top-[15px]">북마크</div>
+              <div className="absolute right-[15px] top-[15px]">
+                <button onClick={handleBookmarkClick} type="button">
+                  <img
+                    src="/assets/images/camp/ico-camp-list-bookmark.svg"
+                    alt="북마크"
+                  />
+                  {/* 
+                    이윤지 작업 - 북마크 액티브 되면 아래의 아이콘 쓰시면 됩니다. 
+                    <img
+                      src="/assets/images/camp/ico-camp-list-bookmark-on.svg"
+                      alt="북마크"
+                    /> 
+                  */}
+                </button>
+              </div>
             ) : null}
           </div>
 
           {!type ? (
-            <div className="camp_info">
-              <h2 className="text-[20px]">{camp.facltNm}</h2>
-              <p>{camp.featureNm ? camp.featureNm : camp.intro}</p>
-              <div className="info">
-                <p>{camp.addr1}</p>
-                <p>249Km</p>
-                <p>
-                  <span>{camp.induty}</span>
-                  <span>파쇄석</span>
-                  <span>20도 맑음</span>
-                </p>
+            <div className="camp_info pb-[60px] pt-[20px]">
+              <h2 className="text-[20px] font-bold">{camp.facltNm}</h2>
+              <p className="mb-[8px] mt-[5px] block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
+                {camp.addr1}
+              </p>
+              <p className="color-gray02 line-clamp-3 text-[12px]">
+                {camp.featureNm ? camp.featureNm : camp.intro}
+              </p>
+              <div className="info mt-[10px]">
+                <span className="color-gray01 bg-sub rounded-[8px] px-[10px] py-[5px] text-[12px]">
+                  {camp.induty}
+                </span>
               </div>
             </div>
           ) : (
@@ -77,7 +105,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
                   <img
                     className="relative top-[-1px]"
                     src="/assets/images/main/ico-main-review-count.svg"
-                    alt={`${camp.facltDivNm} 후기 갯수 이미지`}
+                    alt={`${camp.facltNm} 후기 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 후기 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>
@@ -85,7 +113,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
                 <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
                   <img
                     src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltDivNm} 북마크 갯수 이미지`}
+                    alt={`${camp.facltNm} 북마크 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 북마크 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>

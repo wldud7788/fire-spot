@@ -5,14 +5,18 @@ import { TAGS } from "@/_utils/common/constant";
 
 const MainSearch = () => {
   return (
-    <div className="mt-10 flex flex-col items-center text-lg font-semibold">
-      <div className="flex gap-5">
+    <div className="mt-10 flex flex-col items-center">
+      <ul className="flex items-center gap-[20px]">
         {TAGS.map((tag) => (
-          <Link key={tag.name} href={tag.href} className="text-[#FF924C]">
+          <Link
+            key={tag.name}
+            href={tag.href}
+            className="color-main text-[16px"
+          >
             {tag.name}
           </Link>
         ))}
-      </div>
+      </ul>
       <div className="mt-[14px] w-full max-w-[800px] flex-1">
         <SearchBar variant="main" />
       </div>

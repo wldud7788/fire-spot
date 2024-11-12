@@ -144,11 +144,11 @@ export const getMeetCardStyle = (meetCard: CellCard | undefined) => {
   const { isExistPrev, isExistNext, range } = meetCard;
   const isDayTrip = !isExistPrev && !isExistNext && range === 1;
 
-  const paddingLeft = isDayTrip ? "0px" : isExistPrev ? "0px" : "32px";
-  const paddingRight = isDayTrip ? "0px" : isExistNext ? "0px" : "32px";
+  const paddingLeft = isDayTrip ? "12px" : isExistPrev ? "0px" : "32px";
+  const paddingRight = isDayTrip ? "12px" : isExistNext ? "0px" : "32px";
 
   const style = {
-    width: `calc(${100 * range}% + ${range}px)`,
+    width: `calc(${100 * range}% + ${range * 7}px)`,
     paddingLeft,
     paddingRight
   };

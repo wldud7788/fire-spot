@@ -142,6 +142,7 @@ body {
     transform: translateY(-30%);
   }
 
+  /* main */
   .main-slide-wrap .swiper-button-prev,
   .main-slide-wrap .swiper-button-next {
     width: 48px;
@@ -175,6 +176,70 @@ body {
     width: 2px;
     height: 20px;
     background: #d9d9d9;
+  }
+  /* pagination */
+  .pagination-count * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  .btn-pagination {
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    border: 1px solid #bfbfbf;
+    border-radius: 8px;
+    background: url("/assets/images/common/ico-pagination-arrow.svg") no-repeat
+      center center;
+  }
+  .btn-pagination:disabled {
+    opacity: 0.5;
+  }
+  .btn-pagination-prev {
+    position: relative;
+    transform: rotate(180deg);
+  }
+  /* camp detail */
+  .li-before-dot:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 2px;
+    height: 2px;
+    background: #a6a6a6;
+    transform: translateY(-50%);
+  }
+  /* my page */
+  .li-before-line:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 10px;
+    background: #bfbfbf;
+    transform: translateY(-50%);
+  }
+  .mypage_tab button.active {
+    color: #ff924c;
+  }
+  .mypage_tab button:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: #ff924c;
+    transition: all 0.5s ease;
+  }
+  .mypage_tab button.active:before {
+    height: 5px;
   }
 }
 .header_search input:focus {

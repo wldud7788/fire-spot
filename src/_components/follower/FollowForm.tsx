@@ -55,21 +55,39 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
 
   return (
     <div className="follow_form">
-      <ul>
-        <li>
-          <button onClick={() => setIsFollower(true)}>팔로워보기</button>
-        </li>
-        <li>
-          <button onClick={() => setIsFollower(false)}>팔로잉보기</button>
-        </li>
-      </ul>
-      <ul>
+      <div className="item-center flex justify-between">
+        <h2 className="text-[18px] font-bold">
+          {isFollower ? "팔로워 목록" : "팔로잉 목록"}
+        </h2>
+        <ul className="flex items-center">
+          <li className="li-before-line relative mr-[8px] pr-[8px]">
+            <button
+              onClick={() => setIsFollower(true)}
+              className={`${isFollower && "active color-[#000] font-bold"} text-[14px] text-[#bfbfbf]`}
+            >
+              팔로워보기
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setIsFollower(false)}
+              className={`${!isFollower && "active color-[#000] font-bold"} text-[14px] text-[#bfbfbf]`}
+            >
+              팔로잉보기
+            </button>
+          </li>
+        </ul>
+      </div>
+      <ul className="mt-[40px] flex flex-wrap items-center gap-[30px]">
         {isFollower ? (
           <>
             {/* 팔로워 */}
             {matchingFollowingProfiles?.map((profile) => {
               return (
-                <li key={profile.id}>
+                <li
+                  key={profile.id}
+                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom"
+                >
                   <FollowCard loginUserId={loginUserId} profile={profile} />
                 </li>
               );
@@ -80,7 +98,10 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
             {/* 팔로잉 */}
             {matchingFollowerProfiles?.map((profile) => {
               return (
-                <li key={profile.id}>
+                <li
+                  key={profile.id}
+                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom"
+                >
                   <FollowCard loginUserId={loginUserId} profile={profile} />
                 </li>
               );

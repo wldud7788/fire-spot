@@ -1,10 +1,13 @@
+import { Database } from "../../../database.types";
 import FollowButton from "./FollowButton";
 
-type Profile = {
-  id: string;
-  avatar_url: string;
-  nickname: string;
-};
+// type Profile = {
+//   id: string;
+//   avatar_url: string;
+//   nickname: string;
+// };
+
+type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
 type FollowCardProps = {
   loginUserId: string;
@@ -14,11 +17,17 @@ type FollowCardProps = {
 const FollowCard = ({ loginUserId, profile }: FollowCardProps) => {
   return (
     <div className="follow_card">
-      <div className="inner">
-        <div className="img_box">
-          <img src={profile.avatar_url} alt="" />
+      <div className="inner flex flex-col items-center justify-center">
+        <div className="img_box h-[63px] w-[63px] overflow-hidden rounded-[100%]">
+          <img
+            src={profile.avatar_url || ""}
+            alt={`${profile.nickname} 이미지`}
+            className="object-fit h-full w-full"
+          />
         </div>
-        <strong>{profile.nickname}</strong>
+        <strong className="mb-[10px] mt-[20px] text-center text-[14px] font-bold">
+          {profile.nickname}
+        </strong>
         <FollowButton
           loginUserId={loginUserId}
           followUserId={profile.id}

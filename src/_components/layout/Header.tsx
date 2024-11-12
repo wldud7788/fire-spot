@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import HeaderAuth from "./HeaderAuth";
 import SearchBar from "../search/searchBar/SearchBar";
 import { TAGS } from "@/_utils/common/constant";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,7 +40,12 @@ const Header = () => {
         {/* 로고 + 검색 영역 */}
         <div className="z-10 flex items-center justify-between leading-40">
           <div className="flex gap-8">
-            <Link href={"/"}>로고</Link>
+            <Link
+              href={"/"}
+              className="h-[40px] w-[230px] bg-logo bg-contain bg-no-repeat"
+            >
+              <p className="sr-only">로고</p>
+            </Link>
             <SearchBar variant="header" />
             {/* 헤더 검색 (버튼 없음, DropdownRegions 없음, 높이 40px) */}
           </div>
@@ -53,7 +59,10 @@ const Header = () => {
           {/* 아이콘 */}
           <div className="flex items-center">
             <Link href={"/search"} className="header_icon bg-map"></Link>
-            <Link href={"/chat"} className="header_icon bg-chat"></Link>
+            <Link
+              href={`${SERVER_PAGE_URL.chat}`}
+              className="header_icon bg-chat"
+            ></Link>
             <Link href={"/sos"} className="header_icon bg-sos"></Link>
             <HeaderAuth />
           </div>

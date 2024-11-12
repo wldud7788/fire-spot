@@ -17,3 +17,11 @@ export const TAGS = [
 
 export const MAX_RECENT_SEARCHES = 5; // 최대 저장 최근 검색어
 export const STORAGE_KEY = "recentSearches"; // 스토리지 키
+export const SERVER_API_URL = {
+  chatRoomList: "/api/chat-rooms"
+};
+
+export const SERVER_PAGE_URL = {
+  chat: "/chat",
+  chatRoom: (roomId: number) => `/chat/${roomId}`
+};
