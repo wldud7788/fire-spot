@@ -14,3 +14,6 @@ export const TAGS = [
   { name: "#내부화장실", href: "/search?amenities=내부화장실" },
   { name: "#애견동반 가능", href: "/search?petOption=가능" }
 ];
+
+export const MAX_RECENT_SEARCHES = 5; // 최대 저장 최근 검색어
+export const STORAGE_KEY = "recentSearches"; // 스토리지 키

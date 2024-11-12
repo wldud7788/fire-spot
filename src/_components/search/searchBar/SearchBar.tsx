@@ -1,53 +1,41 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import CSearchInput from "../CSearchInput";
 import DropDownSearch from "../dropdown/DropDownSearch";
-import { useRouter } from "next/navigation";
 import DropdownRegions from "../dropdown/DropdownRegions";
 import { useCamps } from "@/app/queries/useQueries";
 import { variants } from "./style";
 import { cn } from "@/_lib/utils";
 import useDropdown from "@/_hooks/useDropdown";
-import useDebounce from "@/_hooks/useDebounce";
-import { MIN_SEARCH_LENGTH, SPECIAL_CHARS } from "@/_utils/common/constant";
+import useDebounce from "@/_hooks/search/useDebounce";
+import { useSearch } from "@/_hooks/search/useSearchRevalidate";
+import { useRecentSearches } from "@/_hooks/search/useRecentSearches";
 
 interface SearchBarProps {
   variant: "main" | "header" | "search";
   className?: string;
 }
-interface ValidationResult {
-  isValid: boolean;
-  error: string | null;
-}
 
-// 유효성 검사 함수
-const validateSearchTerm = (value: string): ValidationResult => {
-  if (SPECIAL_CHARS.test(value)) {
-    return { isValid: false, error: "특수문자는 사용할 수 없습니다." };
-  }
-  if (!value.trim()) {
-    return { isValid: false, error: "검색어를 입력해주세요." };
-  }
-  if (value.length < MIN_SEARCH_LENGTH) {
-    return {
-      isValid: false,
-      error: `검색어는 ${MIN_SEARCH_LENGTH}자 이상 입력해주세요.`
-    };
-  }
-  return { isValid: true, error: null };
-};
 const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const variantStyles = variants[variant];
 
-  // 상태 관리
-  const [searchState, setSearchState] = useState({
-    searchValue: "",
-    validatedValue: "",
-    validationError: null as string | null,
-    selectedRegion: undefined as string | undefined
-  });
+  // 커스텀 훅 사용
+  const {
+    searchState,
+    handleSearchChange,
+    handleRegionSelect,
+    validateSearchTerm
+  } = useSearch();
+
+  const { recentSearches, saveRecentSearch, deleteKeyword, deleteAllKeywords } =
+    useRecentSearches();
+
+  // 드롭다운 관리
+  const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
+    useDropdown(variant);
 
   // 디바운스 적용
   const debouncedSearchValue = useDebounce(searchState.validatedValue, 500);
@@ -58,35 +46,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
     searchState.selectedRegion
   );
 
-  // 드롭다운 관리
-  const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
-    useDropdown(variant);
-
-  const handleRegionSelect = (region: string | null) => {
-    setSearchState((prev) => ({
-      ...prev,
-      selectedRegion: region ?? undefined
-    }));
-  };
-
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const validation = validateSearchTerm(value);
-
-    setSearchState((prev) => ({
-      ...prev,
-      searchValue: value,
-      validationError: validation.error,
-      validatedValue: validation.isValid ? value : prev.validatedValue
-    }));
+    handleSearchChange(e.target.value);
   };
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const validation = validateSearchTerm(searchState.searchValue);
     if (isLoading || !validation.isValid) return;
 
+    // 검색어 저장
+    if (searchState.searchValue.trim()) {
+      saveRecentSearch(searchState.searchValue);
+    }
+
     closeDropdown();
+
     const searchParams = new URLSearchParams({
       keyword: searchState.searchValue
     });
@@ -150,6 +126,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
             dropdownRef={dropdownRef}
             results={results}
             isLoading={isLoading}
+            recentSearches={recentSearches}
+            onDeleteKeyword={deleteKeyword}
+            onDeleteAll={deleteAllKeywords}
             validationError={searchState.validationError}
             validatedValue={searchState.validatedValue}
           />
