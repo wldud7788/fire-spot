@@ -1,21 +1,34 @@
 "use client";
 import useSosCreatorForm from "../../hooks/useSosCreatorForm";
-import { SosSelect } from "../../types/sos.types";
+import { SosWithCamp } from "../../types/sos.types";
 import SosCreatorContentSection from "./formSection/SosCreatorContentSection";
 import SosCreatorInfoSection from "./formSection/SosCreatorInfoSection";
+import SosCreatorSearchSection from "./formSection/SosCreatorSearchSection";
 import SosCreatorTagSection from "./formSection/SosCreatorTagSection";
 import SosCreatorTypeSection from "./formSection/SosCreatorTypeSection";
 
 interface Props {
   sosId?: number;
-  sos: SosSelect;
+  sosWithCamp: SosWithCamp;
 }
 
-const SosCreatorForm = ({ sosId, sos }: Props) => {
-  const { register, handleSubmit, setValue, watch, onSubmit, errors } =
-    useSosCreatorForm({ sosId, sos });
+const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    onSubmit,
+    errors,
+    isOpen,
+    handleSelectCamp,
+    searchKeyword,
+    handleChangeSearchKeyword,
+    searchList,
+    location
+  } = useSosCreatorForm({ sosId, sosWithCamp });
 
-  // const showDropDown = isOpen && !!searchList && searchList.length > 0;
+  const showDropDown = isOpen && !!searchList && searchList.length > 0;
   const submitText = !!sosId ? "수정하기" : "만들기";
 
   return (
@@ -44,19 +57,19 @@ const SosCreatorForm = ({ sosId, sos }: Props) => {
         <SosCreatorContentSection register={register} />
         <SosCreatorTagSection watch={watch} setValue={setValue} />
 
-        {/* <MeetCreatorSearchSection
-              handleSelectCamp={handleSelectCamp}
-              searchKeyword={searchKeyword}
-              handleChangeSearchKeyword={handleChangeSearchKeyword}
-              searchList={searchList}
-              showDropDown={showDropDown}
-              location={location}
-            /> */}
-        {/* <input
+        <SosCreatorSearchSection
+          handleSelectCamp={handleSelectCamp}
+          searchKeyword={searchKeyword}
+          handleChangeSearchKeyword={handleChangeSearchKeyword}
+          searchList={searchList}
+          showDropDown={showDropDown}
+          location={location}
+        />
+        <input
           type="hidden"
           className="border-2"
           {...register("contentId", { required: true })}
-        /> */}
+        />
       </form>
     </div>
   );

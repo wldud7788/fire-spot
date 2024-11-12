@@ -1,4 +1,10 @@
 import { Database } from "../../../../../database.types";
+import { CampSelect } from "../../meets/types/camp.types";
+
+export type SosWithCamp = {
+  sos: SosSelect;
+  camp: CampSelect;
+};
 
 export const SOS_TYPE = {
   emergency: "긴급",
