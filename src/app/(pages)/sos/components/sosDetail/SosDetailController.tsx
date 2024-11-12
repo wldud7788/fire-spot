@@ -28,16 +28,18 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
 
   // TODO 민규님: SOS 상세 섹션별 분리
   return (
-    <div className="mx-auto w-full max-w-[1360px] pl-[30px] pr-[30px]">
+    <div className="mx-auto mb-[100px] mt-[75px] w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <SosTitleSection sos={sos} />
       <SosUserSection sosWithCamp={sosWithCamp} />
-      <SosTagSection sos={sos} />
-      <SosRemainingTimeSection sos={sos} />
+
       <SosChatSection
         messagesByDate={messagesByDate}
         loginUserId={loginUserId}
         roomId={roomId}
       />
+
+      <SosTagSection sos={sos} />
+      <SosRemainingTimeSection sos={sos} />
       {/* <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />

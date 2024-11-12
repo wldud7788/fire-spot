@@ -7,16 +7,15 @@ type Props = {
 
 const SosTitleSection = ({ sos }: Props) => {
   const { title } = sos;
-  const { isProgress } = useSosRemainingTime(new Date(sos.created_at));
+  // const { isProgress } = useSosRemainingTime(new Date(sos.created_at));
 
-  // TODO 민규님: SOS 상세 제목 섹션
+  // SOS 상세 제목 섹션
   return (
-    <div>
+    <div className="sos_tit">
       {/* 제목 */}
-      {title}
-
+      <h1 className="text-[28px] font-extrabold">{title}</h1>
       {/* 진행중(true), 종료됨(false) */}
-      {isProgress.toString()}
+      {/* {isProgress.toString()} */}
     </div>
   );
 };
