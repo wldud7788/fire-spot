@@ -64,7 +64,7 @@ const Header = () => {
             showTags ? "mt-4 h-[20px] pl-14 opacity-100" : "h-0 opacity-0"
           }`}
         >
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 text-[#9A9696]">
             {TAGS.map((tag) => (
               <Link key={tag.name} href={tag.href}>
                 {tag.name}
