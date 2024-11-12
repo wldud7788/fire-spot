@@ -19,6 +19,7 @@ const UserCard: React.FC = () => {
   const [newNickname, setNewNickname] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [meetingCount, setMeetingCount] = useState<number>(0); // 모임 갯수 상태
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const supabase = createClient();
 
@@ -60,10 +61,33 @@ const UserCard: React.FC = () => {
 
         setNickname(profileData.nickname || null);
         setProfileUrl(profileData.avatar_url || null);
+
+        // 후기와 모임 총 갯수 가져오기
+        await fetchCounts(user.id);
       }
     };
+
     fetchUser();
   }, [supabase]);
+
+  // 후기 및 모임 갯수 가져오는 함수
+  const fetchCounts = async (userId: string) => {
+    try {
+      const { count: reviewCount } = await supabase
+        .from("review")
+        .select("*", { count: "exact" })
+        .eq("userId", userId);
+
+      const { count: meetingCount } = await supabase
+        .from("meet")
+        .select("*", { count: "exact" })
+        .eq("user_id", userId);
+
+      setMeetingCount(meetingCount ?? 0);
+    } catch (error) {
+      console.error("Error fetching counts:", error);
+    }
+  };
 
   const handleNicknameUpdate = async () => {
     if (!newNickname || !userId) return;
@@ -92,7 +116,7 @@ const UserCard: React.FC = () => {
       const { error: uploadError } = await supabase.storage
         .from("avatars")
         .upload(filePath, profileImage, {
-          contentType: profileImage.type // MIME 타입 설정
+          contentType: profileImage.type
         });
 
       if (uploadError) {
@@ -121,7 +145,7 @@ const UserCard: React.FC = () => {
         console.error("Error updating avatar_url:", updateError.message);
       } else {
         alert("프로필 이미지 업데이트 성공");
-        setProfileUrl(uploadedImageUrl); // URL 업데이트
+        setProfileUrl(uploadedImageUrl);
       }
     } catch (error) {
       console.error("Error handling profile image:", error);
@@ -151,13 +175,6 @@ const UserCard: React.FC = () => {
           followingCount={followers?.length}
         />
       </div>
-      <button
-        type="button"
-        className="bd-color-main color-main color-main w-full rounded-[7px] border py-[13px] text-[16px]"
-        onClick={() => setIsProfile(!isProfile)}
-      >
-        {isProfile ? "프로필 완료" : "프로필 수정"}
-      </button>
       {!isProfile ? null : (
         <div className="flex flex-col space-y-2">
           <input
@@ -213,7 +230,7 @@ const UserCard: React.FC = () => {
             className="mb-[5px]"
           />
           <p className="text-[16px]">모임</p>
-          <span className="text-[18px] font-bold">0</span>
+          <span className="text-[18px] font-bold">{meetingCount}</span>
         </li>
       </ul>
     </div>

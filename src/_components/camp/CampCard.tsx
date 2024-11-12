@@ -1,19 +1,32 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
+import { useCallback } from "react";
 
 type CampingDataProps = {
-  camp: Camp;
+  camp: CampSelect | Camp;
   type?: string;
+  listParamsId?: string;
+  onBookmarkClick?: (contentId: number, campName: string) => void;
 };
 
-/**
- * [메인]
- * 이미지,카테고리,타이틀,북마크,짧은글(태그인데, 태그 처리가 안될경우?),후기갯수,북마크갯수
- * [일반 카드]
- * 이미지,카테고리,위치,북마크,위치 삭제
- */
+const CampCard = ({
+  camp,
+  type,
+  listParamsId,
+  onBookmarkClick
+}: CampingDataProps) => {
+  const contentId =
+    typeof camp.contentId === "string"
+      ? parseInt(camp.contentId)
+      : camp.contentId;
 
-const CampCard = ({ camp, type }: CampingDataProps) => {
+  const handleBookmarkClick = useCallback(() => {
+    if (onBookmarkClick) {
+      onBookmarkClick(contentId, camp.facltNm);
+    }
+  }, [onBookmarkClick, contentId, camp.facltNm]);
+
   const bookmarkActive = false;
 
   return (
@@ -32,7 +45,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
             />
             {!type ? (
               <div className="absolute right-[15px] top-[15px]">
-                <button type="button">
+                <button onClick={handleBookmarkClick} type="button">
                   <img
                     src="/assets/images/camp/ico-camp-list-bookmark.svg"
                     alt="북마크"
@@ -92,7 +105,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
                   <img
                     className="relative top-[-1px]"
                     src="/assets/images/main/ico-main-review-count.svg"
-                    alt={`${camp.facltDivNm} 후기 갯수 이미지`}
+                    alt={`${camp.facltNm} 후기 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 후기 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>
@@ -100,7 +113,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
                 <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
                   <img
                     src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltDivNm} 북마크 갯수 이미지`}
+                    alt={`${camp.facltNm} 북마크 갯수 이미지`}
                   />
                   {/* [이윤지 작업] - 북마크 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>

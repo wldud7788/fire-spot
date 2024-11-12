@@ -78,7 +78,8 @@ const upsertCamp = async (camp: CampInsert) => {
     induty,
     facltNm,
     lineIntro,
-    firstImageUrl
+    firstImageUrl,
+    featureNm
   } = camp;
 
   const imgUrls = await getCampImgList(contentId);
@@ -97,7 +98,8 @@ const upsertCamp = async (camp: CampInsert) => {
       sigunguNm,
       lineIntro,
       firstImageUrl,
-      imgUrls
+      imgUrls,
+      featureNm
     })
     .select();
 

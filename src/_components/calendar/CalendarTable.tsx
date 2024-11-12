@@ -52,7 +52,7 @@ const CalendarTable = ({
   return (
     <div className="rounded-[15px] border-[0.5px] border-[#BFBFBF] bg-[#FFF] px-[21.5px] py-[16.5px]">
       <section className="pb-[8px] pt-[16px]">
-        <ul className="grid grid-cols-7">
+        <ul className="grid grid-cols-7 gap-[7px]">
           {days.map((day) => (
             <li key={day} className="flex w-full justify-center">
               <span>{day}</span>
@@ -60,7 +60,7 @@ const CalendarTable = ({
           ))}
         </ul>
       </section>
-      <ul className="grid grid-cols-7">
+      <ul className="grid grid-cols-7 gap-[7px]">
         {dates.map((day) => (
           <CalendarCell
             key={day.toISOString()}
