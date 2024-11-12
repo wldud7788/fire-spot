@@ -2,7 +2,7 @@ import React from "react";
 
 const MeetCreatorInfoSection = () => {
   return (
-    <div className="rounded-120px] mt-[40px] flex w-full flex-col rounded-[12px] border border-[#D9D9D9] bg-[#F6F6F6] px-[30px] py-[40px]">
+    <div className="mt-[40px] flex w-full flex-col rounded-[12px] border border-[#D9D9D9] bg-[#F6F6F6] px-[30px] py-[40px]">
       <h2 className="color-gray01 mb-[20px] text-[20px] font-bold">
         모임 작성 예시를 알려드려요
       </h2>
