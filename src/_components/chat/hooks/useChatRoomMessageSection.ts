@@ -19,7 +19,7 @@ export const useChatRoomMessageSection = (
       user_id: loginUserId
     } as ChatMessageInsert;
 
-    postChatMessage(messagePost);
+    await postChatMessage(messagePost);
     setMessageInput("");
   };
 

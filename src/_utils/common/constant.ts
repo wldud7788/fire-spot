@@ -23,5 +23,8 @@ export const SERVER_API_URL = {
 
 export const SERVER_PAGE_URL = {
   chat: "/chat",
-  chatRoom: (roomId: number) => `/chat/${roomId}`
+  chatRoom: (roomId: number) => `/chat/${roomId}`,
+  sosWrite: "/sos/write",
+  sosList: "/sos",
+  sosDetail: (sosId: string) => `/sos/${sosId}`
 };

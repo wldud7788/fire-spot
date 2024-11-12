@@ -44,6 +44,7 @@ const config: Config = {
         infoRound: "url('/assets/images/ico-info-round.svg')",
         plus: "url('/assets/images/ico-plus.svg')",
         minus: "url('/assets/images/ico-minus.svg')",
+        pin: "url('/assets/images/ico-pin.svg')",
         prev: "url('/assets/images/ico-prev.svg')",
         next: "url('/assets/images/ico-next.svg')",
         // 공통

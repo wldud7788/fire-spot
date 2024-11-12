@@ -8,10 +8,13 @@ import {
   patchChatAttendee
 } from "../service/chatService";
 
-export const useChatSubscriptionMessageList = (
-  userId: string,
-  roomId: number
-) => {
+export const useChatSubscriptionMessageList = ({
+  userId,
+  roomId
+}: {
+  userId?: string;
+  roomId: number;
+}) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
 
@@ -25,7 +28,10 @@ export const useChatSubscriptionMessageList = (
     } as ChatAttendeeUpdate;
 
     // 입장 시 마지막 읽은 메시지 null, 퇴장 시 마지막 읽은 메시지 id update
-    await patchChatAttendee(userId, roomId, chatAttendee);
+    // sos 같은 경우 채팅 참여자 데이터 필요 없음 (userId의 유무로 판단)
+    if (userId) {
+      await patchChatAttendee(userId, roomId, chatAttendee);
+    }
   };
 
   /** 채팅방 입장 시 마지막 읽은 메시지 DB에서 가져와서 ref에 저장. null 일 경우 ref 초기값(null) 그대로  */
