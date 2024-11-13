@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/_utils/supabase/client"; // Supabase 클라이언트 가져오기
-import ReviewModal from "@/_components/modal/ReviewModal";
+import ReviewWriteModal from "@/_components/modal/ReviewWriteModal";
 import ReviewCard from "@/_components/review/ReviewCard";
 import { CampSelect } from "../meets/types/camp.types";
 import useUser from "@/_hooks/useUser";
@@ -102,7 +102,7 @@ const CampListPage = () => {
 
       {/* 리뷰쓰기 모달창 */}
       {selectedCampId && (
-        <ReviewModal campId={selectedCampId} onClose={closeReviewModal} />
+        <ReviewWriteModal campId={selectedCampId} onClose={closeReviewModal} />
       )}
     </div>
   );
