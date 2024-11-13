@@ -22,7 +22,7 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
           onClick={onClickFunc}
         >
           <div className="inner">
-            <div className="ibox overflow-hidden">
+            <div className="ibox h-[160px] overflow-hidden">
               <img
                 className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
                 src={feed.camp?.firstImageUrl || ""}

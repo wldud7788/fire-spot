@@ -4,11 +4,14 @@ import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 import CampReviewSlide from "./CampReviewSlide";
-import ReviewModal from "../modal/ReviewWriteModal";
+import ReviewWriteModal from "../modal/ReviewWriteModal";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
 import NoData from "../common/NoData";
 import ForecastWeatherComponent from "../weather/FutureWeather";
+import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
+import { useState } from "react";
+import Modal from "../modal/Modal";
 
 type CampDetailProps = {
   paramsId: string;
@@ -30,6 +33,15 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
     staleTime: 1000 * 60 * 60 * 24
   });
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModalOpen = () => setIsOpen(true);
+  const handleModalClose = () => setIsOpen(false);
+
+  // useEffect(() => {
+
+  // }, [camps])
+
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
@@ -50,6 +62,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   if (!camp) {
     return <>오류: 캠핑장 정보가 없습니다.</>;
   }
+
+  upsertCamp(camp);
 
   return (
     <div className="camp_detail mt-[40px]">
@@ -344,15 +358,28 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               <button
                 type="button"
                 className="color-main bd-color-main rounded-[8px] border p-[10px] text-[18px]"
+                onClick={handleModalOpen}
               >
                 리뷰 쓰기
               </button>
             </div>
+
+            <Modal
+              modalType={""} // 모달 타입
+              width={"500"} // 컨텐츠 넓이
+              isOpen={isOpen}
+              onClose={handleModalClose}
+            >
+              <ReviewWriteModal
+                campId={camp.contentId}
+                onClose={handleModalClose}
+              />
+            </Modal>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
           {true ? (
             <>
-              <ReviewModal campId={paramsId} onClose={() => {}} />
+              <ReviewWriteModal campId={paramsId} onClose={() => {}} />
               <CampReviewSlide campId={paramsId} />
             </>
           ) : (

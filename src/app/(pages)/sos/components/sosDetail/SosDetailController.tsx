@@ -32,17 +32,14 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
     <div className="mx-auto mb-[100px] mt-[75px] w-full max-w-[1360px] pl-[30px] pr-[30px]">
       <SosTitleSection sos={sos} />
       <SosUserSection sosWithCamp={sosWithCamp} />
-
       <SosContentSection sos={sos} />
-
+      <SosTagSection sos={sos} />
+      <SosRemainingTimeSection sos={sos} />
       <SosChatSection
         messagesByDate={messagesByDate}
         loginUserId={loginUserId}
         roomId={roomId}
       />
-
-      <SosTagSection sos={sos} />
-      <SosRemainingTimeSection sos={sos} />
       {/* <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />
