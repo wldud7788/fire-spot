@@ -63,7 +63,9 @@ const config: Config = {
         campTit04: "url('/assets/images/camp/ico-camp-tit04.svg')",
         campTit05: "url('/assets/images/camp/ico-camp-tit05.svg')",
         campTit06: "url('/assets/images/camp/ico-camp-tit06.svg')",
-        campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')"
+        campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')",
+        // 캘린더
+        stamp: "url('/assets/images/ico-stamp.svg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

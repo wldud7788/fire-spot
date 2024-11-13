@@ -30,6 +30,8 @@ const CalendarCell = ({
     (cellCard) => cellCard.type === "stamp"
   );
 
+  console.log("stampCardList", stampCardList);
+
   const meetCard = cellCardList.find((cellCard) => cellCard.type === "meet");
   const meetCardId = meetCard ? `${meetCard.type}-${meetCard.typeId}` : "";
 
@@ -64,16 +66,9 @@ const CalendarCell = ({
         <ul className="flex w-full flex-row-reverse flex-wrap justify-between gap-2 p-[10px]">
           {showStamp &&
             stampCardList.map((stamp) => (
-              <div
-                key={stamp.id}
-                className="flex w-[calc(33%-8px)] flex-row-reverse items-center"
-              >
-                <div className="h-[23px] w-[20px] bg-stamp bg-cover bg-center" />
-              </div>
-              // <li key={`${stamp.id}`} className="h-12 bg-slate-500">
-              //* {stamp.content} */}
-              // stamp
-              // </li>
+              <li key={`${stamp.id}`} className="">
+                <div className="h-[21px] w-[18px] bg-stamp bg-cover bg-center" />
+              </li>
             ))}
         </ul>
       </section>
