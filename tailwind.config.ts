@@ -57,6 +57,7 @@ const config: Config = {
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",
         // 캠핑 상세
         reviewArrow: "url('/assets/images/camp/ico-review-arrow.svg')",
+        direction: "url('/assets/images/camp/ico-direction.svg')",
         campChk: "url('/assets/images/camp/ico-camp-chk.svg')",
         campTit01: "url('/assets/images/camp/ico-camp-tit01.svg')",
         campTit02: "url('/assets/images/camp/ico-camp-tit02.svg')",

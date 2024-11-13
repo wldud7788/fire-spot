@@ -46,6 +46,12 @@ const useSosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
     }
   });
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Enter 키로 인한 form 제출 방지
+    }
+  };
+
   const onSubmit: SubmitHandler<SosInsert> = async (data) => {
     // TODO 사카모토
     await processSosSubmitData(data, sosId);
@@ -106,6 +112,7 @@ const useSosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
     clearErrors,
     errors,
     watch,
+    handleKeyDown,
     onSubmit,
     searchKeyword,
     location,

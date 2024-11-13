@@ -46,7 +46,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   const posblFcltyClInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
   const sbrsClInfo: string[] | undefined = camp?.sbrsCl.split(",");
 
-  console.log(camp, sbrsClInfo);
+  // 캠핑장 정보가 없을 경우에 대한 처리를 내놓고 아래에서 ? 처리를 뺐습니다. JY
+  if (!camp) {
+    return <>오류: 캠핑장 정보가 없습니다.</>;
+  }
 
   return (
     <div className="camp_detail mt-[40px]">
@@ -55,17 +58,17 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         <div className="detail_section flex items-center gap-[40px]">
           <div className="left_area w-[calc(100%-500px)] w-full overflow-hidden rounded-[12px]">
             <img
-              src={camp?.firstImageUrl}
-              alt={`${camp?.facltNm} 이미지`}
+              src={camp.firstImageUrl}
+              alt={`${camp.facltNm} 이미지`}
               className="w-full"
             />
           </div>
           <div className="right_area w-full max-w-[460px] rounded-[12px] shadow-custom">
             <div className="info px-[35px] py-[30px]">
               <div className="cont">
-                <PageTitle text={camp?.facltNm} />
+                <PageTitle text={camp.facltNm} />
                 <p className="color-gray03 mb-[20px] mt-[5px] text-[14px]">
-                  {camp?.addr1}
+                  {camp.addr1}
                 </p>
                 <ul className="flex items-center">
                   <li className="li-before-dot relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
@@ -95,16 +98,19 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                     캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
-                    {camp?.induty ? (
+                    {camp.induty && (
                       <p className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]">
-                        {camp?.induty}
+                        {camp.induty}
                       </p>
-                    ) : null}
-                    {camp?.caravInnerFclty ? (
-                      <p className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]">
-                        {camp?.caravInnerFclty}
+                    )}
+                    {camp.caravInnerFclty?.split(",").map((item) => (
+                      <p
+                        key={item}
+                        className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]"
+                      >
+                        {item}
                       </p>
-                    ) : null}
+                    ))}
                     {sbrsClInfo
                       ? sbrsClInfo.map((item, idx) => {
                           return (
@@ -124,7 +130,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                     주변 정보
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap">
-                    {camp?.posblFcltyCl ? (
+                    {camp.posblFcltyCl ? (
                       posblFcltyClInfo?.map((item, idx) => (
                         <p
                           className="color-main rounded-[5px] bg-[#FFEFE5] p-[5px] text-[12px]"
@@ -178,9 +184,9 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </h2>
           </div>
 
-          {camp?.featureNm || camp?.intro ? (
+          {camp.featureNm || camp.intro ? (
             <p className="color-gray01 text-[16px]">
-              {camp?.featureNm ? camp?.featureNm : camp?.intro}
+              {camp.featureNm ? camp.featureNm : camp.intro}
             </p>
           ) : (
             <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
@@ -191,16 +197,23 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
           )}
 
           <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
-            {camp?.induty ? (
+            {camp.induty && (
               <li className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]">
-                {camp?.induty}
+                {camp.induty}
               </li>
-            ) : null}
-            {camp?.caravInnerFclty ? (
-              <li className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]">
-                {camp?.caravInnerFclty}
-              </li>
-            ) : null}
+            )}
+            {camp.caravInnerFclty && (
+              <>
+                {camp.caravInnerFclty.split(",").map((item) => (
+                  <li
+                    key={item}
+                    className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </>
+            )}
             {sbrsClInfo
               ? sbrsClInfo.map((item, idx) => {
                   return (
@@ -227,11 +240,11 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
           <ul>
             <li className="color-gray01 bg-polygon bg-left-center-0 bg-no-repeat pl-[23px] text-[16px]">
               예약 가능한 날:{" "}
-              {camp?.operDeCl ? camp?.operDeCl : "정보를 확인할 수 없습니다."}
+              {camp.operDeCl ? camp.operDeCl : "정보를 확인할 수 없습니다."}
             </li>
             <li className="color-gray01 bg-polygon bg-left-center-0 bg-no-repeat pl-[23px] text-[16px]">
               예약 사이트:{" "}
-              {camp?.resveUrl ? camp?.resveUrl : "정보를 확인할 수 없습니다."}
+              {camp.resveUrl ? camp.resveUrl : "정보를 확인할 수 없습니다."}
             </li>
           </ul>
           <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
@@ -250,7 +263,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </h2>
           </div>
 
-          {camp?.posblFcltyCl ? (
+          {camp.posblFcltyCl ? (
             <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
               {posblFcltyClInfo?.map((item) => (
                 <li
@@ -277,8 +290,11 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             <h2 className="bg-campTit04 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
               캠핑장 위치
             </h2>
+            <p className="bg-direction bg-left-center-0 bg-no-repeat pl-[30px] text-base">
+              {camp.direction}
+            </p>
           </div>
-          {camp && <DetailMap camp={camp} />}
+          <DetailMap camp={camp} />
         </div>
         {/*// 캠핑장 위치 */}
 
@@ -290,7 +306,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             </h2>
             {/* 캠핑장 날씨 최신 수정 */}
             <p className="color-gray03 rounded-[8px] border border-[#D9D9D9] bg-[#f2f2f2] p-[10px] text-[16px]">
-              캠핑장 이때 방문하면 좋아요 : {camp?.operPdCl}
+              캠핑장 이때 방문하면 좋아요 : {camp.operPdCl}
             </p>
           </div>
           <ForecastWeatherComponent

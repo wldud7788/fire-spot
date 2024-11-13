@@ -26,5 +26,6 @@ export const SERVER_PAGE_URL = {
   chatRoom: (roomId: number) => `/chat/${roomId}`,
   sosWrite: "/sos/write",
   sosList: "/sos",
-  sosDetail: (sosId: string) => `/sos/${sosId}`
+  sosDetail: (sosId: string) => `/sos/${sosId}`,
+  meets: "/meets"
 };
