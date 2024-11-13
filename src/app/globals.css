@@ -331,6 +331,15 @@ body {
     li.react-datepicker__time-list-item--selected:hover {
     background-color: #ff924c !important;
   }
+
+  /* 가이드 */
+  .tip-abs {
+    position: absolute;
+    left: 50%;
+    top: -88px;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
 }
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */
