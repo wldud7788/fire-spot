@@ -438,15 +438,18 @@ export type Database = {
       };
       review: {
         Row: {
-          at: string;
-          campId: number;
-          content: string;
-          id: string;
+          id: number;
           likes: number | null;
-          rating: number;
           title: string;
           updated: string | null;
           userId: string;
+          rating: number;
+          at: string;
+          content: string;
+          campId: number;
+          img: string | null;
+          time: string | null;
+          date: string | null;
         };
         Insert: {
           at: string;
@@ -477,6 +480,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "camp";
             referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "review_userId_fkey";
+            columns: ["userId"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
           }
         ];
       };

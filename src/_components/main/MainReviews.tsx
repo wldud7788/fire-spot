@@ -1,76 +1,66 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@/_utils/supabase/client";
 import ReviewCard from "../review/ReviewCard";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
+
+const supabase = createClient();
 
 const MainReviews = () => {
-  // [이윤지 작업] 리뷰 랜덤으로 5개 리스트 출력해주면 됩니다.
-  // 메인 임시로 적용하기 위해 더미데이터 사용함 (실제 데이터 사용하면 아래 지워주세요!!)
-  const feeds = [
-    {
-      id: 1,
-      like: 4,
-      img: "/assets/images/dummy/@dummy-main-review-01.jpg",
-      title: "너무 만족합니다!",
-      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
-      profileImg:
-        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
-      userName: "킹갓제너럴이준열",
-      date: "2024,10,27"
-    },
-    {
-      id: 2,
-      like: 4,
-      img: "/assets/images/dummy/@dummy-main-review-02.jpg",
-      title: "너무 만족합니다!",
-      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
-      profileImg:
-        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
-      userName: "킹갓제너럴이준열",
-      date: "2024,10,27"
-    },
-    {
-      id: 3,
-      like: 4,
-      img: "/assets/images/dummy/@dummy-main-review-03.jpg",
-      title: "너무 만족합니다!",
-      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
-      profileImg:
-        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
-      userName: "킹갓제너럴이준열",
-      date: "2024,10,27"
-    },
-    {
-      id: 4,
-      like: 4,
-      img: "/assets/images/dummy/@dummy-main-review-01.jpg",
-      title: "너무 만족합니다!",
-      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
-      profileImg:
-        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
-      userName: "킹갓제너럴이준열",
-      date: "2024,10,27"
-    },
-    {
-      id: 5,
-      like: 4,
-      img: "/assets/images/dummy/@dummy-main-review-02.jpg",
-      title: "너무 만족합니다!",
-      desc: "처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서 처음 가본 캠핑장인데 시설이 너무 깔끔 하고 편리하게 되어 있어 마음에 쏙 들고 밤하늘엔 별이 쏟아져 감탄을 자아내서",
-      profileImg:
-        "http://k.kakaocdn.net/dn/caeJXl/btsKrC8yWWV/TQ3b3hXdn8KzD7tBK7Seg0/img_640x640.jpg",
-      userName: "킹갓제너럴이준열",
-      date: "2024,10,27"
-    }
-  ];
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // 함수 이름도 fetchCamps -> fetchReviews 이름 바꾸쇼
+    const fetchReviews = async () => {
+      // const { data, error } = await supabase.from("review").select("*") as { data: FeedItem[] | null, error: Error | null };
+      const { data, error } = await supabase
+        .from(`review`)
+        .select(`*, camp(*), profile(*)`); // as unknown as FeedItem[]
+      console.log(data);
+
+      if (error) {
+        // console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
+        throw new Error("리뷰 정보를 가져오는 중 오류 발생:", error);
+      }
+
+      if (!data) {
+        throw new Error("리뷰 정보를 가져오는 중 오류 발생 (데이터없음)");
+      }
+
+      console.log("data", data);
+      // const reviewItems = data as ReviewItem[] | null;
+      const selectedCamps = getRandomCamps(data || [], 5);
+      // const selectedCamps = data;
+      setReviews(selectedCamps);
+      setError(null);
+    };
+
+    fetchReviews();
+  }, []);
+
+  // TODO 매개변수 이름 camps -> reviews
+  const getRandomCamps = (reviews: ReviewItem[], n: number): ReviewItem[] => {
+    const existImgReviews = reviews.filter(
+      (review) => !!review.camp?.firstImageUrl
+    );
+
+    const shuffled = [...existImgReviews].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  };
 
   return (
-    <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
-      {feeds.map((feed) => {
-        return (
+    <div>
+      {error && <p className="text-red-500">{error}</p>}
+      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
+        {reviews.map((feed) => (
           <li key={feed.id}>
             <ReviewCard feed={feed} type={"main"} />
           </li>
-        );
-      })}
-    </ul>
+        ))}
+      </ul>
+    </div>
   );
 };
 
