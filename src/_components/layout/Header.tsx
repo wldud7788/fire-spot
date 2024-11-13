@@ -53,7 +53,7 @@ const Header = () => {
           <nav className="hidden gap-5 text-lg font-semibold lg:flex">
             <Link href={"./guide"}>캠핑가이드</Link>
             <Link href={"./camps"}>캠핑장</Link>
-            <Link href={"./meets"}>커뮤니티</Link>
+            <Link href={SERVER_PAGE_URL.meets}>커뮤니티</Link>
             <Link href={"./"}>후기</Link>
           </nav>
           {/* 아이콘 */}
