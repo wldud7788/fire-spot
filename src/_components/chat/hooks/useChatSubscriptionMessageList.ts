@@ -26,6 +26,7 @@ export const useChatSubscriptionMessageList = (
 
     // 입장 시 마지막 읽은 메시지 null, 퇴장 시 마지막 읽은 메시지 id update
     await patchChatAttendee(userId, roomId, chatAttendee);
+    //  입장/퇴장 시 is_first_read true (최초로 참여한 채팅방의 경우 안 읽은 메시지 수 표시가 정상적으로 안되었는데 이거 추가해서 해결함)
     await patchChatAttendee(userId, roomId, { is_first_read: true });
   };
 
@@ -52,7 +53,7 @@ export const useChatSubscriptionMessageList = (
           table: "chat_message"
         },
         (payload) => {
-          // 신규 message_id를 계속 참조함
+          // 신규 message_id를 계속 참조함 (언마운트시 마지막으로 읽은 메시지 수 계산을 위함)
           const chatMessage = payload.new as ChatMessageSelect;
           lastChatMessageIdRef.current = chatMessage.id;
 
