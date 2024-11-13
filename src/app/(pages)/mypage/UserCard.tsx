@@ -19,6 +19,7 @@ const UserCard: React.FC = () => {
   const [newNickname, setNewNickname] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [reviewCount, setReviewCount] = useState<number>(0); // 모임 갯수 상태
   const [meetingCount, setMeetingCount] = useState<number>(0); // 모임 갯수 상태
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const supabase = createClient();
@@ -82,6 +83,8 @@ const UserCard: React.FC = () => {
         .from("meet")
         .select("*", { count: "exact" })
         .eq("user_id", userId);
+
+      setReviewCount(reviewCount ?? 0);
 
       setMeetingCount(meetingCount ?? 0);
     } catch (error) {
@@ -221,7 +224,8 @@ const UserCard: React.FC = () => {
             className="mb-[5px]"
           />
           <p className="text-[16px]">스탬프</p>
-          <span className="text-[18px] font-bold">0</span>
+
+          <span className="text-[18px] font-bold">{reviewCount}</span>
         </li>
         <li className="flex flex-col items-center justify-center">
           <img
