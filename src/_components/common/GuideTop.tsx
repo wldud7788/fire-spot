@@ -13,7 +13,7 @@ const GuideTop = ({ text }: CommunityTopProps) => {
       <ul className="mt-[60px] flex items-center gap-[24px] border-b border-b-[#BFBFBF]">
         <li>
           <Link
-            href={"/befinner"}
+            href={"/beginner"}
             className={`${text === "초보 캠퍼 가이드" && "active font-bold text-[##B24600]"} relative block pb-[8px] text-[20px] text-[#42526E]`}
           >
             초보 캠퍼 가이드
