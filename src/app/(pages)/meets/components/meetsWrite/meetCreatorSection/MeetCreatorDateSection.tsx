@@ -45,41 +45,51 @@ const MeetCreatorDateSection = ({
   };
 
   return (
-    <section className="mt-40 flex flex-col gap-5 rounded-[20px] border-[1px] border-[#B5B5B5] px-[53px] py-10">
-      <div className="flex items-center gap-3">
-        <div className="h-6 w-6 bg-date bg-cover bg-center" />
-        <h2 className="text-[20px]">날짜와 시간</h2>
-      </div>
-      <div className="flex items-center gap-2">
-        <div className="h-6 w-6 bg-dateStroke bg-cover bg-center" />
-        <div className="flex h-[45px] w-[162px] items-center rounded-[6px] border-[1px] border-[#AAA] p-2 text-[15px] text-[#BFBFBF]">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              const value = date ? date : addDays(new Date(), 1);
-              setStartDate(value);
-              setValue(startFormName, value);
-            }}
-            showTimeSelect
-            dateFormat="MMMM d일 aa h:mm"
-            locale="ko"
-            onCalendarClose={handleCloseStartDate}
-          />
-        </div>
-        <div className="flex h-[45px] w-[162px] items-center rounded-[6px] border-[1px] border-[#AAA] p-2 text-[15px] text-[#BFBFBF]">
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => {
-              const value = date ? date : addDays(new Date(), 1);
+    <section className="mt-[40px] rounded-[12px] border border-[#D9D9D9] px-[30px] py-[40px]">
+      <h2 className="color-gray01 flex items-center gap-[5px] text-[24px] font-bold">
+        언제 모이나요?
+      </h2>
 
-              setEndDate(value);
-              setValue(endFormName, value);
-            }}
-            showTimeSelect
-            dateFormat="MMMM d일 aa h:mm"
-            locale="ko"
-            onCalendarClose={handleCloseEndDate}
-          />
+      <div className="mt-[40px] flex items-center gap-[40px]">
+        <div className="flex items-center gap-[20px]">
+          <p className="color-gray01 flex-none text-[18px] font-medium">
+            모임 시작
+          </p>
+          <div className="input_date">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                const value = date ? date : addDays(new Date(), 1);
+                setStartDate(value);
+                setValue(startFormName, value);
+              }}
+              showTimeSelect
+              dateFormat="MMMM d일 aa h:mm"
+              locale="ko"
+              onCalendarClose={handleCloseStartDate}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-[20px]">
+          <p className="color-gray01 flex-none text-[18px] font-medium">
+            모임 종료
+          </p>
+          <div className="input_date">
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => {
+                const value = date ? date : addDays(new Date(), 1);
+
+                setEndDate(value);
+                setValue(endFormName, value);
+              }}
+              showTimeSelect
+              dateFormat="MMMM d일 aa h:mm"
+              locale="ko"
+              onCalendarClose={handleCloseEndDate}
+            />
+          </div>
         </div>
       </div>
     </section>

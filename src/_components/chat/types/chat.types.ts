@@ -1,6 +1,7 @@
 import { MeetSelect } from "@/app/(pages)/meets/types/meet.types";
 import { Database } from "../../../../database.types";
 import { ProfileSelect } from "./Profile.types";
+import { SosSelect } from "@/app/(pages)/sos/types/sos.types";
 
 export type ChatRoomInfo = {
   chatAttendee: ChatAttendeeSelect;
@@ -8,6 +9,7 @@ export type ChatRoomInfo = {
   chatMessage: ChatMessageSelect;
   profile: ProfileSelect;
   meet: MeetSelect;
+  sos: SosSelect;
   headcount: number;
   unreadCount: number;
 };

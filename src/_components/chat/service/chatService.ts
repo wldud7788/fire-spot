@@ -234,3 +234,24 @@ export const patchChatAttendee = async (
     console.error("Error patchChatAttendee ", e);
   }
 };
+
+export const fetchChatRoomBySosId = async (sosId: number) => {
+  console.log("sosId", sosId);
+  try {
+    const { data, error } = await supabase
+      .from("chat_room")
+      .select("*")
+      .eq("sos_id", sosId)
+      .single();
+
+    if (error) {
+      throw new Error("Error fetchChatRoomBySosId, " + error.message);
+    }
+
+    if (!data) {
+      return null;
+    }
+
+    return data;
+  } catch (e) {}
+};

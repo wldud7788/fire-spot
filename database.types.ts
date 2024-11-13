@@ -1,9 +1,13 @@
+import { MeetWithCamp } from "@/app/(pages)/meets/types/meet.types";
+
 import {
   ChatRoomInfo,
   ChatRoomMessageInfo,
   ChatRoomTitle,
   ChatRoomType
 } from "@/_components/chat/types/chat.types";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { SosSelect, SosWithCamp } from "@/app/(pages)/sos/types/sos.types";
 
 export type Json =
   | string
@@ -16,6 +20,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookmarks: {
+        Row: {
+          contentId: number;
+          created_at: string;
+          id: number;
+          userId: string;
+        };
+        Insert: {
+          contentId: number;
+          created_at?: string;
+          id?: number;
+          userId: string;
+        };
+        Update: {
+          contentId?: number;
+          created_at?: string;
+          id?: number;
+          userId?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "bookmarks_userId_fkey";
+            columns: ["userId"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       camp: {
         Row: {
           addr1: string;
@@ -31,6 +71,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm: string | null;
+          featureNm?: string | null;
         };
         Insert: {
           addr1: string;
@@ -46,6 +87,7 @@ export type Database = {
           mapX: number;
           mapY: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Update: {
           addr1?: string;
@@ -61,6 +103,7 @@ export type Database = {
           mapX?: number;
           mapY?: number;
           sigunguNm?: string | null;
+          featureNm?: string | null;
         };
         Relationships: [];
       };
@@ -190,6 +233,35 @@ export type Database = {
             columns: ["meet_id"];
             isOneToOne: false;
             referencedRelation: "meet";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      follows: {
+        Row: {
+          created_at: string;
+          follower_id: string | null;
+          following_id: string | null;
+          id: number;
+        };
+        Insert: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Update: {
+          created_at?: string;
+          follower_id?: string | null;
+          following_id?: string | null;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "\bfollows_follower_id_fkey";
+            columns: ["follower_id"];
+            isOneToOne: false;
+            referencedRelation: "profile";
             referencedColumns: ["id"];
           }
         ];
@@ -369,39 +441,52 @@ export type Database = {
       };
       review: {
         Row: {
-          at: string;
-          campId: string;
-          content: string;
-          id: string;
-          rating: number;
+          id: number;
+          likes: number | null;
           title: string;
-          updatede: string | null;
+          updated: string | null;
           userId: string;
+          rating: number;
+          at: string;
+          content: string;
+          campId: number;
+          img: string | null;
+          time: string | null;
+          date: string | null;
         };
         Insert: {
           at: string;
-          campId: string;
+          campId: number;
           content: string;
           id?: string;
+          likes?: number | null;
           rating: number;
           title: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Update: {
           at?: string;
-          campId?: string;
+          campId?: number;
           content?: string;
           id?: string;
+          likes?: number | null;
           rating?: number;
           title?: string;
-          updatede?: string | null;
+          updated?: string | null;
           userId?: string;
         };
         Relationships: [
           {
             foreignKeyName: "review_campId_fkey";
             columns: ["campId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          },
+          {
+            foreignKeyName: "review_userId_fkey";
+            columns: ["userId"];
             isOneToOne: false;
             referencedRelation: "profile";
             referencedColumns: ["id"];
@@ -410,36 +495,58 @@ export type Database = {
       };
       sos: {
         Row: {
-          contents: string | null;
+          content: string;
+          contentId: number | null;
           created_at: string;
           id: number;
-          sos_category: string | null;
-          sos_image: string | null;
-          title: string | null;
+          tag: string[];
+          title: string;
+          type: string;
         };
         Insert: {
-          contents?: string | null;
-          created_at?: string;
-          id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          content: string;
+          tag: string[];
+          title: string;
+          type: string;
+          contentId?: number | null;
+          // id?: number;
+          // created_at?: string;
         };
         Update: {
-          contents?: string | null;
-          created_at?: string;
-          id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          content?: string;
+          contentId?: number | null;
+          tag?: string[];
+          title?: string;
+          type?: string;
+          // id?: number;
+          // created_at?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "sos_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          }
+        ];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      get_meet_attendee_with_meet_and_camp: {
+        Args: {
+          user_id: string;
+        };
+        // Returns: {
+        //   attendee_count: number;
+        //   meet: MeetSelect;
+        //   camp: CampSelect;
+        // }[];
+        Returns: MeetWithCamp[];
+      };
       get_meet_detail:
         | {
             Args: Record<PropertyKey, never>;
@@ -471,21 +578,13 @@ export type Database = {
         Args: Record<string, number | string>;
         Returns: ChatRoomMessageInfo[];
       };
-      get_meet_list1: {
+      get_sos_list: {
         Args: Record<PropertyKey, never>;
-        Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
-        }[];
+        Returns: SosWithCamp[];
       };
-      get_meet_list2: {
-        Args: Record<PropertyKey, never>;
-        Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
-        }[];
+      get_sos_detail: {
+        Args: Record<string, number>;
+        Returns: SosWithCamp[];
       };
     };
     Enums: {

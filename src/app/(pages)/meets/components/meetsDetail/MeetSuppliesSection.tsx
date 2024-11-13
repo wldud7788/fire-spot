@@ -6,15 +6,15 @@ type Props = {
 const MeetSuppliesSection = ({ meetWithCamp }: Props) => {
   const { meet } = meetWithCamp;
   return (
-    <div className="mt-12 flex w-full flex-col gap-7">
-      <h2 className="text-4xl">준비물</h2>
-      <ul className="flex gap-6">
+    <div className="mt-[80px]">
+      <h2 className="color-gray01 text-[24px] font-bold">준비물</h2>
+      <ul className="mt-[30px] flex flex-wrap items-center gap-[12px]">
         {meet.supplies.map((item, idx) => (
           <li
             key={idx}
-            className="rounded-3xl border-[2px] border-black pb-2 pl-7 pr-7 pt-2"
+            className="min-w-[75px] rounded-[20px] border border-[#a6a6a6] px-[16px] py-[8px] text-center"
           >
-            <span className="text-xl">{item}</span>
+            <span className="color-gray01 text-[14px] font-bold">{item}</span>
           </li>
         ))}
       </ul>

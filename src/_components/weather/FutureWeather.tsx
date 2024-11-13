@@ -18,6 +18,7 @@ type ForecastWeatherComponentProps = {
   latitude: number;
   longitude: number;
   campingName: string;
+  date?: Date;
 };
 
 const ForecastWeatherComponent = ({
@@ -78,19 +79,23 @@ const ForecastWeatherComponent = ({
   }
 
   return (
-    <div>
-      <h2>{campingName}의 5일간 날씨</h2>
-      {forecastData.list.map((day, index) => (
-        <div key={index}>
-          <p>날짜: {new Date(day.dt * 1000).toISOString().split("T")[0]}</p>
-          <p>온도: {(day.main.temp - 273.15).toFixed(2)}°C</p>
-          <p>
-            날씨 상태:{" "}
-            {weatherDescriptionMap[day.weather[0].description] ||
-              day.weather[0].description}
-          </p>
-        </div>
-      ))}
+    <div className="w-full rounded-[12px] border border-[#A6A6A6] px-[25px] py-[36px]">
+      <h2 className="mb-[20px] text-[24px] font-bold">
+        {campingName}의 5일간 날씨
+      </h2>
+      <div className="flex items-center">
+        {forecastData.list.map((day, index) => (
+          <div key={index} className="w-[20%]">
+            <p>날짜: {new Date(day.dt * 1000).toISOString().split("T")[0]}</p>
+            <p>온도: {(day.main.temp - 273.15).toFixed(2)}°C</p>
+            <p>
+              날씨 상태:{" "}
+              {weatherDescriptionMap[day.weather[0].description] ||
+                day.weather[0].description}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
