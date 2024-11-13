@@ -3,6 +3,7 @@ import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
 import { useCallback } from "react";
+import BookMarkButton2 from "../bookmark/BookMarkButton2";
 
 type CampingDataProps = {
   camp: CampSelect | Camp;
@@ -47,21 +48,7 @@ const CampCard = ({
               alt={camp.facltNm}
             />
             {!type ? (
-              <div className="absolute right-[15px] top-[15px]">
-                <button onClick={handleBookmarkClick} type="button">
-                  <img
-                    src="/assets/images/camp/ico-camp-list-bookmark.svg"
-                    alt="북마크"
-                  />
-                  {/* 
-                    이윤지 작업 - 북마크 액티브 되면 아래의 아이콘 쓰시면 됩니다. 
-                    <img
-                      src="/assets/images/camp/ico-camp-list-bookmark-on.svg"
-                      alt="북마크"
-                    /> 
-                  */}
-                </button>
-              </div>
+              <BookMarkButton2 campId={camp.contentId.toString()} camp={camp} />
             ) : null}
           </div>
 
@@ -82,18 +69,7 @@ const CampCard = ({
             </div>
           ) : (
             <div className="camp_info relative mt-[20px] rounded-[12px] border border-[#d9d9d9] px-[15px] py-[25px]">
-              <div className="absolute right-[15px] top-[15px]">
-                {/* 윤지님 북마크 컴포넌트 아래의 버튼 클래스, 이미지 사용하시면 됩니다.*/}
-                <button
-                  type="button"
-                  className={`${bookmarkActive ? "bg-gray03" : "bg-white"} flex h-[30px] w-[30px] items-center justify-center rounded-[100%] border border-[#d9d9d9]`}
-                >
-                  <img
-                    src={"/assets/images/common/ico-heart.svg"}
-                    alt={"찜하기"}
-                  />
-                </button>
-              </div>
+              <BookMarkButton2 campId={camp.contentId.toString()} camp={camp} />
               <span className="text-[13px] font-bold text-[#997457]">
                 {camp.induty}
               </span>
