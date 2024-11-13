@@ -22,10 +22,10 @@ const config: Config = {
         "40": "40px"
       },
       screens: {
-        "max-n": { max: "1460px" },
-        "max-t": { max: "1260px" },
-        "max-m": { max: "600px" },
-        "max-sm": { max: "400px" }
+        "max-1460": { max: "1460px" },
+        "max-1260": { max: "1260px" },
+        "max-600": { max: "600px" },
+        "max-400": { max: "400px" }
       },
       backgroundImage: {
         search: "url('/assets/images/search.png')",
@@ -52,6 +52,10 @@ const config: Config = {
         import: "url('/assets/images/common/ico-import.svg')",
         plusColor: "url('/assets/images/common/ico-plus-c.svg')",
         pin: "url('/assets/images/common/ico-pin.svg')",
+        calendarPrev:
+          "url('/assets/images/common/ico-calendar-arrow-prev.svg')",
+        calendarNext:
+          "url('/assets/images/common/ico-calendar-arrow-next.svg')",
         // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",

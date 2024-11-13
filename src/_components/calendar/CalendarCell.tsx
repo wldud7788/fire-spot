@@ -39,15 +39,15 @@ const CalendarCell = ({
     hoverItem === meetCardId ? "bg-[#FF731A]" : "bg-[#FFD0B2]";
 
   return (
-    <li className="flex min-h-[105px] w-full flex-col border-[1px]">
-      <section className="flex h-[20px] w-full justify-end">
-        <p className="p-[10px]">{format(day, "d")}</p>
+    <li className="flex min-h-[105px] w-full flex-col rounded-[10px] border">
+      <section className="flex h-[20px] w-full px-[10px] py-[7px]">
+        <p className="color-gray01 text-[16px]">{format(day, "d")}</p>
       </section>
       <section className="relative flex flex-col justify-end">
         <div className="h-[50px]">
           {meetCard && (
             <div
-              className={`absolute top-[10px] z-50 cursor-pointer`}
+              className={`absolute top-[10px] z-50 cursor-pointer p-[6px] ${meetCardContentBg} rounded-[10px]`}
               style={{ ...meetCardStyle }}
               onMouseOver={() => handleHoverItem(meetCardId)}
               onMouseLeave={() => handleHoverItem("")}
@@ -55,7 +55,7 @@ const CalendarCell = ({
                 router.push(`/meets/${meetCard.typeId}`);
               }}
             >
-              <div className={`w-full ${meetCardContentBg}`}>
+              <div className={`line-clamp-1 w-full text-[12px] text-white`}>
                 {meetCard.content}
               </div>
             </div>

@@ -68,13 +68,15 @@ const BookmarkList: React.FC = () => {
 
   return (
     <div>
-      <h2>북마크 목록</h2>
       {bookmarks.length === 0 ? (
         <p>북마크된 캠핑장이 없습니다.</p>
       ) : (
-        <div className="bookmark-list">
+        <ul className="bookmark-list flex flex-wrap items-start gap-[30px]">
           {bookmarks.map((bookmark) => (
-            <div key={bookmark.contentId} className="camp-card-wrapper">
+            <li
+              key={bookmark.contentId}
+              className="camp-card-wrapper w-full max-w-[calc(33.333%-23px)]"
+            >
               <CampCard
                 camp={bookmark.camp}
                 // camp={{
@@ -93,9 +95,9 @@ const BookmarkList: React.FC = () => {
                 contentId={`${bookmark.contentId}`}
                 onBookmarkRemoved={handleBookmarkRemoved}
               />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
