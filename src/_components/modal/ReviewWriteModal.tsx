@@ -1,6 +1,7 @@
 "use client";
 import { createClient } from "@/_utils/supabase/client";
 import { useState } from "react";
+import MakeStar from "../star/MakeStar";
 
 // ReviewModalProps 인터페이스: props로 campId와 onClose 함수를 받음
 interface ReviewModalProps {
@@ -8,10 +9,12 @@ interface ReviewModalProps {
   onClose: () => void; // 모달창을 닫는 함수
 }
 
-const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
+const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState<number>(0);
+  const [위생별점, 셋위생별점] = useState<number>(0);
+
   const supabase = createClient(); // Supabase 클라이언트 생성
 
   // Supabase를 통해 현재 사용자 정보 가져오기
@@ -39,7 +42,8 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
           title: title, // 전달받은 캠핑장 ID
           content: content, // 입력한 리뷰 내용
           rating: rating, // 입력한 평점
-          at: new Date().toISOString() // 현재 시간
+          at: new Date().toISOString(),
+          date: new Date().toISOString() // 현재 시간
         }
       ]);
 
@@ -53,8 +57,22 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     }
   };
 
+  const onRatingChange = (rating: number) => {
+    setRating(rating);
+  };
+
+  const on위생별점체인지 = (rating: number) => {
+    셋위생별점(rating);
+  };
+
   return (
-    <div className="modal">
+    <div className="modal z-50 bg-white">
+      <h2>별점</h2>
+      <MakeStar onRatingChange={onRatingChange} />
+
+      <h2>위생별점</h2>
+      <MakeStar onRatingChange={on위생별점체인지} />
+
       <h2>제목</h2>
       <textarea
         value={title}
@@ -70,7 +88,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         className="textarea"
       />
       {/* 평점을 입력받는 숫자 입력 필드 */}
-      <input
+      {/* <input
         type="number"
         value={rating || ""}
         onChange={(e) => setRating(parseInt(e.target.value, 10))}
@@ -78,7 +96,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         className="input"
         min={1}
         max={5}
-      />
+      /> */}
       {/* 리뷰 제출 버튼 */}
       <button onClick={handleSubmit} className="btn btn-primary">
         제출
@@ -91,4 +109,4 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
   );
 };
 
-export default ReviewModal;
+export default ReviewWriteModal;
