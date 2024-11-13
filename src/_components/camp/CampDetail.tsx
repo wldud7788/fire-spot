@@ -46,9 +46,6 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   const posblFcltyClInfo: string[] | undefined = camp?.posblFcltyCl.split(",");
   const sbrsClInfo: string[] | undefined = camp?.sbrsCl.split(",");
 
-  console.log("camp", camp);
-  // console.log(camp, sbrsClInfo);
-
   // 캠핑장 정보가 없을 경우에 대한 처리를 내놓고 아래에서 ? 처리를 뺐습니다. JY
   if (!camp) {
     return <>오류: 캠핑장 정보가 없습니다.</>;
@@ -69,7 +66,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
           <div className="right_area w-full max-w-[460px] rounded-[12px] shadow-custom">
             <div className="info px-[35px] py-[30px]">
               <div className="cont">
-                <PageTitle text={camp?.facltNm} />
+                <PageTitle text={camp.facltNm} />
                 <p className="color-gray03 mb-[20px] mt-[5px] text-[14px]">
                   {camp.addr1}
                 </p>
@@ -101,7 +98,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                     캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
-                    {camp?.induty && (
+                    {camp.induty && (
                       <p className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]">
                         {camp.induty}
                       </p>
