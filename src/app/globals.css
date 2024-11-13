@@ -342,3 +342,6 @@ body {
 .button_style {
   @apply rounded-[28px] bg-[#FF924C] px-[28px] text-lg font-semibold text-black;
 }
+.모달지영추가 {
+  @apply relative rounded-lg bg-white p-6;
+}

@@ -3,31 +3,33 @@ import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
 import { Database } from "../../../database.types";
+import ReviewModal2 from "../review/ReviewModal";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 
 const supabase = createClient();
-
-// type Review = {
-//   id: number;
-//   campId: string;
-//   title: string;
-//   content: string;
-//   likes: number;
-// };
-
-type Review = Database["public"]["Tables"]["review"]["Row"];
 
 type CampReviewSlideProps = {
   campId: string;
 };
 
 const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<ReviewItem | null>(null);
+  const handleModalOpen = (review: ReviewItem) => {
+    setSelected(review);
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+    setSelected(null);
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
       const { data, error } = await supabase
-        .from("review")
-        .select("*,camp(*)")
+        .from(`review`)
+        .select(`*, camp(*), profile(*)`)
         .eq("campId", campId);
       console.log(data);
       if (error) {
@@ -40,11 +42,22 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
   }, [campId]);
 
   return (
-    <Slide slidePerview={3} spaceBetween={10}>
-      {reviews.map((review) => (
-        <ReviewSlideCard key={review.id} review={review} />
-      ))}
-    </Slide>
+    <>
+      <Slide slidePerview={3} spaceBetween={10}>
+        {reviews.map((review) => (
+          <ReviewSlideCard
+            key={review.id}
+            review={review}
+            onClickFunc={() => handleModalOpen(review)}
+          />
+        ))}
+      </Slide>
+      <ReviewModal2
+        isOpen={isOpen}
+        selected={selected}
+        handleModalClose={handleModalClose}
+      />
+    </>
   );
 };
 

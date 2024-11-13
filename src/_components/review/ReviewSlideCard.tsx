@@ -13,11 +13,15 @@ import { Database } from "../../../database.types";
 type Review = Database["public"]["Tables"]["review"]["Row"];
 type ReviewSlideCardProps = {
   review: Review;
+  onClickFunc?: () => void;
 };
 
-const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({ review }) => {
+const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({
+  review,
+  onClickFunc
+}) => {
   return (
-    <div>
+    <div onClick={onClickFunc}>
       <h2>{review.campId}</h2>
       <h3>{review.title}</h3>
       <p>{review.content}</p>
