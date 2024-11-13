@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitle from "@/_components/common/PageTitle";
 import FollowButton from "@/_components/follower/FollowButton";
 import FollowForm from "@/_components/follower/FollowForm";
 import { getUser } from "@/_utils/auth";
@@ -38,26 +39,39 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 
   return (
     <>
-      <div className="max-w-sm rounded-lg border p-4 shadow-md">
-        {userProfile && userProfile.avatar_url && (
-          <img
-            src={userProfile?.avatar_url}
-            alt="Profile"
-            className="mx-auto mb-4 h-24 w-24 rounded-full"
-          />
-        )}
-        <h2 className="mb-2 text-center text-lg font-semibold">
-          {userProfile.nickname}
-        </h2>
+      <div className="my_page my-[60px]">
+        <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+          <div className="mb-[40px] border-b border-b-[#BFBFBF] pb-[40px]">
+            <PageTitle text={`${userProfile.nickname}님의 프로필 페이지`} />
+          </div>
 
-        <FollowButton
-          loginUserId={loginUserId}
-          followUserId={userProfile.id}
-          type={"card"}
-        />
+          <div className="flex gap-[40px]">
+            <div className="w-[320px]">
+              <div className="max-w-sm rounded-lg border p-4 shadow-md">
+                {userProfile && userProfile.avatar_url && (
+                  <img
+                    src={userProfile?.avatar_url}
+                    alt="Profile"
+                    className="mx-auto mb-4 h-24 w-24 rounded-full"
+                  />
+                )}
+                <h2 className="mb-2 text-center text-lg font-semibold">
+                  {userProfile.nickname}
+                </h2>
+
+                <FollowButton
+                  loginUserId={loginUserId}
+                  followUserId={userProfile.id}
+                  type={"card"}
+                />
+              </div>
+            </div>
+            <div className="cont w-full max-w-[calc(100%-360px)]">
+              <FollowForm loginUserId={loginUserId} profileUser={profileUser} />
+            </div>
+          </div>
+        </div>
       </div>
-
-      <FollowForm loginUserId={loginUserId} profileUser={profileUser} />
     </>
   );
 };
