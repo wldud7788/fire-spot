@@ -113,10 +113,13 @@ export const fetchChatRoomTitleData = async (roomId: number) => {
  */
 export const fetchChatMessageList = async (roomId: number) => {
   try {
+    const userData = await supabase.auth.getUser();
+    const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
     const { data, error } = await supabase.rpc(
       supabaseRpc.chat.getChatMessage,
       {
-        room_id: roomId
+        room_id: roomId,
+        user_id: userId
       }
     );
     if (error) throw new Error(error.message);

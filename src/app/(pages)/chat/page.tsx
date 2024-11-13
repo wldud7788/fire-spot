@@ -12,6 +12,8 @@ const ChatList = () => {
 
   useChatSubscriptionRoomList();
 
+  console.log("pinnedChatRoomList", pinnedChatRoomList);
+
   return (
     <div>
       {pinnedChatRoomList.map((chatRoomInfo) => (

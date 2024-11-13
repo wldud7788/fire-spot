@@ -465,7 +465,7 @@ export type Database = {
         Returns: ChatRoomTitle[];
       };
       get_chat_message: {
-        Args: Record<string, number>;
+        Args: Record<string, number | string>;
         Returns: ChatRoomMessageInfo[];
       };
       get_meet_list1: {
