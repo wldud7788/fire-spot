@@ -26,6 +26,7 @@ export const useChatSubscriptionMessageList = (
 
     // 입장 시 마지막 읽은 메시지 null, 퇴장 시 마지막 읽은 메시지 id update
     await patchChatAttendee(userId, roomId, chatAttendee);
+    await patchChatAttendee(userId, roomId, { is_first_read: true });
   };
 
   /** 채팅방 입장 시 마지막 읽은 메시지 DB에서 가져와서 ref에 저장. null 일 경우 ref 초기값(null) 그대로  */
