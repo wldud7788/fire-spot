@@ -73,7 +73,8 @@ const config: Config = {
         meetCategory: "url('/assets/images/meet/ico-meet-category.svg')",
         meetImport: "url('/assets/images/meet/ico-import.svg')",
         // 가이드
-        guideBulb: "url('/assets/images/guide/ico-guide-bulb.svg')"
+        guideBulb: "url('/assets/images/guide/ico-guide-bulb.svg')",
+        guideTip: "url('/assets/images/guide/bg-guide-tip.png')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

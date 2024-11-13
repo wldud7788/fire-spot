@@ -40,7 +40,7 @@ const BeginnerPage = () => {
             return (
               <li
                 key={guide.title}
-                className="w-full max-w-[calc(33.333%-50px)] rounded-[12px] bg-[#FFEFE5]"
+                className="w-full max-w-[calc(33.333%-50px)] rounded-[12px] bg-[#FFEFE5] shadow-custom"
               >
                 <Card img={guide.img} title={guide.title} desc={guide.desc} />
               </li>
