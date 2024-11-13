@@ -113,6 +113,7 @@ export type Database = {
           id: number;
           is_pin: boolean;
           last_read_message_id: number | null;
+          is_first_read: boolean;
           room_id: number;
           user_id: string;
         };
@@ -121,6 +122,7 @@ export type Database = {
           id?: number;
           is_pin?: boolean;
           last_read_message_id?: number | null;
+          is_first_read?: boolean;
           room_id: number;
           user_id: string;
         };
@@ -129,6 +131,7 @@ export type Database = {
           id?: number;
           is_pin?: boolean;
           last_read_message_id?: number | null;
+          is_first_read?: true; // true 오타 아님 (false 업데이트할 경우가 없음)
           room_id?: number;
           user_id?: string;
         };
@@ -572,7 +575,7 @@ export type Database = {
         Returns: ChatRoomTitle[];
       };
       get_chat_message: {
-        Args: Record<string, number>;
+        Args: Record<string, number | string>;
         Returns: ChatRoomMessageInfo[];
       };
       get_sos_list: {

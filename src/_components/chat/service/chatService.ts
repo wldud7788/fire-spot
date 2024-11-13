@@ -113,10 +113,13 @@ export const fetchChatRoomTitleData = async (roomId: number) => {
  */
 export const fetchChatMessageList = async (roomId: number) => {
   try {
+    const userData = await supabase.auth.getUser();
+    const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
     const { data, error } = await supabase.rpc(
       supabaseRpc.chat.getChatMessage,
       {
-        room_id: roomId
+        room_id: roomId,
+        user_id: userId
       }
     );
     if (error) throw new Error(error.message);
@@ -136,13 +139,12 @@ export const fetchLastChatMessage = async (roomId: number) => {
       .select("*")
       .eq("room_id", roomId)
       .order("created_at", { ascending: false })
-      .limit(1)
-      .single();
+      .limit(1);
     if (error) throw new Error(error.message);
 
-    if (!data) return null;
+    if (data.length < 1) return null;
 
-    return data;
+    return data[0];
   } catch (e) {
     console.error("Error fetchLastChatMessage ", e);
     return null;
@@ -154,10 +156,40 @@ export const postChatMessage = async (messagePost: ChatMessageInsert) => {
     const { data, error } = await supabase
       .from("chat_message")
       .insert({ ...messagePost });
+
     if (error) throw new Error(error.message);
     return data;
   } catch (e) {
     console.error("Error fetchChatMessageList ", e);
+  }
+};
+
+/** 모든 채팅방 기준 마지막 메시지 */
+const lastChatMessageByAllRooms = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("chat_message")
+      .select("id")
+      .order("created_at", { ascending: false })
+      .limit(1);
+
+    return data;
+  } catch (e) {
+    console.error("fetchLastChatMessageByAllRooms" + e);
+  }
+};
+
+/** 채팅방의 모든 참여자 */
+const fetchChatAttendeeByRoomId = async (roomId: number) => {
+  try {
+    const { data, error } = await supabase
+      .from("chat_attendee")
+      .select("id")
+      .eq("room_id", roomId);
+
+    return data;
+  } catch (e) {
+    console.error("Error fetchChatAttendee" + e);
   }
 };
 
