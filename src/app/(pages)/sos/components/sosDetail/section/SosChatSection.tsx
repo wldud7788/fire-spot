@@ -34,6 +34,7 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
               {messagesByDate[date].map((messageInfo) => (
                 <li
                   key={messageInfo.chatMessage.id}
+                  // 작성자는 오른쪽에 표시되어야하는데 그 조건임
                   className={`mb-10 flex items-start gap-[4px] ${
                     // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
                     loginUserId === messageInfo.chatMessage.user_id
