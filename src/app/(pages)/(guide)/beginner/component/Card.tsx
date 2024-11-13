@@ -1,10 +1,10 @@
-type CardProps = {
+type BeginnerCardProps = {
   img: string;
   title: string;
   desc: string;
 };
 
-const Card = ({ img, title, desc }: CardProps) => {
+const BeginnerCard = ({ img, title, desc }: BeginnerCardProps) => {
   return (
     <div className="guide_card01 flex flex-col items-center justify-center px-[40px] py-[60px] text-center">
       <div className="h-[120px] w-[120px] overflow-hidden rounded-full">
@@ -23,4 +23,4 @@ const Card = ({ img, title, desc }: CardProps) => {
   );
 };
 
-export default Card;
+export default BeginnerCard;

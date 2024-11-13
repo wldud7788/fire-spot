@@ -1,9 +1,9 @@
-type CardProps = {
+type GuideCardProps = {
   title: string;
   desc: string;
 };
 
-const Card = ({ title, desc }: CardProps) => {
+const GuideCard = ({ title, desc }: GuideCardProps) => {
   return (
     <div className="mb-[15px]">
       <strong className="inline-block flex-none rounded-[3px] border border-[#FF924C] bg-[#FFEFE5] p-0 px-[10px] py-[5px] text-[16px] text-[#b24600]">
@@ -14,4 +14,4 @@ const Card = ({ title, desc }: CardProps) => {
   );
 };
 
-export default Card;
+export default GuideCard;
