@@ -4,7 +4,7 @@ import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { useQuery } from "@tanstack/react-query";
 import CampReviewSlide from "./CampReviewSlide";
-import ReviewModal from "../modal/ReviewModal";
+import ReviewModal from "../modal/ReviewWriteModal";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
 import NoData from "../common/NoData";
