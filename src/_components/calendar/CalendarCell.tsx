@@ -47,7 +47,7 @@ const CalendarCell = ({
         <div className="h-[50px]">
           {meetCard && (
             <div
-              className={`absolute top-[10px] z-50 cursor-pointer`}
+              className={`absolute top-[10px] z-50 cursor-pointer p-[6px] ${meetCardContentBg} rounded-[10px]`}
               style={{ ...meetCardStyle }}
               onMouseOver={() => handleHoverItem(meetCardId)}
               onMouseLeave={() => handleHoverItem("")}
@@ -55,7 +55,7 @@ const CalendarCell = ({
                 router.push(`/meets/${meetCard.typeId}`);
               }}
             >
-              <div className={`w-full ${meetCardContentBg}`}>
+              <div className={`line-clamp-1 w-full text-[12px] text-white`}>
                 {meetCard.content}
               </div>
             </div>
