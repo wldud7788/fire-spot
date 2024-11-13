@@ -21,7 +21,7 @@ const GuideTop = ({ text }: CommunityTopProps) => {
         </li>
         <li>
           <Link
-            href="/etiqutte"
+            href="/etiquette"
             className={`${text === "에티켓 가이드" && "active font-bold text-[##B24600]"} relative block pb-[8px] text-[20px] text-[#42526E]`}
           >
             에티켓 가이드
