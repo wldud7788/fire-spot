@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import MainIconButton from "./MainIconButton";
+import Link from "next/link";
 
 const MainUserCard = () => {
   const router = useRouter();
@@ -34,7 +35,12 @@ const MainUserCard = () => {
           로그인 후 사용하세요.
         </p>
         <div className="flex w-full">
-          <MainButton text={"로그인"} href="/sign-in" background="#b24600" />
+          <Link
+            href={"/sign-in"}
+            className="flex h-[60px] flex-1 items-center justify-center rounded-[10px] bg-[#b24600] text-[24px] font-semibold text-[#fff]"
+          >
+            로그인
+          </Link>
         </div>
       </div>
     );
