@@ -8,6 +8,7 @@ import { getUser } from "@/_utils/auth";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@supabase/supabase-js";
 import { ReviewItem } from "../reviews/types/ReviewItem";
+import NoData from "@/_components/common/NoData";
 
 const supabase = createClient();
 
@@ -71,34 +72,36 @@ const CampListPage = () => {
     setSelectedCampId(null);
   };
 
-  if (reviews.length < 1) return <>아직 작성한 리뷰가 없습니다</>;
-
   return (
     <div>
-      <h1>캠핑장 목록</h1>
-
-      {/* 캠핑장 목록 */}
-      {reviews.map((review) => {
-        return (
-          <ReviewCard
-            key={review.id}
-            feed={{
-              id: review.id,
-              likes: review.likes,
-              title: review.title,
-              updated: review.updated,
-              userId: review.userId,
-              camp: review.camp,
-              profile: review.profile,
-              rating: review.rating,
-              at: review.at,
-              content: review.content
-            }}
-            // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
-            onClickFunc={() => openReviewModal(String(review.campId))} // <- 수정된 부분
-          />
-        );
-      })}
+      {reviews.length > 0 ? (
+        <>
+          {/* 캠핑장 목록 */}
+          {reviews.map((review) => {
+            return (
+              <ReviewCard
+                key={review.id}
+                feed={{
+                  id: review.id,
+                  likes: review.likes,
+                  title: review.title,
+                  updated: review.updated,
+                  userId: review.userId,
+                  camp: review.camp,
+                  profile: review.profile,
+                  rating: review.rating,
+                  at: review.at,
+                  content: review.content
+                }}
+                // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
+                onClickFunc={() => openReviewModal(String(review.campId))} // <- 수정된 부분
+              />
+            );
+          })}
+        </>
+      ) : (
+        <NoData text="작성한 리뷰가 없습니다." />
+      )}
 
       {/* 리뷰쓰기 모달창 */}
       {selectedCampId && (

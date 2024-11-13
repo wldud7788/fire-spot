@@ -8,8 +8,12 @@ type Props = {
 const SosRemainingTimeSection = ({ sos }: Props) => {
   const { remainingTimeString } = useSosRemainingTime(new Date(sos.created_at));
 
-  // TODO 민규님: SOS 상세 도움요청남은시간 섹션 (remainingTimeString 실시간으로 남은 시간 표시됨)
-  return <div>{remainingTimeString}</div>;
+  // SOS 상세 도움요청남은시간 섹션 (remainingTimeString 실시간으로 남은 시간 표시됨)
+  return (
+    <div className="my-[60px] flex items-center justify-center text-[24px] font-medium text-[#969696]">
+      요청 남은 시간 : {remainingTimeString}
+    </div>
+  );
 };
 
 export default SosRemainingTimeSection;
