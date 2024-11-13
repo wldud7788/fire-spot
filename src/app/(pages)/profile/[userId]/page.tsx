@@ -47,7 +47,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 
           <div className="flex gap-[40px]">
             <div className="w-[320px]">
-              <div className="max-w-sm rounded-lg border p-4 shadow-md">
+              <div className="min-h-[300px] max-w-sm rounded-lg border p-[50px] shadow-md">
                 {userProfile && userProfile.avatar_url && (
                   <img
                     src={userProfile?.avatar_url}

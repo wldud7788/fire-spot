@@ -52,6 +52,10 @@ const config: Config = {
         import: "url('/assets/images/common/ico-import.svg')",
         plusColor: "url('/assets/images/common/ico-plus-c.svg')",
         pin: "url('/assets/images/common/ico-pin.svg')",
+        calendarPrev:
+          "url('/assets/images/common/ico-calendar-arrow-prev.svg')",
+        calendarNext:
+          "url('/assets/images/common/ico-calendar-arrow-next.svg')",
         // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",

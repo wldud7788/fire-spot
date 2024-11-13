@@ -39,9 +39,9 @@ const CalendarCell = ({
     hoverItem === meetCardId ? "bg-[#FF731A]" : "bg-[#FFD0B2]";
 
   return (
-    <li className="flex min-h-[105px] w-full flex-col border-[1px]">
-      <section className="flex h-[20px] w-full justify-end">
-        <p className="p-[10px]">{format(day, "d")}</p>
+    <li className="flex min-h-[105px] w-full flex-col rounded-[10px] border">
+      <section className="flex h-[20px] w-full px-[10px] py-[7px]">
+        <p className="color-gray01 text-[16px]">{format(day, "d")}</p>
       </section>
       <section className="relative flex flex-col justify-end">
         <div className="h-[50px]">
