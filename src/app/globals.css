@@ -216,6 +216,9 @@ body {
   .main-slide-wrap .swiper {
     height: 100%;
   }
+  .main-slide-wrap .swiper .swiper-pagination-bullet-active {
+    background: #ff924c;
+  }
   .main-user-before:before {
     content: "";
     position: absolute;
