@@ -30,6 +30,7 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     errors,
     location,
     watch,
+    handleKeyDown,
     onSubmit,
     searchKeyword,
     handleChangeSearchKeyword,
@@ -47,6 +48,7 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="relative flex w-full flex-col"
+          onKeyDown={handleKeyDown}
         >
           <section className="mt-[40px] flex items-center justify-end gap-[12px] border-b border-b-[#DFE1E6] pb-[15px]">
             <Link

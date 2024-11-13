@@ -68,6 +68,13 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
       end_date: endDate
     }
   });
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Enter 키로 인한 form 제출 방지
+    }
+  };
+
   const onSubmit: SubmitHandler<MeetInsert> = async (data) => {
     const hasSchedule = await checkMeetPostSchedule(id, startDate, endDate);
     if (hasSchedule) {
@@ -137,6 +144,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
     handleSelectCamp,
     errors,
     watch,
+    handleKeyDown,
     onSubmit,
     searchKeyword,
     location,
