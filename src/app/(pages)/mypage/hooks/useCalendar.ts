@@ -1,12 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchFeedData } from "../../feeds/action/feedAction";
+import { fetchReviewData } from "../../reviews/action/feedAction";
 import { fetchMeetAttendeeByUserId } from "../../meets/actions/meetAttendAction";
 
 export const useCalendarFooter = () => {
   const { data: feedData } = useQuery({
-    queryFn: () => fetchFeedData(),
+    queryFn: () => fetchReviewData(),
     queryKey: ["feeds", "testUser"]
   });
 

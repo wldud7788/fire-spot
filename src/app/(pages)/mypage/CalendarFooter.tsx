@@ -10,14 +10,14 @@ const CalendarFooter = () => {
     <div className="flex w-full justify-between gap-[55px]">
       <section className="flex h-[137px] w-[calc(50%-55px)] items-center justify-center gap-[71px] rounded-[12px] bg-[#F6F2E5]">
         <div className="flex gap-[11px]">
-          <div className="h-[53px] w-[40px] bg-stampBig bg-cover" />
+          <div className="bg-stampBig h-[53px] w-[40px] bg-cover" />
           <div className="flex flex-col items-start justify-start">
             <span>나의 스탬프</span>
             <span>{feedCount} 개</span>
           </div>
         </div>
         <div className="flex gap-[11px]">
-          <span className="h-[53px] w-[40px] bg-meet bg-cover" />
+          <span className="bg-meet h-[53px] w-[40px] bg-cover" />
           <div className="flex flex-col items-start justify-start">
             <span>나의 모임</span>
             <span>{meetAttendeeCount} 개</span>
@@ -27,7 +27,7 @@ const CalendarFooter = () => {
 
       <section className="flex h-[137px] w-[calc(50%-55px)] flex-col gap-2 rounded-[12px] bg-[#F4F4F4] px-7 py-[35px]">
         <div className="flex items-center">
-          <span className="h-5 w-5 bg-flag" />
+          <span className="bg-flag h-5 w-5" />
           <h3>스탬프란?</h3>
         </div>
         <p>

@@ -16,9 +16,9 @@ const groundTypes = {
 
 const MeetCreatorTypeSection = ({ watch, setValue }: Props) => {
   return (
-    <section className="mt-[123px]">
-      <h2 className="mb-[70px] text-xl font-[500]">캠핑 유형</h2>
-      <div className="flex gap-[14px] border-b-[1px] border-[#D4D4D4] pb-[37px] font-[15px]">
+    <section className="mt-[40px] rounded-[12px] border border-[#D9D9D9] px-[30px] py-[40px]">
+      <h2 className="color-gray01 text-[24px] font-bold">캠핑 유형</h2>
+      <div className="mt-[50px] flex items-center gap-[18px]">
         {Object.entries(groundTypes).map(([key, value]) => (
           <button
             key={key}
@@ -27,21 +27,21 @@ const MeetCreatorTypeSection = ({ watch, setValue }: Props) => {
               // 선택된 값으로 설정
               setValue("ground_type", key);
             }}
-            className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("ground_type") === key ? "bg-[#D9D9D9] font-[600]" : ""}`}
+            className={`color-gray01 rounded-[20px] border border-[#bfbfbf] px-[30px] py-[12px] text-[14px] font-bold ${watch("ground_type") === key ? "bg-[#FFB180] font-[600]" : "bg-white"}`}
           >
             {value}
           </button>
         ))}
       </div>
 
-      <div className="flex gap-[14px] border-[#D4D4D4] pt-[37px] font-[15px]">
+      <div className="mt-[18px] flex items-center gap-[18px]">
         <button
           type="button"
           onClick={() => {
             // 선택된 값으로 설정
             setValue("is_newbie", true);
           }}
-          className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("is_newbie") === true ? "bg-[#D9D9D9] font-[600]" : ""}`}
+          className={`color-gray01 rounded-[20px] border border-[#bfbfbf] px-[30px] py-[12px] text-[14px] font-bold ${watch("is_newbie") === true ? "bg-[#FFB180] font-[600]" : "bg-white"}`}
         >
           초보가능
         </button>
@@ -51,7 +51,7 @@ const MeetCreatorTypeSection = ({ watch, setValue }: Props) => {
             // 선택된 값으로 설정
             setValue("is_newbie", false);
           }}
-          className={`h-[45px] rounded-[22.5px] border-[1px] border-[#C3C3C3] px-4 py-[14px] pb-2 pl-7 pr-7 pt-2 text-[#A4A4A4] ${watch("is_newbie") === false ? "bg-[#D9D9D9] font-[600]" : ""}`}
+          className={`rounded-[20px] border border-[#bfbfbf] px-[30px] py-[12px] text-[14px] font-bold color-gray01${watch("is_newbie") === false ? "bg-[#FFB180] font-[600]" : "bg-white"}`}
         >
           숙련자
         </button>

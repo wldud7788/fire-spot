@@ -6,6 +6,8 @@ import {
   ChatRoomTitle,
   ChatRoomType
 } from "@/_components/chat/types/chat.types";
+import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { SosSelect, SosWithCamp } from "@/app/(pages)/sos/types/sos.types";
 
 export type Json =
   | string
@@ -436,15 +438,18 @@ export type Database = {
       };
       review: {
         Row: {
-          at: string;
-          campId: number;
-          content: string;
-          id: string;
+          id: number;
           likes: number | null;
-          rating: number;
           title: string;
           updated: string | null;
           userId: string;
+          rating: number;
+          at: string;
+          content: string;
+          campId: number;
+          img: string | null;
+          time: string | null;
+          date: string | null;
         };
         Insert: {
           at: string;
@@ -487,30 +492,41 @@ export type Database = {
       };
       sos: {
         Row: {
-          contents: string | null;
+          content: string;
+          contentId: number | null;
           created_at: string;
           id: number;
-          sos_category: string | null;
-          sos_image: string | null;
-          title: string | null;
+          tag: string[];
+          title: string;
+          type: string;
         };
         Insert: {
-          contents?: string | null;
-          created_at?: string;
-          id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          content: string;
+          tag: string[];
+          title: string;
+          type: string;
+          contentId?: number | null;
+          // id?: number;
+          // created_at?: string;
         };
         Update: {
-          contents?: string | null;
-          created_at?: string;
-          id?: number;
-          sos_category?: string | null;
-          sos_image?: string | null;
-          title?: string | null;
+          content?: string;
+          contentId?: number | null;
+          tag?: string[];
+          title?: string;
+          type?: string;
+          // id?: number;
+          // created_at?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "sos_contentId_fkey";
+            columns: ["contentId"];
+            isOneToOne: false;
+            referencedRelation: "camp";
+            referencedColumns: ["contentId"];
+          }
+        ];
       };
     };
     Views: {
@@ -559,21 +575,13 @@ export type Database = {
         Args: Record<string, number>;
         Returns: ChatRoomMessageInfo[];
       };
-      get_meet_list1: {
+      get_sos_list: {
         Args: Record<PropertyKey, never>;
-        Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
-        }[];
+        Returns: SosWithCamp[];
       };
-      get_meet_list2: {
-        Args: Record<PropertyKey, never>;
-        Returns: {
-          attendee_count: number;
-          meet: unknown;
-          camp: unknown;
-        }[];
+      get_sos_detail: {
+        Args: Record<string, number>;
+        Returns: SosWithCamp[];
       };
     };
     Enums: {

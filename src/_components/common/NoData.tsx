@@ -1,10 +1,10 @@
 import React from "react";
 
-type CampNoDataProps = {
+type NoDataProps = {
   text: string | undefined;
 };
 
-const CampNoData = ({ text }: CampNoDataProps) => {
+const NoData = ({ text }: NoDataProps) => {
   return (
     <div className="w-full rounded-[12px] border-2 border-dashed border-[#bfbfbf] px-[30px] py-[100px] text-center">
       <p className="color-main inline-block bg-plusColor bg-left-center-0 bg-no-repeat pl-[24px] text-[14px]">
@@ -14,4 +14,4 @@ const CampNoData = ({ text }: CampNoDataProps) => {
   );
 };
 
-export default CampNoData;
+export default NoData;

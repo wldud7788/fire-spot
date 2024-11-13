@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/_utils/supabase/client"; // Supabase 클라이언트 가져오기
 import ReviewModal from "@/_components/modal/ReviewModal";
-import FeedCard from "@/_components/feed/FeedCard";
-
+import ReviewCard from "@/_components/review/ReviewCard";
 import { CampSelect } from "../meets/types/camp.types";
-import { FeedItem } from "../feeds/types/Feed";
 import useUser from "@/_hooks/useUser";
 import { getUser } from "@/_utils/auth";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@supabase/supabase-js";
+import { ReviewItem } from "../reviews/types/ReviewItem";
 
 const supabase = createClient();
 
@@ -19,7 +18,7 @@ const CampListPage = () => {
   const [camps, setCamps] = useState<CampSelect[]>([]);
 
   // 1. type import
-  const [reviews, setReviews] = useState<FeedItem[]>([]);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const user = useUser();
   const userId = user?.id ?? "";
 
@@ -52,6 +51,7 @@ const CampListPage = () => {
           throw new Error("리뷰 정보를 가져오는 중 오류 발생 (데이터없음)");
         }
 
+        const reviewItems = data as ReviewItem[];
         console.log("data", data);
 
         setReviews(data);
@@ -80,9 +80,20 @@ const CampListPage = () => {
       {/* 캠핑장 목록 */}
       {reviews.map((review) => {
         return (
-          <FeedCard
+          <ReviewCard
             key={review.id}
-            feed={review}
+            feed={{
+              id: review.id,
+              likes: review.likes,
+              title: review.title,
+              updated: review.updated,
+              userId: review.userId,
+              camp: review.camp,
+              profile: review.profile,
+              rating: review.rating,
+              at: review.at,
+              content: review.content
+            }}
             // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
             onClickFunc={() => openReviewModal(String(review.campId))} // <- 수정된 부분
           />

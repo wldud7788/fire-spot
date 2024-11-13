@@ -1,14 +1,14 @@
-import { FeedItem } from "@/app/(pages)/feeds/types/Feed";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import Link from "next/link";
 
-// FeedCardProps 타입 정의
-type FeedCardProps = {
-  feed: FeedItem;
+// ReviewCardProps 타입 정의
+type ReviewCardProps = {
+  feed: Omit<ReviewItem, "campId" | "img" | "time" | "date">;
   type?: string;
   onClickFunc?: () => void; // 선택적으로 전달되는 클릭 함수 추가
 };
 
-const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
+const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
   const TOTAL_STAR = 5;
   const activeStars = Array.from({ length: feed.rating });
   const defaultStars = Array.from({ length: TOTAL_STAR - feed.rating });
@@ -16,7 +16,7 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
   return (
     <>
       {type ? (
-        // type main
+        // type main - 메인에서 쓰이는 후기 카드
         <div className="feed_card type_main group overflow-hidden rounded-[12px] border border-[#d9d9d9]">
           <div className="inner">
             <div className="ibox overflow-hidden">
@@ -78,8 +78,7 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
           </div>
         </div>
       ) : (
-        // 나는 이윤지 짱
-        // type default
+        // type default - 마이페이지에서 사용하는 후기 카드
         <div className="feed_card">
           <div className="inner">
             <div className="user_info">
@@ -123,13 +122,5 @@ const FeedCard = ({ feed, type, onClickFunc }: FeedCardProps) => {
     </>
   );
 };
-// 24-11-04
-// 좋아하는 사람이 생겼다.
-/**
- *
- * 그의 이니셜은 M.K
- *
- * 하지만 그는 여자친구가 있다.
- * 난 어떻게 해야할까?
- */
-export default FeedCard;
+
+export default ReviewCard;

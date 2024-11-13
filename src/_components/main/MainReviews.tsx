@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FeedCard from "../feed/FeedCard";
 import { createClient } from "@/_utils/supabase/client";
-import { FeedItem } from "@/app/(pages)/feeds/types/Feed";
+import ReviewCard from "../review/ReviewCard";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 
 const supabase = createClient();
 
 const MainReviews = () => {
-  const [reviews, setReviews] = useState<FeedItem[]>([]);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // 함수 이름도 fetchCamps -> fetchReviews 이름 바꾸쇼
-    const fetchCamps = async () => {
+    const fetchReviews = async () => {
       // const { data, error } = await supabase.from("review").select("*") as { data: FeedItem[] | null, error: Error | null };
       const { data, error } = await supabase
         .from(`review`)
@@ -30,18 +30,18 @@ const MainReviews = () => {
       }
 
       console.log("data", data);
-
+      // const reviewItems = data as ReviewItem[] | null;
       const selectedCamps = getRandomCamps(data || [], 5);
       // const selectedCamps = data;
       setReviews(selectedCamps);
       setError(null);
     };
 
-    fetchCamps();
+    fetchReviews();
   }, []);
 
   // TODO 매개변수 이름 camps -> reviews
-  const getRandomCamps = (reviews: FeedItem[], n: number): FeedItem[] => {
+  const getRandomCamps = (reviews: ReviewItem[], n: number): ReviewItem[] => {
     const existImgReviews = reviews.filter(
       (review) => !!review.camp?.firstImageUrl
     );
@@ -56,7 +56,7 @@ const MainReviews = () => {
       <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
         {reviews.map((feed) => (
           <li key={feed.id}>
-            <FeedCard feed={feed} type={"main"} />
+            <ReviewCard feed={feed} type={"main"} />
           </li>
         ))}
       </ul>

@@ -7,7 +7,7 @@ import CampReviewSlide from "./CampReviewSlide";
 import ReviewModal from "../modal/ReviewModal";
 import Link from "next/link";
 import PageTitle from "../common/PageTitle";
-import CampNoData from "./CampNoData";
+import NoData from "../common/NoData";
 import ForecastWeatherComponent from "../weather/FutureWeather";
 
 type CampDetailProps = {
@@ -289,21 +289,15 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               캠핑장 날씨를 알려드려요.
             </h2>
             {/* 캠핑장 날씨 최신 수정 */}
-            <div className="detail_section mt-[60px]">
-              <h2 className="text-[36px] font-bold">
-                캠핑장 날씨를 알려드려요
-              </h2>
-              <ForecastWeatherComponent
-                latitude={latitude}
-                longitude={longitude}
-                campingName={campingName}
-              />
-            </div>
-
             <p className="color-gray03 rounded-[8px] border border-[#D9D9D9] bg-[#f2f2f2] p-[10px] text-[16px]">
               캠핑장 이때 방문하면 좋아요 : {camp?.operPdCl}
             </p>
           </div>
+          <ForecastWeatherComponent
+            latitude={latitude}
+            longitude={longitude}
+            campingName={campingName}
+          />
         </div>
         {/*// 캠핑장 날씨를 알려드려요 */}
 
@@ -346,7 +340,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               <CampReviewSlide campId={paramsId} />
             </>
           ) : (
-            <CampNoData text={"등록된 리뷰가 없어요."} />
+            <NoData text={"등록된 리뷰가 없어요."} />
           )}
         </div>
         {/*// 캠핑장 리뷰 */}
@@ -361,7 +355,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
           {false ? (
             "데이터 넣어주세요. false에 데이터 있는지 없는지 처리, 현재는 노데이터 스타일하려고 false로 임의로해놓았습니다."
           ) : (
-            <CampNoData text={"추천 캠핑장이 없어요."} />
+            <NoData text={"추천 캠핑장이 없어요."} />
           )}
         </div>
         {/*// 이 장소와 함께 봤어요 */}
