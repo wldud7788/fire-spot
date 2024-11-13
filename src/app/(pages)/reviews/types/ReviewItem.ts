@@ -1,12 +1,20 @@
-export interface ReviewItem {
-  id: number;
-  like: number;
-  title: string;
-  desc: string;
-  img: string;
-  firstImageUrl?: string;
-  profileImg: string;
-  userName: string;
-  date: string;
-  time?: number;
-}
+import { Database } from "../../../../../database.types";
+import { CampSelect } from "../../meets/types/camp.types";
+import { ProfileSelect } from "@/_components/chat/types/Profile.types";
+export type Review = Database["public"]["Tables"]["review"]["Row"];
+export type ReviewItem = Review & {
+  // id: number;
+  // likes: number | null;
+  // title: string;
+  // updated: string | null;
+  // userId: string;
+  // rating : number;
+  // at: string;
+  // content: string;
+  // campId: number;
+  // img: string | null;
+  // time: string | null;
+  // date: string | null;
+  camp: CampSelect | null;
+  profile: ProfileSelect | null;
+};

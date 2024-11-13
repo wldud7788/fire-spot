@@ -60,13 +60,13 @@ const FeedTestPage = () => {
   ];
   return (
     <ul className="reviewTestPage">
-      {dummyData.map((data, idx) => {
+      {/* {dummyData.map((data, idx) => {
         return (
           <li key={idx}>
             <ReviewCard feed={data} />
           </li>
         );
-      })}
+      })} */}
     </ul>
   );
 };
