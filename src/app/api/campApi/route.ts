@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
   let apiUrl;
   if (!keyword) {
-    apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&${QUERYSTRING}`;
+    apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 404}&pageNo=${page ? page : "max"}&${QUERYSTRING}`;
   } else {
     apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&${QUERYSTRING}&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=50`;
   }
