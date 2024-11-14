@@ -8,6 +8,7 @@ import { createClient } from "@/_utils/supabase/client";
 import { Database } from "../../../database.types";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { getUser } from "@/_utils/auth";
 
 // interface Bookmark {
 //   contentId: string;
@@ -34,9 +35,15 @@ const BookmarkList: React.FC = () => {
   // 북마크 데이터를 가져오는 함수
   const fetchBookmarks = async () => {
     try {
+      const user = await getUser();
+      if (!user) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
       const { data, error } = await supabase
         .from("bookmarks")
-        .select("*, camp(*)");
+        .select("*, camp(*)")
+        .eq("userId", user.id);
 
       if (error) throw error;
       if (!data || data.length === 0) {
