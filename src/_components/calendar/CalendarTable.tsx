@@ -31,7 +31,6 @@ const CalendarTable = ({
   const [hoverItem, setHoverItem] = useState("");
 
   const handleHoverItem = (id: string) => {
-    console.log("id", id);
     setHoverItem(id);
   };
 
