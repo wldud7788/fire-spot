@@ -7,7 +7,7 @@ export const fetchSearchData = async (
   region?: string
 ): Promise<Camp[]> => {
   const response = await fetch(
-    `/api/camping?keyword=${keyword || ""}&regions=${region || ""}`
+    `/api/campApi?keyword=${keyword || ""}&regions=${region || ""}`
   );
   if (!response.ok) {
     throw new Error("데이터를 불러오는 데 실패했습니다.");

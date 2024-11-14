@@ -1,21 +1,28 @@
 import {
   GOCAMPING_ALL,
   GOCAMPING_HOST,
-  GOCAMPING_KEY
+  GOCAMPING_KEY,
+  GOCAMPING_SEARCH
 } from "@/_utils/api/apiKey";
 import { QUERYSTRING } from "@/_utils/common/constant";
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  // 요청 URL에서 page와 numOfRows를 가져오기 위해 new URL(request.url)을 사용하여 쿼리 파라미터를 파싱합니다.
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page");
   const numOfRows = searchParams.get("numOfRows");
+  const keyword = searchParams.get("keyword");
+  const regions = searchParams.get("regions");
 
-  const res = await fetch(
-    `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&${QUERYSTRING}`
-  );
+  let apiUrl;
+  if (!keyword) {
+    apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&${QUERYSTRING}`;
+  } else {
+    apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&${QUERYSTRING}&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=50`;
+  }
+
+  const res = await fetch(apiUrl);
 
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
@@ -23,7 +30,14 @@ export async function GET(request: Request) {
 
   try {
     const data: CampApiResponse = await res.json();
-    return NextResponse.json(data.response.body.items.item);
+    let items = data.response.body.items.item;
+
+    // 지역 필터링 추가
+    if (regions && regions !== "전국") {
+      items = items.filter((camp) => camp.doNm === regions);
+    }
+
+    return NextResponse.json(items);
   } catch (error) {
     console.error("Error fetching data:", error);
     return new NextResponse("Failed to fetch data", { status: 500 });
