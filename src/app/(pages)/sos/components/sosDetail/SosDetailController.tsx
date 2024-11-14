@@ -11,6 +11,7 @@ import { useChatRoomMessage } from "@/_components/chat/hooks/useChatRoom";
 import useUser from "@/_hooks/useUser";
 import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChatSubscriptionMessageList";
 import SosContentSection from "./section/SosContentSection";
+import { useChatSosMessage } from "@/_components/chat/hooks/useChatSosMessage";
 
 type Props = {
   sosWithCamp: SosWithCamp;
@@ -23,7 +24,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   const user = useUser();
   const loginUserId = user?.id || "";
 
-  const { messagesByDate } = useChatRoomMessage(roomId);
+  const { messagesByDate } = useChatSosMessage(roomId);
   useChatSubscriptionMessageList({ roomId });
   if (!user) return <></>;
 
