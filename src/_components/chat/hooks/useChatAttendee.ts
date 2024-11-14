@@ -28,6 +28,7 @@ const useChatAttendee = () => {
     };
 
     await patchChatAttendee(userId, roomId, chatAttendee);
+    await patchChatAttendee(userId, roomId, { is_first_read: true });
 
     queryClient.invalidateQueries({
       queryKey: queryKey.chat.chatRoomList

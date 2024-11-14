@@ -22,10 +22,10 @@ const config: Config = {
         "40": "40px"
       },
       screens: {
-        "max-n": { max: "1460px" },
-        "max-t": { max: "1260px" },
-        "max-m": { max: "600px" },
-        "max-sm": { max: "400px" }
+        "max-1460": { max: "1460px" },
+        "max-1260": { max: "1260px" },
+        "max-600": { max: "600px" },
+        "max-400": { max: "400px" }
       },
       backgroundImage: {
         search: "url('/assets/images/search.png')",
@@ -51,11 +51,17 @@ const config: Config = {
         polygon: "url('/assets/images/common/ico-polygon.svg')",
         import: "url('/assets/images/common/ico-import.svg')",
         plusColor: "url('/assets/images/common/ico-plus-c.svg')",
+        pin: "url('/assets/images/common/ico-pin.svg')",
+        calendarPrev:
+          "url('/assets/images/common/ico-calendar-arrow-prev.svg')",
+        calendarNext:
+          "url('/assets/images/common/ico-calendar-arrow-next.svg')",
         // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",
         // 캠핑 상세
         reviewArrow: "url('/assets/images/camp/ico-review-arrow.svg')",
+        direction: "url('/assets/images/camp/ico-direction.svg')",
         campChk: "url('/assets/images/camp/ico-camp-chk.svg')",
         campTit01: "url('/assets/images/camp/ico-camp-tit01.svg')",
         campTit02: "url('/assets/images/camp/ico-camp-tit02.svg')",
@@ -65,7 +71,16 @@ const config: Config = {
         campTit06: "url('/assets/images/camp/ico-camp-tit06.svg')",
         campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')",
         // 캘린더
-        stamp: "url('/assets/images/ico-stamp.svg')"
+        stamp: "url('/assets/images/ico-stamp.svg')",
+        // 모임
+        meetAvatar: "url('/assets/images/meet/ico-meet-avatar.svg')",
+        meetCalendar: "url('/assets/images/meet/ico-meet-calendar.svg')",
+        meetLocation: "url('/assets/images/meet/ico-meet-location.svg')",
+        meetCategory: "url('/assets/images/meet/ico-meet-category.svg')",
+        meetImport: "url('/assets/images/meet/ico-import.svg')",
+        // 가이드
+        guideBulb: "url('/assets/images/guide/ico-guide-bulb.svg')",
+        guideTip: "url('/assets/images/guide/bg-guide-tip.png')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",

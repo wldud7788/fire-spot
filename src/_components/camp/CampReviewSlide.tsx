@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
-import ReviewSlideCard from "../feed/ReviewSlideCard";
+import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
 import { Database } from "../../../database.types";
+import { useQuery } from "@tanstack/react-query";
 
 const supabase = createClient();
 
@@ -21,24 +22,19 @@ type CampReviewSlideProps = {
 };
 
 const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const { data, error } = await supabase
+  const { data: reviews } = useQuery({
+    queryFn: async () => {
+      const reviewList = await supabase
         .from("review")
         .select("*,camp(*)")
         .eq("campId", campId);
-      console.log(data);
-      if (error) {
-        console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
-      } else {
-        setReviews(data || []);
-      }
-    };
-    fetchReviews();
-  }, [campId]);
-
+      return reviewList.data;
+    },
+    queryKey: ["reviewList", campId]
+  });
+  if (!reviews) {
+    return <div>리뷰 데이터가 없습니다.</div>;
+  }
   return (
     <Slide slidePerview={3} spaceBetween={10}>
       {reviews.map((review) => (

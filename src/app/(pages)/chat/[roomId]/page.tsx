@@ -21,7 +21,7 @@ const ChatRoom = ({ params }: Props) => {
   const user = useUser();
   const { chatRoomTitle } = useChatRoomTitle(roomId);
   const { messagesByDate } = useChatRoomMessage(roomId);
-  useChatSubscriptionMessageList(user?.id || "", roomId);
+  useChatSubscriptionMessageList({ userId: user?.id || "", roomId });
 
   if (!user) return <></>;
 

@@ -1,4 +1,5 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
 import { useCallback } from "react";
@@ -23,8 +24,10 @@ const CampCard = ({
 
   const handleBookmarkClick = useCallback(() => {
     if (onBookmarkClick) {
+      // alert("북마크 클릭");
       onBookmarkClick(contentId, camp.facltNm);
     }
+    upsertCamp(camp);
   }, [onBookmarkClick, contentId, camp.facltNm]);
 
   const bookmarkActive = false;

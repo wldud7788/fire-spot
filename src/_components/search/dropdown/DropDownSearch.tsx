@@ -1,13 +1,33 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
-import Link from "next/link";
-import React from "react";
+import { RecentSearches } from "../ResentSearch";
+import { SearchResult } from "../searchResult";
+import { SearchSkeleton } from "../SearchSkeleton";
 
-const DropDownSearch: React.FC<{
+interface DropDownSearchProps {
   isOpen: boolean;
   closeDropdown: () => void;
-  results: Camp[];
   dropdownRef: React.RefObject<HTMLDivElement>;
-}> = ({ isOpen, closeDropdown, dropdownRef, results }) => {
+  results: Camp[];
+  isLoading: boolean;
+  recentSearches: string[];
+  onDeleteKeyword: (keyword: string) => void;
+  onDeleteAll: () => void;
+  validationError: string | null;
+  validatedValue: string;
+}
+
+const DropDownSearch: React.FC<DropDownSearchProps> = ({
+  isOpen,
+  closeDropdown,
+  dropdownRef,
+  results,
+  isLoading,
+  recentSearches,
+  onDeleteKeyword,
+  onDeleteAll,
+  validationError,
+  validatedValue
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -15,42 +35,55 @@ const DropDownSearch: React.FC<{
       ref={dropdownRef}
       className="absolute top-0 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md"
     >
-      {/* 검색의 드롭다운 내용 */}
-      <ul className="max-h-60 overflow-y-auto">
-        {results?.length > 0 ? (
-          results.map((camp) => (
-            <Link
-              href={`camp-detail/${camp.contentId}`}
-              onClick={closeDropdown}
-              key={camp.contentId}
-            >
-              <li className="flex cursor-pointer space-x-4 p-2 hover:bg-gray-100">
-                {camp.firstImageUrl ? (
-                  <img
-                    src={`${camp.firstImageUrl}`}
-                    className="h-[80px] w-[100px]"
-                    alt="캠핑 썸네일"
+      {isLoading ? (
+        <SearchSkeleton />
+      ) : (
+        <div className="max-h-[80vh] overflow-y-auto">
+          {validationError && (
+            <div className="z-50 py-2 text-sm text-red-500">
+              {validationError}
+            </div>
+          )}
+
+          {/* 최근 검색어 섹션 */}
+          <div className="mb-4">
+            <RecentSearches
+              recentSearches={recentSearches}
+              onDeleteKeyword={onDeleteKeyword}
+              onDeleteAll={onDeleteAll}
+            />
+          </div>
+
+          {/* 검색 결과 섹션 */}
+          {results.length > 0 && (
+            <div className="mt-4">
+              <h3 className="mb-2 text-sm font-medium text-gray-500">
+                검색 결과
+              </h3>
+              <div className="space-y-2">
+                {results.map((camp) => (
+                  <SearchResult
+                    key={camp.contentId}
+                    camp={camp}
+                    validatedValue={validatedValue}
+                    closeDropdown={closeDropdown}
                   />
-                ) : (
-                  <img
-                    src={"/assets/images/default_profile.jpeg"}
-                    className="h-[80px] w-[100px]"
-                    alt="캠핑 썸네일"
-                  />
-                )}
-                <div className="flex flex-col">
-                  <h2 className="max-w-[200px] overflow-hidden truncate whitespace-nowrap">
-                    {camp.facltNm}
-                  </h2>
-                  <p>{camp.doNm}</p>
-                </div>
-              </li>
-            </Link>
-          ))
-        ) : (
-          <div className="p-2">검색 결과가 없습니다.</div>
-        )}
-      </ul>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 검색 결과 없음 메시지 */}
+          {!isLoading &&
+            results.length === 0 &&
+            validatedValue &&
+            !validationError && (
+              <div className="mt-2 p-2 text-sm text-gray-500">
+                검색 결과가 없습니다.
+              </div>
+            )}
+        </div>
+      )}
     </div>
   );
 };
