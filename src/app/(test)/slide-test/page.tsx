@@ -3,9 +3,7 @@
 import Slide from "@/_components/slide/Slide";
 
 const SlideTestPage = () => {
-  const test = () => {
-    console.log("test");
-  };
+  const test = () => {};
   return (
     <Slide slidePerview={3} spaceBetween={10} onChangeEvent={test}>
       <div>슬라이드1</div>

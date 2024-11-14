@@ -27,8 +27,6 @@ export const getFollowingData = async (userId: string | "") => {
     .select(`*`)
     .eq("following_id", userId);
 
-  console.log("Following data:", followings);
-
   return followings;
 };
 

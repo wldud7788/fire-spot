@@ -7,7 +7,6 @@ type Props = {
 const SosTagSection = ({ sos }: Props) => {
   const { tag } = sos;
 
-  console.log("tag =>", tag);
   // SOS 상세 태그 섹션 (tag = string[])
   return (
     <div className="flex flex-col gap-[20px]">

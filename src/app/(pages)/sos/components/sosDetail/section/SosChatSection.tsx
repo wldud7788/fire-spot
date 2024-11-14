@@ -15,8 +15,6 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
   const { messageInput, handleChangeInput, sendMessage } =
     useChatRoomMessageSection(roomId, loginUserId);
 
-  console.log("messagesByDate", messagesByDate);
-
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (
     <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">

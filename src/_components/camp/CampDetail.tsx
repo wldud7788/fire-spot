@@ -332,6 +332,20 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/*// 캠핑장 날씨를 알려드려요 */}
 
         {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
+        {/* TODO: 이윤지
+pr 먼저~
+          1. 리뷰 정책 추가하기 
+          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기
+          3. PR 올려서 머지하기
+
+          ------ PR 이후 다시 작업
+          
+          1. 해당 캠핑장의 리뷰 총 개수 가져와서 뿌려주기
+          2. 해당 리뷰둘의 평균값을 가져와서 뿌려주기
+
+
+          3. 모달 슬라이드쪽이랑 z-index 겹치는 부분 수정하기 (민규님이 해주실수도? 행복회로)
+         */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px] flex items-center justify-between">
             <div className="left_area flex items-center gap-[15px]">
