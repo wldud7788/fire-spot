@@ -6,22 +6,15 @@ import { Database } from "../../../database.types";
 import { useQuery } from "@tanstack/react-query";
 
 const supabase = createClient();
-
-// type Review = {
-//   id: number;
-//   campId: string;
-//   title: string;
-//   content: string;
-//   likes: number;
-// };
-
-type Review = Database["public"]["Tables"]["review"]["Row"];
-
 type CampReviewSlideProps = {
   campId: string;
+  onReviewCountChange?: (count: number) => void;
 };
 
-const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
+const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
+  campId,
+  onReviewCountChange
+}) => {
   const { data: reviews } = useQuery({
     queryFn: async () => {
       const reviewList = await supabase
@@ -32,6 +25,13 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
     },
     queryKey: ["reviewList", campId]
   });
+  // 리뷰 데이터가 변경될 떄마다 갯수를 부모에게 전달
+  useEffect(() => {
+    if (reviews && onReviewCountChange) {
+      onReviewCountChange(reviews.length);
+    }
+  }, [reviews, onReviewCountChange]);
+
   if (!reviews) {
     return <div>리뷰 데이터가 없습니다.</div>;
   }

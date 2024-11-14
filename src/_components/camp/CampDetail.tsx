@@ -12,7 +12,6 @@ import ForecastWeatherComponent from "../weather/FutureWeather";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { useState } from "react";
 import Modal from "../modal/Modal";
-import CampReviewCount from "../review/CampReviewCount";
 
 type CampDetailProps = {
   paramsId: string;
@@ -35,6 +34,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   });
 
   const [isOpen, setIsOpen] = useState(false);
+  const [reviewCount, setReviewCount] = useState<number>(0);
 
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
@@ -96,12 +96,14 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                   </li>
                   <li>
                     {/* [이윤지 작업] 리뷰 갯수 = 리뷰 ${리뷰 카운트}개  */}
-                    <button
+                    {/* <button
                       type="button"
                       className="bg-reviewArrow bg-right-center-0 bg-no-repeat pr-[13px]"
                     >
-                      리뷰 00개
-                    </button>
+                     
+                      리뷰 갯수: {reviewCount} 개 
+                    </button> */}
+                    리뷰 갯수: {reviewCount} 개
                   </li>
                 </ul>
                 <p className="color-main mt-[15px] text-[16px]">
@@ -110,7 +112,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </p>
                 <dl>
                   <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
-                    캠핑장 소개
+                    캠핑장 소개 리뷰 갯수: {reviewCount} 개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.induty && (
@@ -357,10 +359,10 @@ pr 먼저~
               <ul className="flex items-center">
                 <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  {/* <CampReviewCount  /> */}
                 </li>
                 <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
+                  리뷰: {reviewCount}개
                   <img
                     src="/assets/images/common/ico-star-c-big.svg"
                     alt="평점"
@@ -395,7 +397,10 @@ pr 먼저~
           {true ? (
             <>
               <ReviewWriteModal campId={paramsId} onClose={() => {}} />
-              <CampReviewSlide campId={paramsId} />
+              <CampReviewSlide
+                campId={paramsId}
+                onReviewCountChange={setReviewCount}
+              />
             </>
           ) : (
             <NoData text={"등록된 리뷰가 없어요."} />
