@@ -578,6 +578,10 @@ export type Database = {
         Args: Record<string, number | string>;
         Returns: ChatRoomMessageInfo[];
       };
+      get_chat_message_sos: {
+        Args: Record<string, number>;
+        Returns: ChatRoomMessageInfo[];
+      };
       get_sos_list: {
         Args: Record<PropertyKey, never>;
         Returns: SosWithCamp[];

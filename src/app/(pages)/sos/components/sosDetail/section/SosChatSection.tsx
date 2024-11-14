@@ -4,6 +4,7 @@ import {
   MessagesByDate
 } from "@/_components/chat/types/chat.types";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
+import { profile } from "console";
 import React from "react";
 type Props = {
   loginUserId: string;
@@ -13,6 +14,8 @@ type Props = {
 const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
   const { messageInput, handleChangeInput, sendMessage } =
     useChatRoomMessageSection(roomId, loginUserId);
+
+  console.log("messagesByDate", messagesByDate);
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (
@@ -31,10 +34,23 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
               {messagesByDate[date].map((messageInfo) => (
                 <li
                   key={messageInfo.chatMessage.id}
-                  className="mb-10 flex items-start gap-[4px]"
+                  // 작성자는 오른쪽에 표시되어야하는데 그 조건임
+                  className={`mb-10 flex items-start gap-[4px] ${
+                    // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
+                    loginUserId === messageInfo.chatMessage.user_id
+                      ? "ml-10"
+                      : ""
+                  }`}
                 >
                   <div className="h-[45px] w-[45px] overflow-hidden rounded-full bg-[#d9d9d9]">
-                    <img className="h-full w-full object-cover" src="" alt="" />
+                    <img
+                      className="h-full w-full object-cover"
+                      src={
+                        messageInfo.profile.avatar_url ||
+                        "/assets/images/default_profile.jpeg"
+                      }
+                      alt=""
+                    />
                   </div>
                   <div>
                     <strong className="color-[#909090] text-[14px]">
