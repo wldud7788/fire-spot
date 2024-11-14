@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
-import { Database } from "../../../database.types";
 import ReviewModal2 from "../review/ReviewModal";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
+import { useQuery } from "@tanstack/react-query";
 
 const supabase = createClient();
 
@@ -13,7 +13,7 @@ type CampReviewSlideProps = {
 };
 
 const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
-  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  // const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<ReviewItem | null>(null);
   const handleModalOpen = (review: ReviewItem) => {
@@ -24,23 +24,19 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
     setIsOpen(false);
     setSelected(null);
   };
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const { data, error } = await supabase
-        .from(`review`)
-        .select(`*, camp(*), profile(*)`)
+  const { data: reviews } = useQuery({
+    queryFn: async () => {
+      const reviewList = await supabase
+        .from("review")
+        .select("*,camp(*)")
         .eq("campId", campId);
-      console.log(data);
-      if (error) {
-        console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
-      } else {
-        setReviews(data || []);
-      }
-    };
-    fetchReviews();
-  }, [campId]);
-
+      return reviewList.data as ReviewItem[];
+    },
+    queryKey: ["reviewList", campId]
+  });
+  if (!reviews) {
+    return <div>리뷰 데이터가 없습니다.</div>;
+  }
   return (
     <>
       <Slide slidePerview={3} spaceBetween={10}>

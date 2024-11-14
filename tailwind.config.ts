@@ -70,6 +70,8 @@ const config: Config = {
         campTit05: "url('/assets/images/camp/ico-camp-tit05.svg')",
         campTit06: "url('/assets/images/camp/ico-camp-tit06.svg')",
         campTit07: "url('/assets/images/camp/ico-camp-tit07.svg')",
+        // 캘린더
+        stamp: "url('/assets/images/ico-stamp.svg')",
         // 모임
         meetAvatar: "url('/assets/images/meet/ico-meet-avatar.svg')",
         meetCalendar: "url('/assets/images/meet/ico-meet-calendar.svg')",

@@ -41,6 +41,12 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
   const showDropDown = isOpen && !!searchList && searchList.length > 0;
   const submitText = !!meetId ? "수정하기" : "모임 등록";
 
+  // console.log("startDate", watch("start_date"));
+  // console.log("endDate", watch("end_date"));
+
+  console.log("startDate", startDate);
+  console.log("endDate", endDate);
+
   return (
     <div className="meet_write mb-[60px] mt-[90px]">
       <div className="inner m-auto w-full max-w-[1360px] px-[30px]">

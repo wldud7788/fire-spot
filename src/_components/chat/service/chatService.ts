@@ -131,6 +131,24 @@ export const fetchChatMessageList = async (roomId: number) => {
   }
 };
 
+/** SOS 전용 채팅 메시지 목록 */
+export const fetchSosChatMessageList = async (roomId: number) => {
+  try {
+    const { data, error } = await supabase.rpc(
+      supabaseRpc.chat.getChatMessage,
+      {
+        room_id: roomId
+      }
+    );
+    if (error) throw new Error(error.message);
+
+    if (!data) return [] as ChatRoomMessageInfo[];
+    return data;
+  } catch (e) {
+    console.error("Error fetchChatMessageList ", e);
+  }
+};
+
 /** 마지막 메시지 (last_read_message_id를 위함)*/
 export const fetchLastChatMessage = async (roomId: number) => {
   try {

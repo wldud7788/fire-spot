@@ -3,27 +3,14 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import CampCard from "../camp/CampCard";
-import BookmarkButton from "../bookmark/BookmarkButton";
+import BookMarkButton2 from "./BookMarkButton2";
 import { createClient } from "@/_utils/supabase/client";
 import { Database } from "../../../database.types";
-import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
+import { getUser } from "@/_utils/auth";
 
-// interface Bookmark {
-//   contentId: string;
-//   camp: {
-//     facltNm: string;
-//     firstImageUrl: string;
-//     intro: string;
-//     addr1: string;
-//     induty: string;
-//   };
-//   featureNm: string;
-// }
-// type Camp = Database["public"]["Tables"]["camp"]["Row"];
 type Bookmark = Database["public"]["Tables"]["bookmarks"]["Row"] & {
   camp: CampSelect;
-  // featureNm: string;
 };
 
 const BookmarkList: React.FC = () => {
@@ -34,9 +21,15 @@ const BookmarkList: React.FC = () => {
   // 북마크 데이터를 가져오는 함수
   const fetchBookmarks = async () => {
     try {
+      const user = await getUser();
+      if (!user) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
       const { data, error } = await supabase
         .from("bookmarks")
-        .select("*, camp(*)");
+        .select("*, camp(*)")
+        .eq("userId", user.id);
 
       if (error) throw error;
       if (!data || data.length === 0) {
@@ -49,15 +42,6 @@ const BookmarkList: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  // 북마크 제거 후 목록 업데이트 함수
-  const handleBookmarkRemoved = (contentId: string) => {
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.filter(
-        (bookmark) => bookmark.contentId !== Number(contentId)
-      )
-    );
   };
 
   useEffect(() => {
@@ -77,23 +61,10 @@ const BookmarkList: React.FC = () => {
               key={bookmark.contentId}
               className="camp-card-wrapper w-full max-w-[calc(33.333%-23px)]"
             >
-              <CampCard
+              <CampCard camp={bookmark.camp} type="bookmark" />
+              <BookMarkButton2
+                campId={bookmark.contentId.toString()}
                 camp={bookmark.camp}
-                // camp={{
-                //   contentId:bookmark.contentId || 0,
-                //   facltNm: bookmark.camp.facltNm || "",
-                //   firstImageUrl: bookmark.camp.firstImageUrl || "",
-                //   featureNm: bookmark.featureNm || "",
-                //   intro: bookmark.camp.intro || "",
-                //   addr1: bookmark.camp.addr1 || "",
-                //   induty: bookmark.camp.induty || ""
-                // }}
-                type="bookmark"
-              />
-              {/* 북마크 제거 버튼에 handleBookmarkRemoved 전달 */}
-              <BookmarkButton
-                contentId={`${bookmark.contentId}`}
-                onBookmarkRemoved={handleBookmarkRemoved}
               />
             </li>
           ))}
