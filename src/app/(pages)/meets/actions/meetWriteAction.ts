@@ -28,7 +28,7 @@ const postMeet = async (meet: Test) => {
       throw new Error("postMeet Error");
     }
 
-    postMeetAttendee(meetResult.id ?? 0);
+    await postMeetAttendee(meetResult.id ?? 0);
     revalidatePath("/meets");
     return true;
   } catch (e) {
