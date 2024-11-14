@@ -89,7 +89,7 @@ body {
   @apply bg-search bg-[length:20px_20px] bg-left-center bg-no-repeat pl-10;
 }
 .header_icon {
-  @apply hidden h-10 w-10 bg-no-repeat sm:block;
+  @apply h-10 w-10 bg-no-repeat;
 }
 .input_focus_none {
   @apply focus:border-0 focus:outline-none focus:ring-0 focus:ring-offset-0;
@@ -361,4 +361,7 @@ body {
 }
 .button_style {
   @apply rounded-[28px] bg-[#FF924C] px-[28px] text-lg font-semibold text-black;
+}
+.모달지영추가 {
+  @apply relative rounded-lg bg-white p-6;
 }

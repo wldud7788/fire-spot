@@ -1,37 +1,16 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
-import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
-import { useCallback } from "react";
+import LikeButton from "../like/LikeButton";
 
 type CampingDataProps = {
   camp: CampSelect | Camp;
   type?: string;
   listParamsId?: string;
-  onBookmarkClick?: (contentId: number, campName: string) => void;
+  onlikeClick?: (contentId: number, campName: string) => void;
 };
 
-const CampCard = ({
-  camp,
-  type,
-  listParamsId,
-  onBookmarkClick
-}: CampingDataProps) => {
-  const contentId =
-    typeof camp.contentId === "string"
-      ? parseInt(camp.contentId)
-      : camp.contentId;
-
-  const handleBookmarkClick = useCallback(() => {
-    if (onBookmarkClick) {
-      // alert("북마크 클릭");
-      onBookmarkClick(contentId, camp.facltNm);
-    }
-    upsertCamp(camp);
-  }, [onBookmarkClick, contentId, camp.facltNm]);
-
-  const bookmarkActive = false;
-
+const CampCard = ({ camp, type }: CampingDataProps) => {
   return (
     <div className="camping_card group">
       <Link href={`/camp-detail/${camp.contentId}`}>
@@ -47,21 +26,7 @@ const CampCard = ({
               alt={camp.facltNm}
             />
             {!type ? (
-              <div className="absolute right-[15px] top-[15px]">
-                <button onClick={handleBookmarkClick} type="button">
-                  <img
-                    src="/assets/images/camp/ico-camp-list-bookmark.svg"
-                    alt="북마크"
-                  />
-                  {/* 
-                    이윤지 작업 - 북마크 액티브 되면 아래의 아이콘 쓰시면 됩니다. 
-                    <img
-                      src="/assets/images/camp/ico-camp-list-bookmark-on.svg"
-                      alt="북마크"
-                    /> 
-                  */}
-                </button>
-              </div>
+              <LikeButton campId={camp.contentId.toString()} camp={camp} />
             ) : null}
           </div>
 
@@ -82,18 +47,7 @@ const CampCard = ({
             </div>
           ) : (
             <div className="camp_info relative mt-[20px] rounded-[12px] border border-[#d9d9d9] px-[15px] py-[25px]">
-              <div className="absolute right-[15px] top-[15px]">
-                {/* 윤지님 북마크 컴포넌트 아래의 버튼 클래스, 이미지 사용하시면 됩니다.*/}
-                <button
-                  type="button"
-                  className={`${bookmarkActive ? "bg-gray03" : "bg-white"} flex h-[30px] w-[30px] items-center justify-center rounded-[100%] border border-[#d9d9d9]`}
-                >
-                  <img
-                    src={"/assets/images/common/ico-heart.svg"}
-                    alt={"찜하기"}
-                  />
-                </button>
-              </div>
+              <LikeButton campId={camp.contentId.toString()} camp={camp} />
               <span className="text-[13px] font-bold text-[#997457]">
                 {camp.induty}
               </span>
@@ -116,9 +70,9 @@ const CampCard = ({
                 <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
                   <img
                     src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltNm} 북마크 갯수 이미지`}
+                    alt={`${camp.facltNm} 좋아요 갯수 이미지`}
                   />
-                  {/* [이윤지 작업] - 북마크 카운트 노출시켜야합니다. 아래의 100*/}
+                  {/* [이윤지 작업] - 좋아요 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>
                 </p>
               </div>
