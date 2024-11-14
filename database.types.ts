@@ -450,7 +450,7 @@ export type Database = {
           at: string;
           content: string;
           campId: number;
-          img: string | null;
+          img: string[];
           time: string | null;
           date: string | null;
         };
@@ -461,6 +461,7 @@ export type Database = {
           id?: string;
           likes?: number | null;
           rating: number;
+          img: string[];
           title: string;
           updated?: string | null;
           userId?: string;
@@ -472,6 +473,7 @@ export type Database = {
           id?: string;
           likes?: number | null;
           rating?: number;
+          img?: string[];
           title?: string;
           updated?: string | null;
           userId?: string;

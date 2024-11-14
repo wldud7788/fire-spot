@@ -52,7 +52,6 @@ const Calendar = () => {
   };
 
   const handleFilterType = (type: FilterType) => {
-    console.log("type", type);
     setFilterType(type);
   };
 

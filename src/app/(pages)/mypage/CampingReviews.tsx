@@ -34,8 +34,6 @@ const CampListPage = () => {
   useEffect(() => {
     // 함수 이름도 fetchCamps -> fetchReviews 이름 바꾸쇼
 
-    console.log("user", user);
-
     const fetchReviews = async () => {
       if (user) {
         const { data, error } = await supabase
@@ -53,7 +51,6 @@ const CampListPage = () => {
         }
 
         const reviewItems = data as ReviewItem[];
-        console.log("data", data);
 
         setReviews(data);
       }

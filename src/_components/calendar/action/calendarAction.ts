@@ -24,8 +24,6 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
     //   .select(`*, camp(*)`)
     //   .eq("user_id", userId);
 
-    console.log("feedData", feedData);
-
     if (!feedData || !meetData) {
       return [];
     }
