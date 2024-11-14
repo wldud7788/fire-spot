@@ -1,6 +1,6 @@
 "use client";
 import { createClient } from "@/_utils/supabase/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MakeStar from "../star/MakeStar";
 
 // ReviewModalProps 인터페이스: props로 campId와 onClose 함수를 받음
@@ -13,7 +13,9 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState<number>(0);
-  const [위생별점, 셋위생별점] = useState<number>(0);
+  const [nickname, setNickname] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
+  const [refresh, setRefresh] = useState(1); // refresh 상태값 초기화
 
   const supabase = createClient(); // Supabase 클라이언트 생성
 
@@ -23,6 +25,11 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
       data: { user }
     } = await supabase.auth.getUser();
     return user;
+  };
+
+  // 새로고침을 트리거하는 함수
+  const handleRefresh = () => {
+    setRefresh((prev) => prev * -1);
   };
 
   // 리뷰를 제출하는 함수
@@ -61,17 +68,10 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     setRating(rating);
   };
 
-  const on위생별점체인지 = (rating: number) => {
-    셋위생별점(rating);
-  };
-
   return (
     <div className="modal z-50 bg-white">
       <h2>별점</h2>
       <MakeStar onRatingChange={onRatingChange} />
-
-      <h2>위생별점</h2>
-      <MakeStar onRatingChange={on위생별점체인지} />
 
       <h2>제목</h2>
       <textarea
@@ -87,16 +87,7 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         placeholder="리뷰 내용을 입력하세요"
         className="textarea"
       />
-      {/* 평점을 입력받는 숫자 입력 필드 */}
-      {/* <input
-        type="number"
-        value={rating || ""}
-        onChange={(e) => setRating(parseInt(e.target.value, 10))}
-        placeholder="평점 (1-5)"
-        className="input"
-        min={1}
-        max={5}
-      /> */}
+
       {/* 리뷰 제출 버튼 */}
       <button onClick={handleSubmit} className="btn btn-primary">
         제출
