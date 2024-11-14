@@ -3,6 +3,8 @@ import { MeetWithCamp } from "../../types/meet.types";
 import Slide from "@/_components/slide/Slide";
 import { formatDate_4 } from "@/_utils/common/dateFormat";
 import { ButtonConfig } from "../../hooks/useMeetDetailController";
+import Link from "next/link";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 interface Props {
   meetWithCamp: MeetWithCamp;
   buttonConfig: ButtonConfig;
@@ -14,7 +16,7 @@ const MeetTitleSection = ({
   buttonConfig,
   hasChatAccess
 }: Props) => {
-  const { meet, camp, attendee_count } = meetWithCamp;
+  const { meet, camp, attendee_count, chat_room_id } = meetWithCamp;
   const tags = [];
 
   if (camp.induty) {
@@ -109,7 +111,9 @@ const MeetTitleSection = ({
               <button
                 className={`flex h-[60px] w-[230px] items-center justify-center rounded-[18px] border bg-[#ac8064] text-[18px] font-bold text-white`}
               >
-                모임 톡
+                <Link href={SERVER_PAGE_URL.chatRoom(chat_room_id)}>
+                  모임 톡
+                </Link>
               </button>
             )}
             {!hasChatAccess && (
