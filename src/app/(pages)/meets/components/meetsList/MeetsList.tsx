@@ -1,16 +1,14 @@
 "use client";
 
 import MeetCard from "@/_components/meet/MeetCard";
-import { fetchMeetList } from "../../actions/meetListAction";
-import { MeetWithCamp } from "../../types/meet.types";
 import { convertMeetDataToMeetCard } from "../../utils/convertMeetDataToMeetCard";
 import WriteButton from "../meets/WriteButton";
-import { useQuery } from "@tanstack/react-query";
 import usePagination from "@/_components/pagination/hooks/pagination";
 import Pagination from "@/_components/pagination/Pagination";
 import CommunityTop from "@/_components/common/CommunityTop";
 import { useState } from "react";
 import NoData from "@/_components/common/NoData";
+import { useMeetList } from "../../hooks/useMeetList";
 
 type MeetsListProps = {
   itemsPerPage: number;
@@ -18,17 +16,14 @@ type MeetsListProps = {
 
 const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
-  const { data: meetWithCampList, isError } = useQuery<MeetWithCamp[]>({
-    queryKey: ["meets"],
-    queryFn: async () => fetchMeetList()
-  });
+  const { meetWithCampList, isProgress, toggleShowType } = useMeetList();
 
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
     usePagination({ items: meetWithCampList || [], itemsPerPage });
 
   if (!currentItems) return <>데이터 로딩중.</>;
 
-  const meetCardList = convertMeetDataToMeetCard(currentItems);
+  const meetCardList = convertMeetDataToMeetCard(currentItems, isProgress);
 
   const handleDeadlineCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsDeadline(!isDeadline);
@@ -40,10 +35,16 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
         <CommunityTop text={"캠핑모임"} />
         <div className="utils flex items-center justify-between">
           <div className="flex items-center gap-[14px]">
-            <button className="rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold">
+            <button
+              className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold ${isProgress ? "border-[#ff924c]" : ""}`}
+              onClick={() => toggleShowType(true)}
+            >
               모집중
             </button>
-            <button className="rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold">
+            <button
+              className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold ${!isProgress ? "border-[#ff924c]" : ""}`}
+              onClick={() => toggleShowType(false)}
+            >
               마감
             </button>
             <button className="rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold">
