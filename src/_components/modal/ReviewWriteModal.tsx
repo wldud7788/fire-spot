@@ -1,23 +1,22 @@
 "use client";
 import { createClient } from "@/_utils/supabase/client";
 import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import MakeStar from "../star/MakeStar";
 
-// ReviewModalProps 인터페이스: props로 campId와 onClose 함수를 받음
 interface ReviewModalProps {
-  campId: string; // 리뷰를 작성할 캠핑장 ID
-  onClose: () => void; // 모달창을 닫는 함수
+  campId: string;
+  onClose: () => void;
 }
 
 const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState<number>(0);
-  const [위생별점, 셋위생별점] = useState<number>(0);
+  const queryClient = useQueryClient();
 
-  const supabase = createClient(); // Supabase 클라이언트 생성
+  const supabase = createClient();
 
-  // Supabase를 통해 현재 사용자 정보 가져오기
   const getUser = async () => {
     const {
       data: { user }
@@ -25,7 +24,6 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     return user;
   };
 
-  // 리뷰를 제출하는 함수
   const handleSubmit = async () => {
     const user = await getUser();
     if (!user) {
@@ -34,23 +32,24 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     }
 
     try {
-      // Supabase의 `review` 테이블에 리뷰 데이터 삽입
       const { data, error } = await supabase.from("review").insert([
         {
-          userId: user.id, // 현재 사용자 ID
+          userId: user.id,
           campId: Number(campId),
-          title: title, // 전달받은 캠핑장 ID
-          content: content, // 입력한 리뷰 내용
-          rating: rating, // 입력한 평점
+          title: title,
+          content: content,
+          rating: rating,
           at: new Date().toISOString(),
-          date: new Date().toISOString() // 현재 시간
+          date: new Date().toISOString()
         }
       ]);
 
       if (error) throw error;
-
+      queryClient.invalidateQueries({
+        queryKey: ["reviewList", campId]
+      });
       alert("리뷰가 성공적으로 작성되었습니다!");
-      onClose(); // 모달창 닫기
+      onClose();
     } catch (error) {
       console.error("리뷰 작성 중 오류 발생:", error);
       alert("리뷰 작성에 실패했습니다.");
@@ -61,17 +60,10 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     setRating(rating);
   };
 
-  const on위생별점체인지 = (rating: number) => {
-    셋위생별점(rating);
-  };
-
   return (
     <div className="modal z-50 bg-white">
       <h2>별점</h2>
       <MakeStar onRatingChange={onRatingChange} />
-
-      <h2>위생별점</h2>
-      <MakeStar onRatingChange={on위생별점체인지} />
 
       <h2>제목</h2>
       <textarea
@@ -80,6 +72,7 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         placeholder="리뷰 제목을 입력하세요"
         className="textarea"
       />
+
       <h2>내용</h2>
       <textarea
         value={content}
@@ -87,21 +80,10 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         placeholder="리뷰 내용을 입력하세요"
         className="textarea"
       />
-      {/* 평점을 입력받는 숫자 입력 필드 */}
-      {/* <input
-        type="number"
-        value={rating || ""}
-        onChange={(e) => setRating(parseInt(e.target.value, 10))}
-        placeholder="평점 (1-5)"
-        className="input"
-        min={1}
-        max={5}
-      /> */}
-      {/* 리뷰 제출 버튼 */}
+
       <button onClick={handleSubmit} className="btn btn-primary">
         제출
       </button>
-      {/* 모달창 닫기 버튼 */}
       <button onClick={onClose} className="btn btn-secondary">
         닫기
       </button>
