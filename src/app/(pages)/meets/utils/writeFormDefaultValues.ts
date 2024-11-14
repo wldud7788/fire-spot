@@ -35,5 +35,6 @@ export const defaultValues: MeetWithCamp = {
     imgUrls: [],
     created_at: new Date().toISOString()
   },
-  attendee_count: 0
+  attendee_count: 0,
+  chat_room_id: 0
 };

@@ -34,6 +34,7 @@ const MeetCreatorDateSection = ({
     }
     if (startDate > endDate) {
       setEndDate(startDate);
+      setValue(endFormName, startDate);
     }
   };
 
@@ -41,6 +42,7 @@ const MeetCreatorDateSection = ({
     if (endDate < startDate) {
       alert("시작 날짜 보다 이전 이면 안됨");
       setEndDate(startDate);
+      setValue(endFormName, startDate);
     }
   };
 
