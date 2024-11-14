@@ -10,9 +10,11 @@ const ChatRoomTitleSection = ({ chatRoomTitle }: Props) => {
   const { meet, headcount } = chatRoomTitle;
 
   return (
-    <div className="mb-20 flex gap-4">
-      {meet.title}
-      {headcount}명
+    <div className="flex items-center gap-[12px] border-b-2 border-[#FFD0B2] bg-[#FFD0B2] px-[30px] py-[25px]">
+      <p className="text-[18px] font-medium">{meet.title}</p>
+      <span className="color-gray02 bg-chatUser bg-left-center-0 bg-no-repeat pl-[15px] text-[14px]">
+        {headcount}
+      </span>
     </div>
   );
 };

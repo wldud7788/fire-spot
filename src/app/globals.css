@@ -343,6 +343,14 @@ body {
     transform: translateX(-50%);
     z-index: 2;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */
