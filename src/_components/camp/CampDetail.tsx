@@ -12,6 +12,7 @@ import ForecastWeatherComponent from "../weather/FutureWeather";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { useState } from "react";
 import Modal from "../modal/Modal";
+import CampReviewCount from "../review/CampReviewCount";
 
 type CampDetailProps = {
   paramsId: string;
@@ -334,8 +335,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         {/* TODO: 이윤지
 pr 먼저~
-          1. 리뷰 정책 추가하기 
-          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기
+          1. 리뷰 정책 추가하기  (완료)
+          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기 (어려워요 ㅠ)  
           3. PR 올려서 머지하기
 
           ------ PR 이후 다시 작업
@@ -356,7 +357,7 @@ pr 먼저~
               <ul className="flex items-center">
                 <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  33
+                  {/* <CampReviewCount  /> */}
                 </li>
                 <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
