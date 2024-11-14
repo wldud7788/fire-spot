@@ -25,7 +25,7 @@ const MeetList = () => {
         </button>
       </div>
 
-      {meetCardList ? (
+      {meetCardList.length > 0 ? (
         <section className="flex w-full">
           <ul className="flex w-full flex-col items-center gap-[15px]">
             {meetCardList.map((meetCard) => (

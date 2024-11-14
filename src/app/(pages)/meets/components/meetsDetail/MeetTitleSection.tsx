@@ -34,7 +34,7 @@ const MeetTitleSection = ({
 
   return (
     <div className="mt-4 flex w-full gap-[45px]">
-      <div className="h-[350px] w-[460px] flex-none overflow-hidden rounded-[20px] border border-[#A6A6A6]">
+      <div className="main-slide-wrap h-[350px] w-[460px] flex-none overflow-hidden rounded-[20px] border border-[#A6A6A6]">
         <Slide slidePerview={1} onChangeEvent={() => {}}>
           {camp.imgUrls.map((url) => (
             <div
@@ -48,7 +48,7 @@ const MeetTitleSection = ({
       <div className="flex w-full max-w-[calc(rgba(100%-505px))] flex-col rounded-[18px] border border-[#A6A6A6] p-[27px]">
         <section className="flex items-center justify-between">
           <h2 className="text-[28px] font-bold">{meet.title}</h2>
-          <div className="flex items-center justify-end gap-[10px]">
+          <div className="flex w-[70px] flex-none items-center justify-end gap-[10px]">
             <button type="button">
               <img src="/assets/images/ico-heart.svg" alt="북마크" />
             </button>

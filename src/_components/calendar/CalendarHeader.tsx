@@ -16,42 +16,38 @@ const CalendarHeader = ({
   handleFilterType
 }: Props) => {
   return (
-    <div className="w-full px-[21.5px] py-[31px]">
+    <div className="w-full">
       <section className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h3 className="w-28 text-[20px]">
+          <h3 className="text-[16px]">
             {format(currentMonth, "yyyy")}년 {format(currentMonth, "M")}월
           </h3>
           <div className="flex">
             <button
               onClick={prevMonth}
-              className="flex h-[22px] w-[15px] items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9]"
-            >
-              <div className="h-[21px] w-[18px] bg-prev bg-cover bg-center" />
-            </button>
+              className="flex h-[28px] w-[25px] border border-[#C9C9C9] bg-calendarPrev bg-center bg-no-repeat"
+            ></button>
             <button
               onClick={nextMonth}
-              className="flex h-[22px] w-[15px] items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9]"
-            >
-              <div className="h-[21px] w-[18px] bg-next bg-cover bg-center" />
-            </button>
+              className="flex h-[28px] w-[25px] border border-[#C9C9C9] bg-calendarNext bg-center bg-no-repeat"
+            ></button>
           </div>
         </div>
         <div className="flex">
           <button
-            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            className="rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
             onClick={() => handleFilterType("all")}
           >
             같이 보기
           </button>
           <button
-            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            className="ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
             onClick={() => handleFilterType("stamp")}
           >
             후기
           </button>
           <button
-            className="flex items-center justify-center border-[0.5px] border-[#C9C9C9] bg-[#D9D9D9] px-2"
+            className="ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
             onClick={() => handleFilterType("meet")}
           >
             모임

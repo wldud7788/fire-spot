@@ -65,8 +65,9 @@ const patchMeet = async (meetId: string, meet: MeetUpdate) => {
 };
 
 /** 사용자가 모임작성에서 검색 후 '클릭' 한 캠핑장은 DB에 저장 */
-const upsertCamp = async (camp: CampInsert) => {
+const upsertCamp = async (camp: CampInsert | Camp) => {
   const supabase = await createClient();
+  console.log(camp);
 
   const {
     contentId,
@@ -82,13 +83,13 @@ const upsertCamp = async (camp: CampInsert) => {
     featureNm
   } = camp;
 
-  const imgUrls = await getCampImgList(contentId);
+  const imgUrls = await getCampImgList(Number(contentId));
 
   // TODO 타입 에러나는거 한번 싹 정리해야됨
   const { error } = await supabase
     .from("camp")
     .upsert({
-      contentId,
+      contentId: Number(contentId),
       mapX,
       mapY,
       addr1,
