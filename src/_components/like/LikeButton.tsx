@@ -1,26 +1,26 @@
 "use client";
 import { createClient } from "@/_utils/supabase/client";
-import { useBookmarkStore } from "@/_utils/zustand/useBookmarkStore";
+import { useLikeStore } from "@/_utils/zustand/useLikeStore";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import React, { useEffect, useState } from "react";
 
-interface BookMarkButton2Props {
+interface LikeButtonProps {
   campId: string;
   camp: CampSelect | Camp;
 }
 
-const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({ campId, camp }) => {
   const supabase = createClient();
   const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore();
-  const bookmarked = isBookmarked(campId);
+  const { addLike, removeLike, isLiked } = useLikeStore();
+  const Liked = isLiked(campId);
 
   useEffect(() => {
-    const checkBookmarkStatus = async () => {
+    const checkLikeStatus = async () => {
       try {
         const {
           data: { session }
@@ -41,12 +41,12 @@ const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
           .single();
 
         if (error && error.code !== "PGRST116") {
-          console.error("북마크 상태 확인 오류:", error);
+          console.error("좋아요 상태 확인 오류:", error);
           return;
         }
 
         if (data) {
-          addBookmark(campId);
+          addLike(campId);
         }
       } catch (error) {
         console.error("에러 발생:", error);
@@ -55,20 +55,20 @@ const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
       }
     };
 
-    checkBookmarkStatus();
-  }, [campId, addBookmark]);
+    checkLikeStatus();
+  }, [campId, addLike]);
 
-  const handleToggleBookmark = async () => {
+  const handleToggleLike = async () => {
     if (!userId) {
       alert("로그인이 필요한 서비스입니다.");
       return;
     }
 
     try {
-      upsertCamp(camp);
+      await upsertCamp(camp);
       setIsLoading(true);
 
-      if (bookmarked) {
+      if (Liked) {
         const { error } = await supabase
           .from("bookmarks")
           .delete()
@@ -76,11 +76,11 @@ const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
           .eq("userId", userId);
 
         if (error) {
-          console.error("북마크 제거 오류:", error);
+          console.error("좋아요 제거 오류:", error);
           return;
         }
 
-        removeBookmark(campId);
+        removeLike(campId);
       } else {
         const { error } = await supabase.from("bookmarks").insert([
           {
@@ -91,11 +91,11 @@ const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
         ]);
 
         if (error) {
-          console.error("북마크 추가 오류:", error);
+          console.error("좋아요 추가 오류:", error);
           return;
         }
 
-        addBookmark(campId);
+        addLike(campId);
       }
     } catch (error) {
       console.error("에러 발생:", error);
@@ -107,26 +107,26 @@ const BookMarkButton2: React.FC<BookMarkButton2Props> = ({ campId, camp }) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    handleToggleBookmark();
+    handleToggleLike();
   };
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      className="absolute right-[15px] top-[15px] z-50 flex h-[30px] w-[30px] items-center justify-center"
+      className="absolute right-[15px] top-[15px] z-50 flex h-[42px] w-[42px] items-center justify-center"
       disabled={isLoading}
     >
       <img
         src={
-          bookmarked
-            ? "/assets/images/camp/ico-camp-list-bookmark-on.svg"
-            : "/assets/images/camp/ico-camp-list-bookmark.svg"
+          Liked
+            ? "/assets/images/camp/btn-camp-like-active.svg"
+            : "/assets/images/camp/btn-camp-like.svg"
         }
-        alt={bookmarked ? "북마크 해제" : "북마크 추가"}
+        alt={Liked ? "좋아요 해제" : "좋아요 추가"}
       />
     </button>
   );
 };
 
-export default BookMarkButton2;
+export default LikeButton;

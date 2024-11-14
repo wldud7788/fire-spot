@@ -1,38 +1,16 @@
 import { Camp } from "@/app/(pages)/camps/types/Camp";
-import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
-import { useCallback } from "react";
-import BookMarkButton2 from "../bookmark/BookMarkButton2";
+import LikeButton from "../like/LikeButton";
 
 type CampingDataProps = {
   camp: CampSelect | Camp;
   type?: string;
   listParamsId?: string;
-  onBookmarkClick?: (contentId: number, campName: string) => void;
+  onlikeClick?: (contentId: number, campName: string) => void;
 };
 
-const CampCard = ({
-  camp,
-  type,
-  listParamsId,
-  onBookmarkClick
-}: CampingDataProps) => {
-  const contentId =
-    typeof camp.contentId === "string"
-      ? parseInt(camp.contentId)
-      : camp.contentId;
-
-  const handleBookmarkClick = useCallback(() => {
-    if (onBookmarkClick) {
-      // alert("북마크 클릭");
-      onBookmarkClick(contentId, camp.facltNm);
-    }
-    upsertCamp(camp);
-  }, [onBookmarkClick, contentId, camp.facltNm]);
-
-  const bookmarkActive = false;
-
+const CampCard = ({ camp, type }: CampingDataProps) => {
   return (
     <div className="camping_card group">
       <Link href={`/camp-detail/${camp.contentId}`}>
@@ -48,7 +26,7 @@ const CampCard = ({
               alt={camp.facltNm}
             />
             {!type ? (
-              <BookMarkButton2 campId={camp.contentId.toString()} camp={camp} />
+              <LikeButton campId={camp.contentId.toString()} camp={camp} />
             ) : null}
           </div>
 
@@ -69,7 +47,7 @@ const CampCard = ({
             </div>
           ) : (
             <div className="camp_info relative mt-[20px] rounded-[12px] border border-[#d9d9d9] px-[15px] py-[25px]">
-              <BookMarkButton2 campId={camp.contentId.toString()} camp={camp} />
+              <LikeButton campId={camp.contentId.toString()} camp={camp} />
               <span className="text-[13px] font-bold text-[#997457]">
                 {camp.induty}
               </span>
@@ -92,9 +70,9 @@ const CampCard = ({
                 <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
                   <img
                     src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltNm} 북마크 갯수 이미지`}
+                    alt={`${camp.facltNm} 좋아요 갯수 이미지`}
                   />
-                  {/* [이윤지 작업] - 북마크 카운트 노출시켜야합니다. 아래의 100*/}
+                  {/* [이윤지 작업] - 좋아요 카운트 노출시켜야합니다. 아래의 100*/}
                   <span>100</span>
                 </p>
               </div>

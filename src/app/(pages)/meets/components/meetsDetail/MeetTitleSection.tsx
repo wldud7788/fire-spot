@@ -50,9 +50,6 @@ const MeetTitleSection = ({
           <h2 className="text-[28px] font-bold">{meet.title}</h2>
           <div className="flex w-[70px] flex-none items-center justify-end gap-[10px]">
             <button type="button">
-              <img src="/assets/images/ico-heart.svg" alt="북마크" />
-            </button>
-            <button type="button">
               <img src="/assets/images/common/ico-share.svg" alt="공유하기" />
             </button>
           </div>

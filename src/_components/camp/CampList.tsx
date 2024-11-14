@@ -13,7 +13,7 @@ type CampListProps = {
 };
 
 const CampList = ({ itemsPerPage }: CampListProps) => {
-  const [isBookMarkChk, setIsBookMarkChk] = useState<boolean>(false);
+  const [islikeChk, setIslikeChk] = useState<boolean>(false);
   const {
     data: camps,
     isLoading,
@@ -35,8 +35,8 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
   if (isError || !camps) return <div>에러가 발생했습니다.</div>;
 
-  const handleBookMarkCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsBookMarkChk(!isBookMarkChk);
+  const handlelikeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIslikeChk(!islikeChk);
   };
 
   return (
@@ -47,14 +47,14 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
         <div className="input_box relative mb-[40px] mt-[15px]">
           <input
             type="checkbox"
-            id="bookMarkChk"
-            checked={isBookMarkChk}
-            onChange={handleBookMarkCheck}
+            id="likeChk"
+            checked={islikeChk}
+            onChange={handlelikeCheck}
             className="absolute left-0 top-0 h-full w-full opacity-0"
           />
           <label
-            htmlFor="bookMarkChk"
-            className={`${isBookMarkChk ? "bg-chkOn" : "bg-chk"} bg-left-center-0 bg-no-repeat pl-[25px]`}
+            htmlFor="likeChk"
+            className={`${islikeChk ? "bg-chkOn" : "bg-chk"} bg-left-center-0 bg-no-repeat pl-[25px]`}
           >
             내가 찜한 캠핑장 모아보기
           </label>

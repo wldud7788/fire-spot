@@ -32,21 +32,14 @@ const MeetCard = ({ meetCard }: MeetCardProps) => {
               );
             })}
           </ul>
-          <div className="flex w-[40px] justify-end">
+          {/* <div className="flex w-[40px] justify-end">
             <button type="button">
               <img
                 src="/assets/images/camp/ico-camp-list-bookmark.svg"
-                alt="북마크"
+                alt="좋아요 버튼"
               />
-              {/* 
-                이윤지 작업 - 북마크 액티브 되면 아래의 아이콘 쓰시면 됩니다. 
-                <img
-                  src="/assets/images/camp/ico-camp-list-bookmark-on.svg"
-                  alt="북마크"
-                /> 
-              */}
             </button>
-          </div>
+          </div> */}
         </div>
         <Link
           href={`/meets/${meetCard.id}`}

@@ -1,25 +1,24 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import React from "react";
 import CampCard from "../camp/CampCard";
-import BookMarkButton2 from "./BookMarkButton2";
 import { createClient } from "@/_utils/supabase/client";
 import { Database } from "../../../database.types";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import { getUser } from "@/_utils/auth";
+import LikeButton from "./LikeButton";
 
-type Bookmark = Database["public"]["Tables"]["bookmarks"]["Row"] & {
+type Like = Database["public"]["Tables"]["bookmarks"]["Row"] & {
   camp: CampSelect;
 };
 
-const BookmarkList: React.FC = () => {
+const LikeList: React.FC = () => {
   const supabase = createClient();
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+  const [Likes, setLikes] = useState<Like[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // 북마크 데이터를 가져오는 함수
-  const fetchBookmarks = async () => {
+  // 좋아요 데이터를 가져오는 함수
+  const fetchlikes = async () => {
     try {
       const user = await getUser();
       if (!user) {
@@ -33,39 +32,36 @@ const BookmarkList: React.FC = () => {
 
       if (error) throw error;
       if (!data || data.length === 0) {
-        setBookmarks([]);
+        setLikes([]);
         return;
       }
-      setBookmarks(data as Bookmark[]);
+      setLikes(data as Like[]);
     } catch (error) {
-      console.error("북마크 데이터를 가져오는 중 오류 발생:", error);
+      console.error("좋아요 데이터를 가져오는 중 오류 발생:", error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchBookmarks();
+    fetchlikes();
   }, []);
 
   if (loading) return <div>로딩 중...</div>;
 
   return (
     <div>
-      {bookmarks.length === 0 ? (
-        <p>북마크된 캠핑장이 없습니다.</p>
+      {Likes.length === 0 ? (
+        <p>좋아요한 캠핑장이 없습니다.</p>
       ) : (
-        <ul className="bookmark-list flex flex-wrap items-start gap-[30px]">
-          {bookmarks.map((bookmark) => (
+        <ul className="like-list flex flex-wrap items-start gap-[30px]">
+          {Likes.map((Like) => (
             <li
-              key={bookmark.contentId}
+              key={Like.contentId}
               className="camp-card-wrapper w-full max-w-[calc(33.333%-23px)]"
             >
-              <CampCard camp={bookmark.camp} type="bookmark" />
-              <BookMarkButton2
-                campId={bookmark.contentId.toString()}
-                camp={bookmark.camp}
-              />
+              <CampCard camp={Like.camp} type="like" />
+              <LikeButton campId={Like.contentId.toString()} camp={Like.camp} />
             </li>
           ))}
         </ul>
@@ -74,6 +70,4 @@ const BookmarkList: React.FC = () => {
   );
 };
 
-export default BookmarkList;
-
-// 수퍼베이스랑 공공데이터의 타입이 맞지 않음 -> 오류 발생
+export default LikeList;
