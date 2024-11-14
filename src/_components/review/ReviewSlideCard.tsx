@@ -9,7 +9,10 @@ type ReviewSlideCardProps = {
   onClickFunc?: () => void;
 };
 
-const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({ review }) => {
+const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({
+  review,
+  onClickFunc
+}) => {
   // 이윤지: 이미지 없는 경우 어떻게 할 지 생각하기
   const imgUrl = review.img.length > 0 ? review.img[0] : "";
 
