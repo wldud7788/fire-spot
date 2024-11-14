@@ -4,6 +4,7 @@ import {
   GOCAMPING_SEARCH,
   GOCAMPING_ALL
 } from "@/_utils/api/apiKey";
+import { QUERYSTRING } from "@/_utils/common/constant";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { NextRequest } from "next/server";
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export const GET = async (request: NextRequest) => {
     let apiUrl;
 
     if (!keyword) {
-      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=50&pageNo=max&MobileOS=ETC&MobileApp=TestApp&_type=json`;
+      apiUrl = `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=50&pageNo=max&${QUERYSTRING}`;
     } else {
       apiUrl = `${GOCAMPING_HOST}${GOCAMPING_SEARCH}?serviceKey=${GOCAMPING_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json&keyword=${encodeURIComponent(keyword)}&pageNo=1&numOfRows=50`;
     }

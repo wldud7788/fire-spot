@@ -3,6 +3,7 @@ import {
   GOCAMPING_HOST,
   GOCAMPING_KEY
 } from "@/_utils/api/apiKey";
+import { QUERYSTRING } from "@/_utils/common/constant";
 import { CampApiResponse } from "@/app/(pages)/camps/types/Camp";
 import { NextResponse } from "next/server";
 
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
   const numOfRows = searchParams.get("numOfRows");
 
   const res = await fetch(
-    `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&MobileOS=ETC&MobileApp=TestApp&_type=json`
+    `${GOCAMPING_HOST}${GOCAMPING_ALL}?serviceKey=${GOCAMPING_KEY}&numOfRows=${numOfRows ? numOfRows : 4044}&pageNo=${page ? page : "max"}&${QUERYSTRING}`
   );
 
   if (!res.ok) {
