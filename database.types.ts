@@ -453,6 +453,7 @@ export type Database = {
           img: string[];
           time: string | null;
           date: string | null;
+          count: number;
         };
         Insert: {
           at: string;
@@ -465,6 +466,7 @@ export type Database = {
           title: string;
           updated?: string | null;
           userId?: string;
+          count: number;
         };
         Update: {
           at?: string;
@@ -477,6 +479,7 @@ export type Database = {
           title?: string;
           updated?: string | null;
           userId?: string;
+          count: number;
         };
         Relationships: [
           {

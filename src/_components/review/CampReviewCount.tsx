@@ -8,6 +8,7 @@ const supabase = createClient();
 
 type CampReviewCountProps = {
   campId: string;
+  count: number;
 };
 
 const CampReviewCount: React.FC<CampReviewCountProps> = ({ campId }) => {
