@@ -56,6 +56,7 @@ const config: Config = {
           "url('/assets/images/common/ico-calendar-arrow-prev.svg')",
         calendarNext:
           "url('/assets/images/common/ico-calendar-arrow-next.svg')",
+        chatUser: "url('/assets/images/common/ico-chat-user.svg')",
         // 체크박스
         chk: "url('/assets/images/common/ico-checkbox.svg')",
         chkOn: "url('/assets/images/common/ico-checkbox-on.svg')",

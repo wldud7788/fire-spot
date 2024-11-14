@@ -8,6 +8,7 @@ import {
   useChatRoomTitle
 } from "@/_components/chat/hooks/useChatRoom";
 import useUser from "@/_hooks/useUser";
+import PageTitle from "@/_components/common/PageTitle";
 
 type Props = {
   params: {
@@ -26,13 +27,19 @@ const ChatRoom = ({ params }: Props) => {
   if (!user) return <></>;
 
   return (
-    <div>
-      <ChatRoomTitleSection chatRoomTitle={chatRoomTitle} />
-      <ChatRoomMessageSection
-        loginUserId={user.id}
-        roomId={roomId}
-        messagesByDate={messagesByDate}
-      />
+    <div className="mb-[60px] mt-[40px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+        <PageTitle text={"대화 모아보기"} />
+        <div className="mb-[30px] mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px]"></div>
+        <div className="overflow-hidden rounded-[12px] bg-[#FFEFE5]">
+          <ChatRoomTitleSection chatRoomTitle={chatRoomTitle} />
+          <ChatRoomMessageSection
+            loginUserId={user.id}
+            roomId={roomId}
+            messagesByDate={messagesByDate}
+          />
+        </div>
+      </div>
     </div>
   );
 };

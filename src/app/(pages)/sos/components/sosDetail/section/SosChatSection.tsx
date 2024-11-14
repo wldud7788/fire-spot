@@ -17,8 +17,8 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (
-    <div className="rounded-[12px] bg-[#FFEFE5] p-[40px]">
-      <ul>
+    <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
+      <ul className="no-scrollbar max-h-[700px] overflow-y-auto">
         {/* 날짜별로 메시지 그룹 출력 */}
         {Object.keys(messagesByDate).map((date) => (
           <li key={date}>
@@ -32,15 +32,16 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
               {messagesByDate[date].map((messageInfo) => (
                 <li
                   key={messageInfo.chatMessage.id}
-                  // 작성자는 오른쪽에 표시되어야하는데 그 조건임
                   className={`mb-10 flex items-start gap-[4px] ${
                     // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
                     loginUserId === messageInfo.chatMessage.user_id
-                      ? "ml-10"
+                      ? "justify-end"
                       : ""
                   }`}
                 >
-                  <div className="h-[45px] w-[45px] overflow-hidden rounded-full bg-[#d9d9d9]">
+                  <div
+                    className={`h-[45px] w-[45px] overflow-hidden rounded-full bg-[#d9d9d9] ${loginUserId === messageInfo.chatMessage.user_id ? "hidden" : ""}`}
+                  >
                     <img
                       className="h-full w-full object-cover"
                       src={
@@ -50,15 +51,21 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
                       alt=""
                     />
                   </div>
-                  <div>
-                    <strong className="color-[#909090] text-[14px]">
+                  <div
+                    className={`${loginUserId === messageInfo.chatMessage.user_id ? "flex flex-col items-end justify-end" : ""}`}
+                  >
+                    <strong className={`color-[#909090] text-[14px]`}>
                       {messageInfo.profile.nickname}
                     </strong>
-                    <div className="flex items-end gap-[7px]">
-                      <p className="rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px] bg-[#FFD0B2] px-[18px] py-[15px] text-[16px]">
+                    <div className={`flex items-end gap-[7px]`}>
+                      <p
+                        className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
+                      >
                         {messageInfo.chatMessage.message}
                       </p>
-                      <p className="pb-[10px] text-[12px] text-[#9b9b9b]">
+                      <p
+                        className={`pb-[10px] text-[12px] text-[#9b9b9b] ${loginUserId === messageInfo.chatMessage.user_id ? "order-0" : ""}`}
+                      >
                         {formatDate_6(messageInfo.chatMessage.created_at)}
                       </p>
                     </div>
