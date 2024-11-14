@@ -77,6 +77,7 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
 
   const onSubmit: SubmitHandler<MeetInsert> = async (data) => {
     const hasSchedule = await checkMeetPostSchedule(id, startDate, endDate);
+
     if (hasSchedule) {
       alert("겹치는 일정이 있습니다.");
     } else {

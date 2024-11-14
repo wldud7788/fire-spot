@@ -5,6 +5,7 @@ export interface MeetWithCamp {
   meet: MeetSelect;
   camp: CampSelect;
   attendee_count: number;
+  chat_room_id: number;
 }
 
 export interface MeetWithCampInsert {
