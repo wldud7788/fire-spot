@@ -12,6 +12,8 @@ import ForecastWeatherComponent from "../weather/FutureWeather";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { useState } from "react";
 import Modal from "../modal/Modal";
+import LikeButton from "../like/LikeButton";
+import ShareButton from "./ShareButton";
 
 type CampDetailProps = {
   paramsId: string;
@@ -34,8 +36,6 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   });
 
   const [isOpen, setIsOpen] = useState(false);
-  const [reviewCount, setReviewCount] = useState<number>(0);
-  const [averageRate, setAverageRate] = useState<number | null>(null);
 
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
@@ -93,21 +93,16 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                       src="/assets/images/common/ico-star-c-big.svg"
                       alt="평점"
                     />
-                    평점:{" "}
-                    {averageRate !== null
-                      ? averageRate.toFixed(2)
-                      : "평점 없음"}
+                    <p>4.9</p>
                   </li>
                   <li>
                     {/* [이윤지 작업] 리뷰 갯수 = 리뷰 ${리뷰 카운트}개  */}
-                    {/* <button
+                    <button
                       type="button"
                       className="bg-reviewArrow bg-right-center-0 bg-no-repeat pr-[13px]"
                     >
-                     
-                      리뷰 갯수: {reviewCount} 개 
-                    </button> */}
-                    리뷰 개수: {reviewCount}
+                      리뷰 00개
+                    </button>
                   </li>
                 </ul>
                 <p className="color-main mt-[15px] text-[16px]">
@@ -116,7 +111,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </p>
                 <dl>
                   <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
-                    캠핑장 소개 리뷰 개수: {reviewCount}
+                    캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.induty && (
@@ -169,28 +164,12 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </dl>
               </div>
               <div className="btn_area mt-[50px] flex items-center gap-[12px]">
-                <button
-                  type="button"
-                  className="bg-main bd-color-main flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border text-[18px]"
-                >
-                  <img
-                    src="/assets/images/camp/btn-camp-bookmark.svg"
-                    alt="스크랩"
-                  />
-                  <p className="text-[18px] font-bold text-[#fff]">
-                    스크랩하기
-                  </p>
-                </button>
-                <button
-                  type="button"
-                  className="flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border border-[#a6a6a6] bg-white text-[18px]"
-                >
-                  <img
-                    src="/assets/images/camp/btn-camp-share.svg"
-                    alt="공유하기"
-                  />
-                  <p className="color-gray02 text-[18px] font-bold">공유하기</p>
-                </button>
+                <LikeButton
+                  campId={camp.contentId}
+                  camp={camp}
+                  variant="detailLike"
+                />
+                <ShareButton />
               </div>
             </div>
           </div>
@@ -341,8 +320,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         {/* TODO: 이윤지
 pr 먼저~
-          1. 리뷰 정책 추가하기  (완료)
-          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기 (어려워요 ㅠ)  
+          1. 리뷰 정책 추가하기 
+          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기
           3. PR 올려서 머지하기
 
           ------ PR 이후 다시 작업
@@ -363,16 +342,15 @@ pr 먼저~
               <ul className="flex items-center">
                 <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  평점:{" "}
-                  {averageRate !== null ? averageRate.toFixed(2) : "평점 없음"}
+                  33
                 </li>
                 <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  리뷰: {reviewCount}개
                   <img
                     src="/assets/images/common/ico-star-c-big.svg"
                     alt="평점"
                   />
+                  <p>4.9</p>
                 </li>
               </ul>
             </div>
@@ -401,12 +379,8 @@ pr 먼저~
           {/* 이윤지 작업 - 리뷰 리스트*/}
           {true ? (
             <>
-              {/* <ReviewWriteModal campId={paramsId} onClose={() => {}} /> */}
-              <CampReviewSlide
-                campId={paramsId}
-                onReviewCountChange={setReviewCount}
-                onAverageRateChange={setAverageRate}
-              />
+              <ReviewWriteModal campId={paramsId} onClose={() => {}} />
+              <CampReviewSlide campId={paramsId} />
             </>
           ) : (
             <NoData text={"등록된 리뷰가 없어요."} />
