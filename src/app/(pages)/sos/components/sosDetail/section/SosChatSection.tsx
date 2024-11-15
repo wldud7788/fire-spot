@@ -92,6 +92,12 @@ const SosChatSection = ({
           className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
           value={messageInput}
           onChange={handleChangeInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(); // Enter 키를 눌렀을 때 호출할 함수
+              e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+            }
+          }}
         />
         <button
           className="absolute bottom-[16px] right-[16px] rounded-[8px] bg-[#F2F2F2] px-[28px] py-[12px]"
