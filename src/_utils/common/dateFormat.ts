@@ -42,11 +42,19 @@ const formatDate_6 = (date: Date | string) => {
   });
 };
 
+/** date -> 2024.10.27 */
+const formatDate_7 = (date: Date | string) => {
+  return format(date, "yyyy.MM.dd", {
+    locale: ko
+  });
+};
+
 export {
   formatDate_1,
   formatDate_2,
   formatDate_3,
   formatDate_4,
   formatDate_5,
-  formatDate_6
+  formatDate_6,
+  formatDate_7
 };
