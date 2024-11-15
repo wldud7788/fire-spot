@@ -215,7 +215,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               {camp.featureNm ? camp.featureNm : camp.intro}
             </p>
           ) : (
-            <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
+            <div className="mt-[30px] w-full max-w-[450px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
               <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
                 등록된 캠핑장 소개가 없어요.
               </p>
