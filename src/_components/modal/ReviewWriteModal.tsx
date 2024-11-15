@@ -215,10 +215,6 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
           </div>
         )}
       </div>
-
-      {/* <button onClick={onClose} className="btn btn-secondary">
-        닫기
-      </button> */}
     </div>
   );
 };
