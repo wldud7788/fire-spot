@@ -6,12 +6,15 @@ import SearchBar from "../search/searchBar/SearchBar";
 import { TAGS } from "@/_utils/common/constant";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 import { Menu, X } from "lucide-react";
+import useDropdown from "@/_hooks/useDropdown";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTags, setShowTags] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showSearch, setSearch] = useState(true);
+  // 모바일 메뉴의 드롭다운 관리
+  const { isDropdownOpen, toggleDropdown, closeDropdown, dropdownRef } =
+    useDropdown("mobile");
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 64) {
@@ -76,10 +79,10 @@ const Header = () => {
             <HeaderAuth />
             {/* 모바일 메뉴 버튼 */}
             <button
-              className="ml-2 lg:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="ml-2 hidden max-600:block"
+              onClick={toggleDropdown}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isDropdownOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -90,27 +93,27 @@ const Header = () => {
         </div>
 
         {/* 모바일 메뉴 */}
-        {isMenuOpen && (
+        {isDropdownOpen && (
           <nav className="absolute left-0 right-0 top-full z-50 bg-white px-5 py-4 shadow-md lg:hidden">
             <div className="flex flex-col gap-4">
               <Link
                 href={"/beginner"}
                 className="text-lg font-semibold"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeDropdown}
               >
                 캠핑가이드
               </Link>
               <Link
                 href={"/camps"}
                 className="text-lg font-semibold"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeDropdown}
               >
                 캠핑장
               </Link>
               <Link
                 href={SERVER_PAGE_URL.meets}
                 className="text-lg font-semibold"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeDropdown}
               >
                 커뮤니티
               </Link>
