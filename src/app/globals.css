@@ -266,6 +266,37 @@ body {
     background: #a6a6a6;
     transform: translateY(-50%);
   }
+  .camp-slide-wrap .swiper {
+    padding-bottom: 30px;
+  }
+  .camp-slide-wrap .swiper-button-prev,
+  .camp-slide-wrap .swiper-button-next {
+    top: calc(50% - 30px);
+    width: 48px;
+  }
+  .camp-slide-wrap .swiper-button-prev:after,
+  .camp-slide-wrap .swiper-button-next:after {
+    width: 100%;
+    color: rgba(0, 0, 0, 0);
+    background: url("/assets/images/main/ico-main-slide-arrow.svg") no-repeat
+      center center;
+    transition: all 0.5s ease;
+  }
+  .camp-slide-wrap .swiper-button-next:after {
+    transform: rotate(180deg);
+  }
+  .camp-slide-wrap .swiper-button-prev:hover:after {
+    transform: scale(1.1);
+  }
+  .camp-slide-wrap .swiper-button-next:hover:after {
+    transform: rotate(180deg) scale(1.1);
+  }
+  .camp-slide-wrap .swiper {
+    height: 100%;
+  }
+  .camp-slide-wrap .swiper .swiper-pagination-bullet-active {
+    background: #ff924c;
+  }
   /* my page */
   .li-before-line:before {
     content: "";
