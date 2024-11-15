@@ -23,6 +23,7 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
   const [averageRate, setAverageRate] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<ReviewItem | null>(null);
+  const [slidePerview, setSlidePerview] = useState<number>(3);
   const handleModalOpen = (review: ReviewItem) => {
     setSelected(review);
     setIsOpen(true);
@@ -54,6 +55,22 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
         onAverageRateChange(calculatedAverage);
       }
     }
+
+    // 화면 크기에 따라 slidePerview 값 변경
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width <= 767) {
+        setSlidePerview(1);
+      } else if (width <= 1160) {
+        setSlidePerview(2);
+      } else {
+        setSlidePerview(3); // 기본값
+      }
+    };
+
+    handleResize(); // 초기 렌더링 시 호출
+    window.addEventListener("resize", handleResize); // 윈도우 리사이즈 이벤트 등록
+    return () => window.removeEventListener("resize", handleResize); // 정리
   }, [reviews, onAverageRateChange]);
 
   // 리뷰 데이터가 변경될 떄마다 갯수를 부모에게 전달
@@ -70,7 +87,7 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
   return (
     <>
       <div className="camp-slide-wrap">
-        <Slide slidePerview={3} spaceBetween={10}>
+        <Slide slidePerview={slidePerview} spaceBetween={10}>
           {reviews.map((review) => (
             <ReviewSlideCard
               key={review.id}
