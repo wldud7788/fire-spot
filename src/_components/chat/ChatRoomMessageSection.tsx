@@ -125,26 +125,6 @@ const ChatRoomMessageSection = ({
         </button>
       </div>
     </div>
-    // <div>
-    //   {chatMessage.map((message) => (
-    //     <div
-    //       key={message.chatMessage.id}
-    //       className={cn(
-    //         loginUserId === message.chatMessage.user_id ? "ml-20" : "",
-    //         "mb-10"
-    //       )}>
-    //       <p>{message.profile.nickname}</p>
-    //       <p>{message.chatMessage.message}</p>
-    //       <p>
-    //         {format(message.chatMessage.created_at, "aa hh:mm", {
-    //           locale: ko
-    //         })}
-    //       </p>
-    //     </div>
-    //   ))}
-    //   <input type="text" value={messageInput} onChange={handleChangeInput} />
-    //   <button onClick={sendMessage}>버튼</button>
-    // </div>
   );
 };
 

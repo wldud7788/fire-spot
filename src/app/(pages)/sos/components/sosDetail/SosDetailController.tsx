@@ -1,13 +1,10 @@
 "use client";
 import { ChatRoomSelect } from "@/_components/chat/types/chat.types";
-import useSosRemainingTime from "../../hooks/useSosRemainingTime";
 import { SosWithCamp } from "../../types/sos.types";
 import SosRemainingTimeSection from "./section/SosRemainingTimeSection";
 import SosTagSection from "./section/SosTagSection";
 import SosTitleSection from "./section/SosTitleSection";
 import SosUserSection from "./section/SosUserSection";
-import SosChatSection from "./section/SosChatSection";
-import { useChatRoomMessage } from "@/_components/chat/hooks/useChatRoom";
 import useUser from "@/_hooks/useUser";
 import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChatSubscriptionMessageList";
 import SosContentSection from "./section/SosContentSection";
