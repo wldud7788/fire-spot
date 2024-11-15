@@ -20,6 +20,7 @@ export const useChatSubscriptionMessageList = ({
 
   // 마지막으로 읽은 message_id를 계속 추적함 (안 읽은 메시지 수 계산을 위함)
   const lastChatMessageIdRef = useRef<number | null>(null);
+  const lastChatMessageUserIdRef = useRef<string | null>(null);
 
   /** 채팅방 입/퇴장 시 마지막 읽은 메시지에 대한 처리 */
   const toggleChatRoomInOut = async (last_read_message_id: number | null) => {
@@ -42,6 +43,7 @@ export const useChatSubscriptionMessageList = ({
     const message = await fetchLastChatMessage(roomId);
     if (message) {
       lastChatMessageIdRef.current = message.id;
+      lastChatMessageUserIdRef.current = message.user_id;
     }
   };
 
@@ -63,6 +65,7 @@ export const useChatSubscriptionMessageList = ({
           // 신규 message_id를 계속 참조함 (언마운트시 마지막으로 읽은 메시지 수 계산을 위함)
           const chatMessage = payload.new as ChatMessageSelect;
           lastChatMessageIdRef.current = chatMessage.id;
+          lastChatMessageUserIdRef.current = chatMessage.user_id;
 
           queryClient.invalidateQueries({
             queryKey: queryKey.chat.chatRoomMessage(roomId)
@@ -77,4 +80,6 @@ export const useChatSubscriptionMessageList = ({
       channel.unsubscribe();
     };
   }, []);
+
+  return { lastChatMessageUserIdRef };
 };

@@ -5,20 +5,42 @@ import {
 } from "@/_components/chat/types/chat.types";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
 import { profile } from "console";
-import React from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
+  lastChatMessageUserIdRef: MutableRefObject<string | null>;
 };
-const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
+const SosChatSection = ({
+  loginUserId,
+  roomId,
+  messagesByDate,
+  lastChatMessageUserIdRef
+}: Props) => {
   const { messageInput, handleChangeInput, sendMessage } =
     useChatRoomMessageSection(roomId, loginUserId);
+
+  // ul 요소에 대한 ref
+  const messageListRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    // messagesByDate가 변경될 때마다 마지막 메시지로 스크롤을 이동
+    if (
+      messageListRef.current &&
+      loginUserId === lastChatMessageUserIdRef.current
+    ) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [messagesByDate]); // messagesByDate가 변경될 때마다 실행
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (
     <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
-      <ul className="no-scrollbar max-h-[700px] overflow-y-auto">
+      <ul
+        className="no-scrollbar max-h-[700px] overflow-y-auto"
+        ref={messageListRef}
+      >
         {/* 날짜별로 메시지 그룹 출력 */}
         {Object.keys(messagesByDate).map((date) => (
           <li key={date}>

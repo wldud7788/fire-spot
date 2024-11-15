@@ -25,7 +25,9 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   const loginUserId = user?.id || "";
 
   const { messagesByDate } = useChatSosMessage(roomId);
-  useChatSubscriptionMessageList({ roomId });
+  const { lastChatMessageUserIdRef } = useChatSubscriptionMessageList({
+    roomId
+  });
   if (!user) return <></>;
 
   // TODO 민규님: SOS 상세 섹션별 분리
@@ -40,6 +42,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
         messagesByDate={messagesByDate}
         loginUserId={loginUserId}
         roomId={roomId}
+        lastChatMessageUserIdRef={lastChatMessageUserIdRef}
       />
       {/* <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />
