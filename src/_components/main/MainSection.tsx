@@ -9,7 +9,9 @@ const MainSection = ({ background, children }: MainSectionProps) => {
       className="main_section py-[40px]"
       style={{ background: `${background}` }}
     >
-      <div className="m-auto w-full max-w-[1360px] px-5">{children}</div>
+      <div className="m-auto w-full max-w-[1360px] px-[30px] max-767:px-[15px]">
+        {children}
+      </div>
     </div>
   );
 };

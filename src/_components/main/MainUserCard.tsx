@@ -66,7 +66,7 @@ const MainUserCard = () => {
           <ul className="flex items-center justify-center">
             <li className="main-user-before relative mr-[9px] w-[calc(50%-9px)] pr-[9px]">
               <strong className="flex items-center gap-[3px] text-[16px] font-semibold">
-                <span className="line-clamp-1 flex-1 max-1280:text-[14px] max-989:text-right">
+                <span className="line-clamp-1 flex-1 text-right max-1280:text-[14px]">
                   {userWithProfile.profile.nickname ||
                     userWithProfile.profile.user_name}
                 </span>
@@ -74,7 +74,7 @@ const MainUserCard = () => {
               </strong>
             </li>
             <li className="w-[calc(50%-9px)]">
-              <p className="color-gray04 text-[16px] font-semibold uppercase max-1280:text-[14px] max-989:text-left">
+              <p className="color-gray04 text-left text-[16px] font-semibold uppercase max-1280:text-[14px]">
                 {userWithProfile.user.app_metadata.provider || ""} 계정
               </p>
             </li>
