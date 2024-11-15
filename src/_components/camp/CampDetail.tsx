@@ -263,9 +263,19 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               예약 가능한 날:{" "}
               {camp.operDeCl ? camp.operDeCl : "정보를 확인할 수 없습니다."}
             </li>
+            {/* <li>
+              예약 사이트: 
+            </li>
+            {camp.resveUrl && <a href={camp.resveUrl}></a>} */}
             <li className="color-gray01 bg-polygon bg-left-center-0 bg-no-repeat pl-[23px] text-[16px]">
               예약 사이트:{" "}
-              {camp.resveUrl ? camp.resveUrl : "정보를 확인할 수 없습니다."}
+              {camp.resveUrl ? (
+                <a href={camp.resveUrl} target="_blank" className="underline">
+                  {camp.resveUrl}
+                </a>
+              ) : (
+                "정보를 확인할 수 없습니다."
+              )}
             </li>
           </ul>
           <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
