@@ -44,7 +44,7 @@ const HeaderAuth = () => {
             <img
               src={avatarUrl}
               alt="Profile"
-              className="h-full w-full rounded-full object-cover max-600:hidden"
+              className="hidden h-full w-full rounded-full object-cover lg:block"
             />
           ) : (
             <div className="h-full w-full bg-profile" />
