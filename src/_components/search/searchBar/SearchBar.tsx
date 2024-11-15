@@ -133,19 +133,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant, className }) => {
             validatedValue={searchState.validatedValue}
           />
         </div>
-        {variantStyles.showButton && (
-          <button
-            type="submit"
-            className={cn(
-              variantStyles.button,
-              (isLoading || !!searchState.validationError) &&
-                "cursor-not-allowed opacity-50"
-            )}
-            disabled={isLoading || !!searchState.validationError}
-          >
-            검색
-          </button>
-        )}
       </form>
     </div>
   );

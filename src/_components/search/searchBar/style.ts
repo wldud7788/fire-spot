@@ -1,14 +1,14 @@
 export const variants = {
   main: {
     container: "",
-    input: "h-[60px] text-lg max-w-[800px]",
-    button: "h-[60px] button_style ",
+    input: "h-[60px] text-lg",
+    button: "",
     showButton: true,
     showRegions: true
   },
   header: {
-    container: "w-[250px] sm:w-[300px] md:w-[400px] text-sm",
-    input: "h-[40px] ",
+    container: "w-full",
+    input: "h-[40px] w-[400px]",
     button: "",
     showButton: false,
     showRegions: false

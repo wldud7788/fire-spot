@@ -8,6 +8,7 @@ import useDropdown from "@/_hooks/useDropdown";
 
 const HeaderAuth = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const { dropdownRef, isDropdownOpen, toggleDropdown, closeDropdown } =
     useDropdown("header");
@@ -17,6 +18,7 @@ const HeaderAuth = () => {
     const fetchUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
+      setAvatarUrl(currentUser?.user_metadata.avatar_url);
       setLoading(false);
     };
     fetchUser();
@@ -34,10 +36,20 @@ const HeaderAuth = () => {
         <Link href={"/sign-in"}>로그인</Link>
       ) : (
         <div
-          className="relative inline-block h-10 w-10 cursor-pointer bg-profile bg-center bg-no-repeat"
+          className="relative inline-block h-10 w-10 cursor-pointer bg-center bg-no-repeat"
           ref={dropdownRef}
           onClick={toggleDropdown}
         >
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Profile"
+              className="hidden h-full w-full rounded-full object-cover lg:block"
+            />
+          ) : (
+            <div className="h-full w-full bg-profile" />
+          )}
+
           {isDropdownOpen && (
             <div className="absolute right-0 top-10 w-48 rounded-lg border border-gray-200 bg-white shadow-lg">
               <ul className="py-2">
