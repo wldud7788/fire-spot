@@ -28,8 +28,8 @@ const ChatRoomMessageSection = ({
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 
   return (
-    <div className="relative p-[36px]">
-      <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
+    <div className="relative rounded-[12px] bg-[#FFEFE5] p-[36px]">
+      <div className="min-h-[400px] p-[40px]">
         <ul
           className="no-scrollbar max-h-[700px] overflow-y-auto"
           ref={messageListRef}
@@ -102,27 +102,27 @@ const ChatRoomMessageSection = ({
             </li>
           ))}
         </ul>
-      </div>
-      {/* 입력 필드 */}
-      <div className="relative">
-        <input
-          type="text"
-          className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
-          value={messageInput}
-          onChange={handleChangeInput}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage(); // Enter 키를 눌렀을 때 호출할 함수
-              e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
-            }
-          }}
-        />
-        <button
-          className={`absolute bottom-[16px] right-[16px] rounded-[8px] px-[28px] py-[12px] ${activeSendButton ? "bg-[#FF731A] text-white" : "bg-[#F2F2F2]"}`}
-          onClick={sendMessage}
-        >
-          전송
-        </button>
+        {/* 입력 필드 */}
+        <div className="relative">
+          <input
+            type="text"
+            className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
+            value={messageInput}
+            onChange={handleChangeInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage(); // Enter 키를 눌렀을 때 호출할 함수
+                e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+              }
+            }}
+          />
+          <button
+            className={`absolute bottom-[16px] right-[16px] rounded-[8px] px-[28px] py-[12px] ${activeSendButton ? "bg-[#FF731A] text-white" : "bg-[#F2F2F2]"}`}
+            onClick={sendMessage}
+          >
+            전송
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
           <div className="inner">
             <div className="ibox h-[160px] overflow-hidden">
               <img
-                className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
+                className="h-full w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
                 src={feed.camp?.firstImageUrl || ""}
                 alt={`${feed.title} 이미지`}
               />

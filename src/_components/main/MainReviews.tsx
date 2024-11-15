@@ -66,7 +66,7 @@ const MainReviews = () => {
       {error && <p className="text-red-500">{error}</p>}
       <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
         {reviews.map((review) => (
-          <li key={review.id}>
+          <li key={review.id} className="w-[calc(20%-10px)]">
             <ReviewCard
               feed={review}
               type={"main"}
