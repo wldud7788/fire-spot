@@ -16,7 +16,19 @@ export const useChatSosMessage = (roomId: number) => {
 
   const messagesByDate = convertMessageListToMessagesByDate(data);
 
+  if (!messagesByDate) {
+    return {};
+  }
+
+  const dateArr = Object.keys(messagesByDate || {});
+  // const lastDate = dateArr[dateArr.length - 1];
+
+  const lastDate = dateArr.slice(-1)[0];
+
+  const lastDateMessages = messagesByDate[lastDate];
+  const lastMessage = lastDateMessages.slice(-1)[0];
+
   if (error) throw new Error(error.message);
 
-  return { messagesByDate };
+  return { messagesByDate, lastMessage };
 };

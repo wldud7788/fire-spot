@@ -1,14 +1,15 @@
-import { MessagesByDate } from "./types/chat.types";
+import { ChatRoomMessageInfo, MessagesByDate } from "./types/chat.types";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { useChatRoomMessageSection } from "./hooks/useChatRoomMessageSection";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
+  lastMessage: ChatRoomMessageInfo | undefined;
   messageListRef: MutableRefObject<HTMLUListElement | null>;
 };
 
@@ -16,10 +17,57 @@ const ChatRoomMessageSection = ({
   loginUserId,
   roomId,
   messagesByDate,
+  lastMessage,
   messageListRef
 }: Props) => {
   const { messageInput, handleChangeInput, sendMessage, activeSendButton } =
     useChatRoomMessageSection(roomId, loginUserId);
+  const messageRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
+  const [firstScroll, setFirstScroll] = useState(false);
+
+  useEffect(() => {
+    // lastMessage가 정의되고, 마지막 메시지가 있을 때 포커스를 맞추기
+
+    if (!firstScroll) {
+      if (
+        lastMessage &&
+        lastMessage.chatMessage &&
+        lastMessage.chatMessage.id &&
+        messagesByDate
+      ) {
+        setFirstScroll(true);
+        const lastMessageId = lastMessage.chatMessage.id;
+        const messageElement = messageRefs.current[lastMessageId];
+
+        if (messageElement) {
+          // 메시지로 스크롤
+          messageElement.scrollIntoView({
+            behavior: "instant",
+            block: "start"
+          });
+        }
+
+        console.log("lastMessageId", lastMessageId);
+
+        // messagesByDate에서 마지막 메시지를 찾음
+        // Object.keys(messagesByDate).forEach((date) => {
+        //   messagesByDate[date].forEach((messageInfo) => {
+        //     if (messageInfo.chatMessage.id === lastMessageId) {
+        //       // 해당 메시지를 ref로 저장해두고
+        //       const messageElement = messageRefs.current[lastMessageId];
+        //       if (messageElement) {
+        //         // 메시지로 스크롤
+        //         messageElement.scrollIntoView({
+        //           behavior: "instant",
+        //           block: "start"
+        //         });
+        //       }
+        //     }
+        //   });
+        // });
+      }
+    }
+  }, [messagesByDate]);
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 
@@ -43,6 +91,15 @@ const ChatRoomMessageSection = ({
                 {messagesByDate[date].map((messageInfo, index) => (
                   <li
                     key={messageInfo.chatMessage.id}
+                    ref={(el) => {
+                      // 마지막 메시지에만 ref를 설정하여 포커스를 맞추기
+                      if (
+                        messageInfo.chatMessage.id ===
+                        lastMessage?.chatMessage.id
+                      ) {
+                        messageRefs.current[lastMessage.chatMessage.id] = el;
+                      }
+                    }}
                     className={`mb-10 flex items-start gap-[4px] ${
                       // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
                       loginUserId === messageInfo.chatMessage.user_id
