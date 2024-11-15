@@ -1,8 +1,5 @@
 "use client";
-
-import NoData from "@/_components/common/NoData";
 import LikeList from "@/_components/like/LikeList";
-
 const Likes: React.FC = () => {
   return (
     <div className="flex flex-col gap-[60px]">
