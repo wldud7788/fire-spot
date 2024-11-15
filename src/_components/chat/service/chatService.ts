@@ -254,7 +254,6 @@ export const patchChatAttendee = async (
 };
 
 export const fetchChatRoomBySosId = async (sosId: number) => {
-  console.log("sosId", sosId);
   try {
     const { data, error } = await supabase
       .from("chat_room")

@@ -3,27 +3,33 @@ import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { useChatRoomMessageSection } from "./hooks/useChatRoomMessageSection";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
+import { MutableRefObject, useEffect, useRef } from "react";
 
 type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
+  messageListRef: MutableRefObject<HTMLUListElement | null>;
 };
 
 const ChatRoomMessageSection = ({
   loginUserId,
   roomId,
-  messagesByDate
+  messagesByDate,
+  messageListRef
 }: Props) => {
-  const { messageInput, handleChangeInput, sendMessage } =
+  const { messageInput, handleChangeInput, sendMessage, activeSendButton } =
     useChatRoomMessageSection(roomId, loginUserId);
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 
   return (
     <div className="relative p-[36px]">
-      <div className="min-h-[400px]">
-        <ul className="no-scrollbar max-h-[700px] overflow-y-auto">
+      <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
+        <ul
+          className="no-scrollbar max-h-[700px] overflow-y-auto"
+          ref={messageListRef}
+        >
           {/* 날짜별로 메시지 그룹 출력 */}
           {Object.keys(messagesByDate).map((date) => (
             <li key={date}>
@@ -34,7 +40,7 @@ const ChatRoomMessageSection = ({
               </div>
               {/* 날짜 하위 메시지 목록 출력 */}
               <ul className="mb-10">
-                {messagesByDate[date].map((messageInfo) => (
+                {messagesByDate[date].map((messageInfo, index) => (
                   <li
                     key={messageInfo.chatMessage.id}
                     className={`mb-10 flex items-start gap-[4px] ${
@@ -59,7 +65,9 @@ const ChatRoomMessageSection = ({
                     <div
                       className={`${loginUserId === messageInfo.chatMessage.user_id ? "flex flex-col items-end justify-end" : ""}`}
                     >
-                      <strong className={`color-[#909090] text-[14px]`}>
+                      <strong
+                        className={`color-[#909090] text-[14px] ${loginUserId === messageInfo.chatMessage.user_id ? "hidden" : ""}`}
+                      >
                         {messageInfo.profile.nickname}
                       </strong>
                       <div className={`flex items-end gap-[7px]`}>
@@ -89,9 +97,15 @@ const ChatRoomMessageSection = ({
           className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
           value={messageInput}
           onChange={handleChangeInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(); // Enter 키를 눌렀을 때 호출할 함수
+              e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+            }
+          }}
         />
         <button
-          className="absolute bottom-[16px] right-[16px] rounded-[8px] bg-[#F2F2F2] px-[28px] py-[12px]"
+          className={`absolute bottom-[16px] right-[16px] rounded-[8px] px-[28px] py-[12px] ${activeSendButton ? "bg-[#FF731A] text-white" : "bg-[#F2F2F2]"}`}
           onClick={sendMessage}
         >
           전송

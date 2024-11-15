@@ -38,7 +38,7 @@ export const getUserProfile = async (userId: string) => {
     .single();
 
   if (error) {
-    throw new Error(error.message);
+    return;
   }
   return userProfile;
 };
