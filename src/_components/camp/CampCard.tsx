@@ -32,11 +32,13 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
 
           {!type ? (
             <div className="camp_info pb-[60px] pt-[20px]">
-              <h2 className="text-[20px] font-bold">{camp.facltNm}</h2>
-              <p className="mb-[8px] mt-[5px] block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
+              <h2 className="line-clamp-1 text-[20px] font-bold">
+                {camp.facltNm}
+              </h2>
+              <p className="mb-[8px] mt-[5px] line-clamp-1 block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
                 {camp.addr1}
               </p>
-              <p className="color-gray02 line-clamp-3 text-[12px]">
+              <p className="color-gray02 line-clamp-3 min-h-[51px] text-[12px]">
                 {camp.featureNm ? camp.featureNm : camp.intro}
               </p>
               <div className="info mt-[10px]">

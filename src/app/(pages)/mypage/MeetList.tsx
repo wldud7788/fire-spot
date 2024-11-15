@@ -8,17 +8,18 @@ const MeetList = () => {
   const { meetWithCampList, isProgress, toggleShowType } = useMeetList();
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList, isProgress);
 
+  console.log("isProgress ===>", isProgress);
   return (
     <div className="flex flex-col">
       <div className="mb-[40px] flex items-center">
         <button
-          className="rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
+          className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${isProgress && "bg-main bd-color-main text-white"}`}
           onClick={() => toggleShowType(true)}
         >
           모집중
         </button>
         <button
-          className="ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
+          className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${!isProgress && "bg-main bd-color-main text-white"}`}
           onClick={() => toggleShowType(false)}
         >
           마감

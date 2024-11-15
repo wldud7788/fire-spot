@@ -40,16 +40,16 @@ const CalendarCell = ({
   const meetCardContentBg =
     hoverItem === meetCardId ? "bg-[#FF731A]" : "bg-[#FFD0B2]";
 
+  console.log("stampCardList ====>", stampCardList);
+
   return (
-    <li className="flex min-h-[105px] w-full flex-col rounded-[10px] border">
+    <li className="relative flex min-h-[105px] w-full flex-col justify-between rounded-[10px] border">
       <section className="flex h-[20px] w-full px-[10px] py-[7px]">
         <p className="color-gray01 text-[16px]">{format(day, "d")}</p>
-      </section>
-      <section className="relative flex flex-col justify-end">
         <div className="h-[50px]">
           {meetCard && (
             <div
-              className={`absolute top-[10px] z-50 cursor-pointer p-[6px] ${meetCardContentBg} rounded-[10px]`}
+              className={`absolute left-0 top-[35px] z-50 cursor-pointer py-[6px] ${meetCardContentBg} rounded-[10px]`}
               style={{ ...meetCardStyle }}
               onMouseOver={() => handleHoverItem(meetCardId)}
               onMouseLeave={() => handleHoverItem("")}
@@ -63,12 +63,18 @@ const CalendarCell = ({
             </div>
           )}
         </div>
-        <ul className="flex w-full flex-row-reverse flex-wrap justify-between gap-2 p-[10px]">
+      </section>
+      <section className="relative flex flex-col justify-end">
+        <ul className="relative flex h-[25px] w-full flex-wrap justify-end gap-2">
           {showStamp &&
-            stampCardList.map((stamp) => (
+            stampCardList.map((stamp, idx) => (
               <div
                 key={stamp.id}
-                className="flex w-[calc(33%-8px)] flex-row-reverse items-center"
+                className={`absolute bottom-[5px] flex items-center pr-[5px]`}
+                style={{
+                  right: `${6 * idx}px`,
+                  zIndex: idx
+                }}
               >
                 <div className="h-[23px] w-[20px] bg-stamp bg-cover bg-center" />
               </div>
