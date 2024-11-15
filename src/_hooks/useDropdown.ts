@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
 
-const useDropdown = (dropdownType: "main" | "header" | "search") => {
+const useDropdown = (
+  dropdownType: "main" | "header" | "search" | "mobile" | null
+) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const isTogglingRef = useRef(false);

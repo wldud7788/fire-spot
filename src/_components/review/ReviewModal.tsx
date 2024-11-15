@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "../modal/Modal";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 
@@ -30,7 +30,10 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
         <img src="/assets/images/ico-avatar.svg" alt="" />
       )}
       {/* 작성자 닉네임 */}
-      <p>{selected?.profile?.nickname}님의 후기입니다.</p>
+      <p>
+        {selected?.profile?.nickname || selected?.profile?.user_name}님의
+        후기입니다.
+      </p>
       <button>좋아요 버튼</button>
       {selected?.likes ? (
         <p>좋아요 수 0개</p>

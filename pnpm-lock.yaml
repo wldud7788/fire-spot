@@ -37,6 +37,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       lucide-react:
         specifier: ^0.456.0
         version: 0.456.0(react@18.3.1)
@@ -77,6 +80,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(@types/react@18.3.11)(react@18.3.1)
     devDependencies:
+      "@types/lodash":
+        specifier: ^4.17.13
+        version: 4.17.13
       "@types/navermaps":
         specifier: ^3.7.8
         version: 3.7.8
@@ -1042,6 +1048,12 @@ packages:
     resolution:
       {
         integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+      }
+
+  "@types/lodash@4.17.13":
+    resolution:
+      {
+        integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==
       }
 
   "@types/navermaps@3.7.8":
@@ -2890,6 +2902,12 @@ packages:
     resolution:
       {
         integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==
+      }
+
+  lodash@4.17.21:
+    resolution:
+      {
+        integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
       }
 
   log-symbols@5.1.0:
@@ -4950,6 +4968,8 @@ snapshots:
 
   "@types/json5@0.0.29": {}
 
+  "@types/lodash@4.17.13": {}
+
   "@types/navermaps@3.7.8":
     dependencies:
       "@types/geojson": 7946.0.14
@@ -6172,6 +6192,8 @@ snapshots:
   lodash.templatesettings@4.2.0:
     dependencies:
       lodash._reinterpolate: 3.0.0
+
+  lodash@4.17.21: {}
 
   log-symbols@5.1.0:
     dependencies:

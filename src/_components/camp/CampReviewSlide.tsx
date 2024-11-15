@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
-import ReviewModal2 from "../review/ReviewModal";
+
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import { useQuery } from "@tanstack/react-query";
+import ReviewModal from "../review/ReviewModal";
 
 const supabase = createClient();
 
@@ -36,7 +37,7 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
     queryFn: async () => {
       const reviewList = await supabase
         .from("review")
-        .select("*,camp(*)")
+        .select("*,camp(*),profile(*)")
         .eq("campId", campId);
       return reviewList.data as ReviewItem[];
     },
@@ -97,7 +98,7 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
           ))}
         </Slide>
       </div>
-      <ReviewModal2
+      <ReviewModal
         isOpen={isOpen}
         selected={selected}
         handleModalClose={handleModalClose}

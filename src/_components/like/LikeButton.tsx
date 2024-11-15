@@ -9,9 +9,15 @@ import React, { useEffect, useState } from "react";
 interface LikeButtonProps {
   campId: string;
   camp: CampSelect | Camp;
+  variant?: `default` | "detailLike";
+  className?: string;
 }
 
-const LikeButton: React.FC<LikeButtonProps> = ({ campId, camp }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({
+  campId,
+  camp,
+  variant = "default"
+}) => {
   const supabase = createClient();
   const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -110,21 +116,61 @@ const LikeButton: React.FC<LikeButtonProps> = ({ campId, camp }) => {
     handleToggleLike();
   };
 
+  const getButtonStyles = () => {
+    if (variant === "default") {
+      return "absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center max-1280:right-[10px] max-1280:top-[10px]";
+    }
+    if (variant === "detailLike") {
+      return `flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border border-[#a6a6a6] bg-white text-[18px] max-1280:h-[50px] max-1280:text-[16px] ${(
+        <img
+          src={
+            Liked
+              ? "/assets/images/camp/btn-camp-detail-like-active.svg"
+              : "/assets/images/camp/btn-camp-detail-like.svg"
+          }
+          alt={Liked ? "좋아요 해제" : "좋아요 추가"}
+        />
+      )}`;
+    }
+  };
+  const renderButtonContent = () => {
+    if (variant === "default") {
+      return (
+        <img
+          src={
+            Liked
+              ? "/assets/images/camp/btn-camp-like-active.svg"
+              : "/assets/images/camp/btn-camp-like.svg"
+          }
+          alt={Liked ? "좋아요 해제" : "좋아요 추가"}
+        />
+      );
+    }
+    if (variant === "detailLike") {
+      return (
+        <>
+          <img
+            src={
+              Liked
+                ? "/assets/images/camp/btn-camp-detail-like-active.svg"
+                : "/assets/images/camp/btn-camp-detail-like.svg"
+            }
+            alt={Liked ? "좋아요 해제" : "좋아요 추가"}
+          />
+          <p className="color-gray02 text-[18px] font-bold">좋아요</p>
+        </>
+      );
+    }
+  };
+
   return (
     <button
       type="button"
       onClick={handleClick}
-      className="absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center max-1280:right-[10px] max-1280:top-[10px]"
+      className={getButtonStyles()}
       disabled={isLoading}
     >
-      <img
-        src={
-          Liked
-            ? "/assets/images/camp/btn-camp-like-active.svg"
-            : "/assets/images/camp/btn-camp-like.svg"
-        }
-        alt={Liked ? "좋아요 해제" : "좋아요 추가"}
-      />
+      {renderButtonContent()}
     </button>
   );
 };
