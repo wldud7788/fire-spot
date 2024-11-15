@@ -25,7 +25,7 @@ const Modal = ({
   };
   return (
     <div
-      className={`modal fixed left-0 top-0 h-full w-full bg-[rgba(0,0,0,.35)] ${className ? className : ""} flex items-center justify-center`}
+      className={`modal fixed left-0 top-0 z-[9999] h-full w-full bg-[rgba(0,0,0,.35)] ${className ? className : ""} flex items-center justify-center`}
       onClick={handleBackgroundClick}
     >
       <div
@@ -33,8 +33,15 @@ const Modal = ({
         style={{ width: `${width}px` }}
       >
         <div className="modal_inner">{children}</div>
-        <button type="button" className="modal_close_btn" onClick={onClose}>
-          닫기
+        <button
+          type="button"
+          className="modal_close_btn absolute right-[15px] top-[15px]"
+          onClick={onClose}
+        >
+          <img
+            src="/assets/images/common/ico-modal-close.svg"
+            alt="모달 닫기"
+          />
         </button>
       </div>
     </div>
