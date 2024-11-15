@@ -96,3 +96,18 @@ export const unfollowUser = async (
     throw error;
   }
 };
+
+export const fetchBookmarks = async () => {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+  if (!session) {
+    return;
+  }
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select("*")
+    .eq("userId", session.user.id);
+  console.log("data", data);
+  return data;
+};
