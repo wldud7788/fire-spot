@@ -5,6 +5,7 @@ import { createClient } from "@/_utils/supabase/client";
 import FollowsCount from "@/_components/follower/FollowsCount";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
+  fetchBookmarks,
   getFollowerData,
   getFollowingData
 } from "@/_utils/service/followService";
@@ -21,6 +22,7 @@ const UserCard: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [reviewCount, setReviewCount] = useState<number>(0); // 모임 갯수 상태
   const [meetingCount, setMeetingCount] = useState<number>(0); // 모임 갯수 상태
+  const [likeCount, setLikeCount] = useState<number>(0);
   const [isProfile, setIsProfile] = useState<boolean>(false);
   const [isEditingImage, setIsEditingImage] = useState(false); // 프로필 사진 수정 상태
   const [isEditingNickname, setIsEditingNickname] = useState(false); // 닉네임 수정 상태
@@ -86,12 +88,16 @@ const UserCard: React.FC = () => {
         .select("*", { count: "exact" })
         .eq("user_id", userId);
 
+      const { count: likecount } = await supabase
+        .from("bookmarks")
+        .select("*", { count: "exact" })
+        .eq("userId", userId);
+      setLikeCount(likecount ?? 0);
+
       setReviewCount(reviewCount ?? 0);
 
       setMeetingCount(meetingCount ?? 0);
-    } catch (error) {
-      console.error("Error fetching counts:", error);
-    }
+    } catch (error) {}
   };
 
   const handleNicknameUpdate = async () => {
@@ -250,7 +256,7 @@ const UserCard: React.FC = () => {
             className="mb-[5px]"
           />
           <p className="text-[16px]">스크랩</p>
-          <span className="text-[18px] font-bold">0</span>
+          <span className="text-[18px] font-bold">{likeCount}</span>
         </li>
         <li className="flex flex-col items-center justify-center">
           <img
