@@ -116,7 +116,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </p>
                 <dl>
                   <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
-                    캠핑장 소개 리뷰 개수: {reviewCount}
+                    캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.induty && (
