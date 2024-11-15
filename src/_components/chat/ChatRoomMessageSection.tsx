@@ -23,8 +23,6 @@ const ChatRoomMessageSection = ({
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 
-  console.log("activeSendButton", activeSendButton);
-
   return (
     <div className="relative p-[36px]">
       <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">

@@ -26,8 +26,6 @@ export const useChatRoomMessageSection = (
       user_id: loginUserId
     } as ChatMessageInsert;
 
-    console.log('"messageInput"', messageInput);
-
     if (activeSendButton) {
       await postChatMessage(messagePost);
       setMessageInput("");
