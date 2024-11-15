@@ -27,7 +27,7 @@ const MainUserCard = () => {
     router.push("/sign-in");
   };
 
-  if (!userWithProfile) {
+  if (!userWithProfile || !userWithProfile.profile || !userWithProfile.user) {
     return (
       <div className="m-auto flex w-full max-w-[240px] flex-col items-center justify-center gap-[64px] py-[23%] text-center">
         <p className="text-[24px] font-bold leading-[1.3]">
@@ -57,10 +57,10 @@ const MainUserCard = () => {
               className="h-full w-full object-cover"
               src={
                 userWithProfile.profile.avatar_url ||
-                userWithProfile.user?.user_metadata.avatar_url ||
+                userWithProfile.user.user_metadata.avatar_url ||
                 "/assets/images/default_profile.jpeg"
               }
-              alt={`${userWithProfile.profile.nickname} 이미지`}
+              alt={`${userWithProfile.profile?.nickname} 이미지`}
             />
           </div>
           <ul className="flex items-center justify-center">
@@ -73,7 +73,7 @@ const MainUserCard = () => {
             </li>
             <li>
               <p className="color-gray04 text-[20px] font-semibold uppercase">
-                {userWithProfile.user?.app_metadata.provider || ""} 계정
+                {userWithProfile.user.app_metadata.provider || ""} 계정
               </p>
             </li>
           </ul>
