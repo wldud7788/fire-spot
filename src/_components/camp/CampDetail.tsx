@@ -155,7 +155,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                   <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
                     주변 정보
                   </dt>
-                  <dd className="mt-[15px] flex flex-wrap">
+                  <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.posblFcltyCl ? (
                       posblFcltyClInfo?.map((item, idx) => (
                         <p
