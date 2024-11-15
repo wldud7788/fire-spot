@@ -14,7 +14,7 @@ const ChatList = () => {
   useChatSubscriptionRoomList();
 
   return (
-    <div className="mt-[40px]">
+    <div className="mb-[60px] mt-[40px]">
       <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
         <PageTitle text={"대화 모아보기"} />
 
