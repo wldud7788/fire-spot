@@ -168,7 +168,7 @@ const UserCard: React.FC = () => {
   if (isFollowingsError) return <div>팔로잉 데이터를 전달받지 못했습니다.</div>;
 
   return (
-    <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md">
+    <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md max-989:p-[20px]">
       <div className="relative m-auto h-[100px] w-[100px] overflow-hidden rounded-[100%]">
         {profileUrl && (
           <img
@@ -248,7 +248,7 @@ const UserCard: React.FC = () => {
           </button>
         </div>
       )}
-      <ul className="mt-[30px] flex items-center justify-between">
+      <ul className="mt-[30px] flex items-center justify-between max-989:justify-center max-989:gap-[25px]">
         <li className="flex flex-col items-center justify-center">
           <img
             src="/assets/images/mypage/ico-mypage-bookmark.svg"

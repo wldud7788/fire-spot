@@ -49,7 +49,7 @@ const CalendarTable = ({
   }, [currentMonth]);
 
   return (
-    <div className="mt-[20px] rounded-[15px] border border-[#BFBFBF] bg-[#FFF] px-[21.5px] py-[16.5px]">
+    <div className="mt-[20px] rounded-[15px] border border-[#BFBFBF] bg-[#FFF] px-[21.5px] py-[16.5px] max-767:min-w-[695px]">
       <section className="pb-[8px] pt-[16px]">
         <ul className="grid grid-cols-7 gap-[7px]">
           {days.map((day) => (
