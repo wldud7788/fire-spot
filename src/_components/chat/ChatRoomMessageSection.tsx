@@ -25,7 +25,7 @@ const ChatRoomMessageSection = ({
 
   return (
     <div className="relative p-[36px]">
-      <div className="min-h-[400px]">
+      <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
         <ul
           className="no-scrollbar max-h-[700px] overflow-y-auto"
           ref={messageListRef}

@@ -10,9 +10,11 @@ import {
 
 export const useChatSubscriptionMessageList = ({
   userId,
-  roomId
+  roomId,
+  type
 }: {
   userId?: string;
+  type?: string;
   roomId: number;
 }) => {
   const supabase = createClient();
@@ -30,8 +32,8 @@ export const useChatSubscriptionMessageList = ({
       last_read_message_id: last_read_message_id
     } as ChatAttendeeUpdate;
 
-    // sos 같은 경우 채팅 참여자 데이터 필요 없음 (userId의 유무로 판단)
-    if (userId) {
+    // sos 같은 경우 채팅 참여자 데이터 필요 없음 (type으로 판단)
+    if (type === "meet" && !!userId) {
       // 입장 시 마지막 읽은 메시지 null, 퇴장 시 마지막 읽은 메시지 id update
       await patchChatAttendee(userId, roomId, chatAttendee);
 
@@ -85,6 +87,7 @@ export const useChatSubscriptionMessageList = ({
 
   /** 마지막 메시지와 전송자가 일치하는 경우 스크롤 맨 아래로 */
   useEffect(() => {
+    console.log('"messageListRef.current"', messageListRef.current);
     if (messageListRef.current && userId === lastChatMessageUserIdRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
