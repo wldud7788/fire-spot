@@ -2,6 +2,7 @@ import React from "react";
 import { ChatRoomInfo } from "./types/chat.types";
 import Link from "next/link";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
+import { formatDate_6, formatDate_7 } from "@/_utils/common/dateFormat";
 
 type Props = {
   chatRoomInfo: ChatRoomInfo;
@@ -75,7 +76,7 @@ const ChatListCard = ({
         </div>
         <div className="right_area flex w-[30%] flex-none flex-col items-end justify-end">
           <p className="text-[14px] text-[#787878]">
-            {chatMessage?.created_at || ""}
+            {formatDate_6(chatMessage?.created_at || "") || ""}
           </p>
           <p
             className={`${unreadCount ? "bg-main" : "bg-[#d9d9d9]"} min-w-[40px] rounded-[16px] px-[10px] py-[4px] text-center text-[18px] font-medium text-white`}
