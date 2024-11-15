@@ -6,7 +6,7 @@ import GuideCard from "../component/GuideCard";
 const PetPage = () => {
   return (
     <div className="my-[40px] mb-[60px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <GuideTop text={"반려동물 가이드"} />
 
         <div className="flex flex-col gap-[50px] rounded-[34px] px-[60px] py-[80px] shadow-custom">

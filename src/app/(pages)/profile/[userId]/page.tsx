@@ -40,7 +40,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   return (
     <>
       <div className="my_page my-[60px]">
-        <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+        <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
           <div className="mb-[40px] border-b border-b-[#BFBFBF] pb-[40px]">
             <PageTitle text={`${userProfile.nickname}님의 프로필 페이지`} />
           </div>

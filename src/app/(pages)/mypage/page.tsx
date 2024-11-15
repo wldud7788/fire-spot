@@ -14,7 +14,7 @@ const MyPage = () => {
 
   return (
     <div className="my_page my-[60px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <div className="tab_list">
           <TabList activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>

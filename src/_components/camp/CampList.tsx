@@ -41,7 +41,7 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
 
   return (
     <div className="camp_list my-[65px] max-767:mb-[60px] max-767:mt-[40px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-767:px-[15px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"캠핑장 리스트"} />
         {/* 이윤지 작업 - 내가 찜한 캠핑장 모아보기 */}
         <div className="input_box relative mb-[40px] mt-[15px]">

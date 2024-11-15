@@ -49,7 +49,7 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
 
   return (
     <div className="meet_write mb-[60px] mt-[90px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"캠핑 모임 만들기"} />
         <form
           onSubmit={handleSubmit(onSubmit)}

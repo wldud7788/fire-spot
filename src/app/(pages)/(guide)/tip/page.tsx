@@ -6,7 +6,7 @@ import { TipGuide } from "@/_utils/guide";
 const TipPage = () => {
   return (
     <div className="my-[40px] mb-[60px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <GuideTop text={"초보 캠핑 꿀팁"} />
         <div className="tit_box flex flex-col items-center justify-center gap-[40px] text-center">
           <h2 className="color-gray01 text-[30px] font-bold">

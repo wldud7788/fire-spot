@@ -15,19 +15,19 @@ const ChatList = () => {
 
   return (
     <div className="mb-[60px] mt-[40px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-767:px-[15px]">
         <PageTitle text={"대화 모아보기"} />
 
-        <div className="mb-[30px] mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px]">
+        <div className="mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px] max-767:mt-[20px]">
           <div className="flex items-center gap-[7px]">
             <button
               type="button"
-              className="rounded-[20px] bg-[#FFB180] px-[16px] py-[7px] text-[14px] font-bold text-white"
+              className="rounded-[20px] bg-[#FFB180] px-[16px] py-[7px] text-[14px] font-bold text-white max-1280:text-[13px]"
             >
               진행중
             </button>
             <button
-              className="rounded-[20px] border border-[#a6a6a6] bg-[#fff] px-[16px] py-[7px] text-[14px] font-bold text-[#404040]"
+              className="rounded-[20px] border border-[#a6a6a6] bg-[#fff] px-[16px] py-[7px] text-[14px] font-bold text-[#404040] max-1280:text-[13px]"
               type="button"
             >
               종료됨
@@ -36,12 +36,12 @@ const ChatList = () => {
           <div className="flex items-center gap-[7px]">
             <button
               type="button"
-              className="rounded-[20px] bg-[#FFB180] px-[16px] py-[7px] text-[14px] font-bold text-white"
+              className="rounded-[20px] bg-[#FFB180] px-[16px] py-[7px] text-[14px] font-bold text-white max-1280:text-[13px]"
             >
               최신순
             </button>
             <button
-              className="rounded-[20px] border border-[#FFB180] bg-[#fff] px-[16px] py-[7px] text-[14px] font-bold text-[#FFB180]"
+              className="rounded-[20px] border border-[#FFB180] bg-[#fff] px-[16px] py-[7px] text-[14px] font-bold text-[#FFB180] max-1280:text-[13px]"
               type="button"
             >
               오래된 순

@@ -6,7 +6,7 @@ import BeginnerCard from "./component/Card";
 const BeginnerPage = () => {
   return (
     <div className="my-[40px] mb-[60px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <GuideTop text={"초보 캠퍼 가이드"} />
         <ul className="flex flex-wrap content-stretch justify-center gap-[50px]">
           {BeginnerGuide.map((guide) => {

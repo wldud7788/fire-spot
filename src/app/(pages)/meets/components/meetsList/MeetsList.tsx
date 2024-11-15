@@ -31,7 +31,7 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
 
   return (
     <div className="camp_detail mt-[40px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <CommunityTop text={"캠핑모임"} />
         <div className="utils flex items-center justify-between">
           <div className="flex items-center gap-[14px]">
