@@ -14,6 +14,7 @@ export const config = {
     "/sign-in",
     "/meets/write",
     "/meets/edit/:meetId*",
-    "/chat"
+    "/chat",
+    "/chat/:roomId*"
   ]
 };
