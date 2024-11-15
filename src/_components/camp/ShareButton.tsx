@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Toast from "../common/\bToast";
+import Toast from "../common/Toast";
 
 const ShareButton = () => {
   const [showToast, setShowToast] = useState(false);
