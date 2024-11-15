@@ -9,12 +9,15 @@ const supabase = createClient();
 type CampReviewSlideProps = {
   campId: string;
   onReviewCountChange?: (count: number) => void;
+  onAverageRateChange?: (averageRate: number) => void;
 };
 
 const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
   campId,
-  onReviewCountChange
+  onReviewCountChange,
+  onAverageRateChange
 }) => {
+  const [averageRate, setAverageRate] = useState<number | null>(null);
   const { data: reviews } = useQuery({
     queryFn: async () => {
       const reviewList = await supabase
@@ -25,6 +28,22 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
     },
     queryKey: ["reviewList", campId]
   });
+
+  useEffect(() => {
+    if (reviews && reviews.length > 0) {
+      const totalRate = reviews.reduce(
+        (acc, review) => acc + (review.rating || 0),
+        0
+      );
+      const calculatedAverage = totalRate / reviews.length;
+
+      setAverageRate(calculatedAverage);
+      if (onAverageRateChange) {
+        onAverageRateChange(calculatedAverage);
+      }
+    }
+  }, [reviews, onAverageRateChange]);
+
   // 리뷰 데이터가 변경될 떄마다 갯수를 부모에게 전달
   useEffect(() => {
     if (reviews && onReviewCountChange) {
@@ -35,18 +54,17 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
   if (!reviews) {
     return <div>리뷰 데이터가 없습니다.</div>;
   }
+
   return (
-    <Slide slidePerview={3} spaceBetween={10}>
-      {reviews.map((review) => (
-        <ReviewSlideCard key={review.id} review={review} />
-      ))}
-    </Slide>
+    <div>
+      {/* 리뷰 슬라이드 */}
+      <Slide slidePerview={3} spaceBetween={10}>
+        {reviews.map((review) => (
+          <ReviewSlideCard key={review.id} review={review} />
+        ))}
+      </Slide>
+    </div>
   );
 };
 
 export default CampReviewSlide;
-
-// 요기 수파베이스 불러오기 슬라이드로 감싸기
-// 아이디가 포함되어있는 리뷰만 뽑아오기
-// useState 안에 담기 요기서~
-// 담아져있는 state를 map 돌리기 FeedCard 대신에 컴포넌트(수파베이스 리뷰 관련) 하나 만들어서 불러오기
