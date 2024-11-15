@@ -5,20 +5,29 @@ import {
 } from "@/_components/chat/types/chat.types";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
 import { profile } from "console";
-import React from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
+  messageListRef: MutableRefObject<HTMLUListElement | null>;
 };
-const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
+const SosChatSection = ({
+  loginUserId,
+  roomId,
+  messagesByDate,
+  messageListRef
+}: Props) => {
   const { messageInput, handleChangeInput, sendMessage } =
     useChatRoomMessageSection(roomId, loginUserId);
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (
     <div className="min-h-[400px] rounded-[12px] bg-[#FFEFE5] p-[40px]">
-      <ul className="no-scrollbar max-h-[700px] overflow-y-auto">
+      <ul
+        className="no-scrollbar max-h-[700px] overflow-y-auto"
+        ref={messageListRef}
+      >
         {/* 날짜별로 메시지 그룹 출력 */}
         {Object.keys(messagesByDate).map((date) => (
           <li key={date}>
@@ -83,6 +92,12 @@ const SosChatSection = ({ loginUserId, roomId, messagesByDate }: Props) => {
           className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
           value={messageInput}
           onChange={handleChangeInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage(); // Enter 키를 눌렀을 때 호출할 함수
+              e.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+            }
+          }}
         />
         <button
           className="absolute bottom-[16px] right-[16px] rounded-[8px] bg-[#F2F2F2] px-[28px] py-[12px]"

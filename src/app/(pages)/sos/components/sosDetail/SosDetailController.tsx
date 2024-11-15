@@ -12,6 +12,7 @@ import useUser from "@/_hooks/useUser";
 import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChatSubscriptionMessageList";
 import SosContentSection from "./section/SosContentSection";
 import { useChatSosMessage } from "@/_components/chat/hooks/useChatSosMessage";
+import ChatRoomMessageSection from "@/_components/chat/ChatRoomMessageSection";
 
 type Props = {
   sosWithCamp: SosWithCamp;
@@ -25,7 +26,10 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   const loginUserId = user?.id || "";
 
   const { messagesByDate } = useChatSosMessage(roomId);
-  useChatSubscriptionMessageList({ roomId });
+  const { messageListRef } = useChatSubscriptionMessageList({
+    roomId,
+    userId: loginUserId
+  });
   if (!user) return <></>;
 
   // TODO 민규님: SOS 상세 섹션별 분리
@@ -36,11 +40,18 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
       <SosContentSection sos={sos} />
       <SosTagSection sos={sos} />
       <SosRemainingTimeSection sos={sos} />
-      <SosChatSection
+      <ChatRoomMessageSection
+        loginUserId={user.id}
+        roomId={roomId}
+        messagesByDate={messagesByDate}
+        messageListRef={messageListRef}
+      />
+      {/* <SosChatSection
         messagesByDate={messagesByDate}
         loginUserId={loginUserId}
         roomId={roomId}
-      />
+        messageListRef={messageListRef}
+      /> */}
       {/* <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />
