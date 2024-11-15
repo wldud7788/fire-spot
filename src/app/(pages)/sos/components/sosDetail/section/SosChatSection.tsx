@@ -68,7 +68,7 @@ const SosChatSection = ({
                     </strong>
                     <div className={`flex items-end gap-[7px]`}>
                       <p
-                        className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
+                        className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] max-767:px-[15px] max-767:py-[10px] max-767:text-[13px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
                       >
                         {messageInfo.chatMessage.message}
                       </p>

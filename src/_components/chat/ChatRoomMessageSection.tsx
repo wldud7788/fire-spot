@@ -25,7 +25,7 @@ const ChatRoomMessageSection = ({
 
   return (
     <div className="relative rounded-[12px] bg-[#FFEFE5] p-[36px] max-1280:p-[20px]">
-      <div className="min-h-[400px] p-[40px] max-1280:p-0">
+      <div className="min-h-[400px] p-[40px] max-1280:p-0 max-767:min-h-[300px]">
         <ul
           className="no-scrollbar max-h-[700px] overflow-y-auto"
           ref={messageListRef}
@@ -72,7 +72,7 @@ const ChatRoomMessageSection = ({
                       </strong>
                       <div className={`flex items-end gap-[7px]`}>
                         <p
-                          className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"} max-1280:text-[14px]`}
+                          className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] max-767:px-[15px] max-767:py-[10px] max-767:text-[13px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"} max-1280:text-[14px]`}
                         >
                           {messageInfo.chatMessage.message}
                         </p>

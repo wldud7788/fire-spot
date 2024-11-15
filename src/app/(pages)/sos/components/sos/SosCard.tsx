@@ -17,14 +17,14 @@ const SosCard = ({ sosWithCamp }: Props) => {
 
   return (
     <div
-      className={`w-full rounded-[16px] border border-[#a6a6a6] px-[30px] py-[22px] ${isProgress ? "bg-white" : "bg-[#F2F2F2]"}`}
+      className={`w-full rounded-[16px] border border-[#a6a6a6] px-[30px] py-[22px] max-767:px-[20px] max-767:py-[15px] ${isProgress ? "bg-white" : "bg-[#F2F2F2]"}`}
     >
       <div className="inner">
         <div className="utils flex items-center justify-between">
           <ul className="flex gap-[10px]">
             {/* isProgress 종료여부 boolean */}
             <span
-              className={`${isProgress ? "bg-[#FFB180] text-[#B24600]" : "bg-[#d9d9d9] text-[#737373]"} rounded-[50px] px-[15px] py-[5px] text-[14px]`}
+              className={`max-767:py-[3px] max-767:text-[11px] ${isProgress ? "bg-[#FFB180] text-[#B24600]" : "bg-[#d9d9d9] text-[#737373]"} rounded-[50px] px-[15px] py-[5px] text-[14px]`}
             >
               {isProgress && "진행중"}
               {!isProgress && "종료됨"}
@@ -45,18 +45,18 @@ const SosCard = ({ sosWithCamp }: Props) => {
         <div className="flex items-center justify-between gap-[15px]">
           <Link
             href={SERVER_PAGE_URL.sosDetail(sos.id.toString())}
-            className="my-[14px] block text-[16px] font-medium"
+            className="my-[14px] line-clamp-1 block w-[calc(100%-91px)] pr-[20px] text-[16px] font-medium max-767:w-[calc(100%-61px)] max-767:text-[14px]"
           >
             {/* sos 제목 */}
             {sos.title}
           </Link>
-          <p className="color-gray02 flex-none text-[18px]">
+          <p className="color-gray02 w-[91px] flex-none text-[18px] max-767:w-[61px] max-767:text-[12px]">
             {remainingTimeString}
           </p>
         </div>
 
         <div className="info flex gap-[20px]">
-          <p className="bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[16px]">
+          <p className="bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[16px] max-1280:text-[12px]">
             {/* 시군구 명 */}
             {camp.sigunguNm}
           </p>
