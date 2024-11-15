@@ -114,7 +114,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ campId, camp }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center"
+      className="absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center max-1280:right-[10px] max-1280:top-[10px]"
       disabled={isLoading}
     >
       <img

@@ -15,7 +15,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
     <div className="camping_card group">
       <Link href={`/camp-detail/${camp.contentId}`}>
         <div className="inner">
-          <div className="img_box relative h-[300px] overflow-hidden rounded-[12px] max-1280:h-[250px] max-989:h-[200px]">
+          <div className="img_box relative h-[300px] overflow-hidden rounded-[12px] max-1280:h-[250px] max-989:h-[200px] max-450:shadow-custom">
             <img
               src={
                 camp.firstImageUrl
@@ -31,13 +31,15 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
           </div>
 
           {!type ? (
-            <div className="camp_info pb-[60px] pt-[20px]">
-              <h2 className="line-clamp-1 text-[20px] font-bold">
+            <div className="camp_info pb-[60px] pt-[20px] max-450:pb-[0]">
+              <h2 className="line-clamp-1 text-[20px] font-bold max-1280:text-[18px] max-989:text-[16px]">
                 {camp.facltNm}
               </h2>
-              <p className="mb-[8px] mt-[5px] line-clamp-1 block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
-                {camp.addr1}
-              </p>
+              <div className="mb-[8px] mt-[5px] bg-location bg-left-center-0 bg-no-repeat pl-[20px]">
+                <p className="line-clamp-1 w-[calc(100%-20px)] text-[12px]">
+                  {camp.addr1}
+                </p>
+              </div>
               <p className="color-gray02 line-clamp-3 min-h-[51px] text-[12px]">
                 {camp.featureNm ? camp.featureNm : camp.intro}
               </p>

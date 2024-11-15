@@ -248,6 +248,16 @@ body {
     background: url("/assets/images/common/ico-pagination-arrow.svg") no-repeat
       center center;
   }
+  @media (max-width: 1280px) {
+    .btn-pagination {
+      width: 30px;
+      height: 30px;
+    }
+    .pagination-count * {
+      height: 30px;
+      font-size: 14px;
+    }
+  }
   .btn-pagination:disabled {
     opacity: 0.5;
   }
