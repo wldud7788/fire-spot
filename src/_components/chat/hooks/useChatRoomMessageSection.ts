@@ -7,9 +7,16 @@ export const useChatRoomMessageSection = (
   loginUserId: string
 ) => {
   const [messageInput, setMessageInput] = useState("");
+  const [activeSendButton, setActiveSendButton] = useState(false);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessageInput(e.target.value);
+
+    if (!!e.target.value) {
+      setActiveSendButton(true);
+    } else {
+      setActiveSendButton(false);
+    }
   };
 
   const sendMessage = async () => {
@@ -19,9 +26,12 @@ export const useChatRoomMessageSection = (
       user_id: loginUserId
     } as ChatMessageInsert;
 
-    await postChatMessage(messagePost);
-    setMessageInput("");
+    if (activeSendButton) {
+      await postChatMessage(messagePost);
+      setMessageInput("");
+      setActiveSendButton(false);
+    }
   };
 
-  return { messageInput, handleChangeInput, sendMessage };
+  return { messageInput, handleChangeInput, sendMessage, activeSendButton };
 };

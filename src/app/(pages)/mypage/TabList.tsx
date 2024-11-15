@@ -27,10 +27,10 @@ const TabList: React.FC<TabListProps> = ({ activeTab, setActiveTab }) => {
         캘린더
       </button>
       <button
-        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "bookmarks" && "active font-bold"}`}
-        onClick={() => setActiveTab("bookmarks")}
+        className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "Likes" && "active font-bold"}`}
+        onClick={() => setActiveTab("Likes")}
       >
-        북마크
+        좋아요
       </button>
       <button
         className={`color-gray01 relative pb-[25px] text-[18px] ${activeTab === "followers" && "active font-bold"}`}

@@ -18,11 +18,20 @@ const Modal = ({
   onClose
 }: ModalProps) => {
   if (!isOpen) return null;
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   return (
     <div
       className={`modal fixed left-0 top-0 h-full w-full bg-[rgba(0,0,0,.35)] ${className ? className : ""} flex items-center justify-center`}
+      onClick={handleBackgroundClick}
     >
-      <div className={`modal_cont`} style={{ width: `${width}px` }}>
+      <div
+        className={`modal_cont 모달지영추가`}
+        style={{ width: `${width}px` }}
+      >
         <div className="modal_inner">{children}</div>
         <button type="button" className="modal_close_btn" onClick={onClose}>
           닫기

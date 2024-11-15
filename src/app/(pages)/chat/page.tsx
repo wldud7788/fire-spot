@@ -48,22 +48,25 @@ const ChatList = () => {
             </button>
           </div>
         </div>
-        {pinnedChatRoomList.map((chatRoomInfo) => (
-          <ChatListCard
-            key={chatRoomInfo.chatRoom.id}
-            chatRoomInfo={chatRoomInfo}
-            togglePin={togglePin}
-            handleMessageRead={handleMessageRead}
-          />
-        ))}
-        {unPinnedChatRoomList.map((chatRoomInfo) => (
-          <ChatListCard
-            key={chatRoomInfo.chatRoom.id}
-            chatRoomInfo={chatRoomInfo}
-            togglePin={togglePin}
-            handleMessageRead={handleMessageRead}
-          />
-        ))}
+
+        <div className="flex flex-col">
+          {pinnedChatRoomList.map((chatRoomInfo) => (
+            <ChatListCard
+              key={chatRoomInfo.chatRoom.id}
+              chatRoomInfo={chatRoomInfo}
+              togglePin={togglePin}
+              handleMessageRead={handleMessageRead}
+            />
+          ))}
+          {unPinnedChatRoomList.map((chatRoomInfo) => (
+            <ChatListCard
+              key={chatRoomInfo.chatRoom.id}
+              chatRoomInfo={chatRoomInfo}
+              togglePin={togglePin}
+              handleMessageRead={handleMessageRead}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

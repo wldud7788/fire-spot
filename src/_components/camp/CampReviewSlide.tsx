@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
-import { Database } from "../../../database.types";
+import ReviewModal2 from "../review/ReviewModal";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import { useQuery } from "@tanstack/react-query";
 
 const supabase = createClient();
+
 type CampReviewSlideProps = {
   campId: string;
   onReviewCountChange?: (count: number) => void;
@@ -17,18 +19,28 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
   onReviewCountChange,
   onAverageRateChange
 }) => {
+  // const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [averageRate, setAverageRate] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<ReviewItem | null>(null);
+  const handleModalOpen = (review: ReviewItem) => {
+    setSelected(review);
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+    setSelected(null);
+  };
   const { data: reviews } = useQuery({
     queryFn: async () => {
       const reviewList = await supabase
         .from("review")
         .select("*,camp(*)")
         .eq("campId", campId);
-      return reviewList.data;
+      return reviewList.data as ReviewItem[];
     },
     queryKey: ["reviewList", campId]
   });
-
   useEffect(() => {
     if (reviews && reviews.length > 0) {
       const totalRate = reviews.reduce(
@@ -60,7 +72,11 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
       {/* 리뷰 슬라이드 */}
       <Slide slidePerview={3} spaceBetween={10}>
         {reviews.map((review) => (
-          <ReviewSlideCard key={review.id} review={review} />
+          <ReviewSlideCard
+            key={review.id}
+            review={review}
+            onClickFunc={() => handleModalOpen(review)}
+          />
         ))}
       </Slide>
     </div>

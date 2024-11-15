@@ -53,13 +53,13 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
             <div className="input_box relative ml-[10px]">
               <input
                 type="checkbox"
-                id="bookMarkChk"
+                id="likeChk"
                 checked={isDeadline}
                 onChange={handleDeadlineCheck}
                 className="absolute left-0 top-0 h-full w-full opacity-0"
               />
               <label
-                htmlFor="bookMarkChk"
+                htmlFor="likeChk"
                 className={`${isDeadline ? "bg-chkOn" : "bg-chk"} bg-left-center-0 bg-no-repeat pl-[25px]`}
               >
                 마감이 임박한 것부터 보기

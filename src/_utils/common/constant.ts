@@ -29,3 +29,9 @@ export const SERVER_PAGE_URL = {
   sosDetail: (sosId: string) => `/sos/${sosId}`,
   meets: "/meets"
 };
+export const API_PARAMS = {
+  MOBILE_OS: "ETC",
+  MOBILE_APP: "TestApp",
+  TYPE: "json"
+} as const;
+export const QUERYSTRING = `MobileOS=${API_PARAMS.MOBILE_OS}&MobileApp=${API_PARAMS.MOBILE_APP}&_type=${API_PARAMS.TYPE}`;
