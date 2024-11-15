@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import HeaderAuth from "./HeaderAuth";
 import SearchBar from "../../search/searchBar/SearchBar";
 import { TAGS } from "@/_utils/common/constant";
@@ -9,6 +9,10 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
+import { throttle } from "lodash";
+
+const SCROLL_THRESHOLD_TAGS = 260;
+const SCROLL_THRESHOLD_SEARCH = 300;
 
 const Header = () => {
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -25,16 +29,36 @@ const Header = () => {
     setActiveDropdown(activeDropdown === "mobile" ? null : "mobile");
   };
 
-  // 스크롤 이벤트 핸들러
-  useEffect(() => {
-    const handleScroll = () => {
+  // 태그 표시를 위한 throttled 스크롤 핸들러
+  const handleTagsScroll = useCallback(
+    throttle(() => {
       const scrollPosition = window.scrollY;
-      setShowTags(scrollPosition > 260);
-    };
+      setShowTags(scrollPosition > SCROLL_THRESHOLD_TAGS);
+    }, 100),
+    []
+  );
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // 검색창 표시를 위한 throttled 스크롤 핸들러
+  const handleSearchScroll = useCallback(
+    throttle((isMainPage: boolean) => {
+      if (!isMainPage) return;
+      const scrollPosition = window.scrollY;
+      setShowSearch(scrollPosition > SCROLL_THRESHOLD_SEARCH);
+    }, 100),
+    []
+  );
+
+  // 태그 표시 스크롤 이벤트
+  useEffect(() => {
+    window.addEventListener("scroll", handleTagsScroll);
+    // 초기 상태 설정
+    handleTagsScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleTagsScroll);
+      handleTagsScroll.cancel();
+    };
+  }, [handleTagsScroll]);
 
   // 검색창 표시 로직
   useEffect(() => {
@@ -51,14 +75,17 @@ const Header = () => {
       return;
     }
 
-    const handleScroll = () => {
-      setShowSearch(window.scrollY > 300);
-    };
+    window.addEventListener("scroll", () => handleSearchScroll(isMainPage));
+    // 초기 상태 설정
+    handleSearchScroll(isMainPage);
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+    return () => {
+      window.removeEventListener("scroll", () =>
+        handleSearchScroll(isMainPage)
+      );
+      handleSearchScroll.cancel();
+    };
+  }, [pathname, handleSearchScroll]);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-[110] bg-white shadow-md">

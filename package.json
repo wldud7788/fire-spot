@@ -20,6 +20,7 @@
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.456.0",
     "moment-timezone": "^0.5.46",
     "next": "14.2.14",
@@ -35,6 +36,7 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/navermaps": "^3.7.8",
     "@types/node": "^20",
     "@types/react": "^18",
