@@ -52,7 +52,7 @@ const MainUserCard = () => {
       <div className="flex items-center justify-center gap-[30px]">
         {/* left_area */}
         <div className="left_area text-center">
-          <div className="ibox mx-auto mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%]">
+          <div className="ibox mx-auto mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%] shadow-custom">
             <img
               className="h-full w-full object-cover"
               src={
