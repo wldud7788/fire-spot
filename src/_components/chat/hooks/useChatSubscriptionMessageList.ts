@@ -26,6 +26,8 @@ export const useChatSubscriptionMessageList = ({
 
   const messageListRef = useRef<HTMLUListElement | null>(null);
 
+  const messageRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
+
   /** 채팅방 입/퇴장 시 마지막 읽은 메시지에 대한 처리 */
   const toggleChatRoomInOut = async (last_read_message_id: number | null) => {
     const chatAttendee = {
@@ -48,6 +50,16 @@ export const useChatSubscriptionMessageList = ({
     if (message) {
       lastChatMessageIdRef.current = message.id;
       lastChatMessageUserIdRef.current = message.user_id;
+
+      /** 채팅방 입장 시 마지막 메시지로 포커싱 */
+      const messageElement = messageRefs.current[message.id];
+      if (messageElement) {
+        // 메시지로 스크롤
+        messageElement.scrollIntoView({
+          behavior: "instant",
+          block: "start"
+        });
+      }
     }
   };
 
@@ -89,9 +101,42 @@ export const useChatSubscriptionMessageList = ({
   useEffect(() => {
     console.log('"messageListRef.current"', messageListRef.current);
     if (messageListRef.current && userId === lastChatMessageUserIdRef.current) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+      // 채팅 전송 시 애니메이션 없는 스크롤 이동 (애니메이션 X)
+      // messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+
+      /** 채팅 전송 시 애니메이션 있는 스크롤 이동 */
+      const totalHeight = messageListRef.current.scrollHeight;
+
+      // 부드러운 스크롤을 위해 requestAnimationFrame을 사용
+      const smoothScrollToBottom = () => {
+        const start = messageListRef?.current?.scrollTop || 0;
+        const distance = totalHeight - start; // scrollHeight - current scrollTop
+        const duration = 500; // 스크롤 애니메이션 지속 시간 (밀리초)
+        let startTime: number;
+
+        // 스크롤 애니메이션 함수
+        const animateScroll = (timestamp: number) => {
+          if (messageListRef.current) {
+            if (!startTime) startTime = timestamp; // 시작 시간 저장
+            const progress = timestamp - startTime; // 경과 시간 계산
+            const easeInOut = Math.min(progress / duration, 1); // 시간 비례로 비례적으로 변하는 비율
+
+            messageListRef.current.scrollTop = start + distance * easeInOut;
+
+            if (progress < duration) {
+              window.requestAnimationFrame(animateScroll); // 지속적으로 애니메이션 진행
+            } else {
+              messageListRef.current.scrollTop = totalHeight; // 애니메이션 종료 후 정확한 최하단 위치 설정
+            }
+          }
+        };
+
+        window.requestAnimationFrame(animateScroll); // 애니메이션 시작
+      };
+
+      smoothScrollToBottom();
     }
   }, [lastChatMessageIdRef.current]);
 
-  return { messageListRef };
+  return { messageListRef, messageRefs };
 };

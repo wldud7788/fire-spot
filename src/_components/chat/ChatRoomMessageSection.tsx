@@ -11,6 +11,9 @@ type Props = {
   messagesByDate: MessagesByDate | undefined;
   lastMessage: ChatRoomMessageInfo | undefined;
   messageListRef: MutableRefObject<HTMLUListElement | null>;
+  messageRefs: MutableRefObject<{
+    [key: number]: HTMLLIElement | null;
+  }>;
 };
 
 const ChatRoomMessageSection = ({
@@ -18,56 +21,58 @@ const ChatRoomMessageSection = ({
   roomId,
   messagesByDate,
   lastMessage,
-  messageListRef
+  messageListRef,
+  messageRefs
 }: Props) => {
   const { messageInput, handleChangeInput, sendMessage, activeSendButton } =
     useChatRoomMessageSection(roomId, loginUserId);
-  const messageRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
-  const [firstScroll, setFirstScroll] = useState(false);
 
-  useEffect(() => {
-    // lastMessage가 정의되고, 마지막 메시지가 있을 때 포커스를 맞추기
+  // const messageRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
+  // const [firstScroll, setFirstScroll] = useState(false);
 
-    if (!firstScroll) {
-      if (
-        lastMessage &&
-        lastMessage.chatMessage &&
-        lastMessage.chatMessage.id &&
-        messagesByDate
-      ) {
-        setFirstScroll(true);
-        const lastMessageId = lastMessage.chatMessage.id;
-        const messageElement = messageRefs.current[lastMessageId];
+  // useEffect(() => {
+  //   // lastMessage가 정의되고, 마지막 메시지가 있을 때 포커스를 맞추기
 
-        if (messageElement) {
-          // 메시지로 스크롤
-          messageElement.scrollIntoView({
-            behavior: "instant",
-            block: "start"
-          });
-        }
+  //   if (!firstScroll) {
+  //     if (
+  //       lastMessage &&
+  //       lastMessage.chatMessage &&
+  //       lastMessage.chatMessage.id &&
+  //       messagesByDate
+  //     ) {
+  //       setFirstScroll(true);
+  //       const lastMessageId = lastMessage.chatMessage.id;
+  //       const messageElement = messageRefs.current[lastMessageId];
 
-        console.log("lastMessageId", lastMessageId);
+  //       if (messageElement) {
+  //         // 메시지로 스크롤
+  //         messageElement.scrollIntoView({
+  //           behavior: "instant",
+  //           block: "start"
+  //         });
+  //       }
 
-        // messagesByDate에서 마지막 메시지를 찾음
-        // Object.keys(messagesByDate).forEach((date) => {
-        //   messagesByDate[date].forEach((messageInfo) => {
-        //     if (messageInfo.chatMessage.id === lastMessageId) {
-        //       // 해당 메시지를 ref로 저장해두고
-        //       const messageElement = messageRefs.current[lastMessageId];
-        //       if (messageElement) {
-        //         // 메시지로 스크롤
-        //         messageElement.scrollIntoView({
-        //           behavior: "instant",
-        //           block: "start"
-        //         });
-        //       }
-        //     }
-        //   });
-        // });
-      }
-    }
-  }, [messagesByDate]);
+  //       console.log("lastMessageId", lastMessageId);
+
+  //       // messagesByDate에서 마지막 메시지를 찾음
+  //       // Object.keys(messagesByDate).forEach((date) => {
+  //       //   messagesByDate[date].forEach((messageInfo) => {
+  //       //     if (messageInfo.chatMessage.id === lastMessageId) {
+  //       //       // 해당 메시지를 ref로 저장해두고
+  //       //       const messageElement = messageRefs.current[lastMessageId];
+  //       //       if (messageElement) {
+  //       //         // 메시지로 스크롤
+  //       //         messageElement.scrollIntoView({
+  //       //           behavior: "instant",
+  //       //           block: "start"
+  //       //         });
+  //       //       }
+  //       //     }
+  //       //   });
+  //       // });
+  //     }
+  //   }
+  // }, [messagesByDate]);
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 

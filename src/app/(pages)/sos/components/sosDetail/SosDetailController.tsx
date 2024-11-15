@@ -26,7 +26,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   const loginUserId = user?.id || "";
 
   const { messagesByDate, lastMessage } = useChatSosMessage(roomId);
-  const { messageListRef } = useChatSubscriptionMessageList({
+  const { messageListRef, messageRefs } = useChatSubscriptionMessageList({
     roomId,
     userId: loginUserId
   });
@@ -46,6 +46,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
         messagesByDate={messagesByDate}
         messageListRef={messageListRef}
         lastMessage={lastMessage}
+        messageRefs={messageRefs}
       />
       {/* <SosChatSection
         messagesByDate={messagesByDate}
