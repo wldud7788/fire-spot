@@ -29,8 +29,8 @@ const MainUserCard = () => {
 
   if (!userWithProfile || !userWithProfile.profile || !userWithProfile.user) {
     return (
-      <div className="m-auto flex w-full max-w-[240px] flex-col items-center justify-center gap-[64px] py-[23%] text-center">
-        <p className="text-[24px] font-bold leading-[1.3]">
+      <div className="m-auto flex h-full w-full max-w-[240px] flex-col items-center justify-center gap-[64px] py-[23%] text-center max-1460:py-[60px] max-989:gap-[30px] max-989:py-[0]">
+        <p className="text-[24px] font-bold leading-[1.3] max-1460:text-[18px]">
           환영합니다.
           <br />
           로그인 후 사용하세요.
@@ -38,7 +38,7 @@ const MainUserCard = () => {
         <div className="flex w-full">
           <Link
             href={"/sign-in"}
-            className="flex h-[60px] flex-1 items-center justify-center rounded-[10px] bg-[#b24600] text-[24px] font-semibold text-[#fff]"
+            className="flex h-[60px] flex-1 items-center justify-center rounded-[10px] bg-[#b24600] text-[24px] font-semibold text-[#fff] max-1460:h-[50px] max-1460:text-[22px]"
           >
             로그인
           </Link>
@@ -49,10 +49,10 @@ const MainUserCard = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-[30px]">
+      <div className="flex h-full items-center justify-center gap-[30px] max-989:flex-wrap">
         {/* left_area */}
-        <div className="left_area text-center">
-          <div className="ibox mx-auto mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%] shadow-custom">
+        <div className="left_area flex-1 text-center">
+          <div className="mx-auto mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%] shadow-custom max-1460:h-[180px] max-1460:w-[180px] max-1160:h-[110px] max-1160:w-[110px]">
             <img
               className="h-full w-full object-cover"
               src={
@@ -65,25 +65,25 @@ const MainUserCard = () => {
           </div>
           <ul className="flex items-center justify-center">
             <li className="main-user-before relative mr-[9px] w-[calc(50%-9px)] pr-[9px]">
-              <strong className="flex items-center gap-[3px] text-[18px] font-semibold">
-                <span className="line-clamp-1 flex-1">
+              <strong className="flex items-center gap-[3px] text-[16px] font-semibold">
+                <span className="line-clamp-1 flex-1 max-1280:text-[14px] max-989:text-right">
                   {userWithProfile.profile.nickname ||
                     userWithProfile.profile.user_name}
                 </span>
-                <span className="flex-none">님</span>
+                <span className="flex-none max-1280:text-[14px]">님</span>
               </strong>
             </li>
             <li className="w-[calc(50%-9px)]">
-              <p className="color-gray04 text-[18px] font-semibold uppercase">
+              <p className="color-gray04 text-[16px] font-semibold uppercase max-1280:text-[14px] max-989:text-left">
                 {userWithProfile.user.app_metadata.provider || ""} 계정
               </p>
             </li>
           </ul>
-          <p className="mb-[25px] mt-[12px] text-[16px]">
+          <p className="mb-[25px] mt-[12px] text-[16px] max-1460:text-[14px] max-1280:text-[13px]">
             {userWithProfile.profile.email}
           </p>
           <button
-            className="bg-sub w-full max-w-[190px] rounded-[10px] py-[12px] text-[18px] font-medium"
+            className="bg-sub w-full max-w-[190px] rounded-[10px] py-[12px] text-[18px] font-medium max-1160:text-[16px]"
             onClick={handleLogout}
           >
             로그아웃
@@ -91,8 +91,8 @@ const MainUserCard = () => {
         </div>
         {/*// left_area */}
         {/* right_area */}
-        <div className="right_area w-full max-w-[115px]">
-          <div className="link_box flex flex-col gap-[10px]">
+        <div className="right_area w-full max-w-[115px] max-1160:max-w-[80px] max-989:max-w-[100%]">
+          <div className="link_box flex flex-col gap-[10px] max-989:flex-row">
             <MainIconButton
               href={"/mypage"}
               src="/assets/images/main/ico-main-meet.svg"
