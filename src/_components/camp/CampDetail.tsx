@@ -393,7 +393,7 @@ pr 먼저~
           {/* 이윤지 작업 - 리뷰 리스트*/}
           {true ? (
             <>
-              <ReviewWriteModal campId={paramsId} onClose={() => {}} />
+              {/* <ReviewWriteModal campId={paramsId} onClose={() => {}} /> */}
               <CampReviewSlide campId={paramsId} />
             </>
           ) : (
