@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
@@ -10,10 +10,17 @@ const supabase = createClient();
 
 type CampReviewSlideProps = {
   campId: string;
+  onReviewCountChange?: (count: number) => void;
+  onAverageRateChange?: (averageRate: number) => void;
 };
 
-const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
+const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
+  campId,
+  onReviewCountChange,
+  onAverageRateChange
+}) => {
   // const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [averageRate, setAverageRate] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<ReviewItem | null>(null);
   const handleModalOpen = (review: ReviewItem) => {
@@ -34,11 +41,35 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
     },
     queryKey: ["reviewList", campId]
   });
+  useEffect(() => {
+    if (reviews && reviews.length > 0) {
+      const totalRate = reviews.reduce(
+        (acc, review) => acc + (review.rating || 0),
+        0
+      );
+      const calculatedAverage = totalRate / reviews.length;
+
+      setAverageRate(calculatedAverage);
+      if (onAverageRateChange) {
+        onAverageRateChange(calculatedAverage);
+      }
+    }
+  }, [reviews, onAverageRateChange]);
+
+  // 리뷰 데이터가 변경될 떄마다 갯수를 부모에게 전달
+  useEffect(() => {
+    if (reviews && onReviewCountChange) {
+      onReviewCountChange(reviews.length);
+    }
+  }, [reviews, onReviewCountChange]);
+
   if (!reviews) {
     return <div>리뷰 데이터가 없습니다.</div>;
   }
+
   return (
     <>
+      {/* 리뷰 슬라이드 */}
       <div className="camp-slide-wrap">
         <Slide slidePerview={3} spaceBetween={10}>
           {reviews.map((review) => (
@@ -60,8 +91,3 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
 };
 
 export default CampReviewSlide;
-
-// 요기 수파베이스 불러오기 슬라이드로 감싸기
-// 아이디가 포함되어있는 리뷰만 뽑아오기
-// useState 안에 담기 요기서~
-// 담아져있는 state를 map 돌리기 FeedCard 대신에 컴포넌트(수파베이스 리뷰 관련) 하나 만들어서 불러오기
