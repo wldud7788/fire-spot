@@ -173,7 +173,8 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
         >
           작성 완료
         </button>
-        <button onClick={() => setIsOff(!isOff)}>{isOff ? "ON" : "OFF"}</button>
+        
+                <button onClick={() => setIsOff(!isOff)}>{isOff ? "ON" : "OFF"}</button>
         {!isOff && (
           <div>
             <p>
@@ -214,6 +215,7 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
             </ul>
           </div>
         )}
+        
       </div>
     </div>
   );
