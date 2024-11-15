@@ -65,24 +65,27 @@ const Header = () => {
     const isMainPage = pathname === "/";
     const isSearchPage = pathname === "/search";
 
+    // 검색 페이지에서는 검색창 숨김
     if (isSearchPage) {
       setShowSearch(false);
       return;
     }
 
+    // 메인 페이지가 아닌 경우 검색창 항상 표시
     if (!isMainPage) {
       setShowSearch(true);
       return;
     }
 
-    window.addEventListener("scroll", () => handleSearchScroll(isMainPage));
+    // 메인 페이지에서만 스크롤 이벤트 처리
+    const scrollHandler = () => handleSearchScroll(true);
+    window.addEventListener("scroll", scrollHandler);
+
     // 초기 상태 설정
-    handleSearchScroll(isMainPage);
+    handleSearchScroll(true);
 
     return () => {
-      window.removeEventListener("scroll", () =>
-        handleSearchScroll(isMainPage)
-      );
+      window.removeEventListener("scroll", scrollHandler);
       handleSearchScroll.cancel();
     };
   }, [pathname, handleSearchScroll]);
@@ -102,7 +105,7 @@ const Header = () => {
               />
               <p className="sr-only">로고</p>
             </Link>
-            {/* PC 검색바  */}
+            {/* PC 검색바 */}
             <div
               className={`block w-full max-w-[473px] transition-all duration-300 max-600:hidden ${
                 showSearch
