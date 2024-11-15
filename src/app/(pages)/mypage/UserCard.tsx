@@ -22,6 +22,8 @@ const UserCard: React.FC = () => {
   const [reviewCount, setReviewCount] = useState<number>(0); // 모임 갯수 상태
   const [meetingCount, setMeetingCount] = useState<number>(0); // 모임 갯수 상태
   const [isProfile, setIsProfile] = useState<boolean>(false);
+  const [isEditingImage, setIsEditingImage] = useState(false); // 프로필 사진 수정 상태
+  const [isEditingNickname, setIsEditingNickname] = useState(false); // 닉네임 수정 상태
   const supabase = createClient();
 
   const { data: followers, isError: isFollowersError } = useSuspenseQuery({
@@ -104,8 +106,9 @@ const UserCard: React.FC = () => {
       if (error) throw error;
       setNickname(newNickname);
       setNewNickname("");
+      setIsEditingNickname(false);
     } catch (error) {
-      console.error("Error updating nickname:", error);
+      console.error("닉네임 업데이트 실패:", error);
     }
   };
 
@@ -160,7 +163,7 @@ const UserCard: React.FC = () => {
 
   return (
     <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md">
-      <div className="m-auto h-[100px] w-[100px] overflow-hidden rounded-[100%]">
+      <div className="relative m-auto h-[100px] w-[100px] overflow-hidden rounded-[100%]">
         {profileUrl && (
           <img
             src={profileUrl}
@@ -168,9 +171,25 @@ const UserCard: React.FC = () => {
             className="object-fit h-full w-full"
           />
         )}
+        {!isEditingImage && (
+          <button
+            className="absolute bottom-0 right-0 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-gray-200 text-lg hover:bg-gray-300"
+            onClick={() => setIsEditingImage(true)}
+          >
+            📷
+          </button>
+        )}
       </div>
       <h2 className="mb-[15px] mt-[20px] text-center text-[24px] font-bold">
         {nickname}
+        {!isEditingNickname && (
+          <button
+            className="ml-2 text-gray-500 hover:text-gray-700"
+            onClick={() => setIsEditingNickname(true)}
+          >
+            ✏️
+          </button>
+        )}
       </h2>
       <div className="follower_card">
         <FollowsCount
@@ -178,7 +197,29 @@ const UserCard: React.FC = () => {
           followingCount={followers?.length}
         />
       </div>
-      {!isProfile ? null : (
+      {isEditingImage && (
+        <div className="flex flex-col space-y-2">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setProfileImage(e.target.files?.[0] || null)}
+            className="block"
+          />
+          <button
+            onClick={handleProfileImageUpdate}
+            className="rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+          >
+            프로필 사진 저장
+          </button>
+          <button
+            onClick={() => setIsEditingImage(false)}
+            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+          >
+            취소
+          </button>
+        </div>
+      )}
+      {isEditingNickname && (
         <div className="flex flex-col space-y-2">
           <input
             type="text"
@@ -191,19 +232,13 @@ const UserCard: React.FC = () => {
             onClick={handleNicknameUpdate}
             className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           >
-            닉네임 수정
+            닉네임 저장
           </button>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setProfileImage(e.target.files?.[0] || null)}
-            className="block"
-          />
           <button
-            onClick={handleProfileImageUpdate}
-            className="rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+            onClick={() => setIsEditingNickname(false)}
+            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
-            프로필 사진 수정
+            취소
           </button>
         </div>
       )}
@@ -224,7 +259,6 @@ const UserCard: React.FC = () => {
             className="mb-[5px]"
           />
           <p className="text-[16px]">스탬프</p>
-
           <span className="text-[18px] font-bold">{reviewCount}</span>
         </li>
         <li className="flex flex-col items-center justify-center">
