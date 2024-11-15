@@ -152,6 +152,12 @@ body {
     border: 1px solid #ff924c;
     border-radius: 7px;
   }
+  @media (max-width: 767px) {
+    .btn-add {
+      font-size: 13px;
+      padding: 10px 20px 10px 50px;
+    }
+  }
   .btn-add:before {
     content: "";
     position: absolute;

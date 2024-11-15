@@ -7,7 +7,12 @@ interface DetailMapProps {
 }
 const DetailMap: React.FC<DetailMapProps> = ({ camp }) => {
   useCampDetailMap(camp);
-  return <div id="detail-map" className="h-[400px] w-full rounded-lg"></div>;
+  return (
+    <div
+      id="detail-map"
+      className="h-[400px] w-full rounded-lg max-989:h-[250px]"
+    ></div>
+  );
 };
 
 export default DetailMap;

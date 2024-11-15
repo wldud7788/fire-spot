@@ -272,8 +272,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               {camp.resveUrl ? camp.resveUrl : "정보를 확인할 수 없습니다."}
             </li>
           </ul>
-          <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
-            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
+          <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px] max-767:max-w-[100%] max-767:px-[0px]">
+            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px] max-767:text-[14px]">
               자세한 예약 방법은 캠핑장으로 확인해주세요.
             </p>
           </div>

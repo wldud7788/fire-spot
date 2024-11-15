@@ -99,14 +99,14 @@ const ForecastWeatherComponent = ({
 
   return (
     <div className="w-full rounded-[12px] border border-[#A6A6A6] px-[25px] py-[36px] max-989:px-[20px] max-989:py-[25px]">
-      <h2 className="mb-[20px] text-[24px] font-bold max-1280:text-[22px] max-1160:text-[20px] max-989:text-[18px]">
+      <h2 className="mb-[20px] text-[24px] font-bold max-1280:text-[22px] max-1160:text-[20px] max-989:text-[18px] max-767:text-[16px]">
         {campingName}의 5일간 날씨
       </h2>
       <div className="max-767:overflow-x-auto">
         <div className="flex items-center justify-center max-767:min-w-[550px]">
           {forecastData.list.map((day, index) => (
             <div key={index} className="w-[20%] text-center">
-              <strong className="text-[18px] font-medium max-767:text-[16px]">
+              <strong className="text-[18px] font-medium max-767:text-[15px]">
                 {new Date(day.dt * 1000).toISOString().split("T")[0]}
               </strong>
               <p className="my-[8px] text-[16px] text-[#BFBFBF] max-767:text-[14px]">
