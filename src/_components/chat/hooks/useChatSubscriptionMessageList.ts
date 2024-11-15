@@ -22,11 +22,15 @@ export const useChatSubscriptionMessageList = ({
 
   // 마지막으로 읽은 message_id를 계속 추적함 (안 읽은 메시지 수 계산을 위함)
   const lastChatMessageIdRef = useRef<number | null>(null);
+
+  // 마지막으로 전송한 user_id를 추적함 (내가 보낸 메시지에 한해서만 스크롤 이동 조건 처리를 위함)
   const lastChatMessageUserIdRef = useRef<string | null>(null);
 
+  // 채팅방 목록 ul을 참조함 (메시지 전송 시 스크롤 이동을 위함)
   const messageListRef = useRef<HTMLUListElement | null>(null);
 
-  const messageRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
+  // 입장 시점의 마지막으로 전송된 message의 element를 참조함 (채팅방 입장 시 마지막 메시지 element로 스크롤 이동을 위함)
+  const lastMessageRef = useRef<{ [key: number]: HTMLLIElement | null }>({});
 
   /** 채팅방 입/퇴장 시 마지막 읽은 메시지에 대한 처리 */
   const toggleChatRoomInOut = async (last_read_message_id: number | null) => {
@@ -44,7 +48,10 @@ export const useChatSubscriptionMessageList = ({
     }
   };
 
-  /** 채팅방 입장 시 마지막 읽은 메시지 DB에서 가져와서 ref에 저장. null 일 경우 ref 초기값(null) 그대로  */
+  /**
+   * 채팅방 입장 시 마지막 읽은 메시지 DB에서 가져와서 ref에 저장. null 일 경우 ref 초기값(null) 그대로
+   * 채팅방 나갈 때 last_read_message_id를 저장해주기 위함
+   */
   const fetchLastMessage = async () => {
     const message = await fetchLastChatMessage(roomId);
     if (message) {
@@ -52,7 +59,7 @@ export const useChatSubscriptionMessageList = ({
       lastChatMessageUserIdRef.current = message.user_id;
 
       /** 채팅방 입장 시 마지막 메시지로 포커싱 */
-      const messageElement = messageRefs.current[message.id];
+      const messageElement = lastMessageRef.current[message.id];
       if (messageElement) {
         // 메시지로 스크롤
         messageElement.scrollIntoView({
@@ -63,7 +70,20 @@ export const useChatSubscriptionMessageList = ({
     }
   };
 
-  /** 채팅 메시지 실시간 구독  */
+  /**
+   * 채팅 메시지 실시간 구독
+   *
+   * 1. supabase의 realtime을 적용하여 chat_message 테이블에 insert되면 payload로 값을 전달 받음
+   *
+   * 2. 신규 message_id를 참조함
+   * (채팅방 퇴장 시 chat_attendee 테이블의 last_read_message_id 저장 마지막으로 읽은 메시지 수 계산을 위함)
+   *
+   * 3. 신규 메시지를 전송한 user_id를 참조함
+   * (내가 메시지를 보낸 경우에만 스크롤을 내리기 때문에 해당 조건처리를 위함)
+   *
+   * 4. queryKey를 재검증하여 데이터(메시지) 새로 불러옴.
+   *
+   * */
   useEffect(() => {
     toggleChatRoomInOut(null);
     fetchLastMessage();
@@ -97,9 +117,8 @@ export const useChatSubscriptionMessageList = ({
     };
   }, []);
 
-  /** 마지막 메시지와 전송자가 일치하는 경우 스크롤 맨 아래로 */
+  /** 마지막 메시지와 전송자가 일치하는 경우 스크롤 아래로 이동 */
   useEffect(() => {
-    console.log('"messageListRef.current"', messageListRef.current);
     if (messageListRef.current && userId === lastChatMessageUserIdRef.current) {
       // 채팅 전송 시 애니메이션 없는 스크롤 이동 (애니메이션 X)
       // messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
@@ -138,5 +157,5 @@ export const useChatSubscriptionMessageList = ({
     }
   }, [lastChatMessageIdRef.current]);
 
-  return { messageListRef, messageRefs };
+  return { messageListRef, lastMessageRef };
 };

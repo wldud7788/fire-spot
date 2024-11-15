@@ -9,18 +9,18 @@ type Props = {
   messagesByDate: MessagesByDate | undefined;
   lastMessage: ChatRoomMessageInfo | undefined;
   messageListRef: MutableRefObject<HTMLUListElement | null>;
-  messageRefs: MutableRefObject<{
+  lastMessageRef: MutableRefObject<{
     [key: number]: HTMLLIElement | null;
   }>;
 };
 
 const ChatRoomMessageSection = ({
-  loginUserId,
-  roomId,
-  messagesByDate,
-  lastMessage,
-  messageListRef,
-  messageRefs
+  loginUserId, // 로그인 된 userId, (채팅 말풍선 우측에 표시할 때 조건 처리 위함)
+  roomId, // 채팅방 ID
+  messagesByDate, // 날짜별로 분리된(해시테이블) 메시지 데이터
+  lastMessage, // 마지막 message
+  messageListRef, // 채팅 전송 시 <ul> 태그의 맨 마지막으로 스크롤하기 위함
+  lastMessageRef // 채팅방 입장 시 <ul> 태그의 맨 마지막으로 스크롤하기 위함
 }: Props) => {
   const { messageInput, handleChangeInput, sendMessage, activeSendButton } =
     useChatRoomMessageSection(roomId, loginUserId);
@@ -53,7 +53,7 @@ const ChatRoomMessageSection = ({
                         messageInfo.chatMessage.id ===
                         lastMessage?.chatMessage.id
                       ) {
-                        messageRefs.current[lastMessage.chatMessage.id] = el;
+                        lastMessageRef.current[lastMessage.chatMessage.id] = el;
                       }
                     }}
                     className={`mb-10 flex items-start gap-[4px] ${
