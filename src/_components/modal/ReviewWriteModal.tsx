@@ -111,37 +111,69 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
 
   return (
     <div className="modal z-50 bg-white">
-      <h2>별점</h2>
-      <MakeStar onRatingChange={onRatingChange} />
+      <h2 className="color-gray01 block text-center text-[24px] font-bold">
+        리뷰 쓰기
+      </h2>
 
-      <h2>제목</h2>
-      <textarea
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="리뷰 제목을 입력하세요"
-        className="textarea"
-      />
+      <div className="mt-[40px] flex flex-col gap-[40px]">
+        <div className="flex flex-col gap-[10px]">
+          <h2 className="color-gray01 text-[18px] font-bold">캠핑장 별점</h2>
+          <MakeStar onRatingChange={onRatingChange} />
+        </div>
 
-      <h2>내용</h2>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="리뷰 내용을 입력하세요"
-        className="textarea"
-      />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => handleChangeReviewImageUrl(e)}
-        className="block"
-      />
+        <div className="flex flex-col gap-[10px]">
+          <h2 className="color-gray01 text-[18px] font-bold">제목</h2>
+          <textarea
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="리뷰 제목을 입력하세요"
+            className="textarea rounded-[6px] border border-[#FFB180] p-[13px] text-[16px] text-[#a1a1a1]"
+          />
+        </div>
 
-      <button onClick={handleSubmit} className="btn btn-primary">
-        제출
-      </button>
-      <button onClick={onClose} className="btn btn-secondary">
+        <div className="flex flex-col gap-[10px]">
+          <h2 className="color-gray01 text-[18px] font-bold">내용</h2>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="리뷰 내용을 입력하세요"
+            className="textarea rounded-[6px] border border-[#FFB180] p-[13px] text-[16px] text-[#a1a1a1]"
+          />
+        </div>
+
+        <div className="flex flex-col gap-[10px]">
+          <h2 className="color-gray01 text-[18px] font-bold">
+            사진 첨부 (선택)
+          </h2>
+          <p className="text-[16px] text-[#8c8c8c]">사진을 첨부해주세요.</p>
+          <div className="relative mt-[20px] flex cursor-pointer items-center justify-center rounded-[8px] border border-[#A6A6A6] py-[10px]">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleChangeReviewImageUrl(e)}
+              className="absolute left-0 top-0 block h-full w-full cursor-pointer opacity-0"
+            />
+            <p className="color-gray01 flex items-center gap-[5px] text-[16px]">
+              <img
+                src="/assets/images/common/ico-file-upload.svg"
+                alt="사진 첨부"
+              />
+              사진 첨부
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          className="btn btn-primary bg-main w-full rounded-[8px] py-[15px] text-center text-[16px] font-medium text-white"
+        >
+          작성 완료
+        </button>
+      </div>
+
+      {/* <button onClick={onClose} className="btn btn-secondary">
         닫기
-      </button>
+      </button> */}
     </div>
   );
 };

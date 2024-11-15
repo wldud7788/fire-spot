@@ -72,37 +72,33 @@ const CampListPage = () => {
   return (
     <div>
       {reviews.length > 0 ? (
-        <>
+        <ul className="flex flex-wrap items-center gap-[30px]">
           {/* 캠핑장 목록 */}
           {reviews.map((review) => {
             return (
-              <ReviewCard
-                key={review.id}
-                feed={{
-                  id: review.id,
-                  likes: review.likes,
-                  title: review.title,
-                  updated: review.updated,
-                  userId: review.userId,
-                  camp: review.camp,
-                  profile: review.profile,
-                  rating: review.rating,
-                  at: review.at,
-                  content: review.content
-                }}
-                // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
-                onClickFunc={() => openReviewModal(String(review.campId))} // <- 수정된 부분
-              />
+              <li key={review.id} className="w-full max-w-[calc(33.333%-23px)]">
+                <ReviewCard
+                  feed={{
+                    id: review.id,
+                    likes: review.likes,
+                    title: review.title,
+                    updated: review.updated,
+                    userId: review.userId,
+                    camp: review.camp,
+                    profile: review.profile,
+                    rating: review.rating,
+                    at: review.at,
+                    content: review.content
+                  }}
+                  type="mypage"
+                  // onClickFunc를 전달하여 이름 클릭 시 openReviewModal 실행
+                />
+              </li>
             );
           })}
-        </>
+        </ul>
       ) : (
         <NoData text="작성한 리뷰가 없습니다." />
-      )}
-
-      {/* 리뷰쓰기 모달창 */}
-      {selectedCampId && (
-        <ReviewWriteModal campId={selectedCampId} onClose={closeReviewModal} />
       )}
     </div>
   );

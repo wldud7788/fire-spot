@@ -39,15 +39,17 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
   }
   return (
     <>
-      <Slide slidePerview={3} spaceBetween={10}>
-        {reviews.map((review) => (
-          <ReviewSlideCard
-            key={review.id}
-            review={review}
-            onClickFunc={() => handleModalOpen(review)}
-          />
-        ))}
-      </Slide>
+      <div className="camp-slide-wrap">
+        <Slide slidePerview={3} spaceBetween={10}>
+          {reviews.map((review) => (
+            <ReviewSlideCard
+              key={review.id}
+              review={review}
+              onClickFunc={() => handleModalOpen(review)}
+            />
+          ))}
+        </Slide>
+      </div>
       <ReviewModal2
         isOpen={isOpen}
         selected={selected}
