@@ -36,7 +36,7 @@ export const updateSession = async (request: NextRequest) => {
       }
     );
     const user = await supabase.auth.getUser(); // 세션이 만료된 경우 자동 갱신(현재 사용자 정보를 가져옴)
-    const protectedRoutes = ["/mypage", "/meets/write"];
+    const protectedRoutes = ["/mypage", "/meets/write", "/chat"];
     const isProtectedRoute =
       protectedRoutes.includes(request.nextUrl.pathname) ||
       request.nextUrl.pathname.startsWith("/meets/edit"); // 모임 수정 페이지 접근 차단 (동적 URL이라 startsWith 사용)
