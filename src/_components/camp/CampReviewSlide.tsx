@@ -69,7 +69,6 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
 
   return (
     <>
-      {/* 리뷰 슬라이드 */}
       <div className="camp-slide-wrap">
         <Slide slidePerview={3} spaceBetween={10}>
           {reviews.map((review) => (
