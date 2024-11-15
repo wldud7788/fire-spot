@@ -25,7 +25,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
   const loginUserId = user?.id || "";
 
   const { messagesByDate } = useChatSosMessage(roomId);
-  const { lastChatMessageUserIdRef } = useChatSubscriptionMessageList({
+  const { messageListRef } = useChatSubscriptionMessageList({
     roomId
   });
   if (!user) return <></>;
@@ -42,7 +42,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
         messagesByDate={messagesByDate}
         loginUserId={loginUserId}
         roomId={roomId}
-        lastChatMessageUserIdRef={lastChatMessageUserIdRef}
+        messageListRef={messageListRef}
       />
       {/* <MeetIntroSection meetWithCamp={meetWithCamp} />
       <MeetContentSection meetWithCamp={meetWithCamp} />

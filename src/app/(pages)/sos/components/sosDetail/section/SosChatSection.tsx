@@ -10,29 +10,16 @@ type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
-  lastChatMessageUserIdRef: MutableRefObject<string | null>;
+  messageListRef: MutableRefObject<HTMLUListElement | null>;
 };
 const SosChatSection = ({
   loginUserId,
   roomId,
   messagesByDate,
-  lastChatMessageUserIdRef
+  messageListRef
 }: Props) => {
   const { messageInput, handleChangeInput, sendMessage } =
     useChatRoomMessageSection(roomId, loginUserId);
-
-  // ul 요소에 대한 ref
-  const messageListRef = useRef<HTMLUListElement | null>(null);
-
-  useEffect(() => {
-    // messagesByDate가 변경될 때마다 마지막 메시지로 스크롤을 이동
-    if (
-      messageListRef.current &&
-      loginUserId === lastChatMessageUserIdRef.current
-    ) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-    }
-  }, [messagesByDate]); // messagesByDate가 변경될 때마다 실행
 
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
   return (

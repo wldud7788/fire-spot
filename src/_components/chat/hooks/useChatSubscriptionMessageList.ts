@@ -22,6 +22,8 @@ export const useChatSubscriptionMessageList = ({
   const lastChatMessageIdRef = useRef<number | null>(null);
   const lastChatMessageUserIdRef = useRef<string | null>(null);
 
+  const messageListRef = useRef<HTMLUListElement | null>(null);
+
   /** 채팅방 입/퇴장 시 마지막 읽은 메시지에 대한 처리 */
   const toggleChatRoomInOut = async (last_read_message_id: number | null) => {
     const chatAttendee = {
@@ -81,5 +83,12 @@ export const useChatSubscriptionMessageList = ({
     };
   }, []);
 
-  return { lastChatMessageUserIdRef };
+  /** 마지막 메시지와 전송자가 일치하는 경우 스크롤 맨 아래로 */
+  useEffect(() => {
+    if (messageListRef.current && userId === lastChatMessageUserIdRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [lastChatMessageIdRef.current]);
+
+  return { messageListRef };
 };
