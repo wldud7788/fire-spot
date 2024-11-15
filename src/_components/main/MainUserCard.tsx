@@ -52,7 +52,7 @@ const MainUserCard = () => {
       <div className="flex items-center justify-center gap-[30px]">
         {/* left_area */}
         <div className="left_area text-center">
-          <div className="ibox mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%]">
+          <div className="ibox mx-auto mb-[25px] h-[215px] w-[215px] overflow-hidden rounded-[100%]">
             <img
               className="h-full w-full object-cover"
               src={
@@ -64,15 +64,17 @@ const MainUserCard = () => {
             />
           </div>
           <ul className="flex items-center justify-center">
-            <li className="main-user-before relative mr-[9px] pr-[9px]">
-              <strong className="text-[20px] font-semibold">
-                {userWithProfile.profile.nickname ||
-                  userWithProfile.profile.user_name}
-                님
+            <li className="main-user-before relative mr-[9px] w-[calc(50%-9px)] pr-[9px]">
+              <strong className="flex items-center gap-[3px] text-[18px] font-semibold">
+                <span className="line-clamp-1 flex-1">
+                  {userWithProfile.profile.nickname ||
+                    userWithProfile.profile.user_name}
+                </span>
+                <span className="flex-none">님</span>
               </strong>
             </li>
-            <li>
-              <p className="color-gray04 text-[20px] font-semibold uppercase">
+            <li className="w-[calc(50%-9px)]">
+              <p className="color-gray04 text-[18px] font-semibold uppercase">
                 {userWithProfile.user.app_metadata.provider || ""} 계정
               </p>
             </li>
