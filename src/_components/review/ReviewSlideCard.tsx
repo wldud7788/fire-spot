@@ -15,7 +15,7 @@ const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({
 }) => {
   // 이윤지: 이미지 없는 경우 어떻게 할 지 생각하기
   const imgUrl = review.img.length > 0 ? review.img[0] : "";
-  console.log("review ====>", review);
+
   return (
     <div
       onClick={onClickFunc}
