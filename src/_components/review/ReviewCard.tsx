@@ -17,7 +17,10 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
     <>
       {type ? (
         // type main - 메인에서 쓰이는 후기 카드
-        <div className="feed_card type_main group overflow-hidden rounded-[12px] border border-[#d9d9d9]">
+        <div
+          className="feed_card type_main group overflow-hidden rounded-[12px] border border-[#d9d9d9]"
+          onClick={onClickFunc}
+        >
           <div className="inner">
             <div className="ibox h-[160px] overflow-hidden">
               <img

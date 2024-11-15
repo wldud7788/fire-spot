@@ -12,9 +12,9 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
     const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
 
     const { data: feedData } = await supabase
-      .from("feed")
+      .from("review")
       .select(`*, camp(*)`)
-      .eq("user_id", userId);
+      .eq("userId", userId);
 
     const meetData = (await fetchMeetAttendeeByUserId()).map(
       (item) => item.meet
@@ -31,10 +31,10 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
       ...feedData.map((feed) => ({
         type: SCHEDULE_TYPE.stamp,
         typeId: feed.id ?? "",
-        contentId: feed.camp_id ?? "",
+        contentId: feed.camp?.contentId ?? 0,
         content: feed.camp?.facltNm ?? "",
-        startDate: feed.time ?? "",
-        endDate: feed.time ?? ""
+        startDate: feed.at ?? "",
+        endDate: feed.at ?? ""
       })),
       ...meetData.map((meet) => ({
         type: SCHEDULE_TYPE.meet ?? "",

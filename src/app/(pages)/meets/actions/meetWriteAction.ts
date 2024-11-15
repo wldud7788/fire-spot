@@ -67,7 +67,6 @@ const patchMeet = async (meetId: string, meet: MeetUpdate) => {
 /** 사용자가 모임작성에서 검색 후 '클릭' 한 캠핑장은 DB에 저장 */
 const upsertCamp = async (camp: CampInsert | Camp) => {
   const supabase = await createClient();
-  console.log(camp);
 
   const {
     contentId,

@@ -5,9 +5,9 @@ import TabList from "./TabList";
 import MeetList from "./MeetList";
 import CampingReviews from "./CampingReviews";
 import Calendar from "./Calendar";
-import Bookmarks from "./Bookmarks";
 import Followers from "./Followers";
 import UserCard from "./UserCard";
+import Likes from "./Likes";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("myMeetings");
@@ -26,7 +26,7 @@ const MyPage = () => {
             {activeTab === "myMeetings" && <MeetList />}
             {activeTab === "campingReviews" && <CampingReviews />}
             {activeTab === "calendar" && <Calendar />}
-            {activeTab === "bookmarks" && <Bookmarks />}
+            {activeTab === "Likes" && <Likes />}
             {activeTab === "followers" && <Followers />}
           </div>
         </div>

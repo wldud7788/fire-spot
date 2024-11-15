@@ -17,11 +17,15 @@ const convertMeetDataToMeetCard = (
     const tags = getTags({ camp, meet });
     const date = formatDate_1(start_date);
 
+    // 마감: 모임 시작일이 오늘 보다 이전일 경우 || 모집 인원이 다 찬 경우
+    const isDeadline =
+      isBefore(meetWithCamp.meet.start_date, new Date()) ||
+      meet.deadline_headcount <= attendee_count;
+
+    // 마감 임박: 모임 시작일이  DEADLINE_APPROACHING 만큼 남은 경우 && 마감이 아닌 경우
     const isDeadlineApproaching =
       subDays(startOfDay(meetWithCamp.meet.start_date), DEADLINE_APPROACHING) <=
-      new Date();
-
-    const isDeadline = isBefore(meetWithCamp.meet.start_date, new Date());
+        new Date() && !isDeadline;
 
     return {
       id,
@@ -37,7 +41,17 @@ const convertMeetDataToMeetCard = (
   });
 
   const filterMeetCardList = meetCardList.filter((meetCard) => {
-    return !(meetCard.isDeadline && isProgress);
+    if (isProgress) {
+      return !meetCard.isDeadline;
+    }
+
+    return meetCard.isDeadline;
+
+    // console.log("meetCard", meetCard);
+    // console.log("meetCard.isDeadline", meetCard.isDeadline);
+    // console.log("isProgress", isProgress);
+    // console.log("================================");
+    // return !meetCard.isDeadline && isProgress;
   });
 
   return filterMeetCardList;

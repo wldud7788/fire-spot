@@ -4,12 +4,23 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewCard from "../review/ReviewCard";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
+import ReviewModal2 from "../review/ReviewModal";
 
 const supabase = createClient();
 
 const MainReviews = () => {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<ReviewItem | null>(null);
+  const handleModalOpen = (review: ReviewItem) => {
+    setSelected(review);
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+    setSelected(null);
+  };
 
   useEffect(() => {
     // 함수 이름도 fetchCamps -> fetchReviews 이름 바꾸쇼
@@ -54,12 +65,22 @@ const MainReviews = () => {
     <div>
       {error && <p className="text-red-500">{error}</p>}
       <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
-        {reviews.map((feed) => (
-          <li key={feed.id}>
-            <ReviewCard feed={feed} type={"main"} />
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <ReviewCard
+              feed={review}
+              type={"main"}
+              onClickFunc={() => handleModalOpen(review)}
+            />
           </li>
         ))}
       </ul>
+      {/* 리뷰 카드 클릭 시 생성되는 모달창 */}
+      <ReviewModal2
+        isOpen={isOpen}
+        handleModalClose={handleModalClose}
+        selected={selected}
+      />
     </div>
   );
 };

@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewSlideCard from "../review/ReviewSlideCard";
 import Slide from "../slide/Slide";
-import { Database } from "../../../database.types";
+import ReviewModal2 from "../review/ReviewModal";
+import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import { useQuery } from "@tanstack/react-query";
 
 const supabase = createClient();
-
-// type Review = {
-//   id: number;
-//   campId: string;
-//   title: string;
-//   content: string;
-//   likes: number;
-// };
-
-type Review = Database["public"]["Tables"]["review"]["Row"];
 
 type CampReviewSlideProps = {
   campId: string;
 };
 
 const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
+  // const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<ReviewItem | null>(null);
+  const handleModalOpen = (review: ReviewItem) => {
+    setSelected(review);
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+    setSelected(null);
+  };
   const { data: reviews } = useQuery({
     queryFn: async () => {
       const reviewList = await supabase
         .from("review")
         .select("*,camp(*)")
         .eq("campId", campId);
-      return reviewList.data;
+      return reviewList.data as ReviewItem[];
     },
     queryKey: ["reviewList", campId]
   });
@@ -36,11 +38,22 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({ campId }) => {
     return <div>리뷰 데이터가 없습니다.</div>;
   }
   return (
-    <Slide slidePerview={3} spaceBetween={10}>
-      {reviews.map((review) => (
-        <ReviewSlideCard key={review.id} review={review} />
-      ))}
-    </Slide>
+    <>
+      <Slide slidePerview={3} spaceBetween={10}>
+        {reviews.map((review) => (
+          <ReviewSlideCard
+            key={review.id}
+            review={review}
+            onClickFunc={() => handleModalOpen(review)}
+          />
+        ))}
+      </Slide>
+      <ReviewModal2
+        isOpen={isOpen}
+        selected={selected}
+        handleModalClose={handleModalClose}
+      />
+    </>
   );
 };
 
