@@ -124,14 +124,19 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                         {camp.induty}
                       </p>
                     )}
-                    {camp.caravInnerFclty?.split(",").map((item) => (
-                      <p
-                        key={item}
-                        className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]"
-                      >
-                        {item}
-                      </p>
-                    ))}
+                    {camp.caravInnerFclty && (
+                      <>
+                        {camp.caravInnerFclty?.split(",").map((item) => (
+                          <p
+                            key={item}
+                            className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </>
+                    )}
+
                     {sbrsClInfo
                       ? sbrsClInfo.map((item, idx) => {
                           return (
