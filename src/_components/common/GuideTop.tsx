@@ -10,7 +10,7 @@ const GuideTop = ({ text }: CommunityTopProps) => {
   return (
     <div className="community_top my-[60px] max-1280:mb-[20px] max-1280:mt-[40px]">
       <PageTitle text={text} />
-      <ul className="mt-[60px] flex items-center gap-[24px] border-b border-b-[#BFBFBF] max-767:mt-[40px] max-767:gap-[10px]">
+      <ul className="mt-[60px] flex items-center gap-[24px] border-b border-b-[#BFBFBF] max-767:mt-[40px] max-767:gap-[10px] max-767:text-center max-450:justify-center">
         <li>
           <Link
             href={"/beginner"}
