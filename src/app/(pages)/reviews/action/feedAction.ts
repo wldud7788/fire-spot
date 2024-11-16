@@ -8,16 +8,16 @@ export const fetchReviewData = async () => {
     const userData = await supabase.auth.getUser();
     const userId = !!userData.data.user?.id ? userData.data.user?.id : "";
 
-    const { data: feedData, error: feedError } = await supabase
-      .from("feed")
-      .select(`*, camp(*)`)
-      .eq("user_id", userId);
+    const { count: reviewCount } = await supabase
+      .from("review")
+      .select("*", { count: "exact" })
+      .eq("userId", userId);
 
-    if (feedError || !feedData) {
-      return [];
+    if (!reviewCount) {
+      return 0;
     }
 
-    return feedData;
+    return reviewCount;
   } catch (e) {
     console.error("getFeedData Error, ", e);
     return [];
