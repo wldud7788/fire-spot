@@ -19,7 +19,7 @@ const ChatList = () => {
         <PageTitle text={"대화 모아보기"} />
 
         <div className="mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px] max-767:mt-[20px]">
-          <div className="flex items-center gap-[7px]">
+          {/* <div className="flex items-center gap-[7px]">
             <button
               type="button"
               className="rounded-[20px] bg-[#FFB180] px-[16px] py-[7px] text-[14px] font-bold text-white max-1280:text-[13px]"
@@ -46,7 +46,7 @@ const ChatList = () => {
             >
               오래된 순
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col">
