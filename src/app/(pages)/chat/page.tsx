@@ -16,7 +16,7 @@ const ChatList = () => {
   return (
     <div className="mb-[60px] mt-[40px]">
       <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-767:px-[15px]">
-        <PageTitle text={"대화 모아보기"} />
+        <PageTitle text={"대화목록"} />
 
         <div className="mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px] max-767:mt-[20px]">
           {/* <div className="flex items-center gap-[7px]">
