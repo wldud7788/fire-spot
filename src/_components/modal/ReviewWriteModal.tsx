@@ -181,7 +181,7 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
               onClick={() => setIsOff(!isOff)}
               className="w-full rounded-[12px] bg-[#d9d9d9] py-[15px] text-[14px]"
             >
-              {isOff ? "리뷰 작성 시 금지행위 보기" : "OFF"}
+              {isOff ? "리뷰 작성 시 금지행위 보기" : "닫기"}
             </button>
             {!isOff && (
               <div className="flex flex-col">
