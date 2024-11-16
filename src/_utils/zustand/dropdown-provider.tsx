@@ -3,7 +3,7 @@ import { type ReactNode, createContext, useRef, useContext } from "react";
 import { useStore } from "zustand";
 import { create } from "zustand";
 
-type DropdownType = "main" | "header" | "search" | null;
+type DropdownType = "main" | "header" | "search" | "mobile" | null;
 
 interface DropdownStore {
   activeDropdown: DropdownType;

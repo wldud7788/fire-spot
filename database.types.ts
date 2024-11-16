@@ -418,7 +418,7 @@ export type Database = {
           created_at: string;
           email: string | null;
           id: string;
-          nickname: string;
+          nickname: string | null;
           user_name: string | null;
         };
         Insert: {

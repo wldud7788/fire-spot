@@ -74,6 +74,26 @@ export const useMap = (camps: Camp[]) => {
     mapInstanceRef.current.markers = newMarkers;
   }, [camps]);
 
+  const moveToMap = (selectedCamp: Camp) => {
+    console.log("moveToMap");
+    if (!mapInstanceRef.current || !window.naver?.maps) return;
+
+    console.log("moveToMap Innnnnnnn");
+
+    const { map, infoWindow } = mapInstanceRef.current;
+    const position = new window.naver.maps.LatLng(
+      Number(selectedCamp.mapY),
+      Number(selectedCamp.mapX)
+    );
+
+    console.log("position", position);
+
+    map.setCenter(position);
+    map.setZoom(14);
+
+    infoWindow.open(map, position);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       const mapInstance = initializeMap();
@@ -88,5 +108,5 @@ export const useMap = (camps: Camp[]) => {
     };
   }, [camps, initializeMap, createMarkers, cleanup]);
 
-  return { moveToMarker };
+  return { moveToMarker, moveToMap, mapInstanceRef };
 };

@@ -12,6 +12,8 @@ import ForecastWeatherComponent from "../weather/FutureWeather";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
 import { useState } from "react";
 import Modal from "../modal/Modal";
+import LikeButton from "../like/LikeButton";
+import ShareButton from "./ShareButton";
 
 type CampDetailProps = {
   paramsId: string;
@@ -34,8 +36,6 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   });
 
   const [isOpen, setIsOpen] = useState(false);
-  const [reviewCount, setReviewCount] = useState<number>(0);
-  const [averageRate, setAverageRate] = useState<number | null>(null);
 
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
@@ -68,55 +68,49 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   upsertCamp(camp);
 
   return (
-    <div className="camp_detail mt-[40px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+    <div className="camp_detail mt-[40px] max-989:mt-[0px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         {/* 캠핑장 상세 최상단 */}
-        <div className="detail_section flex items-center gap-[40px]">
-          <div className="left_area w-[calc(100%-500px)] w-full overflow-hidden rounded-[12px]">
+        <div className="detail_section flex flex-wrap items-center gap-[20px] max-989:flex-col">
+          <div className="left_area w-[calc(100%-500px)] overflow-hidden rounded-[12px] max-1280:w-[calc(100%-440px)] max-1160:w-[calc(100%-380px)] max-989:w-full">
             <img
               src={camp.firstImageUrl}
               alt={`${camp.facltNm} 이미지`}
               className="w-full"
             />
           </div>
-          <div className="right_area w-full max-w-[460px] rounded-[12px] shadow-custom">
-            <div className="info px-[35px] py-[30px]">
+          <div className="right_area w-full max-w-[460px] rounded-[12px] shadow-custom max-1280:max-w-[400px] max-1160:max-w-[360px] max-989:max-w-[100%]">
+            <div className="info px-[35px] py-[30px] max-1280:p-[30px] max-989:p-[20px]">
               <div className="cont">
-                <PageTitle text={camp.facltNm} />
-                <p className="color-gray03 mb-[20px] mt-[5px] text-[14px]">
+                <h1 className="text-[28px] font-bold max-1280:text-[24px] max-1160:text-[22px]">
+                  {camp.facltNm}
+                </h1>
+                <p className="color-gray03 mb-[20px] mt-[5px] text-[14px] max-1280:text-[13px] max-989:text-[12px]">
                   {camp.addr1}
                 </p>
                 <ul className="flex items-center">
-                  <li className="li-before-dot relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
+                  <li className="li-before-dot relative mr-[5px] flex items-center gap-[2px] pr-[6px] max-1280:text-[14px] max-989:text-[13px]">
                     {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
                     <img
                       src="/assets/images/common/ico-star-c-big.svg"
+                      className="max-1280:relative max-1280:top-[-1px]"
                       alt="평점"
                     />
-                    평점:{" "}
-                    {averageRate !== null
-                      ? averageRate.toFixed(2)
-                      : "평점 없음"}
+                    <p>4.9</p>
                   </li>
-                  <li>
+                  <li className="max-1280:text-[14px] max-989:text-[13px]">
                     {/* [이윤지 작업] 리뷰 갯수 = 리뷰 ${리뷰 카운트}개  */}
-                    {/* <button
+                    <button
                       type="button"
                       className="bg-reviewArrow bg-right-center-0 bg-no-repeat pr-[13px]"
                     >
-                     
-                      리뷰 갯수: {reviewCount} 개 
-                    </button> */}
-                    리뷰 개수: {reviewCount}
+                      리뷰 00개
+                    </button>
                   </li>
                 </ul>
-                <p className="color-main mt-[15px] text-[16px]">
-                  {/* 이지영 작업*/}
-                  249Km
-                </p>
-                <dl>
-                  <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
-                    캠핑장 소개 리뷰 개수: {reviewCount}
+                <dl className="mt-[30px] max-989:mt-[20px]">
+                  <dt className="bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
+                    캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.induty && (
@@ -124,14 +118,19 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                         {camp.induty}
                       </p>
                     )}
-                    {camp.caravInnerFclty?.split(",").map((item) => (
-                      <p
-                        key={item}
-                        className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]"
-                      >
-                        {item}
-                      </p>
-                    ))}
+                    {camp.caravInnerFclty && (
+                      <>
+                        {camp.caravInnerFclty?.split(",").map((item) => (
+                          <p
+                            key={item}
+                            className="color-gray03 rounded-[5px] bg-[#f2f2f2] p-[5px] text-[12px]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </>
+                    )}
+
                     {sbrsClInfo
                       ? sbrsClInfo.map((item, idx) => {
                           return (
@@ -146,11 +145,11 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                       : ""}
                   </dd>
                 </dl>
-                <dl>
-                  <dt className="mt-[30px] bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
+                <dl className="mt-[30px] max-989:mt-[20px]">
+                  <dt className="bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
                     주변 정보
                   </dt>
-                  <dd className="mt-[15px] flex flex-wrap">
+                  <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.posblFcltyCl ? (
                       posblFcltyClInfo?.map((item, idx) => (
                         <p
@@ -169,28 +168,12 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 </dl>
               </div>
               <div className="btn_area mt-[50px] flex items-center gap-[12px]">
-                <button
-                  type="button"
-                  className="bg-main bd-color-main flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border text-[18px]"
-                >
-                  <img
-                    src="/assets/images/camp/btn-camp-bookmark.svg"
-                    alt="스크랩"
-                  />
-                  <p className="text-[18px] font-bold text-[#fff]">
-                    스크랩하기
-                  </p>
-                </button>
-                <button
-                  type="button"
-                  className="flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border border-[#a6a6a6] bg-white text-[18px]"
-                >
-                  <img
-                    src="/assets/images/camp/btn-camp-share.svg"
-                    alt="공유하기"
-                  />
-                  <p className="color-gray02 text-[18px] font-bold">공유하기</p>
-                </button>
+                <LikeButton
+                  campId={camp.contentId}
+                  camp={camp}
+                  variant="detailLike"
+                />
+                <ShareButton />
               </div>
             </div>
           </div>
@@ -200,17 +183,17 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 소개 */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px]">
-            <h2 className="bg-campTit01 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <h2 className="bg-campTit01 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
               캠핑장 소개
             </h2>
           </div>
 
           {camp.featureNm || camp.intro ? (
-            <p className="color-gray01 text-[16px]">
+            <p className="color-gray01 text-[16px] max-1280:text-[14px]">
               {camp.featureNm ? camp.featureNm : camp.intro}
             </p>
           ) : (
-            <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
+            <div className="mt-[30px] w-full max-w-[450px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
               <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
                 등록된 캠핑장 소개가 없어요.
               </p>
@@ -219,7 +202,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
           <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
             {camp.induty && (
-              <li className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]">
+              <li className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px] max-1280:px-[15px] max-1280:py-[7px] max-1280:text-[16px] max-989:px-[12px] max-989:py-[5px] max-989:text-[14px]">
                 {camp.induty}
               </li>
             )}
@@ -228,7 +211,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                 {camp.caravInnerFclty.split(",").map((item) => (
                   <li
                     key={item}
-                    className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]"
+                    className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px] max-1280:px-[15px] max-1280:py-[7px] max-1280:text-[16px] max-989:px-[12px] max-989:py-[5px] max-989:text-[14px]"
                   >
                     {item}
                   </li>
@@ -239,7 +222,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               ? sbrsClInfo.map((item, idx) => {
                   return (
                     <li
-                      className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]"
+                      className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px] max-1280:px-[15px] max-1280:py-[7px] max-1280:text-[16px] max-989:px-[12px] max-989:py-[5px] max-989:text-[14px]"
                       key={`${item}-${idx}`}
                     >
                       {item}
@@ -254,7 +237,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 예약하기 */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px]">
-            <h2 className="bg-campTit02 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <h2 className="bg-campTit02 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
               캠핑장 예약하기
             </h2>
           </div>
@@ -278,8 +261,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               )}
             </li>
           </ul>
-          <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px]">
-            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px]">
+          <div className="mt-[30px] w-full max-w-[400px] rounded-[8px] bg-[#f2f2f2] px-[30px] py-[8px] max-767:max-w-[100%] max-767:px-[0px]">
+            <p className="color-gray02 bg-import bg-left-center bg-no-repeat pl-[35px] text-[16px] max-767:text-[14px]">
               자세한 예약 방법은 캠핑장으로 확인해주세요.
             </p>
           </div>
@@ -289,7 +272,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 주변 정보 */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px]">
-            <h2 className="bg-campTit03 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <h2 className="bg-campTit03 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
               주변 정보
             </h2>
           </div>
@@ -298,7 +281,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
             <ul className="mt-[30px] flex flex-wrap items-center gap-[10px]">
               {posblFcltyClInfo?.map((item) => (
                 <li
-                  className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px]"
+                  className="bd-color-main color-gray01 rounded-[20px] border px-[18px] py-[10px] text-[18px] max-1280:px-[15px] max-1280:py-[7px] max-1280:text-[16px] max-989:px-[12px] max-989:py-[5px] max-989:text-[14px]"
                   key={item}
                 >
                   {item}
@@ -318,10 +301,10 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 위치 */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px]">
-            <h2 className="bg-campTit04 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <h2 className="bg-campTit04 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
               캠핑장 위치
             </h2>
-            <p className="bg-direction bg-left-center-0 bg-no-repeat pl-[30px] text-base">
+            <p className="mt-[15px] bg-direction bg-left-center-0 bg-no-repeat pl-[30px] text-base">
               {camp.direction}
             </p>
           </div>
@@ -331,12 +314,12 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
         {/* 캠핑장 날씨를 알려드려요 */}
         <div className="detail_section mt-[60px]">
-          <div className="tit_area mb-[30px] flex items-center gap-[14px]">
-            <h2 className="bg-campTit05 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+          <div className="tit_area mb-[30px] flex items-center gap-[14px] max-767:flex-col max-767:items-start max-767:gap-[15px]">
+            <h2 className="bg-campTit05 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px] max-767:w-full">
               캠핑장 날씨를 알려드려요.
             </h2>
             {/* 캠핑장 날씨 최신 수정 */}
-            <p className="color-gray03 rounded-[8px] border border-[#D9D9D9] bg-[#f2f2f2] p-[10px] text-[16px]">
+            <p className="color-gray03 rounded-[8px] border border-[#D9D9D9] bg-[#f2f2f2] p-[10px] text-[16px] max-1280:text-[14px]">
               캠핑장 이때 방문하면 좋아요 : {camp.operPdCl}
             </p>
           </div>
@@ -351,8 +334,8 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
         {/* 캠핑장 리뷰  캠프 리뷰 슬라이드 */}
         {/* TODO: 이윤지
 pr 먼저~
-          1. 리뷰 정책 추가하기  (완료)
-          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기 (어려워요 ㅠ)  
+          1. 리뷰 정책 추가하기 
+          2. 캠핑장 리뷰 쓰는 부분 모달열기전에는 보이지 않게 수정하기
           3. PR 올려서 머지하기
 
           ------ PR 이후 다시 작업
@@ -365,31 +348,30 @@ pr 먼저~
          */}
         <div className="detail_section mt-[60px]">
           <div className="tit_area mb-[30px] flex items-center justify-between">
-            <div className="left_area flex items-center gap-[15px]">
-              <h2 className="bg-campTit06 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <div className="left_area flex items-center gap-[15px] max-767:flex-col max-767:items-start">
+              <h2 className="bg-campTit06 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
                 캠핑장 리뷰
               </h2>
               {/* 이윤지 작업 */}
               <ul className="flex items-center">
-                <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold">
+                <li className="li-before-dot color-main relative mr-[10px] flex items-center pr-[10px] text-[20px] font-bold max-1280:text-[16px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  평점:{" "}
-                  {averageRate !== null ? averageRate.toFixed(2) : "평점 없음"}
+                  33
                 </li>
-                <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px]">
+                <li className="relative mr-[5px] flex items-center gap-[2px] pr-[6px] max-1280:text-[16px]">
                   {/* [이윤지 작업] 윤지님 여기 평점 작업 필요합니다. */}
-                  리뷰: {reviewCount}개
                   <img
                     src="/assets/images/common/ico-star-c-big.svg"
                     alt="평점"
                   />
+                  <p>4.9</p>
                 </li>
               </ul>
             </div>
             <div className="right_area">
               <button
                 type="button"
-                className="color-main bd-color-main rounded-[8px] border p-[10px] text-[18px]"
+                className="color-main bd-color-main rounded-[8px] border p-[10px] text-[18px] max-1280:py-[5px] max-1280:text-[16px]"
                 onClick={handleModalOpen}
               >
                 리뷰 쓰기
@@ -412,11 +394,7 @@ pr 먼저~
           {true ? (
             <>
               {/* <ReviewWriteModal campId={paramsId} onClose={() => {}} /> */}
-              <CampReviewSlide
-                campId={paramsId}
-                onReviewCountChange={setReviewCount}
-                onAverageRateChange={setAverageRate}
-              />
+              <CampReviewSlide campId={paramsId} />
             </>
           ) : (
             <NoData text={"등록된 리뷰가 없어요."} />
@@ -427,7 +405,7 @@ pr 먼저~
         {/* 이 장소와 함께 봤어요 */}
         <div className="detail_section mb-[30px] mt-[60px]">
           <div className="tit_area mb-[30px]">
-            <h2 className="bg-campTit07 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold">
+            <h2 className="bg-campTit07 bg-left-center-0 bg-no-repeat pl-[34px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px]">
               비슷한 캠핑장 추천
             </h2>
           </div>
@@ -440,10 +418,10 @@ pr 먼저~
         {/*// 이 장소와 함께 봤어요 */}
 
         {/* 목록으로 가기 */}
-        <div className="detail_section my-[100px] flex justify-center">
+        <div className="detail_section my-[100px] flex justify-center max-767:mb-[60px] max-767:mt-[40px]">
           <Link
             href="/camps"
-            className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold"
+            className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold max-767:max-w-[100%] max-767:py-[15px]"
           >
             목록으로 이동
           </Link>

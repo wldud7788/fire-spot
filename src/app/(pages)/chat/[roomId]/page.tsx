@@ -32,10 +32,10 @@ const ChatRoom = ({ params }: Props) => {
 
   return (
     <div className="mb-[60px] mt-[40px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"대화 모아보기"} />
-        <div className="mb-[30px] mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px]"></div>
-        <div className="overflow-hidden rounded-[12px] bg-[#FFEFE5]">
+        <div className="mt-[50px] flex items-center justify-between border-b-2 border-b-[#BFBFBF] pb-[16px] max-767:mt-[20px]"></div>
+        <div className="mt-[30px] overflow-hidden rounded-[12px] bg-[#FFEFE5]">
           <ChatRoomTitleSection chatRoomTitle={chatRoomTitle} />
           <ChatRoomMessageSection
             loginUserId={user.id}

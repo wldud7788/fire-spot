@@ -72,11 +72,14 @@ const CampListPage = () => {
   return (
     <div>
       {reviews.length > 0 ? (
-        <ul className="flex flex-wrap items-center gap-[30px]">
+        <ul className="flex flex-wrap items-center gap-[30px] max-1280:gap-[15px]">
           {/* 캠핑장 목록 */}
           {reviews.map((review) => {
             return (
-              <li key={review.id} className="w-full max-w-[calc(33.333%-23px)]">
+              <li
+                key={review.id}
+                className="w-full max-w-[calc(33.333%-12px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
+              >
                 <ReviewCard
                   feed={{
                     id: review.id,

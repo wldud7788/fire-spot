@@ -40,8 +40,8 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
   };
 
   return (
-    <div className="camp_list my-[65px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+    <div className="camp_list my-[65px] max-767:mb-[60px] max-767:mt-[40px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"캠핑장 리스트"} />
         {/* 이윤지 작업 - 내가 찜한 캠핑장 모아보기 */}
         <div className="input_box relative mb-[40px] mt-[15px]">
@@ -54,24 +54,29 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
           />
           <label
             htmlFor="likeChk"
-            className={`${islikeChk ? "bg-chkOn" : "bg-chk"} bg-left-center-0 bg-no-repeat pl-[25px]`}
+            className={`${islikeChk ? "bg-chkOn" : "bg-chk"} bg-left-center-0 bg-no-repeat pl-[25px] max-767:py-[3px] max-767:text-[13px]`}
           >
             내가 찜한 캠핑장 모아보기
           </label>
         </div>
-        <ul className="list_box flex flex-wrap gap-[30px]">
+        <ul className="list_box flex flex-wrap gap-[30px] max-989:gap-[15px]">
           {currentItems.map((camp) => (
-            <li key={camp.contentId} className="w-[calc(25%-30px)]">
+            <li
+              key={camp.contentId}
+              className="w-[calc(25%-22.5px)] max-989:w-[calc(50%-8px)] max-450:w-full"
+            >
               <CampCard camp={camp} />
             </li>
           ))}
         </ul>
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          onMovePagePrev={movePagePrev}
-          onMovePageNext={movePageNext}
-        />
+        <div className="max-767:mt-[30px]">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onMovePagePrev={movePagePrev}
+            onMovePageNext={movePageNext}
+          />
+        </div>
       </div>
     </div>
   );

@@ -17,11 +17,16 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
     handleRemoveFilter
   } = useFilters(camps);
 
-  const { moveToMarker } = useMap(filteredCamps);
+  const { moveToMarker, moveToMap, mapInstanceRef } = useMap(filteredCamps);
 
   const handleCampSelect = (selectedCamp: Camp) => {
     moveToMarker(selectedCamp);
   };
+
+  const handleMoveToMap = (camp: Camp) => {
+    moveToMap(camp);
+  };
+
   return (
     <div className="flex h-screen w-[400px] flex-col border-r">
       {/* 검색 및 필터 */}
@@ -36,6 +41,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
       <SearchList
         filteredCamps={filteredCamps}
         handleCampSelect={handleCampSelect}
+        handleMoveToMap={handleMoveToMap}
       />
     </div>
   );

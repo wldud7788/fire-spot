@@ -4,7 +4,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import RQProviders from "@/_utils/reactQuery/RQProviders";
 import { UserStoreProvider } from "@/_utils/zustand/userStoreProvider";
-import Header from "@/_components/layout/Header";
+import Header from "@/_components/layout/header/Header";
 import Footer from "@/_components/layout/Footer";
 import Script from "next/script";
 import { DropdownStoreProvider } from "@/_utils/zustand/dropdown-provider";

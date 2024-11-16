@@ -1,6 +1,6 @@
 import { create } from "zustand";
 // create는 store과 hook을 동시에 생성
-type DropdownType = "main" | "header" | "search" | null;
+type DropdownType = "main" | "header" | "search" | "mobile" | null;
 
 interface DropdownStore {
   // 상태

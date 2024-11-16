@@ -12,7 +12,7 @@ const SosUserSection = ({ sosWithCamp }: Props) => {
 
   // TODO 민규님: SOS 상세 유저 정보 섹션
   return (
-    <div className="utils mt-[60px] flex items-center gap-[15px] border-b-2 border-[#EBECF0] pb-[10px]">
+    <div className="utils mt-[60px] flex items-center gap-[15px] border-b-2 border-[#EBECF0] pb-[10px] max-767:mt-[40px]">
       <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
         {/* 작성자 프사 */}
         <img
@@ -22,16 +22,16 @@ const SosUserSection = ({ sosWithCamp }: Props) => {
         />
       </div>
       <div className="flex flex-col justify-between">
-        <strong>
+        <strong className="max-989:text-[14px]">
           {/* 작성자명 (닉네임 없으면 구글이나 카카오 계정명) */}
           {userName}
         </strong>
         <p className="flex items-center">
           {/* 시군구 */}
-          <span className="color-gray02 py-[5px] text-[14px]">
+          <span className="color-gray02 py-[5px] text-[14px] max-767:text-[13px]">
             {camp.sigunguNm}
           </span>
-          <span className="before-dot-left color-gray02 relative ml-[5px] pl-[10px] text-[14px]">
+          <span className="before-dot-left color-gray02 relative ml-[5px] pl-[10px] text-[14px] max-767:text-[13px]">
             {dateString}
           </span>
         </p>
