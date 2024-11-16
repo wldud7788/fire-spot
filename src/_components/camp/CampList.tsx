@@ -59,7 +59,7 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
             내가 찜한 캠핑장 모아보기
           </label>
         </div>
-        <ul className="list_box flex flex-wrap gap-[30px] max-989:gap-[15px] max-767:gap-[30px]">
+        <ul className="list_box flex flex-wrap gap-[30px] max-989:gap-[15px]">
           {currentItems.map((camp) => (
             <li
               key={camp.contentId}

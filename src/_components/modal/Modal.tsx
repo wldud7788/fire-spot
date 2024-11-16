@@ -25,7 +25,7 @@ const Modal = ({
   };
   return (
     <div
-      className={`modal fixed left-0 top-0 z-[9999] h-full w-full bg-[rgba(0,0,0,.35)] ${className ? className : ""} flex items-center justify-center`}
+      className={`modal fixed left-0 top-0 z-[9999] h-full w-full bg-[rgba(0,0,0,.35)] ${className ? className : ""} flex items-center justify-center px-[15px]`}
       onClick={handleBackgroundClick}
     >
       <div
