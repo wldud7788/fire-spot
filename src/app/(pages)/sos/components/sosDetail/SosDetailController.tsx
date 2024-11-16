@@ -34,7 +34,7 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
 
   // TODO 민규님: SOS 상세 섹션별 분리
   return (
-    <div className="mx-auto mb-[100px] mt-[75px] w-full max-w-[1360px] pl-[30px] pr-[30px]">
+    <div className="mx-auto mb-[60px] mt-[40px] w-full max-w-[1360px] pl-[30px] pr-[30px] max-989:px-[15px]">
       <SosTitleSection sos={sos} />
       <SosUserSection sosWithCamp={sosWithCamp} />
       <SosContentSection sos={sos} />

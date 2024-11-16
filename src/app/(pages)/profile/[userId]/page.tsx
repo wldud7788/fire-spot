@@ -40,14 +40,14 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
   return (
     <>
       <div className="my_page my-[60px]">
-        <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
-          <div className="mb-[40px] border-b border-b-[#BFBFBF] pb-[40px]">
+        <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
+          <div className="mb-[40px] border-b border-b-[#BFBFBF] pb-[40px] max-767:mb-[20px] max-767:pb-[20px]">
             <PageTitle text={`${userProfile.nickname}님의 프로필 페이지`} />
           </div>
 
-          <div className="flex gap-[40px]">
-            <div className="w-[320px]">
-              <div className="min-h-[300px] max-w-sm rounded-lg border p-[50px] shadow-md">
+          <div className="flex gap-[40px] max-989:flex-col max-989:gap-[20px]">
+            <div className="w-[320px] max-989:w-full">
+              <div className="min-h-[300px] max-w-sm rounded-lg border p-[50px] shadow-md max-989:max-w-[100%]">
                 {userProfile && userProfile.avatar_url && (
                   <img
                     src={userProfile?.avatar_url}
@@ -66,7 +66,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
                 />
               </div>
             </div>
-            <div className="cont w-full max-w-[calc(100%-360px)]">
+            <div className="cont w-full max-w-[calc(100%-360px)] max-989:max-w-[100%]">
               <FollowForm loginUserId={loginUserId} profileUser={profileUser} />
             </div>
           </div>

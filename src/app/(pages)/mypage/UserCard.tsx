@@ -168,7 +168,7 @@ const UserCard: React.FC = () => {
   if (isFollowingsError) return <div>팔로잉 데이터를 전달받지 못했습니다.</div>;
 
   return (
-    <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md">
+    <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md max-989:p-[20px]">
       <div className="relative m-auto h-[100px] w-[100px] overflow-hidden rounded-[100%]">
         {profileUrl && (
           <img
@@ -236,19 +236,19 @@ const UserCard: React.FC = () => {
           />
           <button
             onClick={handleNicknameUpdate}
-            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            className="bg-main rounded-md px-4 py-2 text-white"
           >
             닉네임 저장
           </button>
           <button
             onClick={() => setIsEditingNickname(false)}
-            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            className="rounded-md bg-[#d9d9d9] px-4 py-2 text-white"
           >
             취소
           </button>
         </div>
       )}
-      <ul className="mt-[30px] flex items-center justify-between">
+      <ul className="mt-[30px] flex items-center justify-between max-989:justify-center max-989:gap-[25px]">
         <li className="flex flex-col items-center justify-center">
           <img
             src="/assets/images/mypage/ico-mypage-bookmark.svg"

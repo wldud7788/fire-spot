@@ -23,8 +23,11 @@ const config: Config = {
       },
       screens: {
         "max-1460": { max: "1460px" },
-        "max-1260": { max: "1260px" },
-        "max-600": { max: "600px" },
+        "max-1280": { max: "1280px" },
+        "max-1160": { max: "1160px" },
+        "max-989": { max: "989px" },
+        "max-767": { max: "767px" },
+        "max-450": { max: "450px" },
         "max-400": { max: "400px" }
       },
       backgroundImage: {

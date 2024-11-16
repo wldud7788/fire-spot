@@ -24,8 +24,8 @@ const ChatRoomMessageSection = ({
   if (!messagesByDate) return <>채팅 목록 불러오는중</>;
 
   return (
-    <div className="relative rounded-[12px] bg-[#FFEFE5] p-[36px]">
-      <div className="min-h-[400px] p-[40px]">
+    <div className="relative rounded-[12px] bg-[#FFEFE5] p-[36px] max-1280:p-[20px]">
+      <div className="min-h-[400px] p-[40px] max-1280:p-0 max-767:min-h-[300px]">
         <ul
           className="no-scrollbar max-h-[700px] overflow-y-auto"
           ref={messageListRef}
@@ -33,8 +33,8 @@ const ChatRoomMessageSection = ({
           {/* 날짜별로 메시지 그룹 출력 */}
           {Object.keys(messagesByDate).map((date) => (
             <li key={date}>
-              <div className="flex items-center justify-center">
-                <strong className="rounded-[50px] bg-[#FFD0B2] px-[16px] py-[8px] text-[#B24600]">
+              <div className="mb-[20px] flex items-center justify-center">
+                <strong className="rounded-[50px] bg-[#FFD0B2] px-[16px] py-[8px] text-[#B24600] max-1280:text-[14px]">
                   {date}
                 </strong>
               </div>
@@ -43,7 +43,7 @@ const ChatRoomMessageSection = ({
                 {messagesByDate[date].map((messageInfo, index) => (
                   <li
                     key={messageInfo.chatMessage.id}
-                    className={`mb-10 flex items-start gap-[4px] ${
+                    className={`mb-10 flex items-start gap-[4px] max-1280:mb-[15px] ${
                       // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
                       loginUserId === messageInfo.chatMessage.user_id
                         ? "justify-end"
@@ -72,7 +72,7 @@ const ChatRoomMessageSection = ({
                       </strong>
                       <div className={`flex items-end gap-[7px]`}>
                         <p
-                          className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
+                          className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] max-767:px-[15px] max-767:py-[10px] max-767:text-[13px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"} max-1280:text-[14px]`}
                         >
                           {messageInfo.chatMessage.message}
                         </p>
@@ -93,7 +93,7 @@ const ChatRoomMessageSection = ({
         <div className="relative">
           <input
             type="text"
-            className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
+            className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px] max-767:h-[50px]"
             value={messageInput}
             onChange={handleChangeInput}
             onKeyDown={(e) => {
@@ -104,7 +104,7 @@ const ChatRoomMessageSection = ({
             }}
           />
           <button
-            className={`absolute bottom-[16px] right-[16px] rounded-[8px] px-[28px] py-[12px] ${activeSendButton ? "bg-[#FF731A] text-white" : "bg-[#F2F2F2]"}`}
+            className={`absolute bottom-[16px] right-[16px] rounded-[8px] px-[28px] py-[12px] max-767:relative max-767:bottom-auto max-767:right-auto max-767:mt-[10px] max-767:w-full ${activeSendButton ? "bg-[#FF731A] text-white" : "bg-[#F2F2F2]"} max-767:text-[13px]`}
             onClick={sendMessage}
           >
             전송

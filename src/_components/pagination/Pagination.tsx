@@ -20,7 +20,7 @@ const Pagination = ({
       >
         이전
       </button>
-      <div className="pagination-count relative flex h-[40px] items-center justify-center gap-[5px]">
+      <div className="pagination-count relative flex h-[30px] items-center justify-center gap-[5px]">
         <p className="bg-sub color-main bd-color-main border font-bold">
           {page}
         </p>

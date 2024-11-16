@@ -72,7 +72,7 @@ const CalendarCell = ({
                 key={stamp.id}
                 className={`absolute bottom-[5px] flex items-center pr-[5px]`}
                 style={{
-                  right: `${6 * idx}px`,
+                  right: `${7 * idx}px`,
                   zIndex: idx
                 }}
               >

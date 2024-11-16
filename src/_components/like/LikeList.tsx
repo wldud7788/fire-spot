@@ -55,11 +55,11 @@ const LikeList: React.FC = () => {
       {Likes.length === 0 ? (
         <NoData text={"좋아요한 캠핑이 없어요."} />
       ) : (
-        <ul className="like-list flex flex-wrap items-start gap-[30px]">
+        <ul className="like-list flex flex-wrap items-start gap-[30px] max-1280:gap-[15px]">
           {Likes.map((Like) => (
             <li
               key={Like.contentId}
-              className="camp-card-wrapper w-full max-w-[calc(33.333%-23px)]"
+              className="camp-card-wrapper w-full max-w-[calc(33.333%-23px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
             >
               <CampCard camp={Like.camp} type="like" />
               <LikeButton campId={Like.contentId.toString()} camp={Like.camp} />

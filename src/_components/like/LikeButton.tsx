@@ -118,10 +118,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({
 
   const getButtonStyles = () => {
     if (variant === "default") {
-      return "absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center";
+      return "absolute right-[15px] top-[15px] z-30 flex h-[42px] w-[42px] items-center justify-center max-1280:right-[10px] max-1280:top-[10px]";
     }
     if (variant === "detailLike") {
-      return `flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border border-[#a6a6a6] bg-white text-[18px] ${(
+      return `flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border border-[#a6a6a6] bg-white text-[18px] max-1280:h-[50px] max-1280:text-[16px] ${(
         <img
           src={
             Liked

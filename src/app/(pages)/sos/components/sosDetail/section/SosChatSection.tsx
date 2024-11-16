@@ -68,7 +68,7 @@ const SosChatSection = ({
                     </strong>
                     <div className={`flex items-end gap-[7px]`}>
                       <p
-                        className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
+                        className={`bg-[#FFD0B2] px-[18px] py-[15px] text-[16px] max-767:px-[15px] max-767:py-[10px] max-767:text-[13px] ${loginUserId === messageInfo.chatMessage.user_id ? "order-1 rounded-bl-[24px] rounded-br-[24px] rounded-tl-[24px] rounded-tr-[3px]" : "rounded-bl-[24px] rounded-br-[24px] rounded-tl-[3px] rounded-tr-[24px]"}`}
                       >
                         {messageInfo.chatMessage.message}
                       </p>
@@ -89,7 +89,7 @@ const SosChatSection = ({
       <div className="relative">
         <input
           type="text"
-          className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px]"
+          className="h-[190px] w-full rounded-[12px] border border-[#A8A8A8] p-[15px] max-767:h-[50px]"
           value={messageInput}
           onChange={handleChangeInput}
           onKeyDown={(e) => {
@@ -100,7 +100,7 @@ const SosChatSection = ({
           }}
         />
         <button
-          className="absolute bottom-[16px] right-[16px] rounded-[8px] bg-[#F2F2F2] px-[28px] py-[12px]"
+          className="absolute bottom-[16px] right-[16px] rounded-[8px] bg-[#F2F2F2] px-[28px] py-[12px] max-767:relative max-767:bottom-auto max-767:right-auto max-767:mt-[10px] max-767:w-full max-767:text-[13px]"
           onClick={sendMessage}
         >
           전송

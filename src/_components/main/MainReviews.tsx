@@ -64,9 +64,12 @@ const MainReviews = () => {
   return (
     <div>
       {error && <p className="text-red-500">{error}</p>}
-      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px]">
+      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px] max-989:flex-wrap">
         {reviews.map((review) => (
-          <li key={review.id} className="w-[calc(20%-10px)]">
+          <li
+            key={review.id}
+            className="w-[calc(20%-10px)] max-989:flex-[1_0_25%] max-767:flex-[1_0_45%] max-450:flex-[1_0_100%]"
+          >
             <ReviewCard
               feed={review}
               type={"main"}

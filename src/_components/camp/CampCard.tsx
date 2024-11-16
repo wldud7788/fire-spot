@@ -15,7 +15,7 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
     <div className="camping_card group">
       <Link href={`/camp-detail/${camp.contentId}`}>
         <div className="inner">
-          <div className="img_box relative h-[300px] overflow-hidden rounded-[12px]">
+          <div className="img_box relative h-[300px] overflow-hidden rounded-[12px] max-1280:h-[250px] max-989:h-[200px] max-450:shadow-custom">
             <img
               src={
                 camp.firstImageUrl
@@ -31,13 +31,15 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
           </div>
 
           {!type ? (
-            <div className="camp_info pb-[60px] pt-[20px]">
-              <h2 className="line-clamp-1 text-[20px] font-bold">
+            <div className="camp_info pb-[60px] pt-[20px] max-450:pb-[0]">
+              <h2 className="line-clamp-1 text-[20px] font-bold max-1280:text-[18px] max-989:text-[16px]">
                 {camp.facltNm}
               </h2>
-              <p className="mb-[8px] mt-[5px] line-clamp-1 block bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[12px]">
-                {camp.addr1}
-              </p>
+              <div className="mb-[8px] mt-[5px] bg-location bg-left-center-0 bg-no-repeat pl-[20px]">
+                <p className="line-clamp-1 w-[calc(100%-20px)] text-[12px]">
+                  {camp.addr1}
+                </p>
+              </div>
               <p className="color-gray02 line-clamp-3 min-h-[51px] text-[12px]">
                 {camp.featureNm ? camp.featureNm : camp.intro}
               </p>
@@ -48,12 +50,12 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
               </div>
             </div>
           ) : (
-            <div className="camp_info relative mt-[20px] rounded-[12px] border border-[#d9d9d9] px-[15px] py-[25px]">
+            <div className="camp_info relative mt-[20px] rounded-[12px] border border-[#d9d9d9] px-[15px] py-[25px] max-1280:mt-[10px]">
               <LikeButton campId={camp.contentId.toString()} camp={camp} />
-              <span className="text-[13px] font-bold text-[#997457]">
+              <span className="text-[13px] font-bold text-[#997457] max-1280:text-[12px]">
                 {camp.induty}
               </span>
-              <h2 className="mb-[15px] mt-[10px] text-[16px] font-bold">
+              <h2 className="mb-[15px] mt-[10px] text-[16px] font-bold max-1280:mb-[10px] max-1280:text-[14px] max-989:line-clamp-1">
                 {camp.facltNm}
               </h2>
               <p className="color-gray02 line-clamp-3 text-[12px]">

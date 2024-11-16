@@ -22,7 +22,7 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
           onClick={onClickFunc}
         >
           <div className="inner">
-            <div className="ibox h-[160px] overflow-hidden">
+            <div className="h-[160px] overflow-hidden max-1160:h-[120px]">
               <img
                 className="h-full w-full transform object-cover transition-all duration-500 ease-in-out group-hover:scale-110"
                 src={feed.camp?.firstImageUrl || ""}
@@ -50,10 +50,10 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
                   );
                 })}
               </div>
-              <strong className="color-gray01 my-[5px] line-clamp-1 block w-full text-[16px] font-bold">
+              <strong className="color-gray01 my-[5px] line-clamp-1 block w-full text-[16px] font-bold max-1280:text-[14px]">
                 {feed.title}
               </strong>
-              <p className="color-gray01 line-clamp-3 min-h-[51px] text-[12px]">
+              <p className="color-gray01 line-clamp-3 min-h-[51px] text-[12px] max-450:min-h-[auto] max-450:pb-[10px]">
                 {feed.content}
               </p>
               <div className="user_area mt-[10px] flex items-center gap-[10px] border-t border-[#dbdbdb] pt-[10px]">

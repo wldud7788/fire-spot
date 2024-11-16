@@ -107,7 +107,7 @@ const Header = () => {
             </Link>
             {/* PC 검색바 */}
             <div
-              className={`block w-full max-w-[473px] transition-all duration-300 max-600:hidden ${
+              className={`max-600:hidden block w-full max-w-[473px] transition-all duration-300 ${
                 showSearch
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-2 opacity-0"
@@ -147,7 +147,7 @@ const Header = () => {
         </div>
 
         {/* 모바일 검색바 */}
-        <div className="mt-2 hidden max-600:block">
+        <div className="max-600:block mt-2 hidden">
           <SearchBar variant="header" />
         </div>
 
