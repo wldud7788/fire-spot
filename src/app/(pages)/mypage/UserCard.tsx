@@ -236,13 +236,13 @@ const UserCard: React.FC = () => {
           />
           <button
             onClick={handleNicknameUpdate}
-            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            className="bg-main rounded-md px-4 py-2 text-white"
           >
             닉네임 저장
           </button>
           <button
             onClick={() => setIsEditingNickname(false)}
-            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            className="rounded-md bg-[#d9d9d9] px-4 py-2 text-white"
           >
             취소
           </button>
