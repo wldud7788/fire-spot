@@ -10,6 +10,9 @@ import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
 import { throttle } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+import { getSosCountByProgress } from "@/app/(pages)/sos/service/sosSerivce";
+import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
 
 const SCROLL_THRESHOLD_TAGS = 260;
 const SCROLL_THRESHOLD_SEARCH = 300;
@@ -49,6 +52,11 @@ const Header = () => {
     }, 100),
     []
   );
+
+  const { data: sosCountByProgress } = useQuery<number>({
+    queryFn: () => getSosCountByProgress(),
+    queryKey: queryKey.sos.sosCountByProgress
+  });
 
   // 태그 표시 스크롤 이벤트
   useEffect(() => {
@@ -133,7 +141,13 @@ const Header = () => {
                 href={`${SERVER_PAGE_URL.chat}`}
                 className="header_icon bg-chat"
               ></Link>
-              <Link href={"/sos"} className="header_icon bg-sos"></Link>
+              <Link href={"/sos"} className="header_icon relative bg-sos">
+                {!!sosCountByProgress && (
+                  <span className="bg-red absolute right-0 top-[5px] h-[10px] w-[10px] rounded-full bg-red-500 text-[11px]">
+                    {/* {sosCountByProgress} */}
+                  </span>
+                )}
+              </Link>
             </div>
             <HeaderAuth />
 

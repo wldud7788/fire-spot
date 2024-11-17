@@ -6,5 +6,8 @@ export const queryKey = {
     chatRoomMessage: (roomId: number) =>
       ["chatRoomMessage", roomId.toString()] as string[],
     chatRoom: (roomId: number) => ["chatRoom", roomId.toString()] as string[]
+  },
+  sos: {
+    sosCountByProgress: ["sosCountByProgress"]
   }
 };
