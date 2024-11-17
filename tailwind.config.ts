@@ -33,9 +33,9 @@ const config: Config = {
       backgroundImage: {
         search: "url('/assets/images/search.png')",
         profile: "url('/assets/images/profile.png')",
-        map: "url('/assets/images/map.png')",
-        sos: "url('/assets/images/sos.png')",
-        chat: "url('/assets/images/chat.png')",
+        map: "url('/assets/images/map.svg')",
+        sos: "url('/assets/images/sos.svg')",
+        chat: "url('/assets/images/message.svg')",
         date: "url('/assets/images/ico-date.svg')",
         dateStroke: "url('/assets/images/ico-date-stroke.svg')",
         group: "url('/assets/images/ico-group.svg')",

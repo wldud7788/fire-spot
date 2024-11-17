@@ -124,7 +124,7 @@ const Header = () => {
           </nav>
 
           {/* 아이콘 영역 */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <div className="hidden md:flex">
               <Link href={"/search"} className="header_icon bg-map"></Link>
               <Link
