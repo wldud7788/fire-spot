@@ -168,15 +168,17 @@ const UserCard: React.FC = () => {
   if (isFollowingsError) return <div>팔로잉 데이터를 전달받지 못했습니다.</div>;
 
   return (
-    <div className="rounded-[24Px] border border-[#bfbdbd] p-[50px] shadow-md max-989:p-[20px]">
-      <div className="relative m-auto h-[100px] w-[100px] overflow-hidden rounded-[100%]">
-        {profileUrl && (
-          <img
-            src={profileUrl}
-            alt="Profile"
-            className="object-fit h-full w-full"
-          />
-        )}
+    <div className="rounded-[24Px] border border-[#bfbdbd] p-[45px] shadow-md max-989:p-[20px]">
+      <div className="relative m-auto h-[100px] w-[100px]">
+        <div className="relative h-[100px] w-[100px] overflow-hidden rounded-[100%]">
+          {profileUrl && (
+            <img
+              src={profileUrl}
+              alt="Profile"
+              className="object-fit h-full w-full"
+            />
+          )}
+        </div>
         {!isEditingImage && (
           <button
             className="absolute bottom-0 right-0 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-gray-200 text-lg hover:bg-gray-300"
@@ -186,7 +188,7 @@ const UserCard: React.FC = () => {
           </button>
         )}
       </div>
-      <h2 className="mb-[15px] mt-[20px] text-center text-[24px] font-bold">
+      <h2 className="mb-[15px] mt-[20px] text-center text-[22px] font-bold">
         {nickname}
         {!isEditingNickname && (
           <button
@@ -213,13 +215,13 @@ const UserCard: React.FC = () => {
           />
           <button
             onClick={handleProfileImageUpdate}
-            className="rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+            className="bg-main rounded-md px-4 py-2 text-white"
           >
             프로필 사진 저장
           </button>
           <button
             onClick={() => setIsEditingImage(false)}
-            className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            className="rounded-md bg-[#d9d9d9] px-4 py-2 text-white"
           >
             취소
           </button>
