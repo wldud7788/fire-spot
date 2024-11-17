@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTotalData } from "@/_utils/api/campsApi";
 import PageTitle from "../common/PageTitle";
+import useIntersectionObserver from "@/_hooks/useInteraction";
 
 type CampListProps = {
   itemsPerPage: number;
@@ -27,6 +28,11 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
     usePagination({ items: camps || [], itemsPerPage });
 
+  const { isVisible, targetRef } = useIntersectionObserver({
+    threshold: 0.5, // 50% 이상 보일 때 감지
+    rootMargin: "0px" // 여백 없음
+  });
+
   // 페이지 번호가 변경되면 해당 페이지로 스크롤 이동
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 이동 시 상단으로 스크롤
@@ -44,7 +50,14 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
       <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"캠핑장 리스트"} />
         {/* 이윤지 작업 - 내가 찜한 캠핑장 모아보기 */}
-        <div className="input_box relative mb-[40px] mt-[15px]">
+        <div
+          className="input_box relative mb-[40px] mt-[15px]"
+          ref={targetRef}
+          style={{
+            background: isVisible ? "red" : "blue",
+            transition: "all .5s ease 1s"
+          }}
+        >
           <input
             type="checkbox"
             id="likeChk"
