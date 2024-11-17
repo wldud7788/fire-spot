@@ -27,7 +27,9 @@ export const SERVER_PAGE_URL = {
   sosWrite: "/sos/write",
   sosList: "/sos",
   sosDetail: (sosId: string) => `/sos/${sosId}`,
-  meets: "/meets"
+  meets: "/meets",
+  camps: "/camps?page=1",
+  campDetail: (contentId: number | string) => `/camp-detail/${contentId}`
 };
 export const API_PARAMS = {
   MOBILE_OS: "ETC",

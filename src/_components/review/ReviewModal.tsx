@@ -3,6 +3,7 @@ import Modal from "../modal/Modal";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import Link from "next/link";
 import Star from "../star/Star";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 interface ReviewModalProps {
   selected: ReviewItem | null;
@@ -75,7 +76,19 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
         {/* 후기제목 */}
         <p className="color-gray01 text-[14px]">{selected?.content}</p>{" "}
         {/* 후기내용 */}
-        <img src={selected?.img[0] || ""} alt="" />
+        <ul className="flex">
+          {selected?.img.map((imgUrl) => (
+            <li key={imgUrl} className="h-[200px] w-[200px]">
+              <img src={imgUrl} alt="" className="h-full w-full object-cover" />
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={SERVER_PAGE_URL.campDetail(selected?.campId || 10)}
+          className="bg-main mt-[20px] flex h-[40px] w-full items-center justify-center rounded-[8px] text-[16px] font-medium text-white"
+        >
+          캠핑장 보러가기
+        </Link>
         {/* 후기 사진 */}
       </div>
     </Modal>
