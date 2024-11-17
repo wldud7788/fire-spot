@@ -31,7 +31,7 @@ export default function Home() {
           {/* main_sec01 */}
           <MainSection background="#fff">
             <div className="flex flex-wrap content-stretch gap-[20px]">
-              <div className="main-slide-wrap w-[calc(100%-515px)] overflow-hidden rounded-[12px] max-1460:w-[calc(100%-500px)] max-1280:w-[calc(100%-400px)] max-1160:w-[calc(100%-360px)] max-989:w-full">
+              <div className="main-slide-wrap w-[calc(100%-515px)] overflow-hidden rounded-[12px] shadow-custom max-1460:w-[calc(100%-500px)] max-1280:w-[calc(100%-400px)] max-1160:w-[calc(100%-360px)] max-989:w-full">
                 <MainSlide />
               </div>
               <div className="flex-1 rounded-[12px] border border-[#d9d9d9] bg-[#fff] p-[30px] max-1160:p-[20px]">

@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const Sos = async () => {
   const sosWithCampList: SosWithCamp[] = await getSosList();
 
-  return <SosList sosWithCampList={sosWithCampList} />;
+  return <SosList sosWithCampList={sosWithCampList} itemsPerPage={6} />;
 };
 
 export default Sos;
