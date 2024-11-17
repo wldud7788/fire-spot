@@ -7,17 +7,13 @@ interface SearchResultsProps {
   closeDropdown: () => void;
 }
 
-export const useSearchResults = ({
-  results,
-  validatedValue,
-  closeDropdown
-}: SearchResultsProps) => {
+export const useSearchResults = ({ validatedValue }: SearchResultsProps) => {
   const { highlightText } = useHighlight();
 
   const renderImage = (imageUrl: string | null) => (
     <img
       src={imageUrl || "/assets/images/default_profile.jpeg"}
-      className="h-[80px] w-[100px]"
+      className="h-full w-full rounded-md object-cover"
       alt="캠핑 썸네일"
     />
   );

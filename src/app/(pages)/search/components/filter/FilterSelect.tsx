@@ -40,8 +40,8 @@ export const FilterSelect: React.FC<FilterSelectProps> = ({
         className={`inline-flex h-[30px] min-w-[80px] items-center justify-between gap-1 rounded-full px-3 text-sm font-medium ${
           (Array.isArray(value) && value.length > 0) ||
           (typeof value === "string" && value)
-            ? "bg-blue-100 text-blue-800 hover:bg-blue-200"
-            : "bg-blue-600 text-white hover:bg-blue-700"
+            ? "bg-main hover:bg-sub text-white"
+            : "bg-main hover:bg-sub text-white"
         }`}
       >
         <span className="truncate">{getDisplayValue()}</span>
@@ -54,7 +54,7 @@ export const FilterSelect: React.FC<FilterSelectProps> = ({
             value={option}
             className={`rounded-md px-2 py-1.5 text-sm text-gray-900 hover:bg-blue-50 ${
               isMulti && Array.isArray(value) && value.includes(option)
-                ? "bg-blue-100"
+                ? "bg-sub"
                 : ""
             }`}
           >

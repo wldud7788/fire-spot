@@ -33,12 +33,12 @@ const DropDownSearch: React.FC<DropDownSearchProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-0 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md"
+      className="absolute top-0 w-full rounded-2xl border border-slate-300 bg-white p-[25px] pt-[50px] shadow-md max-767:px-0 max-767:py-4"
     >
       {isLoading ? (
         <SearchSkeleton />
       ) : (
-        <div className="max-h-[80vh] overflow-y-auto">
+        <div className="mt-3 max-h-[80vh] overflow-y-auto p-3">
           {validationError && (
             <div className="z-50 py-2 text-sm text-red-500">
               {validationError}
@@ -60,7 +60,7 @@ const DropDownSearch: React.FC<DropDownSearchProps> = ({
               <h3 className="mb-2 text-sm font-medium text-gray-500">
                 검색 결과
               </h3>
-              <div className="space-y-2">
+              <div className="">
                 {results.map((camp) => (
                   <SearchResult
                     key={camp.contentId}

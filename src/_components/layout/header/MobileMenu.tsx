@@ -1,9 +1,10 @@
 "use client";
-import { signOut } from "@/_utils/auth";
+import { getUser, signOut } from "@/_utils/auth";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
+import { User } from "@supabase/supabase-js";
 
 interface MobileMenuProps {
   showSubmenu: boolean;
@@ -14,6 +15,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   showSubmenu,
   setShowSubmenu
 }) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getUser();
+      setUser(currentUser);
+    };
+    fetchUser();
+  }, []);
+
   const setActiveDropdown = useDropdownStore(
     (state) => state.setActiveDropdown
   );
@@ -86,22 +97,26 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             </div>
           )}
         </li>
-        <li className="w-full border-b py-4 text-center">
-          <button
-            className="hover:text-main text-[17px] font-medium text-gray-800 transition-colors"
-            onClick={handleNavigation("/mypage")}
-          >
-            마이페이지
-          </button>
-        </li>
-        <li className="w-full py-4 text-center">
-          <button
-            className="hover:text-main text-[17px] font-medium text-gray-800 transition-colors"
-            onClick={handleLogout}
-          >
-            로그아웃
-          </button>
-        </li>
+        {user ? (
+          <>
+            <li className="w-full border-b py-4 text-center">
+              <button
+                className="hover:text-main text-[17px] font-medium text-gray-800 transition-colors"
+                onClick={handleNavigation("/mypage")}
+              >
+                마이페이지
+              </button>
+            </li>
+            <li className="w-full py-4 text-center">
+              <button
+                className="hover:text-main text-[17px] font-medium text-gray-800 transition-colors"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
+            </li>
+          </>
+        ) : null}
       </ul>
     </nav>
   );
