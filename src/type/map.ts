@@ -27,11 +27,13 @@ interface NaverMap {
 
 interface NaverMarker {
   setMap(map: NaverMap | null): void;
+  getPosition(): NaverLatLng;
 }
 
 interface NaverInfoWindow {
   setContent(content: string): void;
   open(map: NaverMap, position: NaverLatLng): void;
+  close(): void;
 }
 
 interface MapOptions {
