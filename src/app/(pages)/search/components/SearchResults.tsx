@@ -17,7 +17,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
     handleRemoveFilter
   } = useFilters(camps);
 
-  const { moveToMarker, moveToMap, mapInstanceRef } = useMap(filteredCamps);
+  const { moveToMarker, moveToMap } = useMap(filteredCamps);
 
   const handleCampSelect = (selectedCamp: Camp) => {
     moveToMarker(selectedCamp);
