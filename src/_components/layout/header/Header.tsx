@@ -121,7 +121,7 @@ const Header = () => {
           {/* PC 메뉴 */}
           <nav className="hidden gap-5 text-lg font-semibold lg:flex">
             <Link href={"/beginner"}>캠핑가이드</Link>
-            <Link href={"/camps"}>캠핑장</Link>
+            <Link href={SERVER_PAGE_URL.camps(1)}>캠핑장</Link>
             <Link href={SERVER_PAGE_URL.meets}>커뮤니티</Link>
           </nav>
 

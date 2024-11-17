@@ -28,7 +28,7 @@ export const SERVER_PAGE_URL = {
   sosList: "/sos",
   sosDetail: (sosId: string) => `/sos/${sosId}`,
   meets: "/meets",
-  camps: "/camps?page=1",
+  camps: (page: number | string) => `/camps?page=${page}`,
   campDetail: (contentId: number | string) => `/camp-detail/${contentId}`
 };
 export const API_PARAMS = {
