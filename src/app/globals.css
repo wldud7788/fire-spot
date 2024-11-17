@@ -80,14 +80,12 @@ body {
 }
 /* dropdown button css start */
 .dropdown_button {
-  @apply inline-flex h-[60px] items-center rounded-2xl bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:text-lg;
+  @apply inline-flex h-[60px] items-center rounded-2xl bg-[#ff924c] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#ffd0b2] focus:outline-none md:text-lg;
 }
 .dropdown_list {
-  @apply block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white;
+  @apply block px-4 py-2 hover:bg-gray-100;
 }
-.search_icon {
-  @apply bg-search bg-[length:20px_20px] bg-left-center bg-no-repeat pl-10;
-}
+
 .header_icon {
   @apply mx-1 h-10 w-10 bg-center bg-no-repeat;
 }
@@ -399,16 +397,20 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+.search_input {
+  @apply relative z-10 w-full rounded-[24px] border-2 border-solid border-[#A2A2A2] bg-white bg-search bg-left-center bg-no-repeat pl-10 text-sm md:rounded-[28px] md:text-lg max-1280:h-[45px] max-767:h-[35px];
+}
+.button_style {
+  @apply flex w-[100px] items-center justify-center rounded-[24px] bg-[#FF924C] px-0 text-sm font-semibold text-black md:w-[150px] md:rounded-[28px] md:px-[28px] md:text-lg max-1280:h-[45px] max-767:h-[35px];
+}
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */
-  outline: none !;
+  outline: none !important !;
 }
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
 }
-.button_style {
-  @apply rounded-[28px] bg-[#FF924C] px-[28px] text-lg font-semibold text-black;
-}
+
 .모달지영추가 {
   @apply relative rounded-lg bg-white p-6;
 }

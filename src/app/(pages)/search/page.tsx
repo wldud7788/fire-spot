@@ -20,7 +20,6 @@ export default function SearchPage({
   return (
     <div className="flex">
       <SearchResults camps={camps} />
-      <Map />
     </div>
   );
 }

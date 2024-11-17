@@ -75,10 +75,7 @@ export const useMap = (camps: Camp[]) => {
   }, [camps]);
 
   const moveToMap = (selectedCamp: Camp) => {
-    console.log("moveToMap");
     if (!mapInstanceRef.current || !window.naver?.maps) return;
-
-    console.log("moveToMap Innnnnnnn");
 
     const { map, infoWindow } = mapInstanceRef.current;
     const position = new window.naver.maps.LatLng(
@@ -86,19 +83,32 @@ export const useMap = (camps: Camp[]) => {
       Number(selectedCamp.mapX)
     );
 
-    console.log("position", position);
-
     map.setCenter(position);
     map.setZoom(14);
 
     infoWindow.open(map, position);
   };
 
+  const moveToFirstCamp = useCallback(() => {
+    if (!camps.length || !mapInstanceRef.current || !window.naver?.maps) return;
+
+    const firstCamp = camps[0];
+    const { map } = mapInstanceRef.current;
+    const position = new window.naver.maps.LatLng(
+      Number(firstCamp.mapY),
+      Number(firstCamp.mapX)
+    );
+
+    map.setCenter(position);
+    map.setZoom(MAP_CONFIG.ZOOM_LEVEL);
+  }, [camps]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       const mapInstance = initializeMap();
       if (mapInstance && camps.length > 0) {
         createMarkers();
+        moveToFirstCamp(); // 마커 생성 후 첫 번째 캠프 위치로 이동
       }
     }, 100);
 
@@ -106,7 +116,7 @@ export const useMap = (camps: Camp[]) => {
       clearTimeout(timer);
       cleanup();
     };
-  }, [camps, initializeMap, createMarkers, cleanup]);
+  }, [camps, initializeMap, createMarkers, cleanup, moveToFirstCamp]);
 
   return { moveToMarker, moveToMap, mapInstanceRef };
 };
