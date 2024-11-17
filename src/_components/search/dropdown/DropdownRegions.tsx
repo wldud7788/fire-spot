@@ -21,7 +21,7 @@ const DropdownRegions: React.FC<DropdownRegionsProps> = ({
 
   return (
     <Select onValueChange={handleSelect}>
-      <SelectTrigger className="text-md button_style h-[60px] max-w-[140px] border-none py-[18px]">
+      <SelectTrigger className="button_style">
         <SelectValue placeholder="지역별" />
       </SelectTrigger>
       <SelectContent className="max-h-56">
