@@ -58,9 +58,9 @@ export const CampCard: React.FC<CampCardProps> = ({ camp, onSelect }) => {
 
           <div className="min-w-0 space-y-1 text-sm text-gray-600">
             <p className="truncate">{camp.addr1}</p>
-            <div className="flex min-w-0 items-center space-x-2 text-xs">
-              <span className="truncate font-medium text-gray-900">249Km</span>
-              <span className="h-1 w-1 flex-shrink-0 rounded-full bg-gray-300"></span>
+            <div className="flex min-w-0 items-center justify-center space-x-2 text-xs">
+              {/* <span className="truncate font-medium text-gray-900">249Km</span> */}
+              {/* <span className="h-1 w-1 flex-shrink-0 rounded-full bg-gray-300"></span> */}
               <span className="truncate">{camp.induty}</span>
               {getGroundTypes().map((type) => (
                 <React.Fragment key={type}>
