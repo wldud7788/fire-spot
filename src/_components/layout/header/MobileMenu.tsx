@@ -4,9 +4,7 @@ import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
-import useDropdown from "@/_hooks/useDropdown";
 import { User } from "@supabase/supabase-js";
-import { divide } from "lodash";
 
 interface MobileMenuProps {
   showSubmenu: boolean;
@@ -18,15 +16,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   setShowSubmenu
 }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await getUser();
       setUser(currentUser);
-      setAvatarUrl(currentUser?.user_metadata.avatar_url);
-      setLoading(false);
     };
     fetchUser();
   }, []);
