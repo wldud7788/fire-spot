@@ -17,7 +17,7 @@ const HeaderAuth = () => {
       setUserWithProfile(currentUser);
     };
     fetchUser();
-  }, [userWithProfile]);
+  }, []);
 
   const handleLogout = async () => {
     await signOut();

@@ -13,6 +13,7 @@ import {
   QueryClient
 } from "@tanstack/react-query";
 import Link from "next/link";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -54,7 +55,7 @@ export default function Home() {
             </h2>
             <div className="mb-[30px] mt-[20px] flex items-center justify-end max-989:mb-[20px] max-989:mt-[15px]">
               <Link
-                href={"/camps"}
+                href={SERVER_PAGE_URL.camps(1)}
                 className="text-[18px] max-989:text-[16px] max-767:text-[14px]"
               >
                 캠핑장 더보기

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Modal from "../modal/Modal";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import Link from "next/link";
+import Star from "../star/Star";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 interface ReviewModalProps {
   selected: ReviewItem | null;
@@ -45,6 +47,12 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               {selected?.profile?.nickname || selected?.profile?.user_name} 님의
               후기입니다.
             </div>
+            <p className="text-[16px] font-bold">
+              <Star
+                activeStar={selected?.rating || 0}
+                defaultStar={selected?.rating || 0}
+              />
+            </p>{" "}
           </div>
         </div>
       </div>
@@ -55,11 +63,11 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
         ) : (
           <p>{selected?.likes}개 좋아요함</p>
         )} */}
+        {/* 캠핑장명 */}
         <p className="text-[16px] font-bold">
-          {selected?.camp?.facltNm} <span>별점: {selected?.rating}</span>{" "}
+          {selected?.camp?.facltNm}
           {/* 별점 */}
         </p>{" "}
-        {/* 캠핑장명 */}
         <p className="color-gray02 mb-[15px] mt-[5px] bg-location bg-left-center-0 bg-no-repeat pl-[20px] text-[13px]">
           {selected?.camp?.addr1}
         </p>{" "}
@@ -68,6 +76,20 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
         {/* 후기제목 */}
         <p className="color-gray01 text-[14px]">{selected?.content}</p>{" "}
         {/* 후기내용 */}
+        <ul className="flex">
+          {selected?.img.map((imgUrl) => (
+            <li key={imgUrl} className="h-[200px] w-[200px]">
+              <img src={imgUrl} alt="" className="h-full w-full object-cover" />
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={SERVER_PAGE_URL.campDetail(selected?.campId || 10)}
+          className="bg-main mt-[20px] flex h-[40px] w-full items-center justify-center rounded-[8px] text-[16px] font-medium text-white"
+        >
+          캠핑장 보러가기
+        </Link>
+        {/* 후기 사진 */}
       </div>
     </Modal>
   );

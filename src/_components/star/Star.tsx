@@ -9,7 +9,7 @@ const Star = ({ activeStar, defaultStar }: StarProps) => {
   const defaultStars = Array.from({ length: TOTAL_STAR - defaultStar });
 
   return (
-    <>
+    <div className="flex">
       {activeStars.map((_, index) => {
         return (
           <img
@@ -28,7 +28,7 @@ const Star = ({ activeStar, defaultStar }: StarProps) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 
