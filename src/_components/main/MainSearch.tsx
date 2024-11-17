@@ -17,7 +17,7 @@ const MainSearch = () => {
           </Link>
         ))}
       </ul>
-      <div className="mt-[14px] w-full max-w-[800px] flex-1 px-4 md:px-0">
+      <div className="mt-[14px] w-full max-w-[800px] flex-1 px-4 max-767:p-0">
         <SearchBar variant="main" />
       </div>
     </div>

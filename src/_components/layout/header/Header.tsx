@@ -43,7 +43,9 @@ const Header = () => {
     throttle((isMainPage: boolean) => {
       if (!isMainPage) return;
       const scrollPosition = window.scrollY;
-      setShowSearch(scrollPosition > SCROLL_THRESHOLD_SEARCH);
+      const isMobile = window.innerWidth <= 767;
+      const threshold = isMobile ? 200 : SCROLL_THRESHOLD_SEARCH; // 모바일은 100px, PC는 300px
+      setShowSearch(scrollPosition > threshold);
     }, 100),
     []
   );
@@ -107,7 +109,7 @@ const Header = () => {
             </Link>
             {/* PC 검색바 */}
             <div
-              className={`max-600:hidden block w-full max-w-[473px] transition-all duration-300 ${
+              className={`block w-full max-w-[473px] transition-all duration-300 max-767:hidden ${
                 showSearch
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-2 opacity-0"
@@ -119,12 +121,12 @@ const Header = () => {
           {/* PC 메뉴 */}
           <nav className="hidden gap-5 text-lg font-semibold lg:flex">
             <Link href={"/beginner"}>캠핑가이드</Link>
-            <Link href={"/camps"}>캠핑장</Link>
+            <Link href={SERVER_PAGE_URL.camps(1)}>캠핑장</Link>
             <Link href={SERVER_PAGE_URL.meets}>커뮤니티</Link>
           </nav>
 
           {/* 아이콘 영역 */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <div className="hidden md:flex">
               <Link href={"/search"} className="header_icon bg-map"></Link>
               <Link
@@ -145,12 +147,20 @@ const Header = () => {
             </button>
           </div>
         </div>
-
         {/* 모바일 검색바 */}
-        <div className="max-600:block mt-2 hidden">
-          <SearchBar variant="header" />
-        </div>
-
+        {pathname !== "/search" && (
+          <div
+            className={`relative hidden overflow-visible transition-all duration-300 max-767:block ${
+              showSearch ? "mt-2 h-[40px] opacity-100" : "mt-0 h-0 opacity-0"
+            }`}
+          >
+            <div className="relative z-[111]">
+              {" "}
+              {/* z-index를 header보다 높게 설정 */}
+              <SearchBar variant="header" />
+            </div>
+          </div>
+        )}
         {/* 모바일 메뉴 */}
         {activeDropdown === "mobile" && (
           <MobileMenu
@@ -158,7 +168,6 @@ const Header = () => {
             setShowSubmenu={setShowSubmenu}
           />
         )}
-
         {/* 태그 박스 */}
         <div
           className={`overflow-hidden transition-all duration-300 ${

@@ -14,6 +14,7 @@ import { useState } from "react";
 import Modal from "../modal/Modal";
 import LikeButton from "../like/LikeButton";
 import ShareButton from "./ShareButton";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 
 type CampDetailProps = {
   paramsId: string;
@@ -420,7 +421,7 @@ pr 먼저~
         {/* 목록으로 가기 */}
         <div className="detail_section my-[100px] flex justify-center max-767:mb-[60px] max-767:mt-[40px]">
           <Link
-            href="/camps"
+            href={SERVER_PAGE_URL.camps(1)}
             className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold max-767:max-w-[100%] max-767:py-[15px]"
           >
             목록으로 이동
