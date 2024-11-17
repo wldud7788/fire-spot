@@ -24,7 +24,7 @@ const SosCreatorSearchSection = ({
   return (
     <section className="mt-[40px] rounded-[12px] border border-[#D9D9D9] px-[30px] py-[40px]">
       <h2 className="color-gray01 flex items-center gap-[5px] text-[24px] font-bold">
-        어디서 만나나요?
+        도움이 필요한 곳이 어디인가요?
       </h2>
 
       <div className="mt-[40px] flex items-center gap-[60px]">
