@@ -43,7 +43,9 @@ const Header = () => {
     throttle((isMainPage: boolean) => {
       if (!isMainPage) return;
       const scrollPosition = window.scrollY;
-      setShowSearch(scrollPosition > SCROLL_THRESHOLD_SEARCH);
+      const isMobile = window.innerWidth <= 767;
+      const threshold = isMobile ? 200 : SCROLL_THRESHOLD_SEARCH; // 모바일은 100px, PC는 300px
+      setShowSearch(scrollPosition > threshold);
     }, 100),
     []
   );
@@ -145,14 +147,20 @@ const Header = () => {
             </button>
           </div>
         </div>
-
         {/* 모바일 검색바 */}
         {pathname !== "/search" && (
-          <div className="mt-2 hidden max-767:block">
-            <SearchBar variant="header" />
+          <div
+            className={`relative hidden overflow-visible transition-all duration-300 max-767:block ${
+              showSearch ? "mt-2 h-[40px] opacity-100" : "mt-0 h-0 opacity-0"
+            }`}
+          >
+            <div className="relative z-[111]">
+              {" "}
+              {/* z-index를 header보다 높게 설정 */}
+              <SearchBar variant="header" />
+            </div>
           </div>
         )}
-
         {/* 모바일 메뉴 */}
         {activeDropdown === "mobile" && (
           <MobileMenu
@@ -160,7 +168,6 @@ const Header = () => {
             setShowSubmenu={setShowSubmenu}
           />
         )}
-
         {/* 태그 박스 */}
         <div
           className={`overflow-hidden transition-all duration-300 ${
