@@ -48,7 +48,7 @@ const SosList = ({ sosWithCampList, itemsPerPage }: Props) => {
         </div>
       </div>
 
-      {sosWithCampCardList ? (
+      {sosWithCampCardList.length ? (
         <ul className="mt-[40px] flex flex-col items-center gap-[23px] max-767:mt-[20px] max-767:gap-[15px]">
           {sosWithCampCardList.map((sosWithCamp) => (
             <li key={sosWithCamp.sos.id} className="w-full">
@@ -57,7 +57,9 @@ const SosList = ({ sosWithCampList, itemsPerPage }: Props) => {
           ))}
         </ul>
       ) : (
-        <NoData text={"등록된 모임이 없어요."} />
+        <div className="mt-[20px]">
+          <NoData text={"등록된 모임이 없어요."} />
+        </div>
       )}
       <div className="my-[65px]">
         <Pagination
