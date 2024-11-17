@@ -12,7 +12,9 @@ const SosTitleSection = ({ sos }: Props) => {
   return (
     <div className="sos_tit">
       {/* 제목 */}
-      <h1 className="text-[28px] font-extrabold">{title}</h1>
+      <h1 className="text-[28px] font-extrabold max-1280:text-[24px]">
+        {title}
+      </h1>
       {/* 진행중(true), 종료됨(false) */}
       {/* {isProgress.toString()} */}
     </div>

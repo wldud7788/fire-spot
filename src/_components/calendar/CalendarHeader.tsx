@@ -6,6 +6,7 @@ type Props = {
   currentMonth: Date;
   prevMonth: () => void;
   nextMonth: () => void;
+  filterType: FilterType;
   handleFilterType: (type: FilterType) => void;
 };
 
@@ -13,6 +14,7 @@ const CalendarHeader = ({
   currentMonth,
   prevMonth,
   nextMonth,
+  filterType,
   handleFilterType
 }: Props) => {
   return (
@@ -33,21 +35,21 @@ const CalendarHeader = ({
             ></button>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex gap-[1px]">
           <button
-            className="rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
+            className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "all" && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType("all")}
           >
             같이 보기
           </button>
           <button
-            className="ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
+            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "stamp" && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType("stamp")}
           >
             후기
           </button>
           <button
-            className="ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373]"
+            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "meet" && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType("meet")}
           >
             모임

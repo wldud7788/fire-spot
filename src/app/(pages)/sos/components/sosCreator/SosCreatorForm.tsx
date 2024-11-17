@@ -35,7 +35,7 @@ const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
 
   return (
     <div className="meet_write mb-[60px] mt-[90px]">
-      <div className="inner m-auto w-full max-w-[1360px] px-[30px]">
+      <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"SOS 요청하기"} />
         <form
           onSubmit={handleSubmit(onSubmit)}

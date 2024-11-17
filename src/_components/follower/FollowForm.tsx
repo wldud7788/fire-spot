@@ -78,7 +78,7 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
           </li>
         </ul>
       </div>
-      <ul className="mt-[40px] flex flex-wrap items-center gap-[30px]">
+      <ul className="mt-[40px] flex flex-wrap items-center gap-[30px] max-1280:gap-[15px]">
         {isFollower ? (
           <>
             {/* 팔로워 */}
@@ -86,7 +86,7 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
               return (
                 <li
                   key={profile.id}
-                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom"
+                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom max-1280:max-w-[calc(25%-12px)] max-767:max-w-[calc(50%-8px)]"
                 >
                   <FollowCard loginUserId={loginUserId} profile={profile} />
                 </li>
@@ -100,7 +100,7 @@ const FollowForm = ({ loginUserId, profileUser }: FollowFormProps) => {
               return (
                 <li
                   key={profile.id}
-                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom"
+                  className="w-full max-w-[calc(20%-24px)] rounded-[12px] px-[25px] py-[30px] shadow-custom max-1280:max-w-[calc(25%-12px)] max-767:max-w-[calc(50%-8px)]"
                 >
                   <FollowCard loginUserId={loginUserId} profile={profile} />
                 </li>

@@ -1,12 +1,25 @@
-import React from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import { Camp } from "../../camps/types/Camp";
 import { CampCard } from "./CampCard";
+import { useBaseMap } from "@/_hooks/useBaseMap";
+import { MapInstance } from "@/type/map";
 
 interface SearchListProps {
   filteredCamps: Camp[];
   handleCampSelect: (camp: Camp) => void;
+  handleMoveToMap: (camp: Camp) => void;
 }
-const SearchList = ({ filteredCamps, handleCampSelect }: SearchListProps) => {
+const SearchList = ({
+  filteredCamps,
+  handleCampSelect,
+  handleMoveToMap
+}: SearchListProps) => {
+  useEffect(() => {
+    if (filteredCamps.length > 0) {
+      handleMoveToMap(filteredCamps[0]);
+    }
+  }, [filteredCamps]);
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="p-4">

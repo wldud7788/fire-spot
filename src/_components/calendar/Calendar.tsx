@@ -59,16 +59,19 @@ const Calendar = () => {
     currentMonth,
     prevMonth,
     nextMonth,
+    filterType,
     handleFilterType
   };
 
   return (
     <div className="w-full font-pretendard">
       <CalendarHeader {...headerProps} />
-      <CalendarTable
-        currentMonth={currentMonth}
-        cellCardTable={cellCardTable}
-      />
+      <div className="max-767:overflow-y-auto">
+        <CalendarTable
+          currentMonth={currentMonth}
+          cellCardTable={cellCardTable}
+        />
+      </div>
     </div>
   );
 };

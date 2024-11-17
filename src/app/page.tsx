@@ -31,10 +31,10 @@ export default function Home() {
           {/* main_sec01 */}
           <MainSection background="#fff">
             <div className="flex flex-wrap content-stretch gap-[20px]">
-              <div className="main-slide-wrap w-[calc(100%-515px)] overflow-hidden rounded-[12px]">
+              <div className="main-slide-wrap w-[calc(100%-515px)] overflow-hidden rounded-[12px] max-1460:w-[calc(100%-500px)] max-1280:w-[calc(100%-400px)] max-1160:w-[calc(100%-360px)] max-989:w-full">
                 <MainSlide />
               </div>
-              <div className="flex-1 rounded-[12px] border border-[#d9d9d9] bg-[#fff] p-[30px]">
+              <div className="flex-1 rounded-[12px] border border-[#d9d9d9] bg-[#fff] p-[30px] max-1160:p-[20px]">
                 <MainUserCard />
               </div>
             </div>
@@ -52,8 +52,11 @@ export default function Home() {
             <h2 className="flex items-center justify-center text-center text-[32px] font-bold">
               Hot Best Pick
             </h2>
-            <div className="mb-[30px] mt-[20px] flex items-center justify-end">
-              <Link href={"/camps"} className="text-[18px]">
+            <div className="mb-[30px] mt-[20px] flex items-center justify-end max-989:mb-[20px] max-989:mt-[15px]">
+              <Link
+                href={"/camps"}
+                className="text-[18px] max-989:text-[16px] max-767:text-[14px]"
+              >
                 캠핑장 더보기
               </Link>
             </div>

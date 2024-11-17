@@ -18,18 +18,18 @@ const SosList = ({ sosWithCampList }: Props) => {
     useSosList(sosWithCampList);
 
   return (
-    <div className="relative mx-auto w-full max-w-[1360px] px-[30px]">
+    <div className="relative mx-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
       <CommunityTop text={"SOS 도움요청"} />
       <div className="utils flex items-center justify-between">
-        <div className="flex items-center gap-[14px]">
+        <div className="flex items-center gap-[14px] max-1280:gap-[8px]">
           <button
-            className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold ${isProgress ? "border-[#ff924c]" : ""}`}
+            className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold max-1280:px-[12px] max-1280:py-[6px] max-767:text-[12px] ${isProgress ? "border-[#ff924c]" : ""}`}
             onClick={() => toggleShowType(true)}
           >
             진행중
           </button>
           <button
-            className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold ${!isProgress ? "border-[#ff924c]" : ""}`}
+            className={`rounded-[20px] border border-[#a6a6a6] px-[16px] py-[10px] text-[14px] font-bold max-1280:px-[12px] max-1280:py-[6px] max-767:text-[12px] ${!isProgress ? "border-[#ff924c]" : ""}`}
             onClick={() => toggleShowType(false)}
           >
             종료됨
@@ -43,7 +43,7 @@ const SosList = ({ sosWithCampList }: Props) => {
       </div>
 
       {sosWithCampCardList ? (
-        <ul className="mt-[40px] flex flex-col items-center gap-[23px]">
+        <ul className="mt-[40px] flex flex-col items-center gap-[23px] max-767:mt-[20px] max-767:gap-[15px]">
           {sosWithCampCardList.map((sosWithCamp) => (
             <li key={sosWithCamp.sos.id} className="w-full">
               <SosCard sosWithCamp={sosWithCamp} />

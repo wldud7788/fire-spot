@@ -18,7 +18,7 @@ const ShareButton = () => {
     <>
       <button
         onClick={handleCopyLink}
-        className="bg-main bd-color-main flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border text-[18px]"
+        className="bg-main bd-color-main flex h-[60px] flex-1 items-center justify-center gap-[12px] rounded-[12px] border text-[18px] max-1280:h-[50px] max-1280:text-[16px]"
       >
         <img
           src="/assets/images/camp/btn-camp-share-white.svg"
