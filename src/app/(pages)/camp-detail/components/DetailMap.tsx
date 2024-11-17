@@ -10,7 +10,7 @@ const DetailMap: React.FC<DetailMapProps> = ({ camp }) => {
   return (
     <div
       id="detail-map"
-      className="h-[400px] w-full rounded-lg max-989:h-[250px]"
+      className="h-[400px] w-full rounded-lg max-989:h-[300px]"
     ></div>
   );
 };
