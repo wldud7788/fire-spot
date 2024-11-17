@@ -21,8 +21,8 @@ const ChatRoom = ({ params }: Props) => {
   const roomId = Number(params.roomId);
   const user = useUser();
   const { chatRoomTitle } = useChatRoomTitle(roomId);
-  const { messagesByDate } = useChatRoomMessage(roomId);
-  const { messageListRef } = useChatSubscriptionMessageList({
+  const { messagesByDate, lastMessage } = useChatRoomMessage(roomId);
+  const { messageListRef, lastMessageRef } = useChatSubscriptionMessageList({
     userId: user?.id || "",
     roomId,
     type: "meet"
@@ -42,6 +42,8 @@ const ChatRoom = ({ params }: Props) => {
             roomId={roomId}
             messagesByDate={messagesByDate}
             messageListRef={messageListRef}
+            lastMessage={lastMessage}
+            lastMessageRef={lastMessageRef}
           />
         </div>
       </div>

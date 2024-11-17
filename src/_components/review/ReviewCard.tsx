@@ -1,3 +1,4 @@
+import { formatDate_7 } from "@/_utils/common/dateFormat";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import Link from "next/link";
 
@@ -74,7 +75,9 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
                   <p className="color-gray01 line-clamp-1 w-full text-[14px]">
                     {feed.profile?.nickname}
                   </p>
-                  <span className="color-gray03 text-[12px]">{feed.at}</span>
+                  <span className="color-gray03 text-[12px]">
+                    {formatDate_7(feed.at)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -100,7 +103,7 @@ const ReviewCard = ({ feed, type, onClickFunc }: ReviewCardProps) => {
                 alt={`${feed.profile?.nickname} 의 프로필 사진`}
                 className="h-full w-full object-cover"
               />
-              <div>{feed.at}</div>
+              <div>{formatDate_7(feed.at)}</div>
             </div>
             <div className="feed_desc">
               <p>{feed.content}</p>

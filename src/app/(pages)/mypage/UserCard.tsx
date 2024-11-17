@@ -84,7 +84,7 @@ const UserCard: React.FC = () => {
         .eq("userId", userId);
 
       const { count: meetingCount } = await supabase
-        .from("meet")
+        .from("meet_attendee")
         .select("*", { count: "exact" })
         .eq("user_id", userId);
 

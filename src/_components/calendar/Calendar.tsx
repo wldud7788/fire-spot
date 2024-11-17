@@ -59,6 +59,7 @@ const Calendar = () => {
     currentMonth,
     prevMonth,
     nextMonth,
+    filterType,
     handleFilterType
   };
 

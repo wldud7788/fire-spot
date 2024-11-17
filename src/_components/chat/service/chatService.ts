@@ -198,11 +198,11 @@ const lastChatMessageByAllRooms = async () => {
 };
 
 /** 채팅방의 모든 참여자 */
-const fetchChatAttendeeByRoomId = async (roomId: number) => {
+export const fetchChatAttendeeByRoomId = async (roomId: number) => {
   try {
     const { data, error } = await supabase
       .from("chat_attendee")
-      .select("id")
+      .select("user_id")
       .eq("room_id", roomId);
 
     return data;

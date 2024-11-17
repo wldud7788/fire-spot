@@ -4,7 +4,7 @@ import React from "react";
 import { useCalendarFooter } from "./hooks/useCalendar";
 
 const CalendarFooter = () => {
-  const { feedCount, meetAttendeeCount } = useCalendarFooter();
+  const { reviewCount, meetAttendeeCount } = useCalendarFooter();
 
   return (
     <section className="mt-[26px] flex w-full gap-[55px] max-1280:gap-[20px] max-1160:flex-col">
@@ -18,7 +18,7 @@ const CalendarFooter = () => {
             <span className="color-gray03 text-[12px] font-medium">
               나의 스탬프
             </span>
-            <span className="color-gray01 text-[18px]">{feedCount} 개</span>
+            <span className="color-gray01 text-[18px]">{reviewCount} 개</span>
           </div>
         </div>
         <div className="flex items-center gap-[11px]">

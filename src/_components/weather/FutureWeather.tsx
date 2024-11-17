@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDate_8 } from "@/_utils/common/dateFormat";
 import React, { useEffect, useState, useCallback } from "react";
 
 type ForecastData = {
@@ -107,10 +108,13 @@ const ForecastWeatherComponent = ({
           {forecastData.list.map((day, index) => (
             <div key={index} className="w-[20%] text-center">
               <strong className="text-[18px] font-medium max-767:text-[15px]">
-                {new Date(day.dt * 1000).toISOString().split("T")[0]}
+                {/* {new Date(day.dt * 1000).toISOString().split("T")[0]} */}
+                {formatDate_8(
+                  new Date(day.dt * 1000).toISOString().split("T")[0]
+                )}
               </strong>
               <p className="my-[8px] text-[16px] text-[#BFBFBF] max-767:text-[14px]">
-                {(day.main.temp - 273.15).toFixed(2)}°C
+                {(day.main.temp - 273.15).toFixed(0)}°C
               </p>
               <div className="m-auto mb-[25px] flex h-[47px] w-full max-w-[76px] items-center justify-center max-767:max-w-[60px]">
                 <img

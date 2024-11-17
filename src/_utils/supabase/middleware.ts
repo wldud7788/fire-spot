@@ -1,6 +1,7 @@
+import { fetchChatAttendeeByRoomId } from "@/_components/chat/service/chatService";
 import { getMeetDetail } from "@/app/(pages)/meets/actions/meetDetailAction";
 import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const updateSession = async (request: NextRequest) => {
   try {
@@ -35,8 +36,12 @@ export const updateSession = async (request: NextRequest) => {
         }
       }
     );
+
+    const { pathname } = request.nextUrl;
     const user = await supabase.auth.getUser(); // 세션이 만료된 경우 자동 갱신(현재 사용자 정보를 가져옴)
-    const protectedRoutes = ["/mypage", "/meets/write"];
+    const userId = user.data.user?.id || "";
+
+    const protectedRoutes = ["/mypage", "/meets/write", "/chat"];
     const isProtectedRoute =
       protectedRoutes.includes(request.nextUrl.pathname) ||
       request.nextUrl.pathname.startsWith("/meets/edit"); // 모임 수정 페이지 접근 차단 (동적 URL이라 startsWith 사용)
@@ -71,6 +76,32 @@ export const updateSession = async (request: NextRequest) => {
 
       // 모임 작성한 유저와, 로그인 유저가 다른 경우 수정페이지 접근 차단 (메인으로 보냄)
       if (meetDetail.meet.user_id !== user.data.user?.id) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+    }
+
+    /** 채팅방 접근 차단 */
+    const chatRoomIdMatch = pathname.match(/^\/chat\/(\d+)$/);
+    const roomId = chatRoomIdMatch ? chatRoomIdMatch[1] : null;
+
+    if (roomId) {
+      // 로그인 안되어있으면 차단
+      if (!userId) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+      }
+
+      const attendees = await fetchChatAttendeeByRoomId(Number(roomId));
+
+      // 채팅방에 참여자가 한 명도 없을 경우 차단 (이럴 일이 있나)
+      if (!attendees) return NextResponse.redirect(new URL("/", request.url));
+
+      const hasAttend = attendees.some(
+        (attendee) => attendee.user_id === userId
+      );
+
+      // 채팅방에 참여자 목록에 없을 경우 차단
+      if (!hasAttend) {
+        // TODO: 사카모토 채팅방에 참여할 권한 없음
         return NextResponse.redirect(new URL("/", request.url));
       }
     }

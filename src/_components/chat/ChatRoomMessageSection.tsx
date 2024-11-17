@@ -1,22 +1,26 @@
-import { MessagesByDate } from "./types/chat.types";
-import { format } from "date-fns";
-import { ko } from "date-fns/locale";
+import { ChatRoomMessageInfo, MessagesByDate } from "./types/chat.types";
 import { useChatRoomMessageSection } from "./hooks/useChatRoomMessageSection";
 import { formatDate_6 } from "@/_utils/common/dateFormat";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject } from "react";
 
 type Props = {
   loginUserId: string;
   roomId: number;
   messagesByDate: MessagesByDate | undefined;
+  lastMessage: ChatRoomMessageInfo | undefined;
   messageListRef: MutableRefObject<HTMLUListElement | null>;
+  lastMessageRef: MutableRefObject<{
+    [key: number]: HTMLLIElement | null;
+  }>;
 };
 
 const ChatRoomMessageSection = ({
-  loginUserId,
-  roomId,
-  messagesByDate,
-  messageListRef
+  loginUserId, // 로그인 된 userId, (채팅 말풍선 우측에 표시할 때 조건 처리 위함)
+  roomId, // 채팅방 ID
+  messagesByDate, // 날짜별로 분리된(해시테이블) 메시지 데이터
+  lastMessage, // 마지막 message
+  messageListRef, // 채팅 전송 시 <ul> 태그의 맨 마지막으로 스크롤하기 위함
+  lastMessageRef // 채팅방 입장 시 <ul> 태그의 맨 마지막으로 스크롤하기 위함
 }: Props) => {
   const { messageInput, handleChangeInput, sendMessage, activeSendButton } =
     useChatRoomMessageSection(roomId, loginUserId);
@@ -43,6 +47,15 @@ const ChatRoomMessageSection = ({
                 {messagesByDate[date].map((messageInfo, index) => (
                   <li
                     key={messageInfo.chatMessage.id}
+                    ref={(el) => {
+                      // 마지막 메시지에만 ref를 설정하여 포커스를 맞추기
+                      if (
+                        messageInfo.chatMessage.id ===
+                        lastMessage?.chatMessage.id
+                      ) {
+                        lastMessageRef.current[lastMessage.chatMessage.id] = el;
+                      }
+                    }}
                     className={`mb-10 flex items-start gap-[4px] max-1280:mb-[15px] ${
                       // 로그인 유저와 작성자가 같으면 오른쪽에 위치하는 조건문?
                       loginUserId === messageInfo.chatMessage.user_id
@@ -112,26 +125,6 @@ const ChatRoomMessageSection = ({
         </div>
       </div>
     </div>
-    // <div>
-    //   {chatMessage.map((message) => (
-    //     <div
-    //       key={message.chatMessage.id}
-    //       className={cn(
-    //         loginUserId === message.chatMessage.user_id ? "ml-20" : "",
-    //         "mb-10"
-    //       )}>
-    //       <p>{message.profile.nickname}</p>
-    //       <p>{message.chatMessage.message}</p>
-    //       <p>
-    //         {format(message.chatMessage.created_at, "aa hh:mm", {
-    //           locale: ko
-    //         })}
-    //       </p>
-    //     </div>
-    //   ))}
-    //   <input type="text" value={messageInput} onChange={handleChangeInput} />
-    //   <button onClick={sendMessage}>버튼</button>
-    // </div>
   );
 };
 

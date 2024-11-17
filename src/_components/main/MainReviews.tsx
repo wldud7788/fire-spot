@@ -29,7 +29,7 @@ const MainReviews = () => {
       const { data, error } = await supabase
         .from(`review`)
         .select(`*, camp(*), profile(*)`); // as unknown as FeedItem[]
-      console.log(data);
+      // console.log(data);
 
       if (error) {
         // console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
@@ -40,7 +40,7 @@ const MainReviews = () => {
         throw new Error("리뷰 정보를 가져오는 중 오류 발생 (데이터없음)");
       }
 
-      console.log("data", data);
+      // console.log("data", data);
       // const reviewItems = data as ReviewItem[] | null;
       const selectedCamps = getRandomCamps(data || [], 5);
       // const selectedCamps = data;
