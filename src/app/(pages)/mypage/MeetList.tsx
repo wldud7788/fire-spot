@@ -11,15 +11,15 @@ const MeetList = () => {
   console.log("isProgress ===>", isProgress);
   return (
     <div className="flex flex-col">
-      <div className="mb-[40px] flex items-center max-989:mb-[20px] max-989:flex max-989:items-center max-989:overflow-hidden max-989:rounded-[8px]">
+      <div className="mb-[40px] flex items-center max-989:mb-[20px] max-989:flex max-989:items-center max-989:overflow-hidden">
         <button
-          className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] max-989:flex-1 ${isProgress && "bg-main bd-color-main text-white"}`}
+          className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] max-989:flex-1 max-989:rounded-[8px] ${isProgress && "bg-main bd-color-main text-white"}`}
           onClick={() => toggleShowType(true)}
         >
           모집중
         </button>
         <button
-          className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] max-989:flex-1 ${!isProgress && "bg-main bd-color-main text-white"}`}
+          className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] max-989:flex-1 max-989:rounded-[8px] ${!isProgress && "bg-main bd-color-main text-white"}`}
           onClick={() => toggleShowType(false)}
         >
           마감

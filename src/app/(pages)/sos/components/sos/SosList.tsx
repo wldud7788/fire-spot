@@ -8,14 +8,20 @@ import { SERVER_PAGE_URL } from "@/_utils/common/constant";
 import SosCard from "./SosCard";
 import NoData from "@/_components/common/NoData";
 import useSosList from "../../hooks/useSosList";
+import usePagination from "@/_components/pagination/hooks/pagination";
+import Pagination from "@/_components/pagination/Pagination";
 
 type Props = {
   sosWithCampList: SosWithCamp[];
+  itemsPerPage: number;
 };
 
-const SosList = ({ sosWithCampList }: Props) => {
+const SosList = ({ sosWithCampList, itemsPerPage }: Props) => {
   const { isProgress, toggleShowType, sosWithCampCardList } =
     useSosList(sosWithCampList);
+
+  const { currentItems, page, totalPages, movePagePrev, movePageNext } =
+    usePagination({ items: sosWithCampCardList || [], itemsPerPage });
 
   return (
     <div className="relative mx-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
@@ -53,7 +59,14 @@ const SosList = ({ sosWithCampList }: Props) => {
       ) : (
         <NoData text={"등록된 모임이 없어요."} />
       )}
-      <div className="my-[65px]">{"페이지네이션"}</div>
+      <div className="my-[65px]">
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onMovePagePrev={movePagePrev}
+          onMovePageNext={movePageNext}
+        />
+      </div>
     </div>
   );
 };

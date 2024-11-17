@@ -72,7 +72,7 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
         </div>
         {meetCardList ? (
           <>
-            <ul className="mt-[40px] flex flex-wrap gap-[40px] max-1280:gap-[20px] max-767:mt-[20px] max-767:flex-col">
+            <ul className="mt-[40px] flex flex-wrap gap-[20px] max-1280:gap-[20px] max-767:mt-[20px] max-767:flex-col">
               {meetCardList.map((meetCard) => (
                 <li
                   key={meetCard.id}
