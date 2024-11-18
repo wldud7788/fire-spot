@@ -15,11 +15,7 @@ type CampListProps = {
 
 const CampList = ({ itemsPerPage }: CampListProps) => {
   const [islikeChk, setIslikeChk] = useState<boolean>(false);
-  const {
-    data: camps,
-    isLoading,
-    isError
-  } = useQuery({
+  const { data: camps, isError } = useQuery({
     queryKey: ["camps"],
     queryFn: async () => fetchTotalData(),
     staleTime: Infinity
@@ -38,8 +34,8 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
     window.scrollTo(0, 0); // 페이지 이동 시 상단으로 스크롤
   }, [page]);
 
-  if (isLoading) return <div>데이터가 로딩중입니다.</div>;
-  if (isError || !camps) return <div>에러가 발생했습니다.</div>;
+  if (!currentItems) return <div>데이터가 로딩중입니다.</div>;
+  if (isError) return <div>에러가 발생했습니다.</div>;
 
   const handlelikeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIslikeChk(!islikeChk);
@@ -51,11 +47,12 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
         <PageTitle text={"캠핑장 리스트"} />
         {/* 이윤지 작업 - 내가 찜한 캠핑장 모아보기 */}
         <div
-          className="input_box relative mb-[40px] mt-[15px]"
+          className="input_box ani ani-btt relative mb-[40px] mt-[15px]"
           ref={targetRef}
           style={{
-            background: isVisible ? "red" : "blue",
-            transition: "all .5s ease 1s"
+            transform: isVisible ? "translateY(0)" : "translateY(30px)",
+            opacity: isVisible ? 1 : 0,
+            transition: "all .5s ease .5s"
           }}
         >
           <input
