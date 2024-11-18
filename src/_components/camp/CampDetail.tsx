@@ -398,7 +398,7 @@ pr 먼저~
             </Modal>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
-          {true ? (
+          {reviewCount > 0 ? (
             <>
               {/* <ReviewWriteModal campId={paramsId} onClose={() => {}} /> */}
               <CampReviewSlide
