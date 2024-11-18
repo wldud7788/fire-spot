@@ -49,14 +49,8 @@ export const updateSession = async (request: NextRequest) => {
     // // 모임 수정 페이지 권한 확인용
     const isProtectedRouteByOwner =
       request.nextUrl.pathname.startsWith("/meets/edit");
-    // console.log("user.data", user.data.user);
 
-    // 로그인 상태일 때
-    const {
-      data: { session }
-    } = await supabase.auth.getSession();
-
-    if (session) {
+    if (user.data.user) {
       if (request.nextUrl.pathname === "/sign-in") {
         return NextResponse.redirect(new URL("/mypage", request.url));
       }
