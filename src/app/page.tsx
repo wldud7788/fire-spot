@@ -50,7 +50,7 @@ export default function Home() {
 
           {/* main_sec02 */}
           <MainSection background="#fff">
-            <h2 className="flex items-center justify-center text-center text-[32px] font-bold">
+            <h2 className="flex items-center justify-center text-center text-[32px] font-bold max-767:text-[24px]">
               Hot Best Pick
             </h2>
             <div className="mb-[30px] mt-[20px] flex items-center justify-end max-989:mb-[20px] max-989:mt-[15px]">
@@ -67,7 +67,7 @@ export default function Home() {
 
           {/* main_sec03 */}
           <MainSection background="#F2F2F2">
-            <h2 className="flex items-center justify-center text-center text-[32px] font-bold">
+            <h2 className="flex items-center justify-center text-center text-[32px] font-bold max-767:mt-[20px] max-767:text-[24px]">
               후기
             </h2>
             <MainReviews />

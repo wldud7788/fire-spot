@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTotalData } from "@/_utils/api/campsApi";
 import PageTitle from "../common/PageTitle";
+// import useIntersectionObserver from "@/_hooks/useInteraction";
 
 type CampListProps = {
   itemsPerPage: number;
@@ -14,11 +15,7 @@ type CampListProps = {
 
 const CampList = ({ itemsPerPage }: CampListProps) => {
   const [islikeChk, setIslikeChk] = useState<boolean>(false);
-  const {
-    data: camps,
-    isLoading,
-    isError
-  } = useQuery({
+  const { data: camps, isError } = useQuery({
     queryKey: ["camps"],
     queryFn: async () => fetchTotalData(),
     staleTime: Infinity
@@ -27,13 +24,18 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
     usePagination({ items: camps || [], itemsPerPage });
 
+  // const { isVisible, targetRef } = useIntersectionObserver({
+  //   threshold: 0.5, // 50% 이상 보일 때 감지
+  //   rootMargin: "0px" // 여백 없음
+  // });
+
   // 페이지 번호가 변경되면 해당 페이지로 스크롤 이동
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 이동 시 상단으로 스크롤
   }, [page]);
 
-  if (isLoading) return <div>데이터가 로딩중입니다.</div>;
-  if (isError || !camps) return <div>에러가 발생했습니다.</div>;
+  if (!currentItems) return <div>데이터가 로딩중입니다.</div>;
+  if (isError) return <div>에러가 발생했습니다.</div>;
 
   const handlelikeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIslikeChk(!islikeChk);
@@ -44,7 +46,7 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
       <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-989:px-[15px]">
         <PageTitle text={"캠핑장 리스트"} />
         {/* 이윤지 작업 - 내가 찜한 캠핑장 모아보기 */}
-        <div className="input_box relative mb-[40px] mt-[15px]">
+        <div className="input_box ani ani-btt relative mb-[40px] mt-[15px]">
           <input
             type="checkbox"
             id="likeChk"

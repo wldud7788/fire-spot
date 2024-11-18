@@ -102,7 +102,7 @@ const Header = () => {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-[110] bg-white shadow-md">
-      <div className="relative mx-auto w-full max-w-[1360px] bg-white p-3 px-[30px]">
+      <div className="relative mx-auto w-full max-w-[1360px] bg-white p-3 px-[30px] max-767:px-[15px]">
         {/* 메인 헤더 */}
         <div className="z-10 flex items-center justify-between gap-9 leading-40">
           {/* 로고 + 검색 영역 */}
@@ -111,7 +111,7 @@ const Header = () => {
               <img
                 src="/assets/images/logo.svg"
                 alt="logo"
-                className="w-[150px]"
+                className="w-[150px] max-767:w-[100px]"
               />
               <p className="sr-only">로고</p>
             </Link>
@@ -190,7 +190,11 @@ const Header = () => {
         >
           <div className="flex flex-wrap items-center gap-3 px-4 text-[#9A9696] md:gap-5 md:pl-[160px]">
             {TAGS.map((tag) => (
-              <Link key={tag.name} href={tag.href}>
+              <Link
+                key={tag.name}
+                href={tag.href}
+                className="max-767:text-[13px]"
+              >
                 {tag.name}
               </Link>
             ))}
