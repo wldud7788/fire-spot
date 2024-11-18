@@ -110,13 +110,13 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
                       type="button"
                       className="bg-reviewArrow bg-right-center-0 bg-no-repeat pr-[13px]"
                     >
-                      리뷰 개수: {reviewCount} 개
+                      리뷰 {reviewCount} 개
                     </button>
                   </li>
                 </ul>
                 <dl className="mt-[30px] max-989:mt-[20px]">
                   <dt className="bg-campChk bg-left-center-0 bg-no-repeat pl-[23px] text-[14px] font-bold">
-                    캠핑장 소개 리뷰 개수: {reviewCount}
+                    캠핑장 소개
                   </dt>
                   <dd className="mt-[15px] flex flex-wrap gap-[10px]">
                     {camp.induty && (
