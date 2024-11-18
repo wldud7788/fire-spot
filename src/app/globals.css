@@ -405,7 +405,7 @@ body {
 }
 .header_search input:focus {
   border: none !important; /* 강제로 border를 없앰 */
-  outline: none !important !;
+  outline: none !important;
 }
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
