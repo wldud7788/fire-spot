@@ -105,7 +105,7 @@ export const updateSession = async (request: NextRequest) => {
 
     return response;
   } catch (e) {
-    console.log(e, "error");
+    console.error(e, "error");
     return NextResponse.next({
       request: {
         headers: request.headers

@@ -108,7 +108,6 @@ const useMeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
         if (e.target.value && isOpen) {
           const res = await fetch(SEARCH_URL + encodeURI(e.target.value));
           const data = await res.json();
-          console.log("SEARCH_URL", SEARCH_URL);
 
           setSearchList(data.response.body.items.item);
         } else {

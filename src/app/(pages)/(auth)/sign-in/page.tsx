@@ -6,8 +6,6 @@ import React from "react";
 type Provider = "kakao" | "google";
 const SignIn = () => {
   const url = process.env.NEXT_PUBLIC_VERCEL_URL;
-  // console.log("여기는 윈도우", window.location.host);
-  console.log("여기는 url", url);
   // const url = process.env.NEXT_PUBLIC_VERCEL_URL
   const supabase = createClient();
   const signInWithProvider = async (provider: Provider) => {

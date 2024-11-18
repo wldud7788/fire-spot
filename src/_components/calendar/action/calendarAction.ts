@@ -19,10 +19,6 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
     const meetData = (await fetchMeetAttendeeByUserId()).map(
       (item) => item.meet
     );
-    // const { data: meetData } = await supabase
-    //   .from("meet")
-    //   .select(`*, camp(*)`)
-    //   .eq("user_id", userId);
 
     if (!feedData || !meetData) {
       return [];
@@ -45,8 +41,6 @@ export const getScheduleList = async (): Promise<Schedule[]> => {
         endDate: meet?.end_date ?? ""
       }))
     ];
-
-    console.log("schedules", schedules);
 
     return schedules;
   } catch (e) {

@@ -68,7 +68,6 @@ const FollowButton = ({
   });
 
   if (followersError) return <div>에러가 노출되었습니다.</div>;
-  console.log("followers ==>", followers);
 
   const isFollow = followers?.some(
     (following) => following.following_id === followUserId

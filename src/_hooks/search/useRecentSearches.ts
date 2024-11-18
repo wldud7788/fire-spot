@@ -20,7 +20,6 @@ export function useRecentSearches() {
   // 초기 로드
   useEffect(() => {
     const storedSearches = getStoredSearches();
-    console.log("Initial load:", storedSearches);
     setRecentSearches(storedSearches);
   }, [getStoredSearches]);
 
@@ -40,7 +39,6 @@ export function useRecentSearches() {
       }
 
       const newSearches = [trimmedKeyword, ...currentSearches].slice(0, 5);
-      console.log("Saving searches:", newSearches);
       localStorage.setItem("recentSearches", JSON.stringify(newSearches));
       return newSearches;
     });
@@ -49,14 +47,12 @@ export function useRecentSearches() {
   const deleteKeyword = useCallback((keywordToDelete: string) => {
     setRecentSearches((prev) => {
       const newSearches = prev.filter((keyword) => keyword !== keywordToDelete);
-      console.log("After deletion:", newSearches);
       localStorage.setItem("recentSearches", JSON.stringify(newSearches));
       return newSearches;
     });
   }, []);
 
   const deleteAllKeywords = useCallback(() => {
-    console.log("Deleting all keywords");
     setRecentSearches([]);
     localStorage.removeItem("recentSearches");
   }, []);

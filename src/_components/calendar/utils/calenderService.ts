@@ -21,8 +21,6 @@ export const convertScheduleDataToCellCardTable = (
 ): CellCardTable => {
   const cellCardTable: CellCardTable = {};
 
-  // console.log("scheduleList", scheduleList);
-
   scheduleList.forEach((schedule) => {
     const { type, startDate } = schedule;
     let tableKey = format(startDate, "yyyy-MM-dd");

@@ -15,8 +15,6 @@ export const useCalendarFooter = () => {
     queryKey: ["meetAttendee", "testUser"]
   });
 
-  console.log("reviewCount", reviewCount);
-
   const meetAttendeeCount = meetAttendeeData?.length || 0;
 
   return { reviewCount, meetAttendeeCount };
