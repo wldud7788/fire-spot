@@ -25,8 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const MeetDetail = async ({ params }: Props) => {
   const meetWithCamp = await getMeetDetail({ meetId: params.meetId });
 
-  console.log("meetWithCamp", meetWithCamp);
-
   if (!meetWithCamp) {
     redirect("/");
   }

@@ -44,14 +44,7 @@ const convertMeetDataToMeetCard = (
     if (isProgress) {
       return !meetCard.isDeadline;
     }
-
     return meetCard.isDeadline;
-
-    // console.log("meetCard", meetCard);
-    // console.log("meetCard.isDeadline", meetCard.isDeadline);
-    // console.log("isProgress", isProgress);
-    // console.log("================================");
-    // return !meetCard.isDeadline && isProgress;
   });
 
   return filterMeetCardList;

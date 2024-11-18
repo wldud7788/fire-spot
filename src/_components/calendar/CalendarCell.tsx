@@ -30,8 +30,6 @@ const CalendarCell = ({
     (cellCard) => cellCard.type === "stamp"
   );
 
-  console.log("stampCardList", stampCardList);
-
   const meetCard = cellCardList.find((cellCard) => cellCard.type === "meet");
   const meetCardId = meetCard ? `${meetCard.type}-${meetCard.typeId}` : "";
 
@@ -39,8 +37,6 @@ const CalendarCell = ({
 
   const meetCardContentBg =
     hoverItem === meetCardId ? "bg-[#FF731A]" : "bg-[#FFD0B2]";
-
-  console.log("stampCardList ====>", stampCardList);
 
   return (
     <li className="relative flex min-h-[105px] w-full flex-col justify-between rounded-[10px] border">

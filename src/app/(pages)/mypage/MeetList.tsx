@@ -8,7 +8,6 @@ const MeetList = () => {
   const { meetWithCampList, isProgress, toggleShowType } = useMeetList();
   const meetCardList = convertMeetDataToMeetCard(meetWithCampList, isProgress);
 
-  console.log("isProgress ===>", isProgress);
   return (
     <div className="flex flex-col">
       <div className="mb-[40px] flex items-center max-989:mb-[20px] max-989:flex max-989:items-center max-989:overflow-hidden">

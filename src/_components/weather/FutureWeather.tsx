@@ -96,8 +96,6 @@ const ForecastWeatherComponent = ({
     return <p>날씨 데이터를 불러오는 중...</p>;
   }
 
-  console.log("forecastData ======>", forecastData);
-
   return (
     <div className="w-full rounded-[12px] border border-[#A6A6A6] px-[25px] py-[36px] max-989:px-[20px] max-989:py-[25px]">
       <h2 className="mb-[20px] text-[24px] font-bold max-1280:text-[22px] max-1160:text-[20px] max-989:text-[18px] max-767:text-[16px]">
