@@ -102,7 +102,7 @@ const Header = () => {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-[110] bg-white shadow-md">
-      <div className="relative mx-auto max-w-[1540px] bg-white p-3 md:p-5">
+      <div className="relative mx-auto w-full max-w-[1360px] bg-white p-3 px-[30px]">
         {/* 메인 헤더 */}
         <div className="z-10 flex items-center justify-between gap-9 leading-40">
           {/* 로고 + 검색 영역 */}

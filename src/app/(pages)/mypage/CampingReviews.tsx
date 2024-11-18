@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { User } from "@supabase/supabase-js";
 import { ReviewItem } from "../reviews/types/ReviewItem";
 import NoData from "@/_components/common/NoData";
+import ReviewModal from "@/_components/review/ReviewModal";
 
 const supabase = createClient();
 
@@ -22,6 +23,18 @@ const CampListPage = () => {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const user = useUser();
   const userId = user?.id ?? "";
+
+  // 모달 관련
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<ReviewItem | null>(null);
+  const handleReviewClick = (review: ReviewItem) => {
+    setSelectedReview(review);
+    setIsModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedReview(null);
+  };
 
   // const { data: user, error } = useQuery<User | null>({
   //   queryKey: ["user"],
@@ -78,7 +91,8 @@ const CampListPage = () => {
             return (
               <li
                 key={review.id}
-                className="w-full max-w-[calc(33.333%-15px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
+                className="w-full max-w-[calc(33.333%-12px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
+                onClick={() => handleReviewClick(review)}
               >
                 <ReviewCard
                   feed={{
@@ -103,6 +117,11 @@ const CampListPage = () => {
       ) : (
         <NoData text="작성한 리뷰가 없습니다." />
       )}
+      <ReviewModal
+        isOpen={isModalOpen}
+        handleModalClose={handleModalClose}
+        selected={selectedReview}
+      />
     </div>
   );
 };

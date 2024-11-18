@@ -24,7 +24,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
     handleRemoveFilter
   } = useFilters(camps);
 
-  const { moveToMarker, moveToMap } = useMap(filteredCamps);
+  const { moveToMarker } = useMap(filteredCamps);
 
   const handleCampSelect = (selectedCamp: Camp) => {
     // PC 환경 체크
@@ -51,9 +51,9 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
     }
   };
 
-  const handleMoveToMap = (camp: Camp) => {
-    moveToMap(camp);
-  };
+  // const handleMoveToMap = (camp: Camp) => {
+  //   moveToMap(camp);
+  // };
 
   const toggleView = () => {
     setShowMap((prev) => !prev);
@@ -90,7 +90,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({ camps }) => {
         <SearchList
           filteredCamps={filteredCamps}
           handleCampSelect={handleCampSelect}
-          handleMoveToMap={handleMoveToMap}
+          // handleMoveToMap={handleMoveToMap}
         />
       </div>
 
