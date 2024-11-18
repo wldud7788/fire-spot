@@ -63,7 +63,7 @@ const MainReviews = () => {
   return (
     <div>
       {error && <p className="text-red-500">{error}</p>}
-      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px] max-989:flex-wrap">
+      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px] max-989:flex-wrap max-767:mt-[25px]">
         {reviews.map((review) => (
           <li
             key={review.id}
