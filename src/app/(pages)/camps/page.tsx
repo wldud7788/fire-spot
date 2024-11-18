@@ -1,7 +1,5 @@
-import React from "react";
+import CampList from "@/_components/camp/CampList";
 
-const Camps = () => {
-  return <div>Camps</div>;
-};
+const CampListPage = () => <CampList itemsPerPage={8} />;
 
-export default Camps;
+export default CampListPage;
