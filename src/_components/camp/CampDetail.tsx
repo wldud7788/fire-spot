@@ -10,7 +10,7 @@ import PageTitle from "../common/PageTitle";
 import NoData from "../common/NoData";
 import ForecastWeatherComponent from "../weather/FutureWeather";
 import { upsertCamp } from "@/app/(pages)/meets/actions/meetWriteAction";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../modal/Modal";
 import LikeButton from "../like/LikeButton";
 import ShareButton from "./ShareButton";
@@ -42,10 +42,6 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
 
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
-
-  // useEffect(() => {
-
-  // }, [camps])
 
   if (isLoading) return <div>데이터가 로딩중입니다.</div>;
   if (isError) return <div>에러가 발생했습니다.</div>;
@@ -398,18 +394,11 @@ pr 먼저~
             </Modal>
           </div>
           {/* 이윤지 작업 - 리뷰 리스트*/}
-          {reviewCount > 0 ? (
-            <>
-              {/* <ReviewWriteModal campId={paramsId} onClose={() => {}} /> */}
-              <CampReviewSlide
-                campId={paramsId}
-                onReviewCountChange={setReviewCount}
-                onAverageRateChange={setAverageRate}
-              />
-            </>
-          ) : (
-            <NoData text={"등록된 리뷰가 없어요."} />
-          )}
+          <CampReviewSlide
+            campId={paramsId}
+            onReviewCountChange={setReviewCount}
+            onAverageRateChange={setAverageRate}
+          />
         </div>
         {/*// 캠핑장 리뷰 */}
 
