@@ -190,7 +190,11 @@ const Header = () => {
         >
           <div className="flex flex-wrap items-center gap-3 px-4 text-[#9A9696] md:gap-5 md:pl-[160px]">
             {TAGS.map((tag) => (
-              <Link key={tag.name} href={tag.href}>
+              <Link
+                key={tag.name}
+                href={tag.href}
+                className="max-767:text-[13px]"
+              >
                 {tag.name}
               </Link>
             ))}
