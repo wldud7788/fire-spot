@@ -52,17 +52,20 @@ export const updateSession = async (request: NextRequest) => {
     // console.log("user.data", user.data.user);
 
     // 로그인 상태일 때
-    if (user.data.user) {
-      // 만약 접근하고자 하는 경로가 '/sign-in'이라면 마이페이지로 리다이렉션
+    const {
+      data: { session }
+    } = await supabase.auth.getSession();
+
+    if (session) {
       if (request.nextUrl.pathname === "/sign-in") {
         return NextResponse.redirect(new URL("/mypage", request.url));
       }
     }
 
     // 로그인이 필요한 페이지 접근 시
-    if (isProtectedRoute && user.error) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
-    }
+    // if (isProtectedRoute && user.error) {
+    //   return NextResponse.redirect(new URL("/sign-in", request.url));
+    // }
 
     // 수정 권한 없는 유저가 접근하는 경우 (다른 사람이 쓴 게시글 수정 페이지 같은 경우) 차단
     if (isProtectedRouteByOwner) {
