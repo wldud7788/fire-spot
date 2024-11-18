@@ -24,7 +24,10 @@ const MainUserCard = () => {
   const handleLogout = async () => {
     await signOut();
     setUserWithProfile(null);
-    router.push("/sign-in");
+    setTimeout(() => {
+      router.push("/sign-in");
+    });
+    // router.push("/sign-in");
   };
 
   if (!userWithProfile || !userWithProfile.profile || !userWithProfile.user) {
