@@ -63,9 +63,9 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     // 로그인이 필요한 페이지 접근 시
-    // if (isProtectedRoute && user.error) {
-    //   return NextResponse.redirect(new URL("/sign-in", request.url));
-    // }
+    if (isProtectedRoute && user.error) {
+      return NextResponse.redirect(new URL("/sign-in", request.url));
+    }
 
     // 수정 권한 없는 유저가 접근하는 경우 (다른 사람이 쓴 게시글 수정 페이지 같은 경우) 차단
     if (isProtectedRouteByOwner) {
