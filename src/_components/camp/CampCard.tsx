@@ -2,6 +2,7 @@ import { Camp } from "@/app/(pages)/camps/types/Camp";
 import { CampSelect } from "@/app/(pages)/meets/types/camp.types";
 import Link from "next/link";
 import LikeButton from "../like/LikeButton";
+import ReviewBookMarkCount from "./ReviewBookMarkCount";
 
 type CampingDataProps = {
   camp: CampSelect | Camp;
@@ -62,23 +63,8 @@ const CampCard = ({ camp, type }: CampingDataProps) => {
                 {camp.featureNm ? camp.featureNm : camp.intro}
               </p>
               <div className="mt-[18px] flex items-center gap-[8px]">
-                <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
-                  <img
-                    className="relative top-[-1px]"
-                    src="/assets/images/main/ico-main-review-count.svg"
-                    alt={`${camp.facltNm} 후기 갯수 이미지`}
-                  />
-                  {/* [이윤지 작업] - 후기 카운트 노출시켜야합니다. 아래의 100*/}
-                  <span>100</span>
-                </p>
-                <p className="color-gray04 flex items-center gap-[2px] text-[12px]">
-                  <img
-                    src="/assets/images/main/ico-main-bookmark-count.svg"
-                    alt={`${camp.facltNm} 좋아요 갯수 이미지`}
-                  />
-                  {/* [이윤지 작업] - 좋아요 카운트 노출시켜야합니다. 아래의 100*/}
-                  <span>100</span>
-                </p>
+                {/* 리뷰와 북마크 수 카운트 */}
+                <ReviewBookMarkCount campId={camp.contentId} camp={camp} />
               </div>
             </div>
           )}

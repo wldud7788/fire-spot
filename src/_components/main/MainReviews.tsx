@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewCard from "../review/ReviewCard";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
-import ReviewModal2 from "../review/ReviewModal";
-
+import ReviewModal from "../review/ReviewModal";
 const supabase = createClient();
 
 const MainReviews = () => {
@@ -79,7 +78,7 @@ const MainReviews = () => {
         ))}
       </ul>
       {/* 리뷰 카드 클릭 시 생성되는 모달창 */}
-      <ReviewModal2
+      <ReviewModal
         isOpen={isOpen}
         handleModalClose={handleModalClose}
         selected={selected}

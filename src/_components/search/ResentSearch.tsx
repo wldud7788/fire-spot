@@ -1,5 +1,5 @@
-// RecentSearch.tsx
 import { Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface RecentSearchesProps {
   recentSearches: string[];
@@ -12,6 +12,8 @@ export const RecentSearches: React.FC<RecentSearchesProps> = ({
   onDeleteKeyword,
   onDeleteAll
 }) => {
+  const router = useRouter();
+
   if (!recentSearches || recentSearches.length === 0) {
     return null;
   }
@@ -39,7 +41,12 @@ export const RecentSearches: React.FC<RecentSearchesProps> = ({
             key={index}
             className="group flex items-center justify-between rounded-md p-2 hover:bg-gray-100"
           >
-            <span className="cursor-pointer text-sm">{keyword}</span>
+            <button
+              onClick={() => router.push(`/search?keyword=${keyword}`)}
+              className="w-full cursor-pointer text-left text-sm"
+            >
+              {keyword}
+            </button>
             <button
               type="button"
               onClick={(e) => {

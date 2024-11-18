@@ -19,7 +19,7 @@ const ReviewSlideCard: React.FC<ReviewSlideCardProps> = ({
   return (
     <div
       onClick={onClickFunc}
-      className="flex min-h-[245px] flex-col justify-between overflow-hidden rounded-[12px] border border-[#BFBFBF] px-[24px] py-[28px]"
+      className="flex min-h-[245px] cursor-pointer flex-col justify-between overflow-hidden rounded-[12px] border border-[#BFBFBF] px-[24px] py-[28px]"
     >
       {/* <h2>{review.campId}</h2> 어디에 사용하는지 모르겠습니다.*/}
       <div>
