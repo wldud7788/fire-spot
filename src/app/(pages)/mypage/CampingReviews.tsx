@@ -78,7 +78,7 @@ const CampListPage = () => {
             return (
               <li
                 key={review.id}
-                className="w-full max-w-[calc(33.333%-12px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
+                className="w-full max-w-[calc(33.333%-15px)] max-1280:max-w-[calc(33.333%-10px)] max-767:max-w-[calc(50%-8px)] max-450:max-w-[100%]"
               >
                 <ReviewCard
                   feed={{
