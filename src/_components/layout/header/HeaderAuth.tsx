@@ -22,7 +22,9 @@ const HeaderAuth = () => {
   const handleLogout = async () => {
     await signOut();
     setUserWithProfile(null);
-    router.push("/sign-in");
+    setTimeout(() => {
+      router.push("/sign-in");
+    });
   };
 
   const { dropdownRef, isDropdownOpen, toggleDropdown, closeDropdown } =
