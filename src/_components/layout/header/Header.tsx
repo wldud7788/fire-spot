@@ -111,7 +111,7 @@ const Header = () => {
               <img
                 src="/assets/images/logo.svg"
                 alt="logo"
-                className="w-[150px]"
+                className="w-[150px] max-767:w-[100px]"
               />
               <p className="sr-only">로고</p>
             </Link>

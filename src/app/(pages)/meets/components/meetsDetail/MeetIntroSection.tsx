@@ -56,7 +56,7 @@ const MeetIntroSection = ({ meetWithCamp }: Props) => {
             {campInduty}
           </p>
         </div>
-        <p className="bg-center-left-0 bg-meetImport bg-no-repeat pl-[28px] text-[16px] text-[#a6a6a6] max-1280:text-[14px] max-767:text-[13px]">
+        <p className="bg-center-left-0 bg-meetImport bg-no-repeat py-[1px] pl-[28px] text-[16px] text-[#a6a6a6] max-1280:text-[14px] max-767:text-[13px]">
           개인 계좌 입금 유도, 개인 정보 요구, 초대 멤버가 아닌 외부 인원 초대
           등 가이드를 위반하는 경우 불멍스팟에게 신고해주세요!
         </p>

@@ -9,6 +9,7 @@ import useMeetDetailController from "../../hooks/useMeetDetailController";
 import ForecastWeatherComponent from "@/_components/weather/FutureWeather";
 import DetailMap from "@/app/(pages)/camp-detail/components/DetailMap";
 import { Camp } from "@/app/(pages)/camps/types/Camp";
+import Link from "next/link";
 
 type Props = {
   meetWithCamp: MeetWithCamp;
@@ -42,6 +43,16 @@ const MeetDetailController = ({ meetWithCamp }: Props) => {
           longitude={meetWithCamp.camp.mapX}
           campingName={meetWithCamp.camp.facltNm}
         />
+        {/* 목록으로 가기 */}
+        <div className="detail_section my-[100px] flex justify-center max-767:mb-[60px] max-767:mt-[40px]">
+          <Link
+            href="/meets"
+            className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold max-767:max-w-[100%] max-767:py-[15px]"
+          >
+            목록으로 이동
+          </Link>
+        </div>
+        {/*// 목록으로 가기 */}
       </div>
     </div>
   );
