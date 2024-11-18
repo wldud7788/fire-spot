@@ -38,7 +38,7 @@ export default function RootLayout({
                 ></Script>
 
                 <Header />
-                <div className="min-h-[calc(100vh-80px)] pt-[80px]">
+                <div className="min-h-[calc(100vh-80px)] pt-[80px] max-767:pt-[112px]">
                   {children}
                 </div>
                 <Footer />
