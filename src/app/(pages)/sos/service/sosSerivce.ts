@@ -89,3 +89,27 @@ export const getSosDetail = async (sosId: number) => {
 
   return data[0];
 };
+
+export const getSosCountByProgress = async () => {
+  const supabase = await createClient();
+  const threeHoursAgo = new Date();
+  threeHoursAgo.setHours(threeHoursAgo.getHours() - 3);
+
+  try {
+    const { data: sosCountByProgress, error } = await supabase
+      .from("sos")
+      .select("*")
+      .gte("created_at", threeHoursAgo.toISOString());
+
+    if (error) {
+      throw new Error("getSosCountByProgress Error ," + error.message);
+    }
+
+    return sosCountByProgress.length;
+
+    // postMeetAttendee(meetResult.id);
+  } catch (e) {
+    console.error("getSosCountByProgress Error", e);
+    return 0;
+  }
+};

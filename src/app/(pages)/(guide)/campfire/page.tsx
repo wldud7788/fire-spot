@@ -10,10 +10,10 @@ const CampfirePage = () => {
         <GuideTop text={"불멍 가이드"} />
 
         <div className="flex flex-col gap-[50px] rounded-[34px] px-[60px] py-[80px] shadow-custom max-1280:px-[30px] max-1280:py-[40px]">
+          <img src="/assets/images/guide/campfire.jpg" alt="불멍이미지" />
           <h2 className="text-[20px] font-bold max-1280:text-[18px] max-767:text-[16px]">
             캠핑의 꽃인 불멍! 안전하게 즐기는 방법에는 무엇이 있을까요?
           </h2>
-
           <ul className="flex flex-col gap-[20px]">
             {CampfireGuide.map((guide) => {
               return (
