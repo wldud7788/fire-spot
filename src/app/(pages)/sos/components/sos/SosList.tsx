@@ -58,7 +58,7 @@ const SosList = ({ sosWithCampList, itemsPerPage }: Props) => {
         </ul>
       ) : (
         <div className="mt-[20px]">
-          <NoData text={"등록된 모임이 없어요."} />
+          <NoData text={"활성화된 SOS가 없어요."} />
         </div>
       )}
       <div className="my-[65px]">
