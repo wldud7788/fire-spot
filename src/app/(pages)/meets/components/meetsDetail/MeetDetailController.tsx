@@ -32,7 +32,7 @@ const MeetDetailController = ({ meetWithCamp }: Props) => {
         <h2 className="color-gray01 mb-[30px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px] max-767:mb-[20px]">
           모임장소
         </h2>
-        <DetailMap camp={camp} />
+        <DetailMap camp={camp} variant="meet" />
       </div>
       <div className="mt-[80px] max-989:mt-[60px]">
         <h2 className="color-gray01 mb-[30px] text-[24px] font-bold max-1280:text-[20px] max-1160:text-[18px] max-767:mb-[20px]">

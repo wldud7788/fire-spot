@@ -29,7 +29,7 @@ const Modal = ({
       onClick={handleBackgroundClick}
     >
       <div
-        className={`modal_cont 모달지영추가`}
+        className={`modal_cont review_modal`}
         style={{ width: `${width}px` }}
       >
         <div className="modal_inner">{children}</div>

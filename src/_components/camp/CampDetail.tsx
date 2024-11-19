@@ -310,7 +310,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               {camp.direction}
             </p>
           </div>
-          <DetailMap camp={camp} />
+          <DetailMap camp={camp} variant="detail" />
         </div>
         {/*// 캠핑장 위치 */}
 
