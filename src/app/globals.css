@@ -408,20 +408,22 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
-.search_input {
-  @apply relative z-10 w-full rounded-[24px] border-2 border-solid border-[#A2A2A2] bg-white bg-search bg-left-center bg-no-repeat pl-10 text-sm md:rounded-[28px] md:text-lg max-1280:h-[45px] max-767:h-[35px];
-}
-.button_style {
-  @apply flex w-[100px] items-center justify-center rounded-[24px] bg-[#FF924C] px-0 text-sm font-semibold text-black md:w-[150px] md:rounded-[28px] md:px-[28px] md:text-lg max-1280:h-[45px] max-767:h-[35px];
-}
-.header_search input:focus {
-  border: none !important; /* 강제로 border를 없앰 */
-  outline: none !important;
-}
+/* 헤더 */
 .header_icon {
   @apply hidden h-10 w-10 bg-no-repeat sm:block;
 }
-
-.모달지영추가 {
+/* 리뷰 */
+.review_modal {
   @apply relative rounded-lg bg-white p-6;
+}
+
+/* 검색 css */
+.search_input {
+  @apply relative z-10 w-full rounded-[24px] border-2 border-solid border-[#A2A2A2] bg-white bg-search bg-left-center bg-no-repeat pl-10 text-sm md:rounded-[25px] md:text-lg max-1280:h-[45px] max-767:h-[45px];
+}
+.input_focus_none {
+  @apply focus-within:border-0 focus-within:outline-none focus:border-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:border-0 focus-visible:outline-none active:border-0 active:outline-none;
+}
+.button_style {
+  @apply flex w-[100px] items-center justify-center rounded-[24px] bg-[#FF924C] px-0 text-sm font-semibold text-black md:w-[150px] md:rounded-[25px] md:px-[28px] md:text-lg max-1280:h-[45px] max-767:h-[45px];
 }
