@@ -6,6 +6,7 @@ import Slide from "../slide/Slide";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
 import { useQuery } from "@tanstack/react-query";
 import ReviewModal from "../review/ReviewModal";
+import NoData from "../common/NoData";
 
 const supabase = createClient();
 
@@ -81,15 +82,17 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
     }
   }, [reviews, onReviewCountChange]);
 
-  if (!reviews) {
-    return <div>리뷰 데이터가 없습니다.</div>;
+  if (reviews?.length === 0) {
+    return <NoData text={"등록된 리뷰가 없어요."} />;
   }
+
+  console.log("reviews ====>", reviews);
 
   return (
     <>
       <div className="camp-slide-wrap">
         <Slide slidePerview={slidePerview} spaceBetween={10}>
-          {reviews.map((review) => (
+          {reviews?.map((review) => (
             <ReviewSlideCard
               key={review.id}
               review={review}
