@@ -13,6 +13,7 @@ import { throttle } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { getSosCountByProgress } from "@/app/(pages)/sos/service/sosSerivce";
 import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
+import Image from "next/image";
 
 const SCROLL_THRESHOLD_TAGS = 260;
 const SCROLL_THRESHOLD_SEARCH = 300;
@@ -107,12 +108,17 @@ const Header = () => {
         <div className="z-10 flex items-center justify-between gap-9 leading-40">
           {/* 로고 + 검색 영역 */}
           <div className="flex w-[530px] items-center gap-[50px]">
-            <Link href={"/"} className="w-[150px]">
-              <img
-                src="/assets/images/logo.svg"
-                alt="logo"
-                className="w-[150px] max-767:w-[100px]"
-              />
+            <Link href={"/"} className="shrink-0">
+              <div className="h-[36px] w-[136px]">
+                <Image
+                  src="/assets/images/logo.svg"
+                  alt="logo"
+                  width={136}
+                  height={36}
+                  priority
+                  className="h-full w-full object-contain"
+                />
+              </div>
               <p className="sr-only">로고</p>
             </Link>
             {/* PC 검색바 */}
