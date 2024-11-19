@@ -26,6 +26,7 @@ const useChatList = () => {
   });
 
   return {
+    hasChatAttendee: chatRoomList.length > 0,
     pinnedChatRoomList,
     unPinnedChatRoomList
   };

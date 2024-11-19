@@ -11,7 +11,8 @@ import Link from "next/link";
 import React from "react";
 
 const ChatList = () => {
-  const { pinnedChatRoomList, unPinnedChatRoomList } = useChatList();
+  const { hasChatAttendee, pinnedChatRoomList, unPinnedChatRoomList } =
+    useChatList();
   const { togglePin, handleMessageRead } = useChatAttendee();
 
   useChatSubscriptionRoomList();
@@ -54,7 +55,7 @@ const ChatList = () => {
           </div> */}
         </div>
 
-        {pinnedChatRoomList.length > 0 ? (
+        {hasChatAttendee ? (
           <div className="flex flex-col">
             {pinnedChatRoomList.map((chatRoomInfo) => (
               <ChatListCard
