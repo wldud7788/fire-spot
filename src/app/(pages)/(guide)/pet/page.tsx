@@ -11,7 +11,7 @@ const PetPage = () => {
 
         <div className="flex flex-col gap-[50px] rounded-[34px] px-[60px] py-[80px] shadow-custom max-1280:px-[30px] max-1280:py-[40px]">
           <h2 className="text-[20px] font-bold max-1280:text-[18px] max-767:text-[16px]">
-            펫티켓 캠핑
+            페티켓 캠핑
           </h2>
           <img src="/assets/images/guide/pet.jpg" alt="pet" />
           <div className="text_box">
