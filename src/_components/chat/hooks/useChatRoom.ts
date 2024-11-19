@@ -39,10 +39,10 @@ export const useChatRoomMessage = (roomId: number) => {
   let lastDateMessages = [] as ChatRoomMessageInfo[]; // messagesByDate[lastDate];
   let lastMessage = undefined; //lastDateMessages.slice(-1)[0];
 
-  // if (lastDate) {
-  lastDateMessages = messagesByDate[lastDate];
-  lastMessage = lastDateMessages.slice(-1)[0];
-  // }
+  if (lastDate) {
+    lastDateMessages = messagesByDate[lastDate];
+    lastMessage = lastDateMessages.slice(-1)[0];
+  }
 
   if (error) throw new Error(error.message);
 

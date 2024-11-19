@@ -11,7 +11,7 @@ export default function GlobalError({
   return (
     // global-error must include html and body tags
     <html>
-      <div className="bg-sub fixed top-[50px] flex h-svh w-full flex-col items-center justify-center gap-10 p-5">
+      <div className="bg-sub fixed top-0 flex h-svh w-full flex-col items-center justify-center gap-10 p-5">
         <img
           src="/assets/images/logo.svg"
           alt="logo"
