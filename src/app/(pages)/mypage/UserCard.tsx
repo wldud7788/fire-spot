@@ -175,7 +175,7 @@ const UserCard: React.FC = () => {
             <img
               src={profileUrl}
               alt="Profile"
-              className="object-fit h-full w-full"
+              className="h-full w-full object-cover"
             />
           )}
         </div>

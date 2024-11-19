@@ -13,7 +13,7 @@ const PetPage = () => {
           <h2 className="text-[20px] font-bold max-1280:text-[18px] max-767:text-[16px]">
             펫티켓 캠핑
           </h2>
-
+          <img src="/assets/images/guide/pet.jpg" alt="pet" />
           <div className="text_box">
             <strong className="color-main text-[16px] font-bold">
               ‘페티켓’이라는 단어를 아시나요?

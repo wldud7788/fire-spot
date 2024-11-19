@@ -7,18 +7,18 @@ import { MapInstance } from "@/type/map";
 interface SearchListProps {
   filteredCamps: Camp[];
   handleCampSelect: (camp: Camp) => void;
-  handleMoveToMap: (camp: Camp) => void;
+  // handleMoveToMap: (camp: Camp) => void;
 }
 const SearchList = ({
   filteredCamps,
-  handleCampSelect,
-  handleMoveToMap
+  handleCampSelect
+  // handleMoveToMap
 }: SearchListProps) => {
-  useEffect(() => {
-    if (filteredCamps.length > 0) {
-      handleMoveToMap(filteredCamps[0]);
-    }
-  }, [filteredCamps]);
+  // useEffect(() => {
+  //   if (filteredCamps.length > 0) {
+  //     handleMoveToMap(filteredCamps[0]);
+  //   }
+  // }, [filteredCamps]);
 
   return (
     <div className="flex-1 overflow-y-auto">

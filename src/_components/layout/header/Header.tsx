@@ -10,6 +10,9 @@ import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import { useDropdownStore } from "@/_utils/zustand/dropdown-provider";
 import { throttle } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+import { getSosCountByProgress } from "@/app/(pages)/sos/service/sosSerivce";
+import { queryKey } from "@/_utils/reactQuery/queryKey.keys";
 
 const SCROLL_THRESHOLD_TAGS = 260;
 const SCROLL_THRESHOLD_SEARCH = 300;
@@ -49,6 +52,11 @@ const Header = () => {
     }, 100),
     []
   );
+
+  const { data: sosCountByProgress } = useQuery<number>({
+    queryFn: () => getSosCountByProgress(),
+    queryKey: queryKey.sos.sosCountByProgress
+  });
 
   // 태그 표시 스크롤 이벤트
   useEffect(() => {
@@ -94,7 +102,7 @@ const Header = () => {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-[110] bg-white shadow-md">
-      <div className="relative mx-auto max-w-[1540px] bg-white p-3 md:p-5">
+      <div className="relative mx-auto w-full max-w-[1360px] bg-white p-3 px-[30px] max-767:px-[15px]">
         {/* 메인 헤더 */}
         <div className="z-10 flex items-center justify-between gap-9 leading-40">
           {/* 로고 + 검색 영역 */}
@@ -103,7 +111,7 @@ const Header = () => {
               <img
                 src="/assets/images/logo.svg"
                 alt="logo"
-                className="w-[150px]"
+                className="w-[150px] max-767:w-[100px]"
               />
               <p className="sr-only">로고</p>
             </Link>
@@ -133,7 +141,13 @@ const Header = () => {
                 href={`${SERVER_PAGE_URL.chat}`}
                 className="header_icon bg-chat"
               ></Link>
-              <Link href={"/sos"} className="header_icon bg-sos"></Link>
+              <Link href={"/sos"} className="header_icon relative bg-sos">
+                {!!sosCountByProgress && (
+                  <span className="bg-red absolute right-0 top-[5px] h-[10px] w-[10px] rounded-full bg-red-500 text-[11px]">
+                    {/* {sosCountByProgress} */}
+                  </span>
+                )}
+              </Link>
             </div>
             <HeaderAuth />
 
@@ -176,7 +190,11 @@ const Header = () => {
         >
           <div className="flex flex-wrap items-center gap-3 px-4 text-[#9A9696] md:gap-5 md:pl-[160px]">
             {TAGS.map((tag) => (
-              <Link key={tag.name} href={tag.href}>
+              <Link
+                key={tag.name}
+                href={tag.href}
+                className="max-767:text-[13px]"
+              >
                 {tag.name}
               </Link>
             ))}

@@ -83,8 +83,6 @@ const ReviewWriteModal: React.FC<ReviewModalProps> = ({ campId, onClose }) => {
     try {
       const filePath = `${campId}-${Date.now()}`;
 
-      console.log("filePath", filePath);
-
       // 파일 업로드
       const { error: uploadError } = await supabase.storage
         .from("review")

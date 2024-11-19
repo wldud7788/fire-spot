@@ -10,6 +10,7 @@ import { useChatSubscriptionMessageList } from "@/_components/chat/hooks/useChat
 import SosContentSection from "./section/SosContentSection";
 import { useChatSosMessage } from "@/_components/chat/hooks/useChatSosMessage";
 import ChatRoomMessageSection from "@/_components/chat/ChatRoomMessageSection";
+import Link from "next/link";
 
 type Props = {
   sosWithCamp: SosWithCamp;
@@ -55,6 +56,16 @@ const SosDetailController = ({ sosWithCamp, chatRoom }: Props) => {
       <MeetContentSection meetWithCamp={meetWithCamp} />
       <MeetSuppliesSection meetWithCamp={meetWithCamp} />
       <MeetRecommendSection /> */}
+      {/* 목록으로 가기 */}
+      <div className="detail_section my-[100px] flex justify-center max-767:mb-[60px] max-767:mt-[40px]">
+        <Link
+          href="/sos"
+          className="color-main bg-sub block w-full max-w-[300px] rounded-[12px] border border-[#ff924c] bg-[#fff] py-[20px] text-center font-bold max-767:max-w-[100%] max-767:py-[15px]"
+        >
+          목록으로 이동
+        </Link>
+      </div>
+      {/*// 목록으로 가기 */}
     </div>
   );
 };

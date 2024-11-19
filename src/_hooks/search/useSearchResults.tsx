@@ -12,7 +12,7 @@ export const useSearchResults = ({ validatedValue }: SearchResultsProps) => {
 
   const renderImage = (imageUrl: string | null) => (
     <img
-      src={imageUrl || "/assets/images/default_profile.jpeg"}
+      src={imageUrl || "/assets/images/camp/img-camp-default.jpg"}
       className="h-full w-full rounded-md object-cover"
       alt="캠핑 썸네일"
     />

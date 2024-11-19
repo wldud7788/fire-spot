@@ -64,8 +64,6 @@ export const followUser = async (loginUserId: string, followUserId: string) => {
     if (error) {
       throw new Error(error.message);
     }
-
-    console.log("팔로우 성공:", data);
     return data; // 성공적으로 팔로우가 추가되면 데이터를 반환
   } catch (error) {
     console.error("팔로우 실패:", error);
@@ -88,8 +86,6 @@ export const unfollowUser = async (
     if (error) {
       throw new Error(error.message);
     }
-
-    console.log("팔로우 취소 성공:", data);
     return data; // 성공적으로 팔로우가 취소되면 데이터를 반환
   } catch (error) {
     console.error("팔로우 취소 실패:", error);
@@ -108,6 +104,5 @@ export const fetchBookmarks = async () => {
     .from("bookmarks")
     .select("*")
     .eq("userId", session.user.id);
-  console.log("data", data);
   return data;
 };

@@ -49,11 +49,8 @@ export const updateSession = async (request: NextRequest) => {
     // // 모임 수정 페이지 권한 확인용
     const isProtectedRouteByOwner =
       request.nextUrl.pathname.startsWith("/meets/edit");
-    // console.log("user.data", user.data.user);
 
-    // 로그인 상태일 때
     if (user.data.user) {
-      // 만약 접근하고자 하는 경로가 '/sign-in'이라면 마이페이지로 리다이렉션
       if (request.nextUrl.pathname === "/sign-in") {
         return NextResponse.redirect(new URL("/mypage", request.url));
       }
@@ -108,7 +105,7 @@ export const updateSession = async (request: NextRequest) => {
 
     return response;
   } catch (e) {
-    console.log(e, "error");
+    console.error(e, "error");
     return NextResponse.next({
       request: {
         headers: request.headers

@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/_utils/supabase/client";
 import ReviewCard from "../review/ReviewCard";
 import { ReviewItem } from "@/app/(pages)/reviews/types/ReviewItem";
-import ReviewModal2 from "../review/ReviewModal";
-
+import ReviewModal from "../review/ReviewModal";
 const supabase = createClient();
 
 const MainReviews = () => {
@@ -29,7 +28,6 @@ const MainReviews = () => {
       const { data, error } = await supabase
         .from(`review`)
         .select(`*, camp(*), profile(*)`); // as unknown as FeedItem[]
-      // console.log(data);
 
       if (error) {
         // console.error("캠핑장 목록을 가져오는 중 오류 발생:", error);
@@ -40,7 +38,6 @@ const MainReviews = () => {
         throw new Error("리뷰 정보를 가져오는 중 오류 발생 (데이터없음)");
       }
 
-      // console.log("data", data);
       // const reviewItems = data as ReviewItem[] | null;
       const selectedCamps = getRandomCamps(data || [], 5);
       // const selectedCamps = data;
@@ -64,7 +61,7 @@ const MainReviews = () => {
   return (
     <div>
       {error && <p className="text-red-500">{error}</p>}
-      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px] max-989:flex-wrap">
+      <ul className="mb-[40px] mt-[50px] flex items-center justify-center gap-[20px] max-989:flex-wrap max-767:mt-[25px]">
         {reviews.map((review) => (
           <li
             key={review.id}
@@ -79,7 +76,7 @@ const MainReviews = () => {
         ))}
       </ul>
       {/* 리뷰 카드 클릭 시 생성되는 모달창 */}
-      <ReviewModal2
+      <ReviewModal
         isOpen={isOpen}
         handleModalClose={handleModalClose}
         selected={selected}
