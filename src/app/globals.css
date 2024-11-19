@@ -112,6 +112,9 @@ body {
   .color-gray04 {
     color: #a6a6a6;
   }
+  .color-hide {
+    color: rgba(0, 0, 0, 0);
+  }
   .bg-main {
     background: #ff924c;
   }
@@ -120,6 +123,14 @@ body {
   }
   .bg-brown {
     background: #b24600;
+  }
+  .bg-sk01 {
+    background: #d9d9d9;
+    border-radius: 8px;
+  }
+  .bg-sk02 {
+    background: #e5e5e5;
+    border-radius: 8px;
   }
   .bd-color-main {
     border-color: #ff924c;
