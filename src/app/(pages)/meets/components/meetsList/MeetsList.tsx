@@ -9,6 +9,7 @@ import CommunityTop from "@/_components/common/CommunityTop";
 import { useState } from "react";
 import NoData from "@/_components/common/NoData";
 import { useMeetList } from "../../hooks/useMeetList";
+import MeetsListSkeleton from "./MeetsListSkeleton";
 
 type MeetsListProps = {
   itemsPerPage: number;
@@ -20,8 +21,6 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
 
   const { currentItems, page, totalPages, movePagePrev, movePageNext } =
     usePagination({ items: meetWithCampList || [], itemsPerPage });
-
-  if (!currentItems) return <>데이터 로딩중.</>;
 
   const meetCardList = convertMeetDataToMeetCard(currentItems, isProgress);
 
@@ -70,25 +69,32 @@ const MeetsList = ({ itemsPerPage }: MeetsListProps) => {
             <WriteButton>모임 만들기</WriteButton>
           </div>
         </div>
-        {meetCardList ? (
+
+        {meetWithCampList ? (
           <>
-            <ul className="mt-[40px] flex flex-wrap gap-[20px] max-1280:gap-[20px] max-767:mt-[20px] max-767:flex-col">
-              {meetCardList.map((meetCard) => (
-                <li
-                  key={meetCard.id}
-                  className="w-[calc(50%-10px)] max-767:w-full"
-                >
-                  {" "}
-                  {/* 각 아이템을 50% 너비로 설정 */}
-                  <MeetCard meetCard={meetCard} />
-                </li>
-              ))}
-            </ul>
+            {meetCardList ? (
+              <>
+                <ul className="mt-[40px] flex flex-wrap gap-[20px] max-1280:gap-[20px] max-767:mt-[20px] max-767:flex-col">
+                  {meetCardList.map((meetCard) => (
+                    <li
+                      key={meetCard.id}
+                      className="w-[calc(50%-10px)] max-767:w-full"
+                    >
+                      {" "}
+                      {/* 각 아이템을 50% 너비로 설정 */}
+                      <MeetCard meetCard={meetCard} />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <div className="mt-[40px]">
+                <NoData text={"등록된 모임이 없어요."} />
+              </div>
+            )}
           </>
         ) : (
-          <div className="mt-[40px]">
-            <NoData text={"등록된 모임이 없어요."} />
-          </div>
+          <MeetsListSkeleton />
         )}
 
         {/* <ul className="grid grid-cols-3">
