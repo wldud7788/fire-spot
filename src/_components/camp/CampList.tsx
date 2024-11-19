@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTotalData } from "@/_utils/api/campsApi";
 import PageTitle from "../common/PageTitle";
-import CampCardSkeleton from "@/app/(pages)/camps/components/skeletons/CampListSkeleton";
+import CampCardSkeleton from "@/app/(pages)/camps/components/CampListSkeleton";
 // import useIntersectionObserver from "@/_hooks/useInteraction";
 
 type CampListProps = {
