@@ -4,7 +4,10 @@ import ChatListCard from "@/_components/chat/ChatListCard";
 import useChatAttendee from "@/_components/chat/hooks/useChatAttendee";
 import useChatList from "@/_components/chat/hooks/useChatList";
 import { useChatSubscriptionRoomList } from "@/_components/chat/hooks/useChatSubscriptionRoomList";
+import NoData from "@/_components/common/NoData";
 import PageTitle from "@/_components/common/PageTitle";
+import { SERVER_PAGE_URL } from "@/_utils/common/constant";
+import Link from "next/link";
 import React from "react";
 
 const ChatList = () => {
@@ -12,6 +15,8 @@ const ChatList = () => {
   const { togglePin, handleMessageRead } = useChatAttendee();
 
   useChatSubscriptionRoomList();
+
+  console.log("pinnedChatRoomList", pinnedChatRoomList);
 
   return (
     <div className="mb-[60px] mt-[40px]">
@@ -49,7 +54,34 @@ const ChatList = () => {
           </div> */}
         </div>
 
-        <div className="flex flex-col">
+        {pinnedChatRoomList.length > 0 ? (
+          <div className="flex flex-col">
+            {pinnedChatRoomList.map((chatRoomInfo) => (
+              <ChatListCard
+                key={chatRoomInfo.chatRoom.id}
+                chatRoomInfo={chatRoomInfo}
+                togglePin={togglePin}
+                handleMessageRead={handleMessageRead}
+              />
+            ))}
+            {unPinnedChatRoomList.map((chatRoomInfo) => (
+              <ChatListCard
+                key={chatRoomInfo.chatRoom.id}
+                chatRoomInfo={chatRoomInfo}
+                togglePin={togglePin}
+                handleMessageRead={handleMessageRead}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-10">
+            <Link href={SERVER_PAGE_URL.meets}>
+              <NoData text="아직 참여한 모임이 없습니다." />
+            </Link>
+          </div>
+        )}
+
+        {/* <div className="flex flex-col">
           {pinnedChatRoomList.map((chatRoomInfo) => (
             <ChatListCard
               key={chatRoomInfo.chatRoom.id}
@@ -66,7 +98,7 @@ const ChatList = () => {
               handleMessageRead={handleMessageRead}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
