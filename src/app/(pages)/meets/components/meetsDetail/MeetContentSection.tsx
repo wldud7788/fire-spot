@@ -17,7 +17,6 @@ const MeetContentSection = ({ meetWithCamp }: Props) => {
   });
 
   if (!writeUser) return <>유저 정보 로딩중</>;
-  console.log(writeUser);
 
   return (
     <div className="mt-[80px] max-989:mt-[60px]">

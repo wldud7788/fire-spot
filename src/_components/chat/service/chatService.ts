@@ -211,6 +211,25 @@ export const fetchChatAttendeeByRoomId = async (roomId: number) => {
   }
 };
 
+/** 참여자 */
+export const fetchChatAttendeeByRoomIdAndUserId = async (
+  roomId: number,
+  userId: string
+) => {
+  try {
+    const { data, error } = await supabase
+      .from("chat_attendee")
+      .select("id")
+      .eq("room_id", roomId)
+      .eq("user_id", userId)
+      .single();
+
+    return data;
+  } catch (e) {
+    console.error("Error fetchChatAttendee" + e);
+  }
+};
+
 /** 모임 참가자 생성 (모임 or sos 작성, 참가 시 호출 ) */
 export const postChatAttendee = async (userId: string, roomId: number) => {
   try {
@@ -241,6 +260,24 @@ export const patchChatAttendee = async (
       .update(chatAttendee)
       .eq("user_id", userId)
       .eq("room_id", roomId)
+      .single();
+
+    if (error) {
+      return null;
+    }
+
+    return data;
+  } catch (e) {
+    console.error("Error patchChatAttendee ", e);
+  }
+};
+
+export const deleteChatAttendee = async (chatAttendeeId: number) => {
+  try {
+    const { data, error } = await supabase
+      .from("chat_attendee")
+      .delete()
+      .eq("id", chatAttendeeId)
       .single();
 
     if (error) {
