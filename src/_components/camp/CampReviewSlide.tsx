@@ -86,8 +86,6 @@ const CampReviewSlide: React.FC<CampReviewSlideProps> = ({
     return <NoData text={"등록된 리뷰가 없어요."} />;
   }
 
-  console.log("reviews ====>", reviews);
-
   return (
     <>
       <div className="camp-slide-wrap">
