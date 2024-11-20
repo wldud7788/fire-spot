@@ -10,11 +10,17 @@ import { useQuery } from "@tanstack/react-query";
 import { CellCardTable, Schedule } from "./type/schedule.types";
 import { convertScheduleDataToCellCardTable } from "./utils/calenderService";
 
-export type FilterType = "stamp" | "meet" | "all";
+export type FilterType = keyof typeof CALENDAR_FILTER; //"stamp" | "meet" | "all";
+
+export const CALENDAR_FILTER = {
+  stamp: "stamp",
+  meet: "meet",
+  all: "all"
+} as const;
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const [filterType, setFilterType] = useState<FilterType>("all");
+  const [filterType, setFilterType] = useState<FilterType>(CALENDAR_FILTER.all);
 
   // DDDD
 
@@ -62,6 +68,8 @@ const Calendar = () => {
     filterType,
     handleFilterType
   };
+
+  console.log("cellCardTable", cellCardTable);
 
   return (
     <div className="w-full font-pretendard">

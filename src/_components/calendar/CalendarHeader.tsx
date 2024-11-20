@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import { FilterType } from "./Calendar";
+import { CALENDAR_FILTER, FilterType } from "./Calendar";
 
 type Props = {
   currentMonth: Date;
@@ -38,19 +38,19 @@ const CalendarHeader = ({
         <div className="flex gap-[1px]">
           <button
             className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "all" && "bg-main bd-color-main text-white"}`}
-            onClick={() => handleFilterType("all")}
+            onClick={() => handleFilterType(CALENDAR_FILTER.all)}
           >
             같이 보기
           </button>
           <button
             className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "stamp" && "bg-main bd-color-main text-white"}`}
-            onClick={() => handleFilterType("stamp")}
+            onClick={() => handleFilterType(CALENDAR_FILTER.stamp)}
           >
             후기
           </button>
           <button
             className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "meet" && "bg-main bd-color-main text-white"}`}
-            onClick={() => handleFilterType("meet")}
+            onClick={() => handleFilterType(CALENDAR_FILTER.meet)}
           >
             모임
           </button>
