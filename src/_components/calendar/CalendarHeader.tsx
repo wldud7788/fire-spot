@@ -37,19 +37,19 @@ const CalendarHeader = ({
         </div>
         <div className="flex gap-[1px]">
           <button
-            className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "all" && "bg-main bd-color-main text-white"}`}
+            className={`rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === CALENDAR_FILTER.all && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType(CALENDAR_FILTER.all)}
           >
             같이 보기
           </button>
           <button
-            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "stamp" && "bg-main bd-color-main text-white"}`}
+            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === CALENDAR_FILTER.stamp && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType(CALENDAR_FILTER.stamp)}
           >
             후기
           </button>
           <button
-            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === "meet" && "bg-main bd-color-main text-white"}`}
+            className={`ml-[-1px] rounded-[2px] border border-[#D9D9D9] p-[10px] text-[12px] text-[#737373] ${filterType === CALENDAR_FILTER.meet && "bg-main bd-color-main text-white"}`}
             onClick={() => handleFilterType(CALENDAR_FILTER.meet)}
           >
             모임

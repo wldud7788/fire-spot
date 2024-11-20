@@ -38,7 +38,7 @@ const Calendar = () => {
     }
 
     const filterScheduleList = scheduleList.filter((schedule) => {
-      if (filterType === "all") return true;
+      if (filterType === CALENDAR_FILTER.all) return true;
       return schedule.type === filterType;
     });
 
