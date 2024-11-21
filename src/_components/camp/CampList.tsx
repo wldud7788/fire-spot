@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTotalData } from "@/_utils/api/campsApi";
 import PageTitle from "../common/PageTitle";
+import CampCardSkeleton from "@/app/(pages)/camps/components/CampListSkeleton";
 // import useIntersectionObserver from "@/_hooks/useInteraction";
 
 type CampListProps = {
@@ -15,7 +16,11 @@ type CampListProps = {
 
 const CampList = ({ itemsPerPage }: CampListProps) => {
   const [islikeChk, setIslikeChk] = useState<boolean>(false);
-  const { data: camps, isError } = useQuery({
+  const {
+    data: camps,
+    isFetching,
+    isError
+  } = useQuery({
     queryKey: ["camps"],
     queryFn: async () => fetchTotalData(),
     staleTime: Infinity
@@ -62,14 +67,18 @@ const CampList = ({ itemsPerPage }: CampListProps) => {
           </label>
         </div>
         <ul className="list_box flex flex-wrap gap-[30px] max-989:gap-[15px]">
-          {currentItems.map((camp) => (
-            <li
-              key={camp.contentId}
-              className="w-[calc(25%-22.5px)] max-989:w-[calc(50%-8px)] max-450:w-full"
-            >
-              <CampCard camp={camp} />
-            </li>
-          ))}
+          {isFetching
+            ? Array(8)
+                .fill(null)
+                .map((_, index) => <CampCardSkeleton key={index} />)
+            : currentItems.map((camp) => (
+                <li
+                  key={camp.contentId}
+                  className="w-[calc(25%-22.5px)] max-989:w-[calc(50%-8px)] max-450:w-full"
+                >
+                  <CampCard camp={camp} />
+                </li>
+              ))}
         </ul>
         <div className="max-767:mt-[30px]">
           <Pagination
