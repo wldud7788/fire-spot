@@ -17,8 +17,6 @@ const ChatList = () => {
 
   useChatSubscriptionRoomList();
 
-  console.log("pinnedChatRoomList", pinnedChatRoomList);
-
   return (
     <div className="mb-[60px] mt-[40px]">
       <div className="inner m-auto w-full max-w-[1360px] px-[30px] max-767:px-[15px]">

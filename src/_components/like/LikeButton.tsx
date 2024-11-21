@@ -43,8 +43,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
           .from("bookmarks")
           .select("*")
           .eq("contentId", parseInt(campId))
-          .eq("userId", session.user.id)
-          .single();
+          .eq("userId", session.user.id);
 
         if (error && error.code !== "PGRST116") {
           console.error("좋아요 상태 확인 오류:", error);
@@ -78,7 +77,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
         const { error } = await supabase
           .from("bookmarks")
           .delete()
-          .eq("contentId", parseInt(campId))
+          .eq("contentId", campId)
           .eq("userId", userId);
 
         if (error) {

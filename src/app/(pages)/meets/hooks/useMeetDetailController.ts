@@ -12,6 +12,11 @@ import { startOfDay, subDays } from "date-fns";
 import { DEADLINE_APPROACHING } from "@/_utils/common/constant";
 import { useRouter } from "next/navigation";
 import { checkAttendeeSchedule } from "../utils/validateMeetAttendee";
+import {
+  deleteChatAttendee,
+  fetchChatAttendeeByRoomIdAndUserId,
+  fetchChatRoomByMeetId
+} from "@/_components/chat/service/chatService";
 
 export interface ButtonConfig {
   text: string;
@@ -67,9 +72,27 @@ const useMeetDetailController = (meetWithCamp: MeetWithCamp) => {
     }
   };
 
-  /** 신청취소 버튼 클릭 함수 */
+  /** 신청취소 버튼 클릭 함수 meetAttendee, chatAttendee 삭제*/
   const handleAttendDelete = async () => {
     await deleteMeetAttendee(attendeeId);
+
+    // chatAttendee 삭제
+    // chatRoom 데이터 가져옴
+    const chatRoom = await fetchChatRoomByMeetId("meet", meet.id);
+
+    if (chatRoom) {
+      // userId, roomId 기준 chatAttendee 가져옴
+      const chatAttendee = await fetchChatAttendeeByRoomIdAndUserId(
+        chatRoom.id,
+        userId
+      );
+
+      if (chatAttendee) {
+        // chatAttendee.id 삭제
+        await deleteChatAttendee(chatAttendee.id);
+      }
+    }
+
     setAttendeeId(0);
     await fetchData();
   };

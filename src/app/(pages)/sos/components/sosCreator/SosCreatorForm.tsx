@@ -57,7 +57,7 @@ const SosCreatorForm = ({ sosId, sosWithCamp }: Props) => {
           {/* sos 정보  */}
           <SosCreatorInfoSection />
 
-          {errors.title && <span>This field is required</span>}
+          {/* {errors.title && <span>This field is required</span>} */}
 
           {/* sos 타이틀, 내용  */}
           <SosCreatorContentSection register={register} />

@@ -20,13 +20,21 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   });
 
   return (
-    <Link href={`camp-detail/${camp.contentId}`} onClick={closeDropdown}>
-      <li className="flex cursor-pointer items-center space-x-4 p-2 hover:bg-gray-100">
-        <div className="h-[80px] w-[100px] max-767:h-[60px] max-767:w-[80px]">
-          {renderImage(camp.firstImageUrl)}
+    <li className="list-none">
+      <Link
+        href={`camp-detail/${camp.contentId}`}
+        onClick={closeDropdown}
+        className="flex cursor-pointer items-center p-2 hover:bg-gray-100"
+      >
+        <div className="h-[80px] w-[100px] shrink-0 overflow-hidden max-989:h-[60px] max-989:w-[80px]">
+          <div className="relative aspect-[5/4] h-full w-full overflow-hidden">
+            {renderImage(camp.firstImageUrl)}
+          </div>
         </div>
-        {renderResultContent(camp)}
-      </li>
-    </Link>
+        <div className="ml-4 min-w-0 flex-1 overflow-hidden">
+          {renderResultContent(camp)}
+        </div>
+      </Link>
+    </li>
   );
 };
