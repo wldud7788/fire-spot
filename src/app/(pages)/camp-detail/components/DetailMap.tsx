@@ -4,9 +4,12 @@ import { useCampDetailMap } from "../hooks/useCampDetilMap";
 
 interface DetailMapProps {
   camp: Camp;
+  variant?: "detail" | "meet";
 }
-const DetailMap: React.FC<DetailMapProps> = ({ camp }) => {
-  useCampDetailMap(camp);
+const DetailMap: React.FC<DetailMapProps> = ({ camp, variant = "detail" }) => {
+  useCampDetailMap(camp, {
+    showDetailButton: variant === "meet"
+  });
   return (
     <div
       id="detail-map"

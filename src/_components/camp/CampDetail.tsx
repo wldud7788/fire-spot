@@ -15,6 +15,7 @@ import Modal from "../modal/Modal";
 import LikeButton from "../like/LikeButton";
 import ShareButton from "./ShareButton";
 import { SERVER_PAGE_URL } from "@/_utils/common/constant";
+import CampDetailSkeleton from "@/app/(pages)/camp-detail/components/CampDetailSkeleton";
 
 type CampDetailProps = {
   paramsId: string;
@@ -28,7 +29,7 @@ const fetchTotalData = async () => {
 const CampDetail = ({ paramsId }: CampDetailProps) => {
   const {
     data: camps,
-    isLoading,
+    isFetching,
     isError
   } = useQuery({
     queryKey: ["camp"],
@@ -43,7 +44,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
 
-  if (isLoading) return <div>데이터가 로딩중입니다.</div>;
+  if (isFetching) return <CampDetailSkeleton />;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   const camp: Camp | undefined = camps?.find(
@@ -310,7 +311,7 @@ const CampDetail = ({ paramsId }: CampDetailProps) => {
               {camp.direction}
             </p>
           </div>
-          <DetailMap camp={camp} />
+          <DetailMap camp={camp} variant="detail" />
         </div>
         {/*// 캠핑장 위치 */}
 

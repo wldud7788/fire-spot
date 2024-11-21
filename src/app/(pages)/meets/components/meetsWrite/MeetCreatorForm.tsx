@@ -94,7 +94,7 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
             setValue={setValue}
           />
 
-          {errors.title && <span>This field is required</span>}
+          {/* {errors.title && <span>This field is required</span>} */}
 
           <MeetCreatorContentSection
             register={register}
@@ -121,7 +121,7 @@ const MeetCreatorForm = ({ meetId, meetWithCamp }: Props) => {
             required: true
           })}
         /> */}
-          {errors.deadline_headcount && <span>인원수 확인</span>}
+          {/* {errors.deadline_headcount && <span>인원수 확인</span>} */}
         </form>
       </div>
     </div>

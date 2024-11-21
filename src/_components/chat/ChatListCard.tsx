@@ -45,7 +45,7 @@ const ChatListCard = ({
               {meet.title}
             </strong>
             <p className="my-[5px] line-clamp-1 max-1280:text-[13px]">
-              {chatMessage?.message || "아직 메시지 없음"}
+              {chatMessage?.message || "아직 메시지가 없습니다."}
             </p>
             <div className="flex items-center justify-start gap-[3px]">
               <span className="color-gray03 bg-chatUser bg-left-center-0 bg-no-repeat pl-[16px] text-[14px] max-1280:text-[13px]">
@@ -77,9 +77,13 @@ const ChatListCard = ({
             </div>
           </Link>
         </div>
-        <div className="right_area flex w-[30%] flex-none flex-col items-end justify-end max-767:w-[80px]">
-          <p className="mb-[5px] line-clamp-1 w-[71px] text-right text-[14px] text-[#787878] max-767:text-[12px]">
-            {formatDate_6(chatMessage?.created_at) || ""}
+
+        <div className="right_area flex w-[30%] flex-none flex-col items-end justify-end">
+          <p className="mb-[5px] line-clamp-1 w-[71px] text-[14px] text-[#787878] max-767:text-[13px]">
+            {chatMessage?.created_at
+              ? formatDate_6(chatMessage?.created_at)
+              : ""}
+            {/* {formatDate_6(chatMessage?.created_at) || ""} */}
           </p>
           <p
             className={`${unreadCount ? "bg-main" : "bg-[#d9d9d9]"} rounded-[16px] px-[10px] py-[4px] text-center text-[18px] font-medium text-white max-1280:text-[14px] max-767:px-[8px] max-767:py-[2px] max-767:text-[12px]`}

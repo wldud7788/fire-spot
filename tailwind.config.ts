@@ -84,7 +84,9 @@ const config: Config = {
         meetImport: "url('/assets/images/meet/ico-import.svg')",
         // 가이드
         guideBulb: "url('/assets/images/guide/ico-guide-bulb.svg')",
-        guideTip: "url('/assets/images/guide/bg-guide-tip.png')"
+        guideTip: "url('/assets/images/guide/bg-guide-tip.png')",
+        //에러
+        error01: "url('/assets/images/error/error-01.jpg')"
       },
       backgroundPosition: {
         "left-center": "left 10px center",
